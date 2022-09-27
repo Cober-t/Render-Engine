@@ -48,6 +48,16 @@ project "RenderEngine"
 		"%{prj.name}/include/entt/**.hpp",
 		"%{prj.name}/include/imgui/**.cpp",
 		"%{prj.name}/include/imgui/**.h",
+		"%{prj.name}/include/core/**.cpp",
+		"%{prj.name}/include/core/**.h",
+		"%{prj.name}/include/Entities/**.cpp",
+		"%{prj.name}/include/Entities/**.h",
+		"%{prj.name}/include/GUISystem/**.cpp",
+		"%{prj.name}/include/GUISystem/**.h",
+		"%{prj.name}/include/Systems/**.cpp",
+		"%{prj.name}/include/Systems/**.h",
+		"%{prj.name}/include/Render/**.cpp",
+		"%{prj.name}/include/Render/**.h",
 	}
 
 	defines
@@ -60,7 +70,13 @@ project "RenderEngine"
 		"%{prj.name}/include",
 		"%{prj.name}/include/SDL",
 		"%{prj.name}/src",
-		"%{prj.name}/src/imgui"
+		"%{prj.name}/src/imgui",
+		"%{prj.name}/src/core",
+		"%{prj.name}/src/Entities",
+		"%{prj.name}/src/Render",
+		"%{prj.name}/src/GUISystem",
+		"%{prj.name}/src/Systems",
+
 	}
 
 	libdirs

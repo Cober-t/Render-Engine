@@ -1,30 +1,6 @@
 ﻿cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  pch.cpp
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
 cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
 cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
   ImGuiCore.cpp
-  Framebuffer.cpp
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  Shader.cpp
-  Texture.cpp
-  Window.cpp
-  imgui.cpp
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_impl_opengl3.cpp
-  imgui_impl_sdl.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
-  main.cpp
-glew32s.lib(glew.obj) : warning LNK4099: no se encontró PDB 'vc120.pdb' con 'glew32s.lib(glew.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\GraphicsEngine\bin\Debug-windows-x86_64\RenderEngine\vc120.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-  RenderEngine.vcxproj -> C:\Users\jorge\OneDrive\Escritorio\GraphicsEngine\bin\Debug-windows-x86_64\RenderEngine\RenderEngine.exe
+  Engine.cpp
+  RenderEngine.vcxproj -> C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\RenderEngine\RenderEngine.exe

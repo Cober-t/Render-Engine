@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;SOLUTION_DIR=R"($(SolutionDir))";CB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\GUISystem;src\Systems;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -104,7 +104,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;SOLUTION_DIR=R"($(SolutionDir))";CB_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\GUISystem;src\Systems;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -131,7 +131,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;SOLUTION_DIR=R"($(SolutionDir))";CB_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\GUISystem;src\Systems;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -712,11 +712,19 @@
     <ClInclude Include="include\lua\luaconf.h" />
     <ClInclude Include="include\lua\lualib.h" />
     <ClInclude Include="include\sol\sol.hpp" />
-    <ClInclude Include="src\ImGuiCore.h" />
-    <ClInclude Include="src\RenderSystem\Framebuffer.h" />
-    <ClInclude Include="src\RenderSystem\Shader.h" />
-    <ClInclude Include="src\RenderSystem\Texture.h" />
-    <ClInclude Include="src\Window.h" />
+    <ClInclude Include="src\Entities\Components.h" />
+    <ClInclude Include="src\Entities\ECS.h" />
+    <ClInclude Include="src\GUISystem\ImGuiCore.h" />
+    <ClInclude Include="src\Render\Framebuffer.h" />
+    <ClInclude Include="src\Render\Shader.h" />
+    <ClInclude Include="src\Render\Texture.h" />
+    <ClInclude Include="src\Systems\MovementSystem.h" />
+    <ClInclude Include="src\Systems\RenderSystem.h" />
+    <ClInclude Include="src\core\AssetManager.h" />
+    <ClInclude Include="src\core\Engine.h" />
+    <ClInclude Include="src\core\Logger.h" />
+    <ClInclude Include="src\core\Timestep.h" />
+    <ClInclude Include="src\core\Window.h" />
     <ClInclude Include="src\imgui\imconfig.h" />
     <ClInclude Include="src\imgui\imgui.h" />
     <ClInclude Include="src\imgui\imgui_impl_opengl3.h" />
@@ -729,11 +737,18 @@
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ImGuiCore.cpp" />
-    <ClCompile Include="src\RenderSystem\Framebuffer.cpp" />
-    <ClCompile Include="src\RenderSystem\Shader.cpp" />
-    <ClCompile Include="src\RenderSystem\Texture.cpp" />
-    <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="src\Entities\ECS.cpp" />
+    <ClCompile Include="src\GUISystem\ImGuiCore.cpp" />
+    <ClCompile Include="src\Render\Framebuffer.cpp" />
+    <ClCompile Include="src\Render\Shader.cpp" />
+    <ClCompile Include="src\Render\Texture.cpp" />
+    <ClCompile Include="src\Systems\MovementSystem.cpp" />
+    <ClCompile Include="src\Systems\RenderSystem.cpp" />
+    <ClCompile Include="src\core\AssetManager.cpp" />
+    <ClCompile Include="src\core\Engine.cpp" />
+    <ClCompile Include="src\core\Logger.cpp" />
+    <ClCompile Include="src\core\Timestep.cpp" />
+    <ClCompile Include="src\core\Window.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />
     <ClCompile Include="src\imgui\imgui_demo.cpp" />
     <ClCompile Include="src\imgui\imgui_draw.cpp" />
