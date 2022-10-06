@@ -9,8 +9,8 @@ namespace Cober {
     Engine::Engine() : isRunning(false), enableGUI(true) {
         _instance = this;
         Logger::Log("2DEngine Constructor!");
-        _timestep = CreateUnique<Timestep>();
-        _registry = CreateUnique<Registry>();
+        _timestep     = CreateUnique<Timestep>();
+        _registry     = CreateUnique<Registry>();
         _assetManager = CreateUnique<AssetManager>();
     }
 
@@ -70,7 +70,7 @@ namespace Cober {
     void Engine::Run() {
 
         Start();
-        Ref<Framebuffer> framebuffer = Framebuffer::Create(_window->GetWidth(), _window->GetHeight());
+        _framebuffer = Framebuffer::Create(_window->GetWidth(), _window->GetHeight());
         
         // ++++++++++++++++++++++++ RENDER TEST
         Ref<Shader> shader = Shader::Create();
@@ -83,15 +83,12 @@ namespace Cober {
         while (isRunning) {
 
             ProcessInputs();
-            Update();
 
-            //_window->UpdateViewport(_window->GetWidth(), _window->GetHeight());
-            //double aspectRatio = viewportWidth / viewportHeight;
             //framebuffer->SetSpecificationWidth(_window->GetWidth() / aspectRatio);
             //framebuffer->SetSpecificationHeight(_window->GetHeight() / aspectRatio);
             //framebuffer->Resize(_window->GetWidth(), _window->GetHeight());
-            framebuffer->Bind();
-            _window->ClearWindow(0.8f, 0.3f, 0.1f, 1.0f);
+            _framebuffer->Bind();
+            _window->ClearWindow(200, 80, 20, 255);
 
             // ++++++++++++++++++++++++ RENDER TEST
             glUseProgram(shader->GetShaderProgram());
@@ -101,11 +98,13 @@ namespace Cober {
             glUseProgram(0);
             // [[-----------
 
-            framebuffer->Unbind();
+            Update();
+            _framebuffer->Unbind();
+
 
             if (enableGUI) {
                 GUI::Begin();
-                GUI::Render(framebuffer);
+                GUI::Render(_framebuffer);
                 GUI::End();
             }
             _window->SwapBuffers();
@@ -140,16 +139,15 @@ namespace Cober {
         _registry->AddSystem<RenderSystem>();
 
         // Add assets
-        //SDL_Renderer* renderer = _window->GetRenderer();
-        //_assetManager->AddTexture("cat", "../assets/images/tank-panther-right.png");
+        _assetManager->AddTexture("cat", SHADERS_PATH + "woodenContainer.png");
         
-        //// Create som entities
-        //Entity tank = _registry->CreateEntity();
+        // Create som entities
+        Entity tank = _registry->CreateEntity();
         
-        //// Add some components to the entity
-        //tank.AddComponent<Transform>(Vec2(10.0, 10.0), 0, Vec2(1.0, 1.0));
-        //tank.AddComponent<Rigidbody>(Vec2(45.0f, 0.0f));
-        //tank.AddComponent<Sprite>("cat", 128 * 3, 128 * 3);
+        // Add some components to the entity
+        tank.AddComponent<Transform>(Vec2(100.0, 100.0), 0, Vec2(1.0, 1.0));
+        tank.AddComponent<Rigidbody>(Vec2(45.0f, 0.0f));
+        tank.AddComponent<Sprite>("cat", 128 * 3, 128 * 3);
     }
 
     void Engine::Update() {
@@ -161,9 +159,7 @@ namespace Cober {
 
         // Ask all the "previous" frame time
         _registry->GetSystem<MovementSystem>().Update(_timestep->deltaTime);
-
-        _window->ClearWindow();
-        //_registry->GetSystem<RenderSystem>().Update(_window->GetRenderer(), _assetManager);
+        _registry->GetSystem<RenderSystem>().Update(_assetManager);
     }
 
     void Engine::Destroy() {

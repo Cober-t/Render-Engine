@@ -9,6 +9,6 @@ namespace Cober {
 	class RenderSystem : public System {
 	public:
 		RenderSystem();
-		void Update(SDL_Renderer* renderer, Unique<AssetManager>& assets);
+		void Update(Unique<AssetManager>& assets);
 	};
 }

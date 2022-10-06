@@ -40,6 +40,7 @@ namespace Cober {
 		Unique<AssetManager> _assetManager;
 	private:
 		static Engine* _instance;
+		Ref<Framebuffer> _framebuffer;
 		friend int ::main(int argc, char** argv);
 	};
 }

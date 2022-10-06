@@ -19,7 +19,7 @@ namespace Cober {
 			frames++;
 
 			if (lastFrameTime / 1000 - auxTime == 1) {
-				Logger::Log("Frames: " + std::to_string(frames));
+				//Logger::Log("Frames: " + std::to_string(frames));
 				auxTime = lastFrameTime / 1000;
 				frames = 0;
 			}

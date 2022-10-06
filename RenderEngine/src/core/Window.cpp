@@ -42,9 +42,10 @@ namespace Cober {
 		return _context;
 	}
 
-	void Window::ClearWindow(Uint8 r, Uint8 g, Uint8 b, Uint8 k) {
+	void Window::ClearWindow(float red, float green, float blue, float black) {
 
-		glClearColor(0.8f, 0.3f, 0.1f, 1.0f);
+		float r = red / 255, g = green / 255, b = blue / 255, k = black / 255;
+		glClearColor(r, g, b, k);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 

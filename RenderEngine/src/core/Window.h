@@ -24,7 +24,7 @@ namespace Cober {
 		int InitGlew();
 		bool CreateWindow();
 		bool CreateContext();
-		void ClearWindow(Uint8 r = 21, Uint8 g = 21, Uint8 b = 36, Uint8 k = 255);
+		void ClearWindow(float red = 21, float green = 21, float blue = 36, float black = 255);
 		void SwapBuffers();
 		void UpdateViewport(const uint32_t width, const uint32_t height);
 		void CloseWindow();

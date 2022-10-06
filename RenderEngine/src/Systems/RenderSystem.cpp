@@ -9,28 +9,23 @@ namespace Cober {
 		RequireComponent<Sprite>();
 	}
 
-	void RenderSystem::Update(SDL_Renderer* renderer, Unique<AssetManager>& assets) {
+	void RenderSystem::Update(Unique<AssetManager>& assets) {
 
 		for (auto entity : GetSystemEntities()) {
 			auto& transform = entity.GetComponent<Transform>();
 			const auto& sprite = entity.GetComponent<Sprite>();
 
-			// Set the source rectangle of our original sprite texture
-			const SDL_Rect srcRect = { sprite.srcRect.y, sprite.srcRect.x, sprite.w, sprite.h };
-			// Set the destination rectangle with the x, y position to be rendered
-			const SDL_Rect dstRect = {
-				static_cast<int>(transform.position.x),
-				static_cast<int>(transform.position.y),
-				static_cast<int>(sprite.w * transform.scale.x),
-				static_cast<int>(sprite.h * transform.scale.y)
-			};
 
-			SDL_RenderCopyEx(
-				renderer, assets->GetTexture(sprite.assetID),
-				&srcRect, &dstRect,
-				transform.rotation,
-				NULL, SDL_FLIP_NONE
-			);
+			int x = sprite.srcRect.x, y = sprite.srcRect.y;
+			int width  = sprite.w, height = sprite.h;
+
+			glBegin(GL_QUADS);
+				glTexCoord2f(0, 0); glVertex3f(x, y, 0);
+				glTexCoord2f(1, 0); glVertex3f(x + width, y, 0);
+				glTexCoord2f(1, 1); glVertex3f(x + width, y + height, 0);
+				glTexCoord2f(0, 1); glVertex3f(x, y + height, 0);
+			glEnd();
+			glBindTexture(GL_TEXTURE_2D, assets->GetTexture(sprite.assetID));
 		}
 	}
 }
