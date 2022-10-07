@@ -1,6 +1,6 @@
-workspace "Engine"
+workspace "GameEngine"
 	architecture "x64"
-	startproject "Engine"
+	startproject "Editor"
 
 	configurations
 	{
@@ -15,9 +15,9 @@ workspace "Engine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-project "RenderEngine"
-	location "RenderEngine"
-	kind "ConsoleApp"
+project "Engine"
+	location "Engine"
+	kind "StaticLib"
 	language "C++"
 	warnings "Off"
 	ignoredefaultlibraries { "MSVCRT" }
@@ -76,7 +76,6 @@ project "RenderEngine"
 		"%{prj.name}/src/Render",
 		"%{prj.name}/src/GUISystem",
 		"%{prj.name}/src/Systems",
-
 	}
 
 	libdirs
@@ -126,15 +125,119 @@ project "RenderEngine"
 
 	filter "configurations:Debug"
 		defines "CB_DEBUG"
-		buildoptions "/MDd"
+		--buildoptions "/MDd"
 		symbols "on"
 
 	filter "configurations:Release"
 		defines "CB_RELEASE"
-		buildoptions "/MD"
+		--buildoptions "/MD"
 		optimize "on"
 
 	filter "configurations:Dist"
 		defines "CB_DIST"
-		buildoptions "/MD"
+		--buildoptions "/MD"
+		optimize "on"
+
+project "Editor"
+	location "Editor"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files 
+	{
+		"%{prj.name}/**.h",
+		"%{prj.name}/**.cpp"
+	}
+
+	includedirs
+	{
+		"Engine/include",
+		"Engine/include/glm",
+		"Engine/include/imgui",
+		"Engine/src",
+	}
+
+	links 
+	{
+		"Engine"
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+		
+		defines 
+		{
+			"CB_PLATFORM_WINDOWS",
+			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM=<SDL_opengl.h>",
+			"GL_GLEXT_PROTOTYPES=1",
+			"GLEW_STATIC",
+		}
+
+
+	filter "configurations:Debug"
+		defines "CB_DEBUG"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "CB_RELEASE"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines "CB_DIST"
+		optimize "on"
+
+project "Game"
+	location "Game"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files 
+	{
+		"%{prj.name}/**.h",
+		"%{prj.name}/**.cpp",
+	}
+
+	includedirs
+	{
+		"Engine/include",
+		"Engine/include/glm",
+		"Engine/src",
+	}
+
+	links 
+	{
+		"Engine"
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+
+		defines 
+		{
+			"CB_PLATFORM_WINDOWS",
+			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM=<SDL_opengl.h>",
+			"GL_GLEXT_PROTOTYPES=1",
+			"GLEW_STATIC",
+		}
+
+	filter "configurations:Debug"
+		defines "CB_DEBUG"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "CB_RELEASE"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines "CB_DIST"
 		optimize "on"
