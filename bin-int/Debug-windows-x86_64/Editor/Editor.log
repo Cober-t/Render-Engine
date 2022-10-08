@@ -1,12 +1,8 @@
 ﻿  EditorApp.cpp
   EditorLayer.cpp
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Core.h(12,1): warning C4005: 'Mat4': redefinición de macro (compilando archivo de origen src\EditorLayer.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Core.h(11): message : vea la definición anterior de 'Mat4' (compilando archivo de origen src\EditorLayer.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Core.h(12,1): warning C4005: 'Mat4': redefinición de macro (compilando archivo de origen src\EditorApp.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Core.h(11): message : vea la definición anterior de 'Mat4' (compilando archivo de origen src\EditorApp.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(14,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\EditorLayer.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(32,16): warning C4244: '=': conversión de 'float' a 'uint32_t'; posible pérdida de datos (compilando archivo de origen src\EditorLayer.cpp)
 C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(14,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\EditorApp.cpp)
 C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(32,16): warning C4244: '=': conversión de 'float' a 'uint32_t'; posible pérdida de datos (compilando archivo de origen src\EditorApp.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Editor\src\EditorLayer.cpp(152,33): warning C4312: 'conversión de tipo': conversión de 'uint32_t' a 'void *' de mayor tamaño
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(14,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\EditorLayer.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(32,16): warning C4244: '=': conversión de 'float' a 'uint32_t'; posible pérdida de datos (compilando archivo de origen src\EditorLayer.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Editor\src\EditorLayer.cpp(233,33): warning C4312: 'conversión de tipo': conversión de 'uint32_t' a 'void *' de mayor tamaño
   Editor.vcxproj -> C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Editor.exe

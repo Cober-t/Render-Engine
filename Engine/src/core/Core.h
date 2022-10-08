@@ -6,10 +6,9 @@
 #define SHADERS_PATH SOLUTION_DIR + (std::string)"assets\\shaders\\"
 #define BIT(x)          (1 << x)
 #define GET_ERROR()     Logger::Error(SDL_GetError());
-#define Vec2            glm::vec2
-#define Vec3            glm::vec3
-#define Mat4            glm::mat3
-#define Mat4            glm::mat4
+
+static bool DEBUG = false;
+static bool GAME_2D = true;
 
 namespace Cober {
 

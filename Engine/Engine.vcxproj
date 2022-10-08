@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;SOLUTION_DIR=R"($(SolutionDir))";CB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\GUISystem;src\Systems;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -101,7 +101,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;SOLUTION_DIR=R"($(SolutionDir))";CB_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\GUISystem;src\Systems;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -128,7 +128,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;SOLUTION_DIR=R"($(SolutionDir))";CB_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\GUISystem;src\Systems;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -714,6 +714,8 @@
     <ClInclude Include="src\Entities\ECS.h" />
     <ClInclude Include="src\EntryPoint.h" />
     <ClInclude Include="src\GUISystem\GuiLayer.h" />
+    <ClInclude Include="src\Render\Camera\Camera.h" />
+    <ClInclude Include="src\Render\Camera\EditorCamera.h" />
     <ClInclude Include="src\Render\Framebuffer.h" />
     <ClInclude Include="src\Render\Shader.h" />
     <ClInclude Include="src\Render\Texture.h" />
@@ -740,6 +742,7 @@
   <ItemGroup>
     <ClCompile Include="src\Entities\ECS.cpp" />
     <ClCompile Include="src\GUISystem\GuiLayer.cpp" />
+    <ClCompile Include="src\Render\Camera\EditorCamera.cpp" />
     <ClCompile Include="src\Render\Framebuffer.cpp" />
     <ClCompile Include="src\Render\Shader.cpp" />
     <ClCompile Include="src\Render\Texture.cpp" />

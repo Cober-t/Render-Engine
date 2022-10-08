@@ -62,13 +62,51 @@ namespace Cober {
 
 	void EditorLayer::OnUpdate(Ref<Timestep> ts) {
 
+		if (FramebufferSpecification spec = _framebuffer->GetSpecification();
+			_viewportSize.x > 0.0f && _viewportSize.y > 0.0f && // zeero sized framebuffer is invalid
+			(spec.Width != _viewportSize.x || spec.Height != _viewportSize.y)) 
+		{
+			_framebuffer->Resize((uint32_t)_viewportSize.x, (uint32_t)_viewportSize.y);
+			_editorCamera.SetViewportSize(_viewportSize.x, _viewportSize.y);
+			// Resize ViewportScene
+		}
+
 		_framebuffer->Bind();
 
+		// Abstrar to render static commands
 		Engine::Get().GetWindow().ClearWindow(200, 80, 20, 255);
-		
+		switch (Engine::Get().GetGameState())
+		{
+			case GameState::EDITOR:
+			{
+				//colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
+				_editorCamera.OnUpdate(ts);
+				//_activeScene->OnUpdateEditor(ts, _editorCamera);
+				break;
+			}
+			case GameState::PLAY:
+			{
+				//colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
+				//_activeScene->OnUpdateRuntime(ts);
+				break;
+			}
+		}
+
 		// Run Scene Editor or Scene Play
 		// ++++++++++++++++++++++++ RENDER TEST
 		glUseProgram(shader->GetShaderProgram());
+
+		// [+++++++++++++++++++++++++++++++++++++++++++]
+		// [+++++++++++++++ Camera Test +++++++++++++++]
+		// [+++++++++++++++++++++++++++++++++++++++++++]
+		const glm::mat4& projectionMatrix = _editorCamera.GetProjection();
+		const glm::mat4& viewMatrix = _editorCamera.GetViewMatrix();
+
+		GLint location = glGetUniformLocation(shader->GetShaderProgram(), "_projection");
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+		location = glGetUniformLocation(shader->GetShaderProgram(), "_view");
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+
 		glBindVertexArray(shader->GetVAO());
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glBindVertexArray(0);
@@ -76,6 +114,50 @@ namespace Cober {
 
 		_framebuffer->Unbind();
 	}
+
+	/*
+	void EditorLayer::OnEvent(Event& event)
+	{
+		//PerspCamera.OnEvent(event);
+		m_EditorCamera.OnEvent(event);
+
+		EventDispatcher dispatcher(event);
+		dispatcher.Dispatch<KeyPressedEvent>(CB_BIND_EVENT(EditorLayer::OnKeyPressed));
+		//dispatcher.Dispatch<MouseButtonPressedEvent>(CB_BIND_EVENT(EditorLayer::OnMouseButtonPressed));
+	}
+	*/
+
+	/*
+	bool EditorLayer::OnKeyPressed(KeyPressedEvent& event) {
+
+		if (event.GetRepeatCount() > 0)
+			return false;
+
+		bool control = Input::IsKeyPressed(Key::LeftControl) || Input::IsKeyPressed(Key::RightControl);
+		bool shift = Input::IsKeyPressed(Key::LeftShift) || Input::IsKeyPressed(Key::RightShift);
+
+		if (m_SceneState == GameState::EDIT)
+			switch (event.GetKeyCode()) {
+			case Key::N:
+				if (control)
+					NewScene();
+				break;
+			case Key::O:
+				if (control)
+					OpenFile();
+				break;
+			case Key::S:
+				if (control && shift)
+					SaveSceneAs();
+				else if (control)
+					SaveScene();
+				break;
+			case Key::D:
+				if (control)
+					DuplicateSelectedEntity();
+				break;
+	}
+	*/
 
 	void EditorLayer::OnGuiRender() {
 
@@ -131,7 +213,6 @@ namespace Cober {
 
 		if (_framebuffer != nullptr)		// Viewport
 		{
-			glm::vec2 _ViewportSize = { 0.0f, 0.0f };
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 			ImGui::Begin("Viewport");
 
@@ -145,11 +226,21 @@ namespace Cober {
 			_ViewportSize = { _width / aspectRatio,
 							  _height / aspectRatio };*/
 
-			_ViewportSize = { viewportPanelSize.x,
+			_viewportSize = { viewportPanelSize.x,
 							   viewportPanelSize.y };
 
 			uint32_t textureID = _framebuffer->GetColorAttachmentRendererID();
-			ImGui::Image((void*)textureID, ImVec2{ _ViewportSize.x, _ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+			ImGui::Image((void*)textureID, ImVec2{ _viewportSize.x, _viewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+
+			/*if (ImGui::BeginDragDropTarget()) {
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
+					const wchar_t* path = (const wchar_t*)payload->Data;
+					mFilePath = (std::filesystem::path(g_AssetPath) / path).string();
+					OpenFile(std::filesystem::path(g_AssetPath) / path);
+				}
+				ImGui::EndDragDropTarget();
+			}*/
+
 			ImGui::PopStyleVar();
 			ImGui::End();
 		}

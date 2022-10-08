@@ -31,6 +31,7 @@
 #include <Render/Framebuffer.h>
 #include <Render/Shader.h>
 #include <Render/Texture.h>
+#include <Render/Camera/EditorCamera.h>
 
 
 //[++++++++++++++++++++++++++]

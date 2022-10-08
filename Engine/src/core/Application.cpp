@@ -28,7 +28,7 @@ namespace Cober {
         _GuiLayer = new GuiLayer();
         PushOverlay(_GuiLayer);
 
-        _gameState = GameState::PLAY;
+        _gameState = GameState::EDITOR;
         //_timestep->SetFPSLimit(60);
     }
 
@@ -85,7 +85,8 @@ namespace Cober {
 
             switch (event.type) {
             case SDL_KEYDOWN:
-                if (event.key.keysym.sym == SDLK_ESCAPE)
+                auto key = event.key.keysym.sym;
+                if (key == SDLK_ESCAPE)
                     Close();
                 break;
             }

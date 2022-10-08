@@ -58,6 +58,8 @@ project "Engine"
 		"%{prj.name}/include/Systems/**.h",
 		"%{prj.name}/include/Render/**.cpp",
 		"%{prj.name}/include/Render/**.h",
+		"%{prj.name}/include/Render/Camera/**.h",
+		"%{prj.name}/include/Render/Camera/**.cpp",
 	}
 
 	defines
@@ -74,6 +76,7 @@ project "Engine"
 		"%{prj.name}/src/core",
 		"%{prj.name}/src/Entities",
 		"%{prj.name}/src/Render",
+		"%{prj.name}/src/Render/Camera",
 		"%{prj.name}/src/GUISystem",
 		"%{prj.name}/src/Systems",
 	}

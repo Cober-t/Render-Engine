@@ -21,13 +21,13 @@ namespace Cober {
 	};
 
 	struct Transform {
-		Vec2 position = { 0.0f, 0.0f };
+		glm::vec2 position = { 0.0f, 0.0f };
 		double rotation = 0;
-		Vec2 scale = { 0.0f, 0.0f };
+		glm::vec2 scale = { 0.0f, 0.0f };
 
 		Transform() = default;
 		Transform(const Transform&) = default;
-		Transform(Vec2 pos, float rot, Vec2 sc)
+		Transform(glm::vec2 pos, float rot, glm::vec2 sc)
 			: position(pos), rotation(rot), scale(sc) {};
 	};
 
@@ -40,21 +40,21 @@ namespace Cober {
 	};
 
 	struct Rigidbody {
-		Vec2 velocity;
+		glm::vec2 velocity;
 
 		Rigidbody() = default;
 		Rigidbody(const Rigidbody&) = default;
-		Rigidbody(Vec2 vel) : velocity(vel) {}
+		Rigidbody(glm::vec2 vel) : velocity(vel) {}
 	};
 
 	struct Sprite {
 		int w, h;
 		std::string assetID;
-		Vec2 srcRect;
+		glm::vec2 srcRect;
 
 		Sprite() = default;
 		Sprite(const Sprite&) = default;
-		Sprite(const std::string& ID, int width, int height, Vec2 rect = Vec2(0.0, 0.0))
+		Sprite(const std::string& ID, int width, int height, glm::vec2 rect = glm::vec2(0.0, 0.0))
 			: assetID(ID), w(width), h(height), srcRect(rect) {}
 	};
 }

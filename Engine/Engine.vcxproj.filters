@@ -52,6 +52,9 @@
     <Filter Include="src\Render">
       <UniqueIdentifier>{FC94E62B-E84C-2879-5154-01D53D2BC369}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Render\Camera">
+      <UniqueIdentifier>{F4355972-604C-5708-A9C3-E22915192890}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Systems">
       <UniqueIdentifier>{34DEBD24-A093-361A-2988-30F1953C2D1E}</UniqueIdentifier>
     </Filter>
@@ -1755,6 +1758,12 @@
     <ClInclude Include="src\GUISystem\GuiLayer.h">
       <Filter>src\GUISystem</Filter>
     </ClInclude>
+    <ClInclude Include="src\Render\Camera\Camera.h">
+      <Filter>src\Render\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Render\Camera\EditorCamera.h">
+      <Filter>src\Render\Camera</Filter>
+    </ClInclude>
     <ClInclude Include="src\Render\Framebuffer.h">
       <Filter>src\Render</Filter>
     </ClInclude>
@@ -1828,6 +1837,9 @@
     </ClCompile>
     <ClCompile Include="src\GUISystem\GuiLayer.cpp">
       <Filter>src\GUISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\Camera\EditorCamera.cpp">
+      <Filter>src\Render\Camera</Filter>
     </ClCompile>
     <ClCompile Include="src\Render\Framebuffer.cpp">
       <Filter>src\Render</Filter>

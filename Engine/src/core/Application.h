@@ -42,6 +42,8 @@ namespace Cober {
 
 		void Close() { _gameState = GameState::EXIT; }
 		Window& GetWindow() { return *_window; }
+		GameState GetGameState() { return _gameState; }
+		void SetGameState(GameState state) { _gameState = state; }
 	public:
 		uint32_t viewportWidth, viewportHeight;
 	private:
