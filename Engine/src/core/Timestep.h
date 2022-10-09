@@ -1,13 +1,15 @@
 #pragma once
 
+#include <iostream>
+
 namespace Cober {
 
 	class Timestep {
 	public:
 		Timestep(float time = 0.0f)
-			: FPS_Limit(60), lastFrameTime(0), frames(0), limit(false), deltaTime(0) { }
+			: FPS_Limit(60), lastFrameTime(0), frames(0), _countedFrames(0), limit(false), deltaTime(0) { }
 
-		void Update() {
+		inline void Update() {
 			// Limit FrameRate
 			if (limit) {
 				int timeToWait = 1000 / FPS_Limit - (SDL_GetTicks() - lastFrameTime);
@@ -16,12 +18,13 @@ namespace Cober {
 			}
 
 			deltaTime = (SDL_GetTicks() - lastFrameTime) / 1000.0;
-			frames++;
+			_countedFrames++;
 
 			if (lastFrameTime / 1000 - auxTime == 1) {
 				//Logger::Log("Frames: " + std::to_string(frames));
 				auxTime = lastFrameTime / 1000;
-				frames = 0;
+				frames = _countedFrames;
+				_countedFrames = 0;
 			}
 
 			lastFrameTime = SDL_GetTicks();
@@ -36,6 +39,7 @@ namespace Cober {
 		double DeltaTime() { return deltaTime; }
 	private:
 		int auxTime = 0;
+		uint32_t _countedFrames;
 	public:
 		uint32_t lastFrameTime;
 		uint32_t FPS_Limit;

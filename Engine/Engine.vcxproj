@@ -752,7 +752,6 @@
     <ClCompile Include="src\core\AssetManager.cpp" />
     <ClCompile Include="src\core\Layer.cpp" />
     <ClCompile Include="src\core\Logger.cpp" />
-    <ClCompile Include="src\core\Timestep.cpp" />
     <ClCompile Include="src\core\Window.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />
     <ClCompile Include="src\imgui\imgui_demo.cpp" />

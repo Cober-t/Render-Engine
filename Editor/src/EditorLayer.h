@@ -1,6 +1,9 @@
 #pragma once
 #include <Engine.h>
 
+#include "Panels/ContentBrowserPanel.h"
+#include "Panels/SceneHierarchyPanel.h"
+
 namespace Cober {
 
 	class EditorLayer : public Layer {
@@ -20,6 +23,11 @@ namespace Cober {
 		Ref<Framebuffer> _framebuffer;
 		Ref<Shader> shader;	// Render Test
 		EditorCamera _editorCamera;
+
+		std::string _filePath;
 		glm::vec2 _viewportSize = { 0.0f, 0.0f };
+	private:
+		ContentBrowserPanel _contentBrowserPanel;
+		SceneHierarchyPanel _sceneHierarchyPanel;
 	};
 }

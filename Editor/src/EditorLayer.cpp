@@ -179,7 +179,7 @@ namespace Cober {
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
 			window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-			window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+			window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus | ImGuiDragDropFlags_SourceAllowNullID;
 		}
 
 		// When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render our background and handle the pass-thru hole, so we ask Begin() to not render a background.
@@ -196,19 +196,49 @@ namespace Cober {
 
 		// DockSpace
 		ImGuiIO& io = ImGui::GetIO();
+		ImGuiStyle& style = ImGui::GetStyle();
+		float minWinSizeX = style.WindowMinSize.x;
+		style.WindowMinSize.x = 300.0f;
 		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable) {
 			ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
 			ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 		}
+		style.WindowMinSize.x = minWinSizeX;
 
-		if (ImGui::BeginMenuBar()) {
-			if (ImGui::BeginMenu("File")) {
-				if (ImGui::MenuItem("Exit"))
-					Engine::Get().Close();
+		{	///////// MENU BAR
+			if (ImGui::BeginMenuBar()) {
+				if (ImGui::BeginMenu("File")) {
+					if (ImGui::MenuItem("Exit"))
+						Engine::Get().Close();
 
-				ImGui::EndMenu();
+					ImGui::EndMenu();
+				}
+				ImGui::EndMenuBar();
 			}
-			ImGui::EndMenuBar();
+		}
+
+		{	///////// RENDER PANELS
+			_sceneHierarchyPanel.OnGuiRender();
+			_contentBrowserPanel.OnGuiRender();
+		}
+
+		{	///////// IMGUI SHOW DEMO
+			ImGui::ShowDemoWindow();
+		}
+
+		{	///////// SETTINGS
+
+			ImGui::Begin("Settings");
+
+			//std::string name = "None";
+			//if (m_HoveredEntity)
+			//	name = m_HoveredEntity.GetComponent<TagComponent>().Tag;
+			//ImGui::Text("Hovered Entity: %s", name.c_str());
+
+			ImGui::Text("Renderer Stats:");
+			uint32_t frames = Engine::Get().GetFrames();
+			ImGui::Text("Frames: %d", frames);
+			ImGui::End();
 		}
 
 		if (_framebuffer != nullptr)		// Viewport
@@ -232,14 +262,14 @@ namespace Cober {
 			uint32_t textureID = _framebuffer->GetColorAttachmentRendererID();
 			ImGui::Image((void*)textureID, ImVec2{ _viewportSize.x, _viewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 
-			/*if (ImGui::BeginDragDropTarget()) {
+			if (ImGui::BeginDragDropTarget()) {
 				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
 					const wchar_t* path = (const wchar_t*)payload->Data;
-					mFilePath = (std::filesystem::path(g_AssetPath) / path).string();
-					OpenFile(std::filesystem::path(g_AssetPath) / path);
+					_filePath = (std::filesystem::path(SOLUTION_DIR + (std::string)"assets") / path).string();
+					printf(_filePath.c_str());
 				}
 				ImGui::EndDragDropTarget();
-			}*/
+			}
 
 			ImGui::PopStyleVar();
 			ImGui::End();

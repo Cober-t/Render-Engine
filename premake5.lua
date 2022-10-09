@@ -179,6 +179,7 @@ project "Editor"
 			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM=<SDL_opengl.h>",
 			"GL_GLEXT_PROTOTYPES=1",
 			"GLEW_STATIC",
+			'SOLUTION_DIR=R"($(SolutionDir))"'
 		}
 
 

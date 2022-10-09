@@ -29,7 +29,9 @@ namespace Cober {
         PushOverlay(_GuiLayer);
 
         _gameState = GameState::EDITOR;
+
         //_timestep->SetFPSLimit(60);
+        _countedFrames = 0;
     }
 
     Engine::~Engine() {
