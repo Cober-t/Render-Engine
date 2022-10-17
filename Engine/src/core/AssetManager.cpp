@@ -5,8 +5,6 @@ namespace Cober {
 
 	AssetManager::AssetManager() {
 		Logger::Log("AssetManager constructor called!");
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_DEPTH_TEST);
 	}
 
 	AssetManager::~AssetManager() {

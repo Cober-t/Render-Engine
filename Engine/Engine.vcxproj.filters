@@ -49,6 +49,15 @@
     <Filter Include="src\GUISystem">
       <UniqueIdentifier>{2611FCAF-92D1-77E6-5B0C-C163C78BBCC2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Platforms">
+      <UniqueIdentifier>{B40E5C85-20CF-D7BB-E909-213955891C98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platforms\OpenGL">
+      <UniqueIdentifier>{68A52600-5434-B0C9-FD52-C4C4E9C0C06F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platforms\OpenGLES3">
+      <UniqueIdentifier>{D3BC1A31-3FF4-62C8-48FE-C6EBB4B489C1}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Render">
       <UniqueIdentifier>{FC94E62B-E84C-2879-5154-01D53D2BC369}</UniqueIdentifier>
     </Filter>
@@ -1758,6 +1767,27 @@
     <ClInclude Include="src\GUISystem\GuiLayer.h">
       <Filter>src\GUISystem</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platforms\OpenGL\OpenGLContext.h">
+      <Filter>src\Platforms\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platforms\OpenGL\OpenGLFramebuffer.h">
+      <Filter>src\Platforms\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platforms\OpenGL\OpenGLRenderAPI.h">
+      <Filter>src\Platforms\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platforms\OpenGL\OpenGLShader.h">
+      <Filter>src\Platforms\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Context.h">
+      <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Framebuffer.h">
+      <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Shader.h">
+      <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClInclude>
     <ClInclude Include="src\Render\Camera\Camera.h">
       <Filter>src\Render\Camera</Filter>
     </ClInclude>
@@ -1765,6 +1795,15 @@
       <Filter>src\Render\Camera</Filter>
     </ClInclude>
     <ClInclude Include="src\Render\Framebuffer.h">
+      <Filter>src\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Render\GraphicsContext.h">
+      <Filter>src\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Render\RenderAPI.h">
+      <Filter>src\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Render\RenderGlobals.h">
       <Filter>src\Render</Filter>
     </ClInclude>
     <ClInclude Include="src\Render\Shader.h">
@@ -1838,10 +1877,40 @@
     <ClCompile Include="src\GUISystem\GuiLayer.cpp">
       <Filter>src\GUISystem</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platforms\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platforms\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platforms\OpenGL\OpenGLFramebuffer.cpp">
+      <Filter>src\Platforms\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platforms\OpenGL\OpenGLRenderAPI.cpp">
+      <Filter>src\Platforms\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platforms\OpenGL\OpenGLShader.cpp">
+      <Filter>src\Platforms\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Context.cpp">
+      <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Framebuffer.cpp">
+      <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Shader.cpp">
+      <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClCompile>
     <ClCompile Include="src\Render\Camera\EditorCamera.cpp">
       <Filter>src\Render\Camera</Filter>
     </ClCompile>
     <ClCompile Include="src\Render\Framebuffer.cpp">
+      <Filter>src\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\GraphicsContext.cpp">
+      <Filter>src\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\RenderAPI.cpp">
+      <Filter>src\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\RenderGlobals.cpp">
       <Filter>src\Render</Filter>
     </ClCompile>
     <ClCompile Include="src\Render\Shader.cpp">

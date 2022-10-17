@@ -1,7 +1,6 @@
 #pragma once
 
-#include "core/Window.h"
-
+#include "core/Core.h"
 
 namespace Cober { 
 
@@ -16,25 +15,24 @@ namespace Cober {
 
 	class Framebuffer {
 	public:
-		Framebuffer(const FramebufferSpecification& spec);
-		~Framebuffer();
+		virtual ~Framebuffer() = default;
 
-		Ref<Framebuffer> Init(const Unique<Window>& window);
-		void Bind();
-		void Unbind();
+		static Ref<Framebuffer> Create(uint32_t width, uint32_t height);
 
-		void Invalidate();
+		virtual void Bind() = 0;
+		virtual void Unbind() = 0;
 
-		void Resize(uint32_t width, uint32_t height);
-		static Ref<Framebuffer> Create(uint32_t width, uint32_t heith);
+		virtual void Invalidate() = 0;
 
-		uint32_t GetColorAttachmentRendererID() { return _ColorAttachment; }
-		const FramebufferSpecification& GetSpecification() { return _Specification; }
-		void SetSpecificationWidth(const uint32_t width)   { _Specification.Width = width; }
-		void SetSpecificationHeight(const uint32_t height) { _Specification.Height = height; }
-	private:
-		uint32_t _RendererID = 0;
-		uint32_t _ColorAttachment = 0, _DepthAttachment = 0;
-		FramebufferSpecification _Specification;
+		virtual void Resize(uint32_t width, uint32_t height) = 0;
+
+		virtual uint32_t GetColorAttachmentRendererID() = 0;
+		virtual const FramebufferSpecification& GetSpecification() = 0;
+		virtual void SetSpecificationWidth(const uint32_t width) = 0;
+		virtual void SetSpecificationHeight(const uint32_t height) = 0;
+	//private:
+	//	uint32_t _RendererID = 0;
+	//	uint32_t _ColorAttachment = 0, _DepthAttachment = 0;
+	//	FramebufferSpecification _Specification;
 	};
 }

@@ -46,20 +46,20 @@ project "Engine"
 		"%{prj.name}/include/lua/**.hpp",
 		"%{prj.name}/include/box2D/**.h",
 		"%{prj.name}/include/entt/**.hpp",
-		"%{prj.name}/include/imgui/**.cpp",
-		"%{prj.name}/include/imgui/**.h",
-		"%{prj.name}/include/core/**.cpp",
-		"%{prj.name}/include/core/**.h",
-		"%{prj.name}/include/Entities/**.cpp",
-		"%{prj.name}/include/Entities/**.h",
-		"%{prj.name}/include/GUISystem/**.cpp",
-		"%{prj.name}/include/GUISystem/**.h",
-		"%{prj.name}/include/Systems/**.cpp",
-		"%{prj.name}/include/Systems/**.h",
-		"%{prj.name}/include/Render/**.cpp",
-		"%{prj.name}/include/Render/**.h",
-		"%{prj.name}/include/Render/Camera/**.h",
-		"%{prj.name}/include/Render/Camera/**.cpp",
+		--"%{prj.name}/include/imgui/**.cpp",
+		--"%{prj.name}/include/imgui/**.h",
+		--"%{prj.name}/include/core/**.cpp",
+		--"%{prj.name}/include/core/**.h",
+		--"%{prj.name}/include/Entities/**.cpp",
+		--"%{prj.name}/include/Entities/**.h",
+		--"%{prj.name}/include/GUISystem/**.cpp",
+		--"%{prj.name}/include/GUISystem/**.h",
+		--"%{prj.name}/include/Systems/**.cpp",
+		--"%{prj.name}/include/Systems/**.h",
+		--"%{prj.name}/include/Render/**.cpp",
+		--"%{prj.name}/include/Render/**.h",
+		--"%{prj.name}/include/Render/Camera/**.h",
+		--"%{prj.name}/include/Render/Camera/**.cpp",
 	}
 
 	defines
@@ -79,6 +79,9 @@ project "Engine"
 		"%{prj.name}/src/Render/Camera",
 		"%{prj.name}/src/GUISystem",
 		"%{prj.name}/src/Systems",
+		"%{prj.name}/src/Platforms",
+		"%{prj.name}/src/Platforms/OpenGL",
+		"%{prj.name}/src/Platforms/OpenGLES3",
 	}
 
 	libdirs
@@ -123,6 +126,7 @@ project "Engine"
 			"GL_GLEXT_PROTOTYPES=1",
 			"CB_BUILD_DLL",
 			"GLEW_STATIC",
+			"__OPENGL__",
 			'SOLUTION_DIR=R"($(SolutionDir))"'
 		}
 
@@ -179,6 +183,7 @@ project "Editor"
 			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM=<SDL_opengl.h>",
 			"GL_GLEXT_PROTOTYPES=1",
 			"GLEW_STATIC",
+			"__OPENGL__",
 			'SOLUTION_DIR=R"($(SolutionDir))"'
 		}
 

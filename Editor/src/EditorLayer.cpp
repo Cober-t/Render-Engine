@@ -74,7 +74,9 @@ namespace Cober {
 		_framebuffer->Bind();
 
 		// Abstrar to render static commands
-		Engine::Get().GetWindow().ClearWindow(200, 80, 20, 255);
+		//Engine::Get().GetWindow().ClearWindow(200, 80, 20, 255);
+		RenderGlobals::SetClearColor(200, 80, 20, 255);
+		RenderGlobals::Clear();
 		switch (Engine::Get().GetGameState())
 		{
 			case GameState::EDITOR:
@@ -266,7 +268,7 @@ namespace Cober {
 				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
 					const wchar_t* path = (const wchar_t*)payload->Data;
 					_filePath = (std::filesystem::path(SOLUTION_DIR + (std::string)"assets") / path).string();
-					printf(_filePath.c_str());
+					std::cout << _filePath.c_str() << std::endl;
 				}
 				ImGui::EndDragDropTarget();
 			}

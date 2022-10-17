@@ -28,10 +28,22 @@
 //[++++++++++++++++++++++++++]
 //[+++++++++ RENDER +++++++++]
 //[++++++++++++++++++++++++++]
+#include <Render/GraphicsContext.h>   
 #include <Render/Framebuffer.h>
 #include <Render/Shader.h>
 #include <Render/Texture.h>
+#include <Render/RenderGlobals.h>   
+#include <Render/RenderAPI.h>   
 #include <Render/Camera/EditorCamera.h>
+
+
+//[++++++++++++++++++++++++++]
+//[+++++++++ RENDER +++++++++]
+//[++++++++++++++++++++++++++]
+#include <Platforms/OpenGL/OpenGLContext.h>
+#include <Platforms/OpenGL/OpenGLFramebuffer.h>
+#include <Platforms/OpenGL/OpenGLRenderAPI.h>
+#include <Platforms/OpenGL/OpenGLShader.h>
 
 
 //[++++++++++++++++++++++++++]

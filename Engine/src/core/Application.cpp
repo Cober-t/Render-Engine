@@ -22,9 +22,6 @@ namespace Cober {
 
         _window = Window::Create(name, width, height);
 
-        if (_window->InitGlew())
-            LOG("Something gone wrong on Initialice GLEW!!");
-
         _GuiLayer = new GuiLayer();
         PushOverlay(_GuiLayer);
 
@@ -56,7 +53,7 @@ namespace Cober {
 
             ProcessInputs();
 
-            _window->ClearWindow(200, 80, 20, 255);
+            //_window->ClearWindow(200, 80, 20, 255);
 
             Update();
 

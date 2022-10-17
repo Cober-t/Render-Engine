@@ -1,22 +1,56 @@
 #include "pch.h"
+
+#include "Render/RenderAPI.h"
 #include "Shader.h"
+#include "Platforms/OpenGL/OpenGLShader.h"
+//#include "Platforms/OpenGLES/OpenGLESShader.h"
+//#include "Platforms/OpenGLES3/OpenGLES3Shader.h"
 
 namespace Cober {
 
-	Shader::Shader() {
-
-		_shaderProgram = glCreateProgram();
-
-		if (!_shaderProgram) {
-			printf("Error creating shader program!\n");
-			return;
-		}
-	}
-
 	Ref<Shader> Shader::Create() {
 
-		return CreateRef<Shader>();
+		switch (RenderAPI::GetAPI()) {
+			case RenderAPI::API::None:		LOG("RenderAPI::None means there is not render defined!!");		return nullptr;
+			case RenderAPI::API::OpenGL:	return CreateRef<OpenGLShader>();
+
+			// Future implementation
+			//case RenderAPI::API::OpenGLES:	return CreateUnique<OpenGLESShader>(spec)	return nullptr;
+			//case RenderAPI::API::OpenGLES3:	return CreateUnique<OpenGLES3Shader>(spec)	return nullptr;
+		}
+		LOG_ERROR("Unknown Shader RenderAPI!");
+		return nullptr;
 	}
+
+	//Ref<Shader> Shader::Create(const std::string& filepath)
+	//{
+	//	switch (RenderAPI::GetAPI())
+	//	{
+	//		case RenderAPI::API::None:		LOG("RenderAPI::None means there is not render defined!!");		return nullptr;
+	//		case RenderAPI::API::OpenGL:	return CreateRef<OpenGLShader>(filepath);
+	//		// Future implementation
+	//		//case RenderAPI::API::OpenGLES:	return CreateUnique<OpenGLESShader>(spec)	return nullptr;
+	//		//case RenderAPI::API::OpenGLES3:	return CreateUnique<OpenGLES3Shader>(spec)	return nullptr;
+	//	}
+
+	//	LOG_ERROR("Unknown Shader RenderAPI!");
+	//	return nullptr;
+	//}
+
+	//Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+	//{
+	//	switch (RenderAPI::GetAPI())
+	//	{
+	//		case RenderAPI::API::None:		LOG("RenderAPI::None means there is not render defined!!");		return nullptr;
+	//		case RenderAPI::API::OpenGL:	return CreateRef<OpenGLShader>(name, vertexSrc, fragmentSrc);
+	//		// Future implementation
+	//		//case RenderAPI::API::OpenGLES:	return CreateUnique<OpenGLESShader>(spec)	return nullptr;
+	//		//case RenderAPI::API::OpenGLES3:	return CreateUnique<OpenGLES3Shader>(spec)	return nullptr;
+	//	}
+
+	//	LOG_ERROR("Unknown Shader RenderAPI!");
+	//	return nullptr;
+	//}
 
 	std::string Shader::ReadFile(const std::string& filePath)
 	{
@@ -34,56 +68,5 @@ namespace Cober {
 
 		return result;
 	}
-
-	void Shader::AddShader(const std::string& filePath, GLenum shaderType) {
-
-		std::string file = ReadFile(filePath);
-		GLuint theShader = glCreateShader(shaderType);
-
-		const GLchar* theCode[1];
-		theCode[0] = file.c_str();
-
-		GLint codeLength[1];
-		codeLength[0] = strlen(file.c_str());
-
-		glShaderSource(theShader, 1, theCode, codeLength);
-		glCompileShader(theShader);
-
-		GLint result = 0;
-		GLchar eLog[1024] = { 0 };
-
-		glGetShaderiv(theShader, GL_COMPILE_STATUS, &result);
-		if (!result)
-		{
-			glGetShaderInfoLog(theShader, sizeof(eLog), NULL, eLog);
-			printf("Error compiling the %d shader: '%s'\n", shaderType, eLog);
-			return;
-		}
-
-		glAttachShader(_shaderProgram, theShader);
-	}
-
-	void Shader::CompileShader() {
-
-		GLint result = 0;
-		GLchar eLog[1024] = { 0 };
-
-		glLinkProgram(_shaderProgram);
-		glGetProgramiv(_shaderProgram, GL_LINK_STATUS, &result);
-		if (!result)
-		{
-			glGetProgramInfoLog(_shaderProgram, sizeof(eLog), NULL, eLog);
-			printf("Error linking program: '%s'\n", eLog);
-			return;
-		}
-
-		glValidateProgram(_shaderProgram);
-		glGetShaderiv(_shaderProgram, GL_VALIDATE_STATUS, &result);
-		if (!result)
-		{
-			glGetShaderInfoLog(_shaderProgram, sizeof(eLog), NULL, eLog);
-			printf("Error validating program: '%s'\n", eLog);
-			return;
-		}
-	}
 }
+
