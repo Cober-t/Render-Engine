@@ -117,17 +117,13 @@ namespace Cober {
 		_framebuffer->Unbind();
 	}
 
-	/*
-	void EditorLayer::OnEvent(Event& event)
+	
+	void EditorLayer::OnEvent(SDL_Event& event)
 	{
 		//PerspCamera.OnEvent(event);
-		m_EditorCamera.OnEvent(event);
-
-		EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<KeyPressedEvent>(CB_BIND_EVENT(EditorLayer::OnKeyPressed));
-		//dispatcher.Dispatch<MouseButtonPressedEvent>(CB_BIND_EVENT(EditorLayer::OnMouseButtonPressed));
+		_editorCamera.OnEvent(event);
 	}
-	*/
+
 
 	/*
 	bool EditorLayer::OnKeyPressed(KeyPressedEvent& event) {
@@ -250,6 +246,7 @@ namespace Cober {
 
 			ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 			//_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
+			_editorCamera.SetViewportFocused(ImGui::IsWindowFocused());
 
 			//Engine::Get().viewportWidth  = viewportPanelSize.x;
 			//Engine::Get().viewportHeight = viewportPanelSize.y;

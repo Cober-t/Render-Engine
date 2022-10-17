@@ -15,7 +15,11 @@ namespace Cober {
 		EditorCamera(float fov, float aspectRatio, float nearClip, float farClip);
 
 		void OnUpdate(Ref<Timestep> ts);
-		//void OnEvent(Event& e);
+		void OnEvent(SDL_Event& event);
+
+		float OnMouseScroll(SDL_MouseWheelEvent& event);
+		void SetViewportFocused(bool focus) { _viewportFocused = focus; }
+		bool GetViewportFocused() { return _viewportFocused; }
 
 		inline float GetDistance() const { return _distance; }
 		inline void SetDistance(float distance) { _distance = distance; }
@@ -61,6 +65,7 @@ namespace Cober {
 
 		float _distance = 10.0f;
 		float _pitch = 0.0f, _yaw = 0.0f;
+		bool _viewportFocused;
 
 		float _viewportWidth = 1280, _viewportHeight = 720;
 	};

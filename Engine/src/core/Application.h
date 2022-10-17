@@ -16,6 +16,8 @@
 
 #include "GUISystem/GuiLayer.h"
 
+#include "Events.h"
+
 namespace Cober {
 
 	enum class GameState { PLAY, EDITOR, EXIT };
@@ -55,6 +57,7 @@ namespace Cober {
 		Layer _LayerStack;
 		Ref<Timestep> _timestep;
 		Unique<Window> _window;
+		Unique<Events> _events;
 		Unique<Registry> _registry;
 		Unique<AssetManager> _assetManager;
 	private:

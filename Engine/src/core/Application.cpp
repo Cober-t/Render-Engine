@@ -14,6 +14,7 @@ namespace Cober {
         _timestep     = CreateUnique<Timestep>();
         _registry     = CreateUnique<Registry>();
         _assetManager = CreateUnique<AssetManager>();
+        _events       = CreateUnique<Events>();
 
         if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
             Logger::Error("Error initializating SDL");
@@ -78,17 +79,12 @@ namespace Cober {
     void Engine::ProcessInputs() {
 
         SDL_Event event;
-        while (SDL_PollEvent(&event)) {
+        while (SDL_PollEvent(&event))
+        {
+            _events->ProcessEvents(event);
 
-            ImGui_ImplSDL2_ProcessEvent(&event);
-
-            switch (event.type) {
-            case SDL_KEYDOWN:
-                auto key = event.key.keysym.sym;
-                if (key == SDLK_ESCAPE)
-                    Close();
-                break;
-            }
+            for (Layer* layer : _LayerStack)
+                layer->OnEvent(event);
         }
     }
 

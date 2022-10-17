@@ -16,7 +16,7 @@ namespace Cober {
 
 		void OnUpdate(Ref<Timestep> ts) override;
 		virtual void OnGuiRender() override;
-		//void OnEvent(Event& event) override;
+		void OnEvent(SDL_Event& event) override;
 	private:
 		//bool OnKeyPressed(KeyPressedEvent& event)
 	private:

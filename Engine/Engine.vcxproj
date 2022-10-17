@@ -709,6 +709,7 @@
     <ClInclude Include="include\lua\luaconf.h" />
     <ClInclude Include="include\lua\lualib.h" />
     <ClInclude Include="include\sol\sol.hpp" />
+    <ClInclude Include="src\core\Events.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Entities\Components.h" />
     <ClInclude Include="src\Entities\ECS.h" />
@@ -750,6 +751,7 @@
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\Events.cpp" />
     <ClCompile Include="src\Entities\ECS.cpp" />
     <ClCompile Include="src\GUISystem\GuiLayer.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLContext.cpp" />

@@ -56,48 +56,52 @@ namespace Cober {
 		return speed;
 	}
 
-	void EditorCamera::OnUpdate(Ref<Timestep> ts)
-	{
-		/*
-		if (Input::IsKeyPressed(Key::LeftAlt)) 
-		{
-			const glm::vec2& mouse{ Input::GetMouseX(), Input::GetMouseY() };
-			glm::vec2 delta = (mouse - _initialMousePos) * 0.003f;
-			_initialMousePos = mouse;
-			if (Inut::IsMouseButtonPressed(Mouse::ButtonMiddle))
-				MousePan(delta);
-			else if (Input::IsMouseButtonPressed(Mouse::ButtonLeft))
-				MouseRotate(delta);
-			else if (Input::IsMouseButtonPressed(Mouse::ButtonRight))
-				MouseZoom(delta.y);
-		}
-		*/
+	void EditorCamera::OnUpdate(Ref<Timestep> ts) {
 
 		UpdateView();
 	}
+	
+	bool mouseButtonHeld = false;
+	bool altKeyPressed = false;
+	void EditorCamera::OnEvent(SDL_Event& event) {
+	
+		const Uint8* keyStateArray   = SDL_GetKeyboardState(NULL);
 
-	/*
-	float EditorCamera::OnEvent(Event& e) { 
-		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<MouseScrolledEvent>(CB_BIND_EVENT(EditorCamera::OnMouseScroll));
+		if (event.type == SDL_MOUSEBUTTONUP)
+			mouseButtonHeld = false;
+		if (_viewportFocused && keyStateArray[SDL_SCANCODE_LALT] && (event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_MOUSEMOTION)) {
+			mouseButtonHeld = true;
+			int mouseX, mouseY;
+			SDL_GetMouseState(&mouseX, &mouseY);
+			const glm::vec2& mouse{ mouseX, mouseY};
+			glm::vec2 delta = (mouse - _initialMousePos) * 0.003f;
+			_initialMousePos = mouse;
+			SDL_MouseButtonEvent* m = (SDL_MouseButtonEvent*)&event;
+			if (event.button.button == SDL_BUTTON(SDL_BUTTON_MIDDLE))
+				MousePan(delta);
+			else if (m->button == SDL_BUTTON(SDL_BUTTON_LEFT))
+				MouseRotate(delta);
+			else if (m->button == SDL_BUTTON(SDL_BUTTON_RIGHT))
+				MouseZoom(delta.y);
+		}
+
+		if (_viewportFocused && event.type == SDL_MOUSEWHEEL)
+			OnMouseScroll(event.wheel);
 	}
-	*/
 
-	/*
-	float EditorCamera::OnMouseScroll(MouseScrolledEvent& e) 
-	{ 
-		float delta = e.GetYOffset() * 0.1f;
+	float EditorCamera::OnMouseScroll(SDL_MouseWheelEvent& event)
+	{
+		float delta = event.preciseY * 0.1f;
 		MouseZoom(delta);
 		UpdateView();
 		return false;
 	}
-	*/
 
 	void EditorCamera::MousePan(const glm::vec2& delta)
 	{
 		auto [xSpeed, ySpeed] = PanSpeed();
 		_focalPoint += -GetRightDirection() * delta.x * xSpeed * _distance;
-		_focalPoint += -GetUpDirection() * delta.y * ySpeed * _distance;
+		_focalPoint += GetUpDirection() * delta.y * ySpeed * _distance;
 	}
 
 	void EditorCamera::MouseRotate(const glm::vec2& delta)

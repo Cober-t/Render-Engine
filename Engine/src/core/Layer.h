@@ -17,6 +17,7 @@ namespace Cober {
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
 		virtual void OnUpdate(Ref<Timestep> ts) {}
+		virtual void OnEvent(SDL_Event& event) {}
 		virtual void OnGuiRender() {}
 
 		void PushLayer(Layer* layer);
