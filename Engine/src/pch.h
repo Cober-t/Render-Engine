@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <crtdbg.h>
+#include <cstddef>
 
 #include <iostream>
 #include <fstream>
@@ -27,7 +28,7 @@
 // Own libs
 //#include <GL/glew.h>
 #include <SDL/SDL.h>
-#include "core/Core.h"
+//#include "core/Core.h"
 #include <core/Logger.h>
 //#undef main
 #include <SDL/SDL_image.h>

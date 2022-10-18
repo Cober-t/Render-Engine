@@ -4,6 +4,8 @@
 #include "core/Timestep.h"
 //#include "core/MouseEvents.h"
 
+#include <core/Core.h>
+
 //#include <glm/glm.hpp>
 
 namespace Cober {
@@ -65,7 +67,9 @@ namespace Cober {
 
 		float _distance = 10.0f;
 		float _pitch = 0.0f, _yaw = 0.0f;
-		bool _viewportFocused;
+		bool _viewportFocused = false;
+		bool mouseButtonHeld = false;
+		bool altKeyPressed = false;
 
 		float _viewportWidth = 1280, _viewportHeight = 720;
 	};

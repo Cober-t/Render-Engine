@@ -15,7 +15,6 @@ namespace Cober {
 			auto& transform = entity.GetComponent<Transform>();
 			const auto& sprite = entity.GetComponent<Sprite>();
 
-
 			int x = sprite.srcRect.x, y = sprite.srcRect.y;
 			int width  = sprite.w, height = sprite.h;
 

@@ -61,8 +61,6 @@ namespace Cober {
 		UpdateView();
 	}
 	
-	bool mouseButtonHeld = false;
-	bool altKeyPressed = false;
 	void EditorCamera::OnEvent(SDL_Event& event) {
 	
 		const Uint8* keyStateArray   = SDL_GetKeyboardState(NULL);

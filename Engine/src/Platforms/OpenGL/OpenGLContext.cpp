@@ -11,7 +11,7 @@ namespace Cober {
 	OpenGLContext::OpenGLContext(SDL_Window* window) : _windowHandle(window) {
 
 		if (_windowHandle == nullptr) {
-			GET_ERROR();
+			GET_SDL_ERROR();
 			return;
 		}
 
@@ -24,19 +24,19 @@ namespace Cober {
 
 		_context = SDL_GL_CreateContext(_windowHandle);
 		if (_context == nullptr)
-			LOG(SDL_GetError());
+			Logger::Log(SDL_GetError());
 
 		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK)
-			LOG("Something go wrong initializing Glew!!");
+			Logger::Log("Something go wrong initializing Glew!!");
 
 		int bufferWidth, bufferHeight;
 		SDL_GL_GetDrawableSize(_windowHandle, &bufferWidth, &bufferHeight);
 		glViewport(0, 0, bufferWidth, bufferHeight);
 
-		LOG(glGetString(GL_VERSION));
-		LOG(glGetString(GL_VENDOR));
-		LOG(glGetString(GL_RENDERER));
+		std::cout << glGetString(GL_VERSION)  << std::endl;
+		std::cout << glGetString(GL_VENDOR)   << std::endl;
+		std::cout << glGetString(GL_RENDERER) << std::endl;
 	}
 
 	SDL_GLContext OpenGLContext::GetContext() {

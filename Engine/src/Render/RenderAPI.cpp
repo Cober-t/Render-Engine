@@ -5,6 +5,8 @@
 //#include "Platforms/OpenGLES3/OpenGLES3RenderAPI.h"
 //#include "Platforms/OpenGLES3/OpenGLES3Context.h"
 
+#include <core/Logger.h>
+
 namespace Cober {
 
 	#ifdef __OPENGL__
@@ -21,14 +23,14 @@ namespace Cober {
 
 
 		switch (_api) {
-			case RenderAPI::API::None:		LOG("RenderAPI::None means there is not render defined!!"); return nullptr;
+			case RenderAPI::API::None:		Logger::Log("RenderAPI::None means there is not render defined!!"); return nullptr;
 			case RenderAPI::API::OpenGL:	return CreateUnique<OpenGLRenderAPI>();						return nullptr;
 
 			// Future implementation
 			//case RenderAPI::API::OpenGLES:	return CreateUnique<OpenGLESRenderAPI>()	return nullptr;
 			//case RenderAPI::API::OpenGLES3:	return CreateUnique<OpenGLES3RenderAPI>()	return nullptr;
 		}
-		LOG_ERROR("Unknown RenderAPI!");
+		Logger::Error("Unknown RenderAPI!");
 		return nullptr;
 	}
 }

@@ -1,4 +1,35 @@
-﻿  EditorCamera.cpp
+﻿  pch.cpp
+  ECS.cpp
+  GuiLayer.cpp
+  OpenGLES3Context.cpp
+  OpenGLES3Framebuffer.cpp
+  OpenGLES3Shader.cpp
+  OpenGLContext.cpp
+  OpenGLFramebuffer.cpp
+  OpenGLRenderAPI.cpp
+  OpenGLShader.cpp
+  EditorCamera.cpp
+  Framebuffer.cpp
+  GraphicsContext.cpp
+  RenderAPI.cpp
+  RenderGlobals.cpp
+  Shader.cpp
+  Texture.cpp
+  MovementSystem.cpp
+  RenderSystem.cpp
+  Application.cpp
+  AssetManager.cpp
+  Events.cpp
+  Layer.cpp
+  Logger.cpp
+  Window.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_opengl3.cpp
+  imgui_impl_sdl.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
 SDL2.lib(SDL2.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
 SDL2_image.lib(SDL2_image.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
 SDL2_mixer.lib(SDL2_mixer.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida

@@ -63,7 +63,7 @@ namespace Cober {
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, _DepthAttachment, 0);
 
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-			LOG("Framebuffer is incomplete!");
+			Logger::Log("Framebuffer is incomplete!");
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
@@ -78,7 +78,7 @@ namespace Cober {
 			//Resize((uint32_t)_ViewportSize.x, (uint32_t)_ViewportSize.y);
 			if (width == 0 || height == 0 || width > _MaxFramebufferSize || height > _MaxFramebufferSize)
 			{
-				LOG("Attempted to rezize framebuffer bigger than it could be");
+				Logger::Log("Attempted to rezize framebuffer bigger than it could be");
 				return;
 			}
 			_Specification.Width = width;

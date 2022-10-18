@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Render/Shader.h"
-#include "core/Core.h"
 
 #include <GL/glew.h>
 

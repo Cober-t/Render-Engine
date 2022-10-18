@@ -5,10 +5,9 @@ namespace Cober {
 
 	OpenGLShader::OpenGLShader() {
 
-		_shaderProgram = glCreateProgram();
+		_shaderProgram = GLCall(glCreateProgram());
 
 		if (!_shaderProgram) {
-			printf("Error creating shader program!\n");
 			return;
 		}
 	}
@@ -46,7 +45,6 @@ namespace Cober {
 		if (!result)
 		{
 			glGetShaderInfoLog(theShader, sizeof(eLog), NULL, eLog);
-			printf("Error compiling the %d shader: '%s'\n", shaderType, eLog);
 			return;
 		}
 
@@ -63,7 +61,6 @@ namespace Cober {
 		if (!result)
 		{
 			glGetProgramInfoLog(_shaderProgram, sizeof(eLog), NULL, eLog);
-			printf("Error linking program: '%s'\n", eLog);
 			return;
 		}
 
@@ -72,7 +69,6 @@ namespace Cober {
 		if (!result)
 		{
 			glGetShaderInfoLog(_shaderProgram, sizeof(eLog), NULL, eLog);
-			printf("Error validating program: '%s'\n", eLog);
 			return;
 		}
 	}

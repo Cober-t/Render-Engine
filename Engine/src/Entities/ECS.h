@@ -77,9 +77,9 @@ namespace Cober {
 		Pool(int size = 100) { data.resize(size); }
 		virtual ~Pool() = default;
 
-		bool IsEmpty() const { return data.empty(); }
-		int	GetSize() const { return data.size(); }
-		void Resize(int n) { data.resize(n); }
+		bool IsEmpty() const { return data.empty();	}
+		int  GetSize() const { return data.size();	}
+		void Resize(int n)	 { data.resize(n);		}
 
 		void Clear() { data.clear(); }
 		void Add(T object) { data, push_back(object); }
@@ -95,7 +95,7 @@ namespace Cober {
 	// +++++ REGISTRY +++++++++++++++++++++++++++++++++++++++++++ //
 	class Registry {
 	public:
-		Registry() { Logger::Log("Registry constructor called"); };
+		Registry()  { Logger::Log("Registry constructor called"); };
 		~Registry() { Logger::Log("Registry destructor called"); };
 
 		void Update();

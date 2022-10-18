@@ -7,7 +7,6 @@ namespace Cober {
 	Window::Window(const WindowData& data) 
 		: _data(data)
 	{
-
 		if (!CreateWindow())
 			return;
 
@@ -36,7 +35,7 @@ namespace Cober {
 			_data.width, _data.height,
 			SDL_WINDOW_OPENGL);
 		if (_window == nullptr)
-			LOG(SDL_GetError());
+			GET_SDL_ERROR();
 		
 		return _window;
 	}

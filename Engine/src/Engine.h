@@ -39,12 +39,12 @@
 
 
 //[++++++++++++++++++++++++++]
-//[+++++++++ RENDER +++++++++]
+//[+++++++++ Platform +++++++++]
 //[++++++++++++++++++++++++++]
-#include <Platforms/OpenGL/OpenGLContext.h>
-#include <Platforms/OpenGL/OpenGLFramebuffer.h>
-#include <Platforms/OpenGL/OpenGLRenderAPI.h>
-#include <Platforms/OpenGL/OpenGLShader.h>
+//#include <Platforms/OpenGL/OpenGLContext.h>
+//#include <Platforms/OpenGL/OpenGLFramebuffer.h>
+//#include <Platforms/OpenGL/OpenGLRenderAPI.h>
+//#include <Platforms/OpenGL/OpenGLShader.h>
 
 
 //[++++++++++++++++++++++++++]

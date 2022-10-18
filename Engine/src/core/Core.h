@@ -39,15 +39,11 @@
 #endif
 
 
-#define LOG(x)			std::cout << x << std::endl;
-#define LOG_ERROR(x)	std::cerr << x << std::endl;
 #define SHADERS_PATH SOLUTION_DIR + (std::string)"assets\\shaders\\"
 #define BIT(x)          (1 << x)
-#define GET_ERROR()     Logger::Error(SDL_GetError());
 
 static bool DEBUG = false;
 static bool GAME_2D = true;
-
 
 namespace Cober {
 

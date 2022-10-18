@@ -11,14 +11,14 @@ namespace Cober {
 	Ref<Shader> Shader::Create() {
 
 		switch (RenderAPI::GetAPI()) {
-			case RenderAPI::API::None:		LOG("RenderAPI::None means there is not render defined!!");		return nullptr;
+			case RenderAPI::API::None:		Logger::Log("RenderAPI::None means there is not render defined!!");		return nullptr;
 			case RenderAPI::API::OpenGL:	return CreateRef<OpenGLShader>();
 
 			// Future implementation
 			//case RenderAPI::API::OpenGLES:	return CreateUnique<OpenGLESShader>(spec)	return nullptr;
 			//case RenderAPI::API::OpenGLES3:	return CreateUnique<OpenGLES3Shader>(spec)	return nullptr;
 		}
-		LOG_ERROR("Unknown Shader RenderAPI!");
+		Logger::Error("Unknown Shader RenderAPI!");
 		return nullptr;
 	}
 
@@ -64,7 +64,7 @@ namespace Cober {
 			in.close();
 		}
 		else
-			LOG("Could not open file ");
+			Logger::Log("Could not open file ");
 
 		return result;
 	}

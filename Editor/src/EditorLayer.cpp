@@ -48,11 +48,17 @@ namespace Cober {
 		//framebuffer->Resize(_window->GetWidth(), _window->GetHeight());
 
 		// ++++++++++++++++++++++++ RENDER TEST
-		shader = Shader::Create();
-		CreateTriangle(shader);
-		shader->AddShader("vertexShader.glsl", GL_VERTEX_SHADER);
-		shader->AddShader("fragmentShader.glsl", GL_FRAGMENT_SHADER);
-		shader->CompileShader();
+		shaderTriangle = Shader::Create();
+		CreateTriangle(shaderTriangle);
+		shaderTriangle->AddShader("vertexShader.glsl", GL_VERTEX_SHADER);
+		shaderTriangle->AddShader("fragmentShader.glsl", GL_FRAGMENT_SHADER);
+		shaderTriangle->CompileShader();
+
+		// ++++++++++++++++++++++++ GRID
+		//shaderGrid = Shader::Create();
+		//shaderGrid->AddShader("gridVertex.glsl", GL_VERTEX_SHADER);
+		//shaderGrid->AddShader("gridFragment.glsl", GL_FRAGMENT_SHADER);
+		//shaderGrid->CompileShader();
 	}
 
 	void EditorLayer::OnDetach() {
@@ -75,7 +81,7 @@ namespace Cober {
 
 		// Abstrar to render static commands
 		//Engine::Get().GetWindow().ClearWindow(200, 80, 20, 255);
-		RenderGlobals::SetClearColor(200, 80, 20, 255);
+		RenderGlobals::SetClearColor(4, 0, 8, 255);
 		RenderGlobals::Clear();
 		switch (Engine::Get().GetGameState())
 		{
@@ -96,7 +102,7 @@ namespace Cober {
 
 		// Run Scene Editor or Scene Play
 		// ++++++++++++++++++++++++ RENDER TEST
-		glUseProgram(shader->GetShaderProgram());
+		glUseProgram(shaderTriangle->GetShaderProgram());
 
 		// [+++++++++++++++++++++++++++++++++++++++++++]
 		// [+++++++++++++++ Camera Test +++++++++++++++]
@@ -104,15 +110,31 @@ namespace Cober {
 		const glm::mat4& projectionMatrix = _editorCamera.GetProjection();
 		const glm::mat4& viewMatrix = _editorCamera.GetViewMatrix();
 
-		GLint location = glGetUniformLocation(shader->GetShaderProgram(), "_projection");
+		GLint location = glGetUniformLocation(shaderTriangle->GetShaderProgram(), "_projection");
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
-		location = glGetUniformLocation(shader->GetShaderProgram(), "_view");
+		location = glGetUniformLocation(shaderTriangle->GetShaderProgram(), "_view");
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(viewMatrix));
 
-		glBindVertexArray(shader->GetVAO());
+		glBindVertexArray(shaderTriangle->GetVAO());
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glBindVertexArray(0);
 		glUseProgram(0);
+
+		// [++++++++++++++++++ GRID +++++++++++++++++++]
+		// [+++++++++++++++++++++++++++++++++++++++++++]
+		//glm::vec3 nearPoint{ 1.0, 0.0, 1.0 };
+		//glm::vec3 farPoint{ 5.0, 0.0, 5.0 };
+		//glm::vec4 color{ 1.0, 0.0, 0.0, 1.0 };
+		//glUseProgram(shaderGrid->GetShaderProgram());
+		//location = glGetUniformLocation(shaderGrid->GetShaderProgram(), "proj");
+		//glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+		//location = glGetUniformLocation(shaderGrid->GetShaderProgram(), "view");
+		//glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+		//
+		//glBindVertexArray(shaderGrid->GetVAO());
+		//glDrawArrays(GL_TRIANGLES, 0, 3);
+		//glBindVertexArray(0);
+		//glUseProgram(0);
 
 		_framebuffer->Unbind();
 	}

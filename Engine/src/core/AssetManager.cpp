@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "core/AssetManager.h"
 
+#include <core/Logger.h>
+
 namespace Cober {
 
 	AssetManager::AssetManager() {
