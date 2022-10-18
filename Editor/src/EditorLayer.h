@@ -23,8 +23,9 @@ namespace Cober {
 		Ref<Framebuffer> _framebuffer;
 		Ref<Shader> shaderTriangle;	// Render Test
 		//Ref<Shader> shaderGrid;	
-		EditorCamera _editorCamera;
+		Unique<EditorCamera> _editorCamera;
 
+		bool fullscreen = false;
 		std::string _filePath;
 		glm::vec2 _viewportSize = { 0.0f, 0.0f };
 	private:

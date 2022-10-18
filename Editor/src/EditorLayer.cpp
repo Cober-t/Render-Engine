@@ -38,6 +38,7 @@ namespace Cober {
 
 	EditorLayer::EditorLayer() : Layer("Editor") {
 
+		_editorCamera = CreateUnique<EditorCamera>(45.0f, 1.778f, 1.0f, 1000.0f);
 	}
 
 	void EditorLayer::OnAttach() {
@@ -73,7 +74,7 @@ namespace Cober {
 			(spec.Width != _viewportSize.x || spec.Height != _viewportSize.y)) 
 		{
 			_framebuffer->Resize((uint32_t)_viewportSize.x, (uint32_t)_viewportSize.y);
-			_editorCamera.SetViewportSize(_viewportSize.x, _viewportSize.y);
+			_editorCamera->SetViewportSize(_viewportSize.x, _viewportSize.y, GAME_2D);
 			// Resize ViewportScene
 		}
 
@@ -88,7 +89,7 @@ namespace Cober {
 			case GameState::EDITOR:
 			{
 				//colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
-				_editorCamera.OnUpdate(ts);
+				_editorCamera->OnUpdate(ts);
 				//_activeScene->OnUpdateEditor(ts, _editorCamera);
 				break;
 			}
@@ -107,13 +108,13 @@ namespace Cober {
 		// [+++++++++++++++++++++++++++++++++++++++++++]
 		// [+++++++++++++++ Camera Test +++++++++++++++]
 		// [+++++++++++++++++++++++++++++++++++++++++++]
-		const glm::mat4& projectionMatrix = _editorCamera.GetProjection();
-		const glm::mat4& viewMatrix = _editorCamera.GetViewMatrix();
+		const glm::mat4& projectionMatrix = _editorCamera->GetProjection();
+		const glm::mat4& viewMatrix = _editorCamera->GetViewMatrix();
 
 		GLint location = glGetUniformLocation(shaderTriangle->GetShaderProgram(), "_projection");
-		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+		GLCallV(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(projectionMatrix)));
 		location = glGetUniformLocation(shaderTriangle->GetShaderProgram(), "_view");
-		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+		GLCallV(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(viewMatrix)));
 
 		glBindVertexArray(shaderTriangle->GetVAO());
 		glDrawArrays(GL_TRIANGLES, 0, 3);
@@ -143,7 +144,7 @@ namespace Cober {
 	void EditorLayer::OnEvent(SDL_Event& event)
 	{
 		//PerspCamera.OnEvent(event);
-		_editorCamera.OnEvent(event);
+		_editorCamera->OnEvent(event);
 	}
 
 
@@ -230,6 +231,11 @@ namespace Cober {
 				if (ImGui::BeginMenu("File")) {
 					if (ImGui::MenuItem("Exit"))
 						Engine::Get().Close();
+					
+					ImGui::Checkbox("2D", &GAME_2D);
+					if (ImGui::Checkbox("Fullscreen", &fullscreen))
+						Engine::Get().GetWindow().ChangeFullScreen();
+
 
 					ImGui::EndMenu();
 				}
@@ -268,7 +274,7 @@ namespace Cober {
 
 			ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 			//_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
-			_editorCamera.SetViewportFocused(ImGui::IsWindowFocused());
+			_editorCamera->SetViewportFocused(ImGui::IsWindowFocused());
 
 			//Engine::Get().viewportWidth  = viewportPanelSize.x;
 			//Engine::Get().viewportHeight = viewportPanelSize.y;

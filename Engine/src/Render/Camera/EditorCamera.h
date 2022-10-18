@@ -26,9 +26,9 @@ namespace Cober {
 		inline float GetDistance() const { return _distance; }
 		inline void SetDistance(float distance) { _distance = distance; }
 
-		inline void SetViewportSize(float width, float height) { 
+		inline void SetViewportSize(float width, float height, bool& ortho) { 
 			_viewportWidth = width; _viewportHeight = height;
-			UpdateProjection();
+			UpdateProjection(ortho);
 		}
 
 		const glm::mat4& GetViewMatrix() const { return _viewMatrix; }
@@ -44,7 +44,7 @@ namespace Cober {
 		float GetPitch() const { return _pitch; }
 		float GetYaw() const { return _yaw; }
 	private:
-		void UpdateProjection();
+		void UpdateProjection(bool& ortho);
 		void UpdateView();
 
 		//bool OnMouseScroll(MouseScrolledEvent& e);
@@ -70,6 +70,7 @@ namespace Cober {
 		bool _viewportFocused = false;
 		bool mouseButtonHeld = false;
 		bool altKeyPressed = false;
+		bool orthoProjection = false;
 
 		float _viewportWidth = 1280, _viewportHeight = 720;
 	};

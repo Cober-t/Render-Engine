@@ -43,7 +43,7 @@
 #define BIT(x)          (1 << x)
 
 static bool DEBUG = false;
-static bool GAME_2D = true;
+static bool GAME_2D = false;
 
 namespace Cober {
 

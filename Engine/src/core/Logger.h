@@ -14,7 +14,7 @@
 #define GLCallV( x ) \
 		Cober::Logger::GLClearErrors(); \
 		x; \
-		ASSERT(Cober::Logger::GLCheckErrors(#x, __FILE__, __LINE__)
+		ASSERT(Cober::Logger::GLCheckErrors(#x, __FILE__, __LINE__))
 
 #define GLCall( x ) [&]() { \
 		Cober::Logger::GLClearErrors(); \

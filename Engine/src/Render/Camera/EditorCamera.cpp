@@ -14,20 +14,31 @@ namespace Cober {
 		UpdateView();
 	}
 
-	void EditorCamera::UpdateProjection() {
+	void EditorCamera::UpdateProjection(bool& ortho) {
 
+		orthoProjection = ortho;
 		_aspectRatio = _viewportWidth / _viewportHeight;
-		_projection = glm::perspective(glm::radians(_fov), _aspectRatio, _nearClip, _farClip);
+
+		if (ortho)
+			_projection = glm::ortho(-_aspectRatio * _distance, _aspectRatio * _distance, -_distance, _distance, 0.1f, 1000.0f);
+		else
+			_projection = glm::perspective(glm::radians(_fov), _aspectRatio, _nearClip, _farClip);
 	}
 
 	void EditorCamera::UpdateView() {
 
 		// _yaw = _pitch = 0.0f;	// Lock the camera's rotation
 		_position = CalculatePosition();
-		
-		glm::quat orientation = GetOrientation();
-		_viewMatrix = glm::translate(glm::mat4(1.0f), _position) * glm::toMat4(orientation);
-		_viewMatrix = glm::inverse(_viewMatrix);
+
+		if (orthoProjection) {
+			glm::mat4 transform = glm::translate(glm::mat4(1.0f), _position) * glm::rotate(glm::mat4(1.0f), 0.0f, glm::vec3(0, 0, 1));
+			_viewMatrix = glm::inverse(transform);
+		}
+		else {
+			glm::quat orientation = GetOrientation();
+			_viewMatrix = glm::translate(glm::mat4(1.0f), _position) * glm::toMat4(orientation);
+			_viewMatrix = glm::inverse(_viewMatrix);
+		}
 	}
 	
 	std::pair<float, float> EditorCamera::PanSpeed() const {
@@ -77,9 +88,9 @@ namespace Cober {
 			SDL_MouseButtonEvent* m = (SDL_MouseButtonEvent*)&event;
 			if (event.button.button == SDL_BUTTON(SDL_BUTTON_MIDDLE))
 				MousePan(delta);
-			else if (m->button == SDL_BUTTON(SDL_BUTTON_LEFT))
+			else if (orthoProjection == false && m->button == SDL_BUTTON(SDL_BUTTON_LEFT))
 				MouseRotate(delta);
-			else if (m->button == SDL_BUTTON(SDL_BUTTON_RIGHT))
+			else if (orthoProjection == false && m->button == SDL_BUTTON(SDL_BUTTON_RIGHT))
 				MouseZoom(delta.y);
 		}
 

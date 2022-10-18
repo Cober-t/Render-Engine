@@ -15,13 +15,14 @@ namespace Cober {
 			WindowData() {
 				title = "Game Engine ;)";
 				width = 1280; height = 720;
-				VSync = true; 
+				VSync = true;
 			}
 		};
 
 		SDL_Window* _window = nullptr;
 		Unique<GraphicsContext> _context;
 		WindowData _data;
+		SDL_bool _fullscreen;
 	public:
 		Window(const WindowData data);
 		//~Window();
@@ -33,6 +34,7 @@ namespace Cober {
 		void SwapBuffers();
 		void UpdateViewport(const uint32_t width, const uint32_t height);
 		void CloseWindow();
+		void ChangeFullScreen();
 
 		SDL_Window* GetNativeWindow() { return _window; }
 		SDL_GLContext GetContext()	  { return _context->GetContext(); }

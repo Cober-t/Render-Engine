@@ -33,9 +33,11 @@ namespace Cober {
 		_window = SDL_CreateWindow(_data.title.c_str(),
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			_data.width, _data.height,
-			SDL_WINDOW_OPENGL);
+			SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_SHOWN);
 		if (_window == nullptr)
 			GET_SDL_ERROR();
+
+		SDL_SetWindowBordered(_window, SDL_FALSE);
 		
 		return _window;
 	}
@@ -58,6 +60,12 @@ namespace Cober {
 		SDL_GL_DeleteContext(_context->GetContext());
 		SDL_DestroyWindow(_window);
 		SDL_Quit();
+	}
+
+	void Window::ChangeFullScreen() {
+
+		SDL_SetWindowFullscreen(_window, _fullscreen);
+		_fullscreen = _fullscreen == SDL_FALSE ? SDL_TRUE : SDL_FALSE;
 	}
 
 	void Window::SwapBuffers() {
