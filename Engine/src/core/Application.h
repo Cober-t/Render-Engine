@@ -47,10 +47,6 @@ namespace Cober {
 		GameState GetGameState() { return _gameState; }
 		void SetGameState(GameState state) { _gameState = state; }
 		uint32_t GetFrames() { return _timestep->frames; }
-	public:
-		uint32_t viewportWidth, viewportHeight;
-		uint32_t _frameRate;
-		uint32_t _countedFrames;
 	private:
 		GameState _gameState;
 		GuiLayer* _GuiLayer;

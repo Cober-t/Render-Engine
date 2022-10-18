@@ -9,9 +9,10 @@ namespace Cober {
 		Timestep(float time = 0.0f)
 			: FPS_Limit(60), lastFrameTime(0), frames(0), _countedFrames(0), limit(false), deltaTime(0) { }
 
-		inline void Update() {
+		inline void Update(uint32_t framesLimit = 0) {
 			// Limit FrameRate
-			if (limit) {
+			if (framesLimit != 0) {
+				SetFPSLimit(framesLimit);
 				int timeToWait = 1000 / FPS_Limit - (SDL_GetTicks() - lastFrameTime);
 				if (timeToWait > 0 && timeToWait <= 1000 / FPS_Limit)
 					SDL_Delay(timeToWait);
@@ -29,9 +30,9 @@ namespace Cober {
 
 			lastFrameTime = SDL_GetTicks();
 		}
-		void SetFPSLimit(float frames) {
-			//if (frames > 60)
-				//frames = 60;
+		void SetFPSLimit(uint32_t frames) {
+			if (frames > 60)
+				frames = 60;
 			FPS_Limit = frames;
 			limit = true;
 		}

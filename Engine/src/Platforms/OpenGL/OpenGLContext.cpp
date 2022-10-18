@@ -3,7 +3,6 @@
 #include "core/Core.h"
 
 #include "Platforms/OpenGL/OpenGLContext.h"
-#include "Engine.h"
 #include <GL/glew.h>
 
 namespace Cober {
@@ -39,12 +38,13 @@ namespace Cober {
 		std::cout << glGetString(GL_RENDERER) << std::endl;
 	}
 
-	SDL_GLContext OpenGLContext::GetContext() {
-
+	SDL_GLContext OpenGLContext::GetContext() 
+	{
 		return _context;
 	}
-	void OpenGLContext::SwapBuffers() {
 
+	void OpenGLContext::SwapBuffers() 
+	{
 		SDL_GL_SwapWindow(_windowHandle);
 	}
 }

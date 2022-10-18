@@ -4,7 +4,7 @@
 
 namespace Cober {
 
-	Window::Window(const WindowData& data) 
+	Window::Window(const WindowData data) 
 		: _data(data)
 	{
 		if (!CreateWindow())

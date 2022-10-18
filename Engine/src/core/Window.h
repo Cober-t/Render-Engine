@@ -23,7 +23,7 @@ namespace Cober {
 		Unique<GraphicsContext> _context;
 		WindowData _data;
 	public:
-		Window(const WindowData& data);
+		Window(const WindowData data);
 		//~Window();
 
 		static Unique<Window> Create(const std::string& name = "Render Engine ;)", uint32_t width = 1280, uint32_t height = 720, bool VSync = true);
@@ -35,7 +35,8 @@ namespace Cober {
 		void CloseWindow();
 
 		SDL_Window* GetNativeWindow() { return _window; }
-		SDL_GLContext	GetContext() { return _context->GetContext(); }
+		SDL_GLContext GetContext()	  { return _context->GetContext(); }
+		bool GetVSync() { return _data.VSync; }
 		uint32_t GetWidth() { return _data.width; }
 		uint32_t GetHeight() { return _data.height; }
 	};

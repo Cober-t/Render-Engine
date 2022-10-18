@@ -6,30 +6,31 @@ namespace Cober {
     Engine* Engine::_instance = nullptr;
     //static Window* window;
     
-    Engine::Engine(const std::string& name, uint32_t width, uint32_t height, bool vsync) {
-
+    Engine::Engine(const std::string& name, uint32_t width, uint32_t height, bool vsync) 
+    {
         Logger::Log("2DEngine Constructor!");
-
         _instance = this;
-        _timestep     = CreateUnique<Timestep>();
-        _registry     = CreateUnique<Registry>();
+        _timestep = CreateUnique<Timestep>();
+        _registry = CreateUnique<Registry>();
         _assetManager = CreateUnique<AssetManager>();
-        _events       = CreateUnique<Events>();
-
+        _events = CreateUnique<Events>();
+    
         if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
             Logger::Error("Error initializating SDL");
             return;
         }
 
-        _window = Window::Create(name, width, height);
+        _window = Window::Create(name, width, height, vsync);
+        if (_window->GetVSync())
+            SDL_GL_SetSwapInterval(1);
 
-        _GuiLayer = new GuiLayer();
+//#ifndef __EMSCRIPTEN__
+        _GuiLayer = new GuiLayer("#version 430");
         PushOverlay(_GuiLayer);
-
-        _gameState = GameState::EDITOR;
+//#endif
 
         //_timestep->SetFPSLimit(60);
-        _countedFrames = 0;
+        _gameState = GameState::PLAY;
     }
 
     Engine::~Engine() {
@@ -54,21 +55,19 @@ namespace Cober {
 
             ProcessInputs();
 
-            //_window->ClearWindow(200, 80, 20, 255);
-
             Update();
 
             //if(!_minimized) { ...
             {
                 for (Layer* layer : _LayerStack)
                     layer->OnUpdate(_timestep);
-            }
-            
-            {
+
+#ifndef __EMSCRIPTEN__
                 _GuiLayer->Begin();
                 for (Layer* layer : _LayerStack)
                     layer->OnGuiRender();
                 _GuiLayer->End();
+#endif
             }
             // ... }
          

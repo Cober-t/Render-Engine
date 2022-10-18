@@ -19,21 +19,18 @@ namespace Cober {
 
     void Events::ProcessEvents(SDL_Event& event)
     {
-        ImGui_ImplSDL2_ProcessEvent(&event);
-
         switch (event.type) {
-            case SDL_KEYDOWN:
+            case SDL_KEYDOWN: {
                 auto key = event.key.keysym.sym;
                 if (key == SDLK_ESCAPE)
                     Engine::Get().Close();
                 break;
             }
-            switch (event.type)
-            {
             case SDL_QUIT:
+            {
                 std::terminate();
                 break;
-
+            }
             case SDL_WINDOWEVENT:
             {
                 if (event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)

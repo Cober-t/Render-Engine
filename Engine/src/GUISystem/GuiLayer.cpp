@@ -75,7 +75,9 @@ namespace Cober {
 		colors[ImGuiCol_TitleBgCollapsed] = ImVec4{ 0.07f, 0.07f, 0.07f, 1.0f };
 	}
 
-	GuiLayer::GuiLayer() {
+	GuiLayer::GuiLayer(const char* glVersion)
+	: glsl_version(glVersion) 
+	{
 
 	}
 
@@ -94,15 +96,24 @@ namespace Cober {
 		//Style();
 		ImGui::StyleColorsDark();
 		
-		window = Engine::Get().GetWindow().GetNativeWindow();
-		context = Engine::Get().GetWindow().GetContext();
-		SDL_Window* _window = static_cast<SDL_Window*>(window);
-		SDL_GLContext _context = static_cast<SDL_GLContext>(context);
-		ImGui_ImplSDL2_InitForOpenGL(_window, _context);
-		ImGui_ImplOpenGL3_Init("#version 460");
+		
+		ImGui_ImplSDL2_InitForOpenGL(Engine::Get().GetWindow().GetNativeWindow(), Engine::Get().GetWindow().GetContext());
+		ImGui_ImplOpenGL3_Init(glsl_version);
 
 		_width  = Engine::Get().GetWindow().GetWidth();
 		_height = Engine::Get().GetWindow().GetHeight();
+	}
+
+	void GuiLayer::OnDetach() {
+
+		ImGui_ImplOpenGL3_Shutdown();
+		ImGui_ImplSDL2_Shutdown();
+		ImGui::DestroyContext();
+	}
+
+	void GuiLayer::OnEvent(SDL_Event& event) {
+
+		ImGui_ImplSDL2_ProcessEvent(&event);
 	}
 
 	void GuiLayer::Begin() {
@@ -126,10 +137,4 @@ namespace Cober {
 		}
 	}
 
-	void GuiLayer::OnDetach() {
-
-		ImGui_ImplOpenGL3_Shutdown();
-		ImGui_ImplSDL2_Shutdown();
-		ImGui::DestroyContext();
-	}
 }

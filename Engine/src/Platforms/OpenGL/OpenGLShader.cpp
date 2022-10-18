@@ -3,13 +3,9 @@
 
 namespace Cober {
 
-	OpenGLShader::OpenGLShader() {
-
+	OpenGLShader::OpenGLShader()
+	{ 
 		_shaderProgram = GLCall(glCreateProgram());
-
-		if (!_shaderProgram) {
-			return;
-		}
 	}
 
 	/*OpenGLShader::OpenGLShader(const std::string& filepath) {

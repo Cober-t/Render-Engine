@@ -13,7 +13,7 @@ namespace Cober {
 		RenderAPI::API RenderAPI::_api = RenderAPI::API::OpenGL;
 	#elif  __OPENGLES__
 		RenderAPI::API RenderAPI::_api = RenderAPI::API::OpenGLES;
-	#elif  __OPENGLES3__
+	#elif  __OPENGLES3__ || __EMSCRIPTEN__
 		RenderAPI::API RenderAPI::_api = RenderAPI::API::OpenGLES3;
 	#else
 		RenderAPI::API RenderAPI::_api = RenderAPI::API::None;
