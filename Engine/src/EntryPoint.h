@@ -14,9 +14,9 @@ int main(int argc, char* args[]) {
 
 #ifdef __EMSCRIPTEN__
 	int fps = 0; // Use browser's requestAnimationFrame
-	emscripten_set_main_loop_arg(app->Run(), NULL, 0, true);
+	emscripten_set_main_loop_arg(app->Update(), NULL, 0, true);
 #else
-	app->Run();
+	app->Update();
 #endif
 	
 	app->Destroy();

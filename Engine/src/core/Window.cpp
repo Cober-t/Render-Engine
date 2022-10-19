@@ -14,6 +14,9 @@ namespace Cober {
 		if (!_context)
 			return;
 	}
+	Window::~Window() {
+		Logger::Log("Window Destructor called!");
+	}
 
 	Unique<Window> Window::Create(const std::string& name, uint32_t width, uint32_t height, bool VSync) {
 

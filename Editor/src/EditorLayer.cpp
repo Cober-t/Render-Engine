@@ -6,36 +6,6 @@
 namespace Cober {
 
 	//extern const std::filesystem::path _AssetPath;
-	// ++++++++++++++++++++++++ RENDER TEST
-	void CreateTriangle(const Ref<Shader>& shader) {
-
-		GLfloat vertices[] = {
-			-0.4f, -0.4f, 0.0f,
-			 0.4f, -0.4f, 0.0f,
-			 0.0f,  0.4f, 0.0f
-		};
-
-		GLuint VAO = shader->GetVAO();
-		GLuint VBO = shader->GetVBO();
-
-		glGenVertexArrays(1, &VAO);
-		glBindVertexArray(VAO);
-
-		glGenBuffers(1, &VBO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		glEnableVertexAttribArray(0);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-		glBindVertexArray(0);
-
-		shader->SetVAO(VAO);
-		shader->SetVBO(VBO);
-	}
-
 	EditorLayer::EditorLayer() : Layer("Editor") {
 
 		_editorCamera = CreateUnique<EditorCamera>(45.0f, 1.778f, 1.0f, 1000.0f);
@@ -43,28 +13,21 @@ namespace Cober {
 
 	void EditorLayer::OnAttach() {
 
+		_editorScene = Scene::Create();
+		_activeScene = _editorScene;
+
+		// Move to PLAY/STOP button
+		_activeScene->OnRuntimeStart();
+
 		_framebuffer = Framebuffer::Create(1280, 720);
-		//framebuffer->SetSpecificationWidth(_window->GetWidth() / aspectRatio);
-		//framebuffer->SetSpecificationHeight(_window->GetHeight() / aspectRatio);
-		//framebuffer->Resize(_window->GetWidth(), _window->GetHeight());
-
-		// ++++++++++++++++++++++++ RENDER TEST
-		shaderTriangle = Shader::Create();
-		CreateTriangle(shaderTriangle);
-		shaderTriangle->AddShader("vertexShader.glsl", GL_VERTEX_SHADER);
-		shaderTriangle->AddShader("fragmentShader.glsl", GL_FRAGMENT_SHADER);
-		shaderTriangle->CompileShader();
-
-		// ++++++++++++++++++++++++ GRID
-		//shaderGrid = Shader::Create();
-		//shaderGrid->AddShader("gridVertex.glsl", GL_VERTEX_SHADER);
-		//shaderGrid->AddShader("gridFragment.glsl", GL_FRAGMENT_SHADER);
-		//shaderGrid->CompileShader();
 	}
 
 	void EditorLayer::OnDetach() {
 
 		_framebuffer->Unbind();
+
+		_editorScene = nullptr;
+		_activeScene = nullptr;
 	}
 
 	void EditorLayer::OnUpdate(Ref<Timestep> ts) {
@@ -78,72 +41,28 @@ namespace Cober {
 			// Resize ViewportScene
 		}
 
-		_framebuffer->Bind();
+		_framebuffer->Bind();	// <<<---------------------  BIND  -------------------------------[[[
 
-		// Abstrar to render static commands
-		//Engine::Get().GetWindow().ClearWindow(200, 80, 20, 255);
-		RenderGlobals::SetClearColor(4, 0, 8, 255);
-		RenderGlobals::Clear();
-		switch (Engine::Get().GetGameState())
-		{
-			case GameState::EDITOR:
-			{
+		switch (Engine::Get().GetGameState()) {
+			case GameState::EDITOR: {
 				//colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
 				_editorCamera->OnUpdate(ts);
-				//_activeScene->OnUpdateEditor(ts, _editorCamera);
+				_activeScene->OnUpdateEditor(ts, _editorCamera);
 				break;
 			}
-			case GameState::PLAY:
-			{
+			case GameState::PLAY: {
 				//colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
 				//_activeScene->OnUpdateRuntime(ts);
 				break;
 			}
 		}
 
-		// Run Scene Editor or Scene Play
-		// ++++++++++++++++++++++++ RENDER TEST
-		glUseProgram(shaderTriangle->GetShaderProgram());
-
-		// [+++++++++++++++++++++++++++++++++++++++++++]
-		// [+++++++++++++++ Camera Test +++++++++++++++]
-		// [+++++++++++++++++++++++++++++++++++++++++++]
-		const glm::mat4& projectionMatrix = _editorCamera->GetProjection();
-		const glm::mat4& viewMatrix = _editorCamera->GetViewMatrix();
-
-		GLint location = glGetUniformLocation(shaderTriangle->GetShaderProgram(), "_projection");
-		GLCallV(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(projectionMatrix)));
-		location = glGetUniformLocation(shaderTriangle->GetShaderProgram(), "_view");
-		GLCallV(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(viewMatrix)));
-
-		glBindVertexArray(shaderTriangle->GetVAO());
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-		glBindVertexArray(0);
-		glUseProgram(0);
-
-		// [++++++++++++++++++ GRID +++++++++++++++++++]
-		// [+++++++++++++++++++++++++++++++++++++++++++]
-		//glm::vec3 nearPoint{ 1.0, 0.0, 1.0 };
-		//glm::vec3 farPoint{ 5.0, 0.0, 5.0 };
-		//glm::vec4 color{ 1.0, 0.0, 0.0, 1.0 };
-		//glUseProgram(shaderGrid->GetShaderProgram());
-		//location = glGetUniformLocation(shaderGrid->GetShaderProgram(), "proj");
-		//glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
-		//location = glGetUniformLocation(shaderGrid->GetShaderProgram(), "view");
-		//glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(viewMatrix));
-		//
-		//glBindVertexArray(shaderGrid->GetVAO());
-		//glDrawArrays(GL_TRIANGLES, 0, 3);
-		//glBindVertexArray(0);
-		//glUseProgram(0);
-
-		_framebuffer->Unbind();
+		_framebuffer->Unbind();	// <<<--------------------  UNBIND  ------------------------------[[[
 	}
 
 	
 	void EditorLayer::OnEvent(SDL_Event& event)
 	{
-		//PerspCamera.OnEvent(event);
 		_editorCamera->OnEvent(event);
 	}
 
@@ -237,6 +156,19 @@ namespace Cober {
 						Engine::Get().GetWindow().ChangeFullScreen();
 
 
+					ImGui::EndMenu();
+				}
+
+				if (ImGui::BeginMenu("Options")) {
+					if (ImGui::MenuItem("Grid")) {
+						ImGui::Begin("Settings");
+
+						ImGui::Text("PROVISIONAL");
+						ImGui::Text("Adjustable Grid Data");
+						bool snap = false;
+						ImGui::Checkbox("Snap", &snap);
+						ImGui::End();
+					}
 					ImGui::EndMenu();
 				}
 				ImGui::EndMenuBar();

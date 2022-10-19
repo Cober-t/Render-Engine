@@ -1870,6 +1870,8 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\core\Events.h" />
+    <ClInclude Include="src\core\Scene.h" />
+    <ClInclude Include="src\Systems\PhysicsSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entities\ECS.cpp">
@@ -1966,5 +1968,7 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\core\Events.cpp" />
+    <ClCompile Include="src\core\Scene.cpp" />
+    <ClCompile Include="src\Systems\PhysicsSystem.cpp" />
   </ItemGroup>
 </Project>

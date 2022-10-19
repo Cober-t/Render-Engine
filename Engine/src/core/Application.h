@@ -32,30 +32,31 @@ namespace Cober {
 		static Engine& Get() { return *_instance; }
 
 		void Start();
-		void Run();
+		void Update();
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 
 		void ProcessInputs();
 
-		void Update();
 		void Destroy();
-
 		void Close() { _gameState = GameState::EXIT; }
-		Window& GetWindow() { return *_window; }
-		GameState GetGameState() { return _gameState; }
-		void SetGameState(GameState state) { _gameState = state; }
-		uint32_t GetFrames() { return _timestep->frames; }
+
+		void SetGameState(GameState state)  { _gameState = state; }
+		Ref<AssetManager> GetAssetManager() { return _assetManager; }
+		Ref<Registry> GetRegistry()		{ return _registry; }
+		Window&   GetWindow()			{ return *_window; }
+		GameState GetGameState()		{ return _gameState; }
+		uint32_t  GetFrames()			{ return _timestep->frames; }
 	private:
 		GameState _gameState;
 		GuiLayer* _GuiLayer;
 		Layer _LayerStack;
 		Ref<Timestep> _timestep;
+		Ref<Registry> _registry;
 		Unique<Window> _window;
 		Unique<Events> _events;
-		Unique<Registry> _registry;
-		Unique<AssetManager> _assetManager;
+		Ref<AssetManager> _assetManager;
 	private:
 		static Engine* _instance;
 		friend int ::main(int argc, char* argv[]);

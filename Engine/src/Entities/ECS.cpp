@@ -16,6 +16,7 @@ namespace Cober {
 	}
 
 	Entity Registry::CreateEntity() {
+		// Change for Universal Unique Identifier
 		Logger::Log("Entity created with id = " + std::to_string(numEntities));
 
 		int entityID = numEntities++;

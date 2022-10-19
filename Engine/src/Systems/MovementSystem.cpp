@@ -8,6 +8,11 @@ namespace Cober {
 		RequireComponent<Rigidbody>();
 	}
 
+	MovementSystem::~MovementSystem() {
+
+		Logger::Log("Movement System removed from Registry");
+	}
+
 	void MovementSystem::Update(double deltaTime) {
 		
 		for (auto entity : GetSystemEntities()) {

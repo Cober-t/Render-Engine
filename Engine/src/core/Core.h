@@ -44,6 +44,7 @@
 
 static bool DEBUG = false;
 static bool GAME_2D = false;
+static bool PHYSICS_2D = false;
 
 namespace Cober {
 

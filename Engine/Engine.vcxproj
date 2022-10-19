@@ -710,6 +710,7 @@
     <ClInclude Include="include\lua\lualib.h" />
     <ClInclude Include="include\sol\sol.hpp" />
     <ClInclude Include="src\core\Events.h" />
+    <ClInclude Include="src\core\Scene.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Entities\Components.h" />
     <ClInclude Include="src\Entities\ECS.h" />
@@ -731,6 +732,7 @@
     <ClInclude Include="src\Render\Shader.h" />
     <ClInclude Include="src\Render\Texture.h" />
     <ClInclude Include="src\Systems\MovementSystem.h" />
+    <ClInclude Include="src\Systems\PhysicsSystem.h" />
     <ClInclude Include="src\Systems\RenderSystem.h" />
     <ClInclude Include="src\core\Application.h" />
     <ClInclude Include="src\core\AssetManager.h" />
@@ -752,6 +754,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\Events.cpp" />
+    <ClCompile Include="src\core\Scene.cpp" />
     <ClCompile Include="src\Entities\ECS.cpp" />
     <ClCompile Include="src\GUISystem\GuiLayer.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLContext.cpp" />
@@ -769,6 +772,7 @@
     <ClCompile Include="src\Render\Shader.cpp" />
     <ClCompile Include="src\Render\Texture.cpp" />
     <ClCompile Include="src\Systems\MovementSystem.cpp" />
+    <ClCompile Include="src\Systems\PhysicsSystem.cpp" />
     <ClCompile Include="src\Systems\RenderSystem.cpp" />
     <ClCompile Include="src\core\Application.cpp" />
     <ClCompile Include="src\core\AssetManager.cpp" />

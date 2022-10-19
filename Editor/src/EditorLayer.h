@@ -21,9 +21,9 @@ namespace Cober {
 		//bool OnKeyPressed(KeyPressedEvent& event)
 	private:
 		Ref<Framebuffer> _framebuffer;
-		Ref<Shader> shaderTriangle;	// Render Test
-		//Ref<Shader> shaderGrid;	
-		Unique<EditorCamera> _editorCamera;
+		
+		Ref<EditorCamera> _editorCamera;
+		Ref<Scene> _activeScene, _editorScene;
 
 		bool fullscreen = false;
 		std::string _filePath;

@@ -31,8 +31,8 @@ namespace Cober {
 			UpdateProjection(ortho);
 		}
 
-		const glm::mat4& GetViewMatrix() const { return _viewMatrix; }
-		const glm::mat4& GetProjectionMatrix() const { return _projection; }
+		const glm::mat4& GetProjection() const override { return _projection; }
+		const glm::mat4& GetView() const override { return _viewMatrix; }
 		glm::mat4 GetViewProjection() const { return _projection * _viewMatrix; }
 
 		glm::vec3 GetUpDirection() const;
@@ -59,7 +59,7 @@ namespace Cober {
 		float ZoomSpeed() const;
 	private:
 		float _fov = 45.0f, _aspectRatio = 1.778f, _nearClip = 0.1f, _farClip = 1000.0f;
-		glm::mat4 _viewMatrix;
+		//glm::mat4 _viewMatrix;
 		glm::vec3 _position   = { 0.0f, 0.0f, 0.0f };
 		glm::vec3 _focalPoint = { 0.0f, 0.0f, -1.0f };
 

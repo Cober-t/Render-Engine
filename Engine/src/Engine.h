@@ -9,6 +9,7 @@
 #include <core/Window.h>
 #include <core/Layer.h>
 #include <core/Events.h>
+#include <core/Scene.h>
 
 
 //[++++++++++++++++++++++++++]
@@ -17,6 +18,7 @@
 #include <GUISystem/GuiLayer.h>
 #include <Systems/MovementSystem.h>
 #include <Systems/RenderSystem.h>
+#include <Systems/PhysicsSystem.h>
 
 
 //[++++++++++++++++++++++++++]
