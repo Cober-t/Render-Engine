@@ -1,10 +1,60 @@
 #include "pch.h"
 #include "GuiLayer.h"
 
-#define COLOR_IMGUI_WHITE		ImVec4(1.000f, 1.000f, 1.000f, 1.000f)
+#define IMGUI_FULL_OPACITY		ImVec4(1.000f, 1.000f, 1.000f, 0.000f)
+#define IMGUI_WHITE				ImVec4(1.000f, 1.000f, 1.000f, 1.000f)
+#define IMGUI_WHITE_OPACITY_1	ImVec4(1.000f, 1.000f, 1.000f, 0.900f)
+#define IMGUI_WHITE_OPACITY_2	ImVec4(1.000f, 1.000f, 1.000f, 0.800f)
+#define IMGUI_WHITE_OPACITY_3	ImVec4(1.000f, 1.000f, 1.000f, 0.700f)
+#define IMGUI_WHITE_OPACITY_4	ImVec4(1.000f, 1.000f, 1.000f, 0.600f)
+#define IMGUI_WHITE_OPACITY_5	ImVec4(1.000f, 1.000f, 1.000f, 0.500f)
+#define IMGUI_WHITE_OPACITY_6	ImVec4(1.000f, 1.000f, 1.000f, 0.400f)
+#define IMGUI_WHITE_OPACITY_7	ImVec4(1.000f, 1.000f, 1.000f, 0.300f)
+#define IMGUI_WHITE_OPACITY_8	ImVec4(1.000f, 1.000f, 1.000f, 0.200f)
+#define IMGUI_WHITE_OPACITY_9	ImVec4(1.000f, 1.000f, 1.000f, 0.150f)
+#define IMGUI_WHITE_OPACITY_10	ImVec4(1.000f, 1.000f, 1.000f, 0.100f)
 
+#define IMGUI_BLACK				ImVec4(0.000f, 0.000f, 0.000f, 1.000f)
+#define IMGUI_BLACK_OPACITY_1	ImVec4(0.000f, 0.000f, 0.000f, 0.900f)
+#define IMGUI_BLACK_OPACITY_2	ImVec4(0.000f, 0.000f, 0.000f, 0.800f)
+#define IMGUI_BLACK_OPACITY_3	ImVec4(0.000f, 0.000f, 0.000f, 0.700f)
+#define IMGUI_BLACK_OPACITY_4	ImVec4(0.000f, 0.000f, 0.000f, 0.600f)
+#define IMGUI_BLACK_OPACITY_5	ImVec4(0.000f, 0.000f, 0.000f, 0.500f)
+#define IMGUI_BLACK_OPACITY_6	ImVec4(0.000f, 0.000f, 0.000f, 0.400f)
+#define IMGUI_BLACK_OPACITY_7	ImVec4(0.000f, 0.000f, 0.000f, 0.300f)
+#define IMGUI_BLACK_OPACITY_8	ImVec4(0.000f, 0.000f, 0.000f, 0.200f)
+#define IMGUI_BLACK_OPACITY_9	ImVec4(0.000f, 0.000f, 0.000f, 0.150f)
+#define IMGUI_BLACK_OPACITY_10	ImVec4(0.000f, 0.000f, 0.000f, 0.100f)
 
-#define COLOR_IMGUI_MID_OPACITY ImVec4(0.0f, 0.0f, 0.0f, 0.586f)
+#define IMGUI_MID_GRAY_OPACITY_1	ImVec4(0.500f, 0.500f, 0.500f, 0.100f)
+#define IMGUI_MID_GRAY_OPACITY_2	ImVec4(0.500f, 0.500f, 0.500f, 0.200f)
+#define IMGUI_MID_GRAY_OPACITY_3	ImVec4(0.500f, 0.500f, 0.500f, 0.300f)
+#define IMGUI_MID_GRAY_OPACITY_4	ImVec4(0.500f, 0.500f, 0.500f, 0.400f)
+#define IMGUI_MID_GRAY_OPACITY_5	ImVec4(0.500f, 0.500f, 0.500f, 0.500f)
+#define IMGUI_MID_GRAY_OPACITY_6	ImVec4(0.500f, 0.500f, 0.500f, 0.600f)
+#define IMGUI_MID_GRAY_OPACITY_7	ImVec4(0.500f, 0.500f, 0.500f, 0.700f)
+#define IMGUI_MID_GRAY_OPACITY_8	ImVec4(0.500f, 0.500f, 0.500f, 0.800f)
+
+#define IMGUI_GRAY_1	ImVec4(0.800f, 0.800f, 0.800f, 1.000f)
+#define IMGUI_GRAY_2	ImVec4(0.700f, 0.700f, 0.700f, 1.000f)
+#define IMGUI_GRAY_3	ImVec4(0.600f, 0.600f, 0.600f, 1.000f)
+#define IMGUI_GRAY_4	ImVec4(0.500f, 0.500f, 0.500f, 1.000f)
+#define IMGUI_GRAY_5	ImVec4(0.400f, 0.400f, 0.400f, 1.000f)
+#define IMGUI_GRAY_6	ImVec4(0.300f, 0.300f, 0.300f, 1.000f)
+#define IMGUI_GRAY_7	ImVec4(0.250f, 0.250f, 0.250f, 1.000f)
+#define IMGUI_GRAY_8	ImVec4(0.200f, 0.200f, 0.200f, 1.000f)
+#define IMGUI_GRAY_9	ImVec4(0.150f, 0.150f, 0.150f, 1.000f)
+#define IMGUI_GRAY_10	ImVec4(0.100f, 0.100f, 0.100f, 1.000f)
+
+#define IMGUI_ORANGE				ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
+#define IMGUI_ORANGE_LOW_OPACITY	ImVec4(1.000f, 0.391f, 0.000f, 0.750f);
+
+#define IMGUI_GRAY				ImVec4(0.500f, 0.500f, 0.500f, 1.000f)
+#define IMGUI_DARK				ImVec4(0.148f, 0.148f, 0.148f, 1.000f)
+#define IMGUI_DARKEST			ImVec4(0.100f, 0.100f, 0.100f, 1.000f)
+#define IMGUI_DARK_GRAY			ImVec4(0.280f, 0.280f, 0.280f, 1.000f)
+
+#define COLOR_IMGUI(r, g, b, a) ImVec4(r, g, b, a)
 
 namespace Cober {
 
@@ -15,57 +65,57 @@ namespace Cober {
 		ImGuiStyle* style = &ImGui::GetStyle();
 		auto& colors = ImGui::GetStyle().Colors;
 
-		colors[ImGuiCol_Text]					= COLOR_IMGUI_WHITE;
-		colors[ImGuiCol_TextDisabled]			= ImVec4(0.500f, 0.500f, 0.500f, 1.000f);
-		colors[ImGuiCol_WindowBg]				= ImVec4(0.148f, 0.148f, 0.148f, 1.000f);
-		colors[ImGuiCol_ChildBg]				= ImVec4(0.280f, 0.280f, 0.280f, 0.000f);
-		colors[ImGuiCol_PopupBg]				= ImVec4(0.15f, 0.15f, 0.15f, 1.000f);
-		colors[ImGuiCol_Border]					= ImVec4(0.266f, 0.266f, 0.266f, 0.000f);
-		colors[ImGuiCol_BorderShadow]			= ImVec4(0.000f, 0.000f, 0.000f, 0.000f);
-		colors[ImGuiCol_FrameBg]				= ImVec4(0.160f, 0.160f, 0.160f, 1.000f);
-		colors[ImGuiCol_FrameBgHovered]			= ImVec4(0.200f, 0.200f, 0.200f, 1.000f);
-		colors[ImGuiCol_FrameBgActive]			= ImVec4(0.280f, 0.280f, 0.280f, 1.000f);
-		colors[ImGuiCol_TitleBg]				= ImVec4(0.148f, 0.148f, 0.148f, 1.000f);
-		colors[ImGuiCol_TitleBgActive]			= ImVec4(0.148f, 0.148f, 0.148f, 1.000f);
-		colors[ImGuiCol_TitleBgCollapsed]		= ImVec4(0.148f, 0.148f, 0.148f, 1.000f);
-		colors[ImGuiCol_MenuBarBg]				= ImVec4(0.148f, 0.148f, 0.148f, 1.000f);
-		colors[ImGuiCol_ScrollbarBg]			= ImVec4(0.160f, 0.160f, 0.160f, 1.000f);
-		colors[ImGuiCol_ScrollbarGrab]			= ImVec4(0.277f, 0.277f, 0.277f, 1.000f);
-		colors[ImGuiCol_ScrollbarGrabHovered]	= ImVec4(0.300f, 0.300f, 0.300f, 1.000f);
-		colors[ImGuiCol_ScrollbarGrabActive]	= ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
-		colors[ImGuiCol_CheckMark]				= ImVec4(1.000f, 1.000f, 1.000f, 1.000f);
-		colors[ImGuiCol_SliderGrab]				= ImVec4(0.391f, 0.391f, 0.391f, 1.000f);
-		colors[ImGuiCol_SliderGrabActive]		= ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
-		colors[ImGuiCol_Button]					= ImVec4(1.000f, 1.000f, 1.000f, 0.000f);
-		colors[ImGuiCol_ButtonHovered]			= ImVec4(0.5f, 0.5f, 0.5f, 0.5f);
-		colors[ImGuiCol_ButtonActive]			= ImVec4(0.5f, 0.5, 0.5f, 0.4f);
-		colors[ImGuiCol_Header]					= ImVec4(0.313f, 0.313f, 0.313f, 1.000f);
-		colors[ImGuiCol_HeaderHovered]			= ImVec4(0.469f, 0.469f, 0.469f, 1.000f);
-		colors[ImGuiCol_HeaderActive]			= ImVec4(0.469f, 0.469f, 0.469f, 1.000f);
+		colors[ImGuiCol_Text]					= IMGUI_WHITE;
+		colors[ImGuiCol_TextDisabled]			= IMGUI_GRAY;
+		colors[ImGuiCol_WindowBg]				= IMGUI_DARK;
+		colors[ImGuiCol_ChildBg]				= IMGUI_DARK_GRAY;
+		colors[ImGuiCol_PopupBg]				= IMGUI_DARK;
+		colors[ImGuiCol_Border]					= IMGUI_DARK_GRAY;
+		colors[ImGuiCol_BorderShadow]			= IMGUI_DARKEST;
+		colors[ImGuiCol_FrameBg]				= IMGUI_GRAY_9;
+		colors[ImGuiCol_FrameBgHovered]			= IMGUI_GRAY_8;
+		colors[ImGuiCol_FrameBgActive]			= IMGUI_DARK_GRAY;
+		colors[ImGuiCol_TitleBg]				= IMGUI_GRAY_9;
+		colors[ImGuiCol_TitleBgActive]			= IMGUI_GRAY_9;
+		colors[ImGuiCol_TitleBgCollapsed]		= IMGUI_GRAY_9;
+		colors[ImGuiCol_MenuBarBg]				= IMGUI_GRAY_9;
+		colors[ImGuiCol_ScrollbarBg]			= IMGUI_GRAY_9;
+		colors[ImGuiCol_ScrollbarGrab]			= IMGUI_GRAY_7;
+		colors[ImGuiCol_ScrollbarGrabHovered]	= IMGUI_GRAY_6;
+		colors[ImGuiCol_ScrollbarGrabActive]	= IMGUI_ORANGE;
+		colors[ImGuiCol_CheckMark]				= IMGUI_WHITE;
+		colors[ImGuiCol_SliderGrab]				= IMGUI_GRAY_5;
+		colors[ImGuiCol_SliderGrabActive]		= IMGUI_ORANGE;
+		colors[ImGuiCol_Button]					= IMGUI_FULL_OPACITY;
+		colors[ImGuiCol_ButtonHovered]			= IMGUI_MID_GRAY_OPACITY_5;
+		colors[ImGuiCol_ButtonActive]			= IMGUI_MID_GRAY_OPACITY_4;
+		colors[ImGuiCol_Header]					= IMGUI_GRAY_6;
+		colors[ImGuiCol_HeaderHovered]			= IMGUI_GRAY_4;
+		colors[ImGuiCol_HeaderActive]			= IMGUI_GRAY_4;
 		colors[ImGuiCol_Separator]				= colors[ImGuiCol_Border];
-		colors[ImGuiCol_SeparatorHovered]		= ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
-		colors[ImGuiCol_SeparatorActive]		= ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
-		colors[ImGuiCol_ResizeGrip]				= ImVec4(1.000f, 1.000f, 1.000f, 0.250f);
-		colors[ImGuiCol_ResizeGripHovered]		= ImVec4(1.000f, 1.000f, 1.000f, 0.670f);
-		colors[ImGuiCol_ResizeGripActive]		= ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
-		colors[ImGuiCol_Tab]					= ImVec4(0.098f, 0.098f, 0.098f, 1.000f);
-		colors[ImGuiCol_TabHovered]				= ImVec4(0.352f, 0.352f, 0.352f, 1.000f);
-		colors[ImGuiCol_TabActive]				= ImVec4(0.195f, 0.195f, 0.195f, 1.000f);
-		colors[ImGuiCol_TabUnfocused]			= ImVec4(0.098f, 0.098f, 0.098f, 1.000f);
-		colors[ImGuiCol_TabUnfocusedActive]		= ImVec4(0.195f, 0.195f, 0.195f, 1.000f);
-		//colors[ImGuiCol_DockingPreview]		= ImVec4(1.000f, 0.391f, 0.000f, 0.781f);
-		//colors[ImGuiCol_DockingEmptyBg]		= ImVec4(0.148f, 0.148f, 0.148f, 1.000f);
-		colors[ImGuiCol_PlotLines]				= ImVec4(0.469f, 0.469f, 0.469f, 1.000f);
-		colors[ImGuiCol_PlotLinesHovered]		= ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
-		colors[ImGuiCol_PlotHistogram]			= ImVec4(0.586f, 0.586f, 0.586f, 1.000f);
-		colors[ImGuiCol_PlotHistogramHovered]	= ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
-		colors[ImGuiCol_TextSelectedBg]			= ImVec4(1.000f, 1.000f, 1.000f, 0.156f);
-		colors[ImGuiCol_DragDropTarget]			= ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
-		colors[ImGuiCol_NavHighlight]			= ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
-		colors[ImGuiCol_NavWindowingHighlight]	= ImVec4(1.000f, 0.391f, 0.000f, 1.000f);
-		colors[ImGuiCol_NavWindowingDimBg]		= COLOR_IMGUI_MID_OPACITY;
+		colors[ImGuiCol_SeparatorHovered]		= IMGUI_ORANGE;
+		colors[ImGuiCol_SeparatorActive]		= IMGUI_ORANGE;
+		colors[ImGuiCol_ResizeGrip]				= IMGUI_WHITE_OPACITY_7;
+		colors[ImGuiCol_ResizeGripHovered]		= IMGUI_WHITE_OPACITY_3;
+		colors[ImGuiCol_ResizeGripActive]		= IMGUI_ORANGE;
+		colors[ImGuiCol_Tab]					= IMGUI_GRAY_10;
+		colors[ImGuiCol_TabHovered]				= IMGUI_GRAY_6;
+		colors[ImGuiCol_TabActive]				= IMGUI_GRAY_8;
+		colors[ImGuiCol_TabUnfocused]			= IMGUI_GRAY_10;
+		colors[ImGuiCol_TabUnfocusedActive]		= IMGUI_GRAY_8;
+		//colors[ImGuiCol_DockingPreview]		= IMGUI_ORANGE_LOG_OPACITY;
+		//colors[ImGuiCol_DockingEmptyBg]		= IMGUI_GRAY_9;
+		colors[ImGuiCol_PlotLines]				= IMGUI_GRAY_4;
+		colors[ImGuiCol_PlotLinesHovered]		= IMGUI_ORANGE;
+		colors[ImGuiCol_PlotHistogram]			= IMGUI_GRAY_3;
+		colors[ImGuiCol_PlotHistogramHovered]	= IMGUI_ORANGE;
+		colors[ImGuiCol_TextSelectedBg]			= IMGUI_WHITE_OPACITY_8;
+		colors[ImGuiCol_DragDropTarget]			= IMGUI_ORANGE;
+		colors[ImGuiCol_NavHighlight]			= IMGUI_ORANGE;
+		colors[ImGuiCol_NavWindowingHighlight]  = IMGUI_ORANGE;
+		colors[ImGuiCol_NavWindowingDimBg]		= IMGUI_BLACK_OPACITY_5;
 
-		colors[ImGuiCol_ModalWindowDimBg]		= COLOR_IMGUI_MID_OPACITY;
+		colors[ImGuiCol_ModalWindowDimBg]		= IMGUI_BLACK_OPACITY_5;
 
 		style->ChildRounding = 4.0f;
 		style->FrameBorderSize = 1.0f;
@@ -87,7 +137,6 @@ namespace Cober {
 
 	GuiLayer::~GuiLayer() {
 
-		Logger::Log("ImGui Destructor called!");
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplSDL2_Shutdown();
 		ImGui::DestroyContext();
@@ -101,8 +150,8 @@ namespace Cober {
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 	
-		//Style();
-		ImGui::StyleColorsDark();
+		Style();
+		//ImGui::StyleColorsDark();
 		
 		
 		ImGui_ImplSDL2_InitForOpenGL(Engine::Get().GetWindow().GetNativeWindow(), Engine::Get().GetWindow().GetContext());
@@ -113,7 +162,8 @@ namespace Cober {
 	}
 
 	void GuiLayer::OnDetach() {
-	
+
+		Logger::Log("ImGui Destructor called!");
 	}
 
 	void GuiLayer::OnEvent(SDL_Event& event) {

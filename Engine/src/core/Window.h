@@ -41,5 +41,6 @@ namespace Cober {
 		bool GetVSync() { return _data.VSync; }
 		uint32_t GetWidth() { return _data.width; }
 		uint32_t GetHeight() { return _data.height; }
+		std::string& GetTitle() { return _data.title; }
 	};
 }

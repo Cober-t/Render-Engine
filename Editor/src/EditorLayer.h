@@ -1,8 +1,13 @@
 #pragma once
 #include <Engine.h>
 
+// GUI PANELS
+#include "Panels/MenuPanel.h"
 #include "Panels/ContentBrowserPanel.h"
 #include "Panels/SceneHierarchyPanel.h"
+#include "Panels/MenuPanel.h"
+#include "Panels/DataPanel.h"
+#include "Panels/ViewportPanel.h"
 
 namespace Cober {
 
@@ -17,19 +22,19 @@ namespace Cober {
 		void OnUpdate(Ref<Timestep> ts) override;
 		virtual void OnGuiRender() override;
 		void OnEvent(SDL_Event& event) override;
+
 	private:
+		void InitDockspace();
+		void EndDockspace();
 		//bool OnKeyPressed(KeyPressedEvent& event)
 	private:
-		Ref<Framebuffer> _framebuffer;
-		
 		Ref<EditorCamera> _editorCamera;
 		Ref<Scene> _activeScene, _editorScene;
-
-		bool fullscreen = false;
-		std::string _filePath;
-		glm::vec2 _viewportSize = { 0.0f, 0.0f };
 	private:
-		ContentBrowserPanel _contentBrowserPanel;
-		SceneHierarchyPanel _sceneHierarchyPanel;
+		Unique<ContentBrowserPanel> _contentBrowserPanel;
+		Unique<SceneHierarchyPanel> _sceneHierarchyPanel;
+		Unique<ViewportPanel>		_viewportPanel;
+		Unique<MenuPanel>			_menuPanel;
+		Unique<DataPanel>			_dataPanel;
 	};
 }

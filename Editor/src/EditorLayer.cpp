@@ -9,6 +9,12 @@ namespace Cober {
 	EditorLayer::EditorLayer() : Layer("Editor") {
 
 		_editorCamera = CreateUnique<EditorCamera>(45.0f, 1.778f, 1.0f, 1000.0f);
+
+		_contentBrowserPanel = CreateUnique<ContentBrowserPanel>();
+		_sceneHierarchyPanel = CreateUnique<SceneHierarchyPanel>();
+		_viewportPanel = CreateUnique<ViewportPanel>();
+		_menuPanel = CreateUnique<MenuPanel>();
+		_dataPanel = CreateUnique<DataPanel>();
 	}
 
 	void EditorLayer::OnAttach() {
@@ -18,13 +24,11 @@ namespace Cober {
 
 		// Move to PLAY/STOP button
 		_activeScene->OnRuntimeStart();
-
-		_framebuffer = Framebuffer::Create(1280, 720);
 	}
 
 	void EditorLayer::OnDetach() {
 
-		_framebuffer->Unbind();
+		_viewportPanel->UnbindFramebuffer();
 
 		_editorScene = nullptr;
 		_activeScene = nullptr;
@@ -32,16 +36,9 @@ namespace Cober {
 
 	void EditorLayer::OnUpdate(Ref<Timestep> ts) {
 
-		if (FramebufferSpecification spec = _framebuffer->GetSpecification();
-			_viewportSize.x > 0.0f && _viewportSize.y > 0.0f && // zeero sized framebuffer is invalid
-			(spec.Width != _viewportSize.x || spec.Height != _viewportSize.y)) 
-		{
-			_framebuffer->Resize((uint32_t)_viewportSize.x, (uint32_t)_viewportSize.y);
-			_editorCamera->SetViewportSize(_viewportSize.x, _viewportSize.y, GAME_2D);
-			// Resize ViewportScene
-		}
+		_viewportPanel->ResizeViewport(_editorCamera, GAME_2D);
 
-		_framebuffer->Bind();	// <<<---------------------  BIND  -------------------------------[[[
+		_viewportPanel->BindFramebuffer();
 
 		switch (Engine::Get().GetGameState()) {
 			case GameState::EDITOR: {
@@ -57,7 +54,7 @@ namespace Cober {
 			}
 		}
 
-		_framebuffer->Unbind();	// <<<--------------------  UNBIND  ------------------------------[[[
+		_viewportPanel->UnbindFramebuffer();
 	}
 
 	
@@ -65,7 +62,6 @@ namespace Cober {
 	{
 		_editorCamera->OnEvent(event);
 	}
-
 
 	/*
 	bool EditorLayer::OnKeyPressed(KeyPressedEvent& event) {
@@ -99,7 +95,7 @@ namespace Cober {
 	}
 	*/
 
-	void EditorLayer::OnGuiRender() {
+	void EditorLayer::InitDockspace() {
 
 		// [[----- Init variables & dockspace -----]] (from Cherno)
 		static bool dockspaceOpen = true;
@@ -118,7 +114,7 @@ namespace Cober {
 			ImGui::SetNextWindowViewport(viewport->ID);
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-			window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+			window_flags |= /*ImGuiWindowFlags_NoTitleBar |*/  ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize;/* | ImGuiWindowFlags_NoMove */
 			window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus | ImGuiDragDropFlags_SourceAllowNullID;
 		}
 
@@ -126,9 +122,13 @@ namespace Cober {
 		if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode)
 			window_flags |= ImGuiWindowFlags_NoBackground;
 
-		// [[----- BEGIN DOCKSPACE ----]] (EXPORT TO RENDER EDITOR PROJECT)
+		if (!dockspaceOpen)
+			Engine::Get().Close();
+
+		// [[----- BEGIN DOCKSPACE ----]]
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-		ImGui::Begin("DockSpace Demo", &dockspaceOpen, window_flags);
+		const char* title = Engine::Get().GetWindow().GetTitle().c_str();
+		ImGui::Begin(title, &dockspaceOpen, window_flags);
 		ImGui::PopStyleVar();
 
 		if (opt_fullscreen)
@@ -138,101 +138,35 @@ namespace Cober {
 		ImGuiIO& io = ImGui::GetIO();
 		ImGuiStyle& style = ImGui::GetStyle();
 		float minWinSizeX = style.WindowMinSize.x;
-		style.WindowMinSize.x = 300.0f;
+		float minWinSizeY = style.WindowMinSize.y;
+		style.WindowMinSize.x = 200.0f;
+		style.WindowMinSize.y = 200.0f;
 		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable) {
 			ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
 			ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 		}
 		style.WindowMinSize.x = minWinSizeX;
-
-		{	///////// MENU BAR
-			if (ImGui::BeginMenuBar()) {
-				if (ImGui::BeginMenu("File")) {
-					if (ImGui::MenuItem("Exit"))
-						Engine::Get().Close();
-					
-					ImGui::Checkbox("2D", &GAME_2D);
-					if (ImGui::Checkbox("Fullscreen", &fullscreen))
-						Engine::Get().GetWindow().ChangeFullScreen();
+		style.WindowMinSize.y = minWinSizeY;
+	}
 
 
-					ImGui::EndMenu();
-				}
+	void EditorLayer::OnGuiRender() {
 
-				if (ImGui::BeginMenu("Options")) {
-					if (ImGui::MenuItem("Grid")) {
-						ImGui::Begin("Settings");
+		InitDockspace();
 
-						ImGui::Text("PROVISIONAL");
-						ImGui::Text("Adjustable Grid Data");
-						bool snap = false;
-						ImGui::Checkbox("Snap", &snap);
-						ImGui::End();
-					}
-					ImGui::EndMenu();
-				}
-				ImGui::EndMenuBar();
-			}
-		}
+		_sceneHierarchyPanel->OnGuiRender();
+		_contentBrowserPanel->OnGuiRender();
+		_viewportPanel->OnGuiRender(_editorCamera);
+		_menuPanel->OnGuiRender(GAME_2D);
+		_dataPanel->OnGuiRender(GAME_2D);
 
-		{	///////// RENDER PANELS
-			_sceneHierarchyPanel.OnGuiRender();
-			_contentBrowserPanel.OnGuiRender();
-		}
+		ImGui::ShowDemoWindow();
 
-		{	///////// IMGUI SHOW DEMO
-			ImGui::ShowDemoWindow();
-		}
+		EndDockspace();
+	}
 
-		{	///////// SETTINGS
+	void EditorLayer::EndDockspace() {
 
-			ImGui::Begin("Settings");
-
-			//std::string name = "None";
-			//if (m_HoveredEntity)
-			//	name = m_HoveredEntity.GetComponent<TagComponent>().Tag;
-			//ImGui::Text("Hovered Entity: %s", name.c_str());
-
-			ImGui::Text("Renderer Stats:");
-			uint32_t frames = Engine::Get().GetFrames();
-			ImGui::Text("Frames: %d", frames);
-			ImGui::End();
-		}
-
-		if (_framebuffer != nullptr)		// Viewport
-		{
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
-			ImGui::Begin("Viewport");
-
-			ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-			//_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
-			_editorCamera->SetViewportFocused(ImGui::IsWindowFocused());
-
-			//Engine::Get().viewportWidth  = viewportPanelSize.x;
-			//Engine::Get().viewportHeight = viewportPanelSize.y;
-
-			/*float aspectRatio = viewportPanelSize.x / viewportPanelSize.y;
-			_ViewportSize = { _width / aspectRatio,
-							  _height / aspectRatio };*/
-
-			_viewportSize = { viewportPanelSize.x,
-							   viewportPanelSize.y };
-
-			uint32_t textureID = _framebuffer->GetColorAttachmentRendererID();
-			ImGui::Image((void*)textureID, ImVec2{ _viewportSize.x, _viewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
-
-			if (ImGui::BeginDragDropTarget()) {
-				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
-					const wchar_t* path = (const wchar_t*)payload->Data;
-					_filePath = (std::filesystem::path(SOLUTION_DIR + (std::string)"assets") / path).string();
-					std::cout << _filePath.c_str() << std::endl;
-				}
-				ImGui::EndDragDropTarget();
-			}
-
-			ImGui::PopStyleVar();
-			ImGui::End();
-		}
 		ImGui::End();
 	}
 }

@@ -7,7 +7,7 @@ namespace Cober {
 
 	class Editor : public Engine {
 	public:
-		Editor() : Engine("Editor Layer")
+		Editor() : Engine("Engine Editor")
 		{
 			PushLayer(new EditorLayer());
 			Engine::Get().SetGameState(GameState::EDITOR);
