@@ -15,6 +15,7 @@ namespace Cober {
 	public:
 		EditorCamera() = default;
 		EditorCamera(float fov, float aspectRatio, float nearClip, float farClip);
+		~EditorCamera();
 
 		void OnUpdate(Ref<Timestep> ts);
 		void OnEvent(SDL_Event& event);

@@ -9,9 +9,10 @@ namespace Cober {
 	public:
 		Game() {
 			PushLayer(new Game2D());
+			Engine::Get().SetGameState(GameState::PLAY);
 		}
 		~Game() {
-
+			Logger::Log("Game Destructor Called!");
 		}
 	};
 

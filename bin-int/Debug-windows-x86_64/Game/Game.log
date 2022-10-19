@@ -1,8 +1,1 @@
-﻿  GameApp.cpp
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Core.h(12,1): warning C4005: 'Mat4': redefinición de macro
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Core.h(11): message : vea la definición anterior de 'Mat4'
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(14,38): warning C4018: '<=': no coinciden signed/unsigned
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(32,16): warning C4244: '=': conversión de 'float' a 'uint32_t'; posible pérdida de datos
-Engine.lib(glew.obj) : warning LNK4099: no se encontró PDB 'vc120.pdb' con 'Engine.lib(glew.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Game\vc120.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
-  Game.vcxproj -> C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Game\Game.exe
+﻿  Game.vcxproj -> C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Game\Game.exe

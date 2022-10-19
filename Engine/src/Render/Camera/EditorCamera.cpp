@@ -14,6 +14,11 @@ namespace Cober {
 		UpdateView();
 	}
 
+	EditorCamera::~EditorCamera() {
+
+		Logger::Log("Editor Camera Destroyed!!");
+	}
+
 	void EditorCamera::UpdateProjection(bool& ortho) {
 
 		orthoProjection = ortho;

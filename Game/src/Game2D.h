@@ -12,7 +12,8 @@ public:
 	virtual void OnDetach() override;
 
 	void OnUpdate(Ref<Timestep> ts) override;
-	//void OnEvent(Event& event) override;
+	void OnEvent(SDL_Event& event) override;
 private:
-	//Ref<Scene> _ActiveScene;
+	Ref<Scene> _activeScene;
+	Ref<EditorCamera> _camera;
 };

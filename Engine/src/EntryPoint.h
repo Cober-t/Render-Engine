@@ -4,9 +4,10 @@
 #include <emscripten.h>
 #endif
 
+
 extern Cober::Engine* Cober::CreateApplication();
 
-int main(int argc, char* args[]) {
+int main(int argc, char* argv[]) {
 
 	auto app = Cober::CreateApplication();
 

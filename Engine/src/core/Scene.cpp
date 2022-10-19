@@ -2,6 +2,7 @@
 
 #include "Scene.h"
 #include "Systems/RenderSystem.h"
+#include "Systems/UISystem.h"
 #include "Systems/MovementSystem.h"
 #include "Systems/PhysicsSystem.h"
 
@@ -14,6 +15,7 @@ namespace Cober {
 		_registry->AddSystem<MovementSystem>();
 		_registry->AddSystem<PhysicsSystem>();
 		_registry->AddSystem<RenderSystem>();
+		_registry->AddSystem<UISystem>();
 	}
 
 	Scene::~Scene()
@@ -22,6 +24,7 @@ namespace Cober {
 		_registry->RemoveSystem<MovementSystem>();
 		_registry->RemoveSystem<PhysicsSystem>();
 		_registry->RemoveSystem<RenderSystem>();
+		_registry->RemoveSystem<UISystem>();
 	}
 
 	Ref<Scene> Scene::Create() {
@@ -32,7 +35,7 @@ namespace Cober {
 	void Scene::OnRuntimeStart() {
 
 		_registry->GetSystem<RenderSystem>().Start(Engine::Get().GetAssetManager());
-
+		_registry->GetSystem<UISystem>().Start(Engine::Get().GetWindow().GetNativeWindow());
 
 		//_assetManager->AddTexture("cat", SHADERS_PATH + "woodenContainer.png");
 
@@ -56,6 +59,7 @@ namespace Cober {
 		//_registry->GetSystem<ScriptingSystem>();
 		_registry->GetSystem<MovementSystem>().Update(ts->deltaTime);
 		_registry->GetSystem<PhysicsSystem>().Update(ts->deltaTime);
+		_registry->GetSystem<UISystem>().Update();
 
 		// Get Camera components from entities
 		//_registry->GetSystem<RenderSystem>().Update();
@@ -66,5 +70,6 @@ namespace Cober {
 		_registry->Update();
 
 		_registry->GetSystem<RenderSystem>().Update(editorCamera);
+		_registry->GetSystem<UISystem>().Update();
 	}
 }

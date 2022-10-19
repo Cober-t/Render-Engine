@@ -3,8 +3,15 @@
 // Useful libs
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdarg.h>
 #include <crtdbg.h>
 #include <cstddef>
+
+#include <stdio.h>
+#include <math.h>
+#include <assert.h>
+#include <limits.h>
+#include <time.h>
 
 #include <iostream>
 #include <fstream>
@@ -17,6 +24,7 @@
 #include <typeindex>
 #include <vector>
 #include <map>
+
 
 #include <string>
 #include <sstream>

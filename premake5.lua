@@ -46,6 +46,7 @@ project "Engine"
 		"%{prj.name}/include/lua/**.hpp",
 		"%{prj.name}/include/box2D/**.h",
 		"%{prj.name}/include/entt/**.hpp",
+		"%{prj.name}/include/nuklear/**.h",
 		--"%{prj.name}/include/imgui/**.cpp",
 		--"%{prj.name}/include/imgui/**.h",
 		--"%{prj.name}/include/core/**.cpp",
@@ -127,6 +128,8 @@ project "Engine"
 			"CB_BUILD_DLL",
 			"GLEW_STATIC",
 			"__OPENGL__",
+			"NK_IMPLEMENTATION",
+			"NK_SDL_GL3_IMPLEMENTATION",
 			'SOLUTION_DIR=R"($(SolutionDir))"'
 		}
 
@@ -184,6 +187,8 @@ project "Editor"
 			"GL_GLEXT_PROTOTYPES=1",
 			"GLEW_STATIC",
 			"__OPENGL__",
+			"NK_IMPLEMENTATION",
+			"NK_SDL_GL3_IMPLEMENTATION",
 			'SOLUTION_DIR=R"($(SolutionDir))"'
 		}
 
@@ -237,6 +242,9 @@ project "Game"
 			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM=<SDL_opengl.h>",
 			"GL_GLEXT_PROTOTYPES=1",
 			"GLEW_STATIC",
+			"__OPENGL__",
+			"NK_IMPLEMENTATION",
+			'SOLUTION_DIR=R"($(SolutionDir))"'
 		}
 
 	filter "configurations:Debug"

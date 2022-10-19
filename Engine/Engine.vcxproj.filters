@@ -37,6 +37,90 @@
     <Filter Include="include\lua">
       <UniqueIdentifier>{BAECC031-26A2-3927-AF96-33FE1B4B302B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\nuklear">
+      <UniqueIdentifier>{CA1B6368-36A7-D02C-3FB8-5321ABC22C2D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo">
+      <UniqueIdentifier>{BE1B49F4-AAAA-D2BD-53C9-E6B83F37E363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\allegro5">
+      <UniqueIdentifier>{A8783658-1491-1D82-DD3D-AD1B4915B21B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\common">
+      <UniqueIdentifier>{56DB6E83-C2E8-9C69-4BCF-9854B7DB6820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\common\filebrowser">
+      <UniqueIdentifier>{094ABCBB-75D9-7DA6-7ED5-5EBEEAE3B8B2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\d3d11">
+      <UniqueIdentifier>{6A21FC41-5631-A812-BFEA-0C31AB1997AB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\d3d12">
+      <UniqueIdentifier>{6B21FC41-5731-A812-C0EA-0C31AC1997AB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\d3d9">
+      <UniqueIdentifier>{215EF0C3-8D20-244E-D6D0-B2DA42D2FC2B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\gdi">
+      <UniqueIdentifier>{0154E8E6-ED78-3767-16C4-1CF702483685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\gdi_native_nuklear">
+      <UniqueIdentifier>{381199A2-A4A0-5A8D-AD9C-3BA519AB9599}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\gdip">
+      <UniqueIdentifier>{91D4F2C3-FD96-264E-4647-B5DAB248FF2B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\glfw_opengl2">
+      <UniqueIdentifier>{B3C1C105-1F30-1785-6819-D284D4C60C21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\glfw_opengl3">
+      <UniqueIdentifier>{B4C1C105-2030-1785-6919-D284D5C60C21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\glfw_opengl4">
+      <UniqueIdentifier>{B5C1C105-2130-1785-6A19-D284D6C60C21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\sdl2surface_rawfb">
+      <UniqueIdentifier>{1CB36A1A-0805-420A-F123-7F1ADD145BF3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\sdl_opengl3">
+      <UniqueIdentifier>{8775D84F-73C6-C391-9C2A-B25388DA56FB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\sdl_opengles2">
+      <UniqueIdentifier>{FED6CCA7-EA12-D011-5325-E8083F80782C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\sdl_renderer">
+      <UniqueIdentifier>{068934D5-72F7-8954-BBE0-4454278E7FF0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\sfml_opengl2">
+      <UniqueIdentifier>{95FFEE4B-016E-44CB-4A57-FFCAB6043A67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\sfml_opengl3">
+      <UniqueIdentifier>{96FFEE4B-026E-44CB-4B57-FFCAB7043A67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\wayland_rawfb">
+      <UniqueIdentifier>{4E5225A6-3A8E-2810-A3A0-40078FFBD02A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\x11">
+      <UniqueIdentifier>{8795E8E6-73BA-3767-9C05-1DF788893685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\x11_opengl2">
+      <UniqueIdentifier>{FD0ADF43-E95B-CA85-12C0-B847FE6F5DEF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\x11_opengl3">
+      <UniqueIdentifier>{FE0ADF43-EA5B-CA85-13C0-B847FF6F5DEF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\x11_rawfb">
+      <UniqueIdentifier>{78941A98-64BA-E4FE-4D00-6ACA39C509CB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\demo\x11_xft">
+      <UniqueIdentifier>{1825ECAC-04E0-DB58-AD97-54A3993126E9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\example">
+      <UniqueIdentifier>{A5575303-118F-9B9A-1A99-FFBD864FC293}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\nuklear\src">
+      <UniqueIdentifier>{E1AEDBD8-4D10-B9E6-D67D-FF9842DEEFA5}</UniqueIdentifier>
+    </Filter>
     <Filter Include="include\sol">
       <UniqueIdentifier>{C609C131-32BF-3927-BBB3-33FE2768302B}</UniqueIdentifier>
     </Filter>
@@ -1749,6 +1833,120 @@
     <ClInclude Include="include\lua\lualib.h">
       <Filter>include\lua</Filter>
     </ClInclude>
+    <ClInclude Include="include\nuklear\demo\allegro5\KeyboardHandleriOS.h">
+      <Filter>include\nuklear\demo\allegro5</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\allegro5\nuklear_allegro5.h">
+      <Filter>include\nuklear\demo\allegro5</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\common\filebrowser\stb_image.h">
+      <Filter>include\nuklear\demo\common\filebrowser</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\d3d11\nuklear_d3d11.h">
+      <Filter>include\nuklear\demo\d3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\d3d11\nuklear_d3d11_pixel_shader.h">
+      <Filter>include\nuklear\demo\d3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\d3d11\nuklear_d3d11_vertex_shader.h">
+      <Filter>include\nuklear\demo\d3d11</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\d3d12\nuklear_d3d12.h">
+      <Filter>include\nuklear\demo\d3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\d3d12\nuklear_d3d12_pixel_shader.h">
+      <Filter>include\nuklear\demo\d3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\d3d12\nuklear_d3d12_vertex_shader.h">
+      <Filter>include\nuklear\demo\d3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\d3d9\nuklear_d3d9.h">
+      <Filter>include\nuklear\demo\d3d9</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\gdi\nuklear_gdi.h">
+      <Filter>include\nuklear\demo\gdi</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\gdi_native_nuklear\nuklear_gdi.h">
+      <Filter>include\nuklear\demo\gdi_native_nuklear</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\gdi_native_nuklear\window.h">
+      <Filter>include\nuklear\demo\gdi_native_nuklear</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\gdip\nuklear_gdip.h">
+      <Filter>include\nuklear\demo\gdip</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\glfw_opengl2\nuklear_glfw_gl2.h">
+      <Filter>include\nuklear\demo\glfw_opengl2</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\glfw_opengl3\nuklear_glfw_gl3.h">
+      <Filter>include\nuklear\demo\glfw_opengl3</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\glfw_opengl4\nuklear_glfw_gl4.h">
+      <Filter>include\nuklear\demo\glfw_opengl4</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\sdl2surface_rawfb\sdl2surface_rawfb.h">
+      <Filter>include\nuklear\demo\sdl2surface_rawfb</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\sdl_opengl3\nuklear_sdl_gl3.h">
+      <Filter>include\nuklear\demo\sdl_opengl3</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\sdl_opengles2\nuklear_sdl_gles2.h">
+      <Filter>include\nuklear\demo\sdl_opengles2</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\sdl_renderer\nuklear_sdl_renderer.h">
+      <Filter>include\nuklear\demo\sdl_renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\sfml_opengl2\nuklear_sfml_gl2.h">
+      <Filter>include\nuklear\demo\sfml_opengl2</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\sfml_opengl3\nuklear_sfml_gl3.h">
+      <Filter>include\nuklear\demo\sfml_opengl3</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\wayland_rawfb\nuklear_raw_wayland.h">
+      <Filter>include\nuklear\demo\wayland_rawfb</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\x11\nuklear_xlib.h">
+      <Filter>include\nuklear\demo\x11</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\x11_opengl2\nuklear_xlib_gl2.h">
+      <Filter>include\nuklear\demo\x11_opengl2</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\x11_opengl3\nuklear_xlib_gl3.h">
+      <Filter>include\nuklear\demo\x11_opengl3</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\x11_rawfb\nuklear_rawfb.h">
+      <Filter>include\nuklear\demo\x11_rawfb</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\x11_rawfb\nuklear_xlib.h">
+      <Filter>include\nuklear\demo\x11_rawfb</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\demo\x11_xft\nuklear_xlib.h">
+      <Filter>include\nuklear\demo\x11_xft</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\example\stb_image.h">
+      <Filter>include\nuklear\example</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\nuklear.h">
+      <Filter>include\nuklear</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\nuklear_sdl_gl2.h">
+      <Filter>include\nuklear</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\nuklear_sdl_gl3.h">
+      <Filter>include\nuklear</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\src\nuklear.h">
+      <Filter>include\nuklear\src</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\src\nuklear_internal.h">
+      <Filter>include\nuklear\src</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\src\stb_rect_pack.h">
+      <Filter>include\nuklear\src</Filter>
+    </ClInclude>
+    <ClInclude Include="include\nuklear\src\stb_truetype.h">
+      <Filter>include\nuklear\src</Filter>
+    </ClInclude>
     <ClInclude Include="include\sol\sol.hpp">
       <Filter>include\sol</Filter>
     </ClInclude>
@@ -1815,6 +2013,9 @@
     <ClInclude Include="src\Systems\MovementSystem.h">
       <Filter>src\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="src\Systems\PhysicsSystem.h">
+      <Filter>src\Systems</Filter>
+    </ClInclude>
     <ClInclude Include="src\Systems\RenderSystem.h">
       <Filter>src\Systems</Filter>
     </ClInclude>
@@ -1827,10 +2028,16 @@
     <ClInclude Include="src\core\Core.h">
       <Filter>src\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\core\Events.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
     <ClInclude Include="src\core\Layer.h">
       <Filter>src\core</Filter>
     </ClInclude>
     <ClInclude Include="src\core\Logger.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Scene.h">
       <Filter>src\core</Filter>
     </ClInclude>
     <ClInclude Include="src\core\Timestep.h">
@@ -1869,9 +2076,8 @@
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\Events.h" />
-    <ClInclude Include="src\core\Scene.h" />
-    <ClInclude Include="src\Systems\PhysicsSystem.h" />
+    <ClInclude Include="src\Systems\UISystem.h" />
+    <ClInclude Include="src\GUISystem\ImGui.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entities\ECS.cpp">
@@ -1925,6 +2131,9 @@
     <ClCompile Include="src\Systems\MovementSystem.cpp">
       <Filter>src\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="src\Systems\PhysicsSystem.cpp">
+      <Filter>src\Systems</Filter>
+    </ClCompile>
     <ClCompile Include="src\Systems\RenderSystem.cpp">
       <Filter>src\Systems</Filter>
     </ClCompile>
@@ -1934,10 +2143,16 @@
     <ClCompile Include="src\core\AssetManager.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\Events.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
     <ClCompile Include="src\core\Layer.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
     <ClCompile Include="src\core\Logger.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Scene.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
     <ClCompile Include="src\core\Window.cpp">
@@ -1967,8 +2182,6 @@
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Events.cpp" />
-    <ClCompile Include="src\core\Scene.cpp" />
-    <ClCompile Include="src\Systems\PhysicsSystem.cpp" />
+    <ClCompile Include="src\Systems\UISystem.cpp" />
   </ItemGroup>
 </Project>

@@ -6,13 +6,8 @@
 #include "Timestep.h"
 #include "Layer.h"
 
-//#include "Entities/ECS.h"
-//#include "AssetManager.h"
-//#include "Entities/Components.h"
-//#include "Render/Shader.h"
-//#include "Render/Framebuffer.h"
-#include "Systems/MovementSystem.h"
-#include "Systems/RenderSystem.h"
+#include "AssetManager.h"
+#include "Systems/UISystem.h"
 
 #include "GUISystem/GuiLayer.h"
 

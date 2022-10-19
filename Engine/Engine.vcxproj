@@ -76,7 +76,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGL__;SOLUTION_DIR=R"($(SolutionDir))";CB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGL__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";CB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -100,7 +100,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGL__;SOLUTION_DIR=R"($(SolutionDir))";CB_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGL__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";CB_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -127,7 +127,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGL__;SOLUTION_DIR=R"($(SolutionDir))";CB_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGL__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";CB_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -708,14 +708,51 @@
     <ClInclude Include="include\lua\lua.hpp" />
     <ClInclude Include="include\lua\luaconf.h" />
     <ClInclude Include="include\lua\lualib.h" />
+    <ClInclude Include="include\nuklear\demo\allegro5\KeyboardHandleriOS.h" />
+    <ClInclude Include="include\nuklear\demo\allegro5\nuklear_allegro5.h" />
+    <ClInclude Include="include\nuklear\demo\common\filebrowser\stb_image.h" />
+    <ClInclude Include="include\nuklear\demo\d3d11\nuklear_d3d11.h" />
+    <ClInclude Include="include\nuklear\demo\d3d11\nuklear_d3d11_pixel_shader.h" />
+    <ClInclude Include="include\nuklear\demo\d3d11\nuklear_d3d11_vertex_shader.h" />
+    <ClInclude Include="include\nuklear\demo\d3d12\nuklear_d3d12.h" />
+    <ClInclude Include="include\nuklear\demo\d3d12\nuklear_d3d12_pixel_shader.h" />
+    <ClInclude Include="include\nuklear\demo\d3d12\nuklear_d3d12_vertex_shader.h" />
+    <ClInclude Include="include\nuklear\demo\d3d9\nuklear_d3d9.h" />
+    <ClInclude Include="include\nuklear\demo\gdi\nuklear_gdi.h" />
+    <ClInclude Include="include\nuklear\demo\gdi_native_nuklear\nuklear_gdi.h" />
+    <ClInclude Include="include\nuklear\demo\gdi_native_nuklear\window.h" />
+    <ClInclude Include="include\nuklear\demo\gdip\nuklear_gdip.h" />
+    <ClInclude Include="include\nuklear\demo\glfw_opengl2\nuklear_glfw_gl2.h" />
+    <ClInclude Include="include\nuklear\demo\glfw_opengl3\nuklear_glfw_gl3.h" />
+    <ClInclude Include="include\nuklear\demo\glfw_opengl4\nuklear_glfw_gl4.h" />
+    <ClInclude Include="include\nuklear\demo\sdl2surface_rawfb\sdl2surface_rawfb.h" />
+    <ClInclude Include="include\nuklear\demo\sdl_opengl3\nuklear_sdl_gl3.h" />
+    <ClInclude Include="include\nuklear\demo\sdl_opengles2\nuklear_sdl_gles2.h" />
+    <ClInclude Include="include\nuklear\demo\sdl_renderer\nuklear_sdl_renderer.h" />
+    <ClInclude Include="include\nuklear\demo\sfml_opengl2\nuklear_sfml_gl2.h" />
+    <ClInclude Include="include\nuklear\demo\sfml_opengl3\nuklear_sfml_gl3.h" />
+    <ClInclude Include="include\nuklear\demo\wayland_rawfb\nuklear_raw_wayland.h" />
+    <ClInclude Include="include\nuklear\demo\x11\nuklear_xlib.h" />
+    <ClInclude Include="include\nuklear\demo\x11_opengl2\nuklear_xlib_gl2.h" />
+    <ClInclude Include="include\nuklear\demo\x11_opengl3\nuklear_xlib_gl3.h" />
+    <ClInclude Include="include\nuklear\demo\x11_rawfb\nuklear_rawfb.h" />
+    <ClInclude Include="include\nuklear\demo\x11_rawfb\nuklear_xlib.h" />
+    <ClInclude Include="include\nuklear\demo\x11_xft\nuklear_xlib.h" />
+    <ClInclude Include="include\nuklear\example\stb_image.h" />
+    <ClInclude Include="include\nuklear\nuklear.h" />
+    <ClInclude Include="include\nuklear\nuklear_sdl_gl2.h" />
+    <ClInclude Include="include\nuklear\nuklear_sdl_gl3.h" />
+    <ClInclude Include="include\nuklear\src\nuklear.h" />
+    <ClInclude Include="include\nuklear\src\nuklear_internal.h" />
+    <ClInclude Include="include\nuklear\src\stb_rect_pack.h" />
+    <ClInclude Include="include\nuklear\src\stb_truetype.h" />
     <ClInclude Include="include\sol\sol.hpp" />
-    <ClInclude Include="src\core\Events.h" />
-    <ClInclude Include="src\core\Scene.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Entities\Components.h" />
     <ClInclude Include="src\Entities\ECS.h" />
     <ClInclude Include="src\EntryPoint.h" />
     <ClInclude Include="src\GUISystem\GuiLayer.h" />
+    <ClInclude Include="src\GUISystem\ImGui.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLRenderAPI.h" />
@@ -737,8 +774,10 @@
     <ClInclude Include="src\core\Application.h" />
     <ClInclude Include="src\core\AssetManager.h" />
     <ClInclude Include="src\core\Core.h" />
+    <ClInclude Include="src\core\Events.h" />
     <ClInclude Include="src\core\Layer.h" />
     <ClInclude Include="src\core\Logger.h" />
+    <ClInclude Include="src\core\Scene.h" />
     <ClInclude Include="src\core\Timestep.h" />
     <ClInclude Include="src\core\Window.h" />
     <ClInclude Include="src\imgui\imconfig.h" />
@@ -751,10 +790,9 @@
     <ClInclude Include="src\imgui\imstb_textedit.h" />
     <ClInclude Include="src\imgui\imstb_truetype.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\Systems\UISystem.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\core\Events.cpp" />
-    <ClCompile Include="src\core\Scene.cpp" />
     <ClCompile Include="src\Entities\ECS.cpp" />
     <ClCompile Include="src\GUISystem\GuiLayer.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLContext.cpp" />
@@ -776,8 +814,10 @@
     <ClCompile Include="src\Systems\RenderSystem.cpp" />
     <ClCompile Include="src\core\Application.cpp" />
     <ClCompile Include="src\core\AssetManager.cpp" />
+    <ClCompile Include="src\core\Events.cpp" />
     <ClCompile Include="src\core\Layer.cpp" />
     <ClCompile Include="src\core\Logger.cpp" />
+    <ClCompile Include="src\core\Scene.cpp" />
     <ClCompile Include="src\core\Window.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />
     <ClCompile Include="src\imgui\imgui_demo.cpp" />
@@ -789,6 +829,7 @@
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Systems\UISystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

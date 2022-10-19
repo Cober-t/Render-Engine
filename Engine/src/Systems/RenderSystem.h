@@ -16,7 +16,7 @@ namespace Cober {
 		RenderSystem();
 		~RenderSystem();
 
-		void Start(Ref<AssetManager> assets);
+		void Start(Ref<AssetManager> assets = nullptr);
 		void Update(Ref<EditorCamera> camera);	// Test
 	private:
 		Ref<AssetManager> _assets;

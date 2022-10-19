@@ -109,7 +109,6 @@ namespace Cober {
 		//glDrawArrays(GL_TRIANGLES, 0, 3);
 		//glBindVertexArray(0);
 		//glUseProgram(0);
-
 		
 		for (auto entity : GetSystemEntities()) {
 			auto& transform = entity.GetComponent<Transform>();

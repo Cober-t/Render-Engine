@@ -32,6 +32,7 @@ namespace Cober {
 
 		_editorScene = nullptr;
 		_activeScene = nullptr;
+		_editorCamera = nullptr;
 	}
 
 	void EditorLayer::OnUpdate(Ref<Timestep> ts) {
@@ -148,7 +149,6 @@ namespace Cober {
 		style.WindowMinSize.x = minWinSizeX;
 		style.WindowMinSize.y = minWinSizeY;
 	}
-
 
 	void EditorLayer::OnGuiRender() {
 

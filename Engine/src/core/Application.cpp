@@ -26,11 +26,6 @@ namespace Cober {
         if (_window->GetVSync())
             SDL_GL_SetSwapInterval(1);
 
-#ifndef __EMSCRIPTEN__
-        _GuiLayer = new GuiLayer("#version 430");
-        PushOverlay(_GuiLayer);
-#endif
-
         //_timestep->SetFPSLimit(60);
         _gameState = GameState::PLAY;
     }
@@ -53,6 +48,12 @@ namespace Cober {
 
     void Engine::Start() {
 
+#ifndef __EMSCRIPTEN__
+        if (_gameState == GameState::EDITOR) {
+            _GuiLayer = new GuiLayer("#version 430");
+            PushOverlay(_GuiLayer);
+        }
+#endif
     }
 
     void Engine::Update() {
@@ -61,7 +62,9 @@ namespace Cober {
 
             _timestep->Update();  // Allow limit FPS
 
+            UISystem::StartProcessInputs();
             ProcessInputs();
+            UISystem::EndProcessInputs();
 
             //if(!_minimized) { ...
             {
@@ -69,14 +72,16 @@ namespace Cober {
                     layer->OnUpdate(_timestep);
 
 #ifndef __EMSCRIPTEN__
-                _GuiLayer->Begin();
-                for (Layer* layer : _LayerStack)
-                    layer->OnGuiRender();
-                _GuiLayer->End();
+                if (_gameState == GameState::EDITOR) {
+                    _GuiLayer->Begin();
+                    for (Layer* layer : _LayerStack)
+                        layer->OnGuiRender();
+                    _GuiLayer->End();
+                }
 #endif
             }
             // ... }
-         
+
             _window->SwapBuffers();
         }
     }
@@ -86,6 +91,8 @@ namespace Cober {
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
+            UISystem::ProcessInputs(event);
+
             _events->ProcessEvents(event);
 
             for (Layer* layer : _LayerStack)
