@@ -747,6 +747,7 @@
     <ClInclude Include="include\nuklear\src\stb_rect_pack.h" />
     <ClInclude Include="include\nuklear\src\stb_truetype.h" />
     <ClInclude Include="include\sol\sol.hpp" />
+    <ClInclude Include="src\core\UUID.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Entities\Components.h" />
     <ClInclude Include="src\Entities\ECS.h" />
@@ -771,6 +772,7 @@
     <ClInclude Include="src\Systems\MovementSystem.h" />
     <ClInclude Include="src\Systems\PhysicsSystem.h" />
     <ClInclude Include="src\Systems\RenderSystem.h" />
+    <ClInclude Include="src\Systems\UISystem.h" />
     <ClInclude Include="src\core\Application.h" />
     <ClInclude Include="src\core\AssetManager.h" />
     <ClInclude Include="src\core\Core.h" />
@@ -790,9 +792,9 @@
     <ClInclude Include="src\imgui\imstb_textedit.h" />
     <ClInclude Include="src\imgui\imstb_truetype.h" />
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\Systems\UISystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\UUID.cpp" />
     <ClCompile Include="src\Entities\ECS.cpp" />
     <ClCompile Include="src\GUISystem\GuiLayer.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLContext.cpp" />
@@ -812,6 +814,7 @@
     <ClCompile Include="src\Systems\MovementSystem.cpp" />
     <ClCompile Include="src\Systems\PhysicsSystem.cpp" />
     <ClCompile Include="src\Systems\RenderSystem.cpp" />
+    <ClCompile Include="src\Systems\UISystem.cpp" />
     <ClCompile Include="src\core\Application.cpp" />
     <ClCompile Include="src\core\AssetManager.cpp" />
     <ClCompile Include="src\core\Events.cpp" />
@@ -829,7 +832,6 @@
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Systems\UISystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

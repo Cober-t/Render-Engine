@@ -1965,6 +1965,9 @@
     <ClInclude Include="src\GUISystem\GuiLayer.h">
       <Filter>src\GUISystem</Filter>
     </ClInclude>
+    <ClInclude Include="src\GUISystem\ImGui.h">
+      <Filter>src\GUISystem</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platforms\OpenGL\OpenGLContext.h">
       <Filter>src\Platforms\OpenGL</Filter>
     </ClInclude>
@@ -2017,6 +2020,9 @@
       <Filter>src\Systems</Filter>
     </ClInclude>
     <ClInclude Include="src\Systems\RenderSystem.h">
+      <Filter>src\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Systems\UISystem.h">
       <Filter>src\Systems</Filter>
     </ClInclude>
     <ClInclude Include="src\core\Application.h">
@@ -2076,8 +2082,7 @@
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Systems\UISystem.h" />
-    <ClInclude Include="src\GUISystem\ImGui.h" />
+    <ClInclude Include="src\core\UUID.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entities\ECS.cpp">
@@ -2137,6 +2142,9 @@
     <ClCompile Include="src\Systems\RenderSystem.cpp">
       <Filter>src\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="src\Systems\UISystem.cpp">
+      <Filter>src\Systems</Filter>
+    </ClCompile>
     <ClCompile Include="src\core\Application.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
@@ -2182,6 +2190,6 @@
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Systems\UISystem.cpp" />
+    <ClCompile Include="src\core\UUID.cpp" />
   </ItemGroup>
 </Project>

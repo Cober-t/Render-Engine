@@ -13,25 +13,25 @@ namespace Cober {
 	{
 	public:
 		SceneHierarchyPanel() = default;
+		SceneHierarchyPanel(const Ref<Scene> sceneContext);
 		~SceneHierarchyPanel();
-		//SceneHierarchyPanel(const Ref<Scene>& scene);
-
-		//void SetContext(const Ref<Scene>& scene);
 
 		void OnGuiRender();
-		//Entity GetSelectedEntity() const { return m_SelectionContext; }
-		//void SetSelectedEntity(Entity entity);
 
-		//template<typename T, typename UIFunction>
-		//void DrawComponent(const std::string& name, Entity entity, UIFunction uiFunction);
+		void SetContext(const Ref<Scene>& selectionContext);
+		Entity GetSelectedEntity() const { return *_selectionContext; }
+		void SetSelectedEntity(Entity entity);
+
+		template<typename T, typename UIFunction>
+		void DrawComponent(const std::string& name, Entity* entity, UIFunction uiFunction);
 
 		template<typename T>
 		void AddIfHasComponent(std::string name);
 	private:
-		//void DrawEntityNode(Entity entity);
-		//void DrawComponents(Entity entity);
+		void DrawEntityNode(Entity entity);
+		void DrawComponents(Entity* entity);
 	private:
-		//Ref<Scene> m_Context;
-		//Entity m_SelectionContext;
+		Ref<Scene> _sceneContext;
+		Entity* _selectionContext;
 	};
 }

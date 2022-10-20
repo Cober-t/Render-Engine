@@ -1,44 +1,41 @@
 #include "pch.h"
 #include "ECS.h"
 
+
 namespace Cober {
 
-	int IComponent::nextID = 0;
+	int IComponent::nextIndex = 0;
 
-	void System::AddEntityToSystem(Entity entity) {
-		entities.push_back(entity);
-	}
+	Entity Registry::CreateEntity(std::string name) {
 
-	void System::RemoveEntityFromSystem(Entity entity) {
-		entities.erase(std::remove_if(entities.begin(), entities.end(), [&entity](Entity other) {
-			return entity == other;
-			}), entities.end());
-	}
-
-	Entity Registry::CreateEntity() {
-		// Change for Universal Unique Identifier
-		Logger::Log("Entity created with id = " + std::to_string(numEntities));
-
-		int entityID = numEntities++;
-		Entity entity(entityID);
+		int entityIndex = numEntities++;
+		Entity entity(name, entityIndex, UUID());
 		entity.registry = this;
-		entitiesToBeAdded.insert(entity);
 
-		if (entityID >= entityComponentSignatures.size())
-			entityComponentSignatures.resize(entityID + 1);
+		entitiesToBeAdded.insert(entity);
+		entities.insert(entity);
+		
+		if (entityIndex >= entityComponentSignatures.size())
+			entityComponentSignatures.resize(entityIndex + 1);
+
+		entity.AddComponent<Tag>(name);
+		entity.AddComponent<IDComponent>(entity.GetID());
+		entity.AddComponent<Transform>();
+
 		return entity;
 	}
 
-	void Registry::AddEntityToSystems(Entity entity) {
-		const auto& entityComponentSignature = entityComponentSignatures[entity.GetID()];
+	Entity Registry::GetEntity(Entity requestedEntity) {
 
-		for (auto& system : systems) {
-			const auto& systemComponentSignature = system.second->GetComponentSignature();
-			bool isInterested = (entityComponentSignature & systemComponentSignature) == systemComponentSignature;
-			if (isInterested)
-				// TODO: Add the entity to the system
-				system.second->AddEntityToSystem(entity);
+		for (auto entity : entities) {
+			if (entity == requestedEntity)
+				return entity;
 		}
+	}
+	
+	void Registry::DeleteEntity(Entity entity) {
+
+		entitiesToBeKilled.insert(entity);
 	}
 
 	void Registry::Update() {
@@ -52,6 +49,43 @@ namespace Cober {
 		for (auto entity : entitiesToBeAdded)
 			AddEntityToSystems(entity);
 
-		// TODO: Remove the entities that are waiting to be killed from the active Systems
+		for (auto entity : entitiesToBeKilled) {
+			entities.erase(entity);
+			RemoveEntityFromSystems(entity);
+		}
+	}
+
+	void Registry::AddEntityToSystems(Entity entity) {
+		const auto& entityComponentSignature = entityComponentSignatures[entity.GetIndex()];
+
+		for (auto& system : systems) {
+			const auto& systemComponentSignature = system.second->GetComponentSignature();
+			bool isInterested = (entityComponentSignature & systemComponentSignature) == systemComponentSignature;
+			if (isInterested)
+				// TODO: Add the entity to the system
+				system.second->AddEntityToSystem(entity);
+		}
+	}
+
+	void Registry::RemoveEntityFromSystems(Entity entity) {
+		const auto& entityComponentSignature = entityComponentSignatures[entity.GetIndex()];
+
+		for (auto& system : systems) {
+			const auto& systemComponentSignature = system.second->GetComponentSignature();
+			bool isInterested = (entityComponentSignature & systemComponentSignature) == systemComponentSignature;
+			if (isInterested)
+				// TODO: Add the entity to the system
+				system.second->RemoveEntityFromSystem(entity);
+		}
+	}
+
+	void System::AddEntityToSystem(Entity entity) {
+		entities.push_back(entity);
+	}
+
+	void System::RemoveEntityFromSystem(Entity entity) {
+		entities.erase(std::remove_if(entities.begin(), entities.end(), [&entity](Entity other) {
+			return entity == other;
+			}), entities.end());
 	}
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Components.h"
+#include "UUID.h"
 
 #include <vector>
 #include <bitset>
@@ -20,16 +21,20 @@ namespace Cober {
 	// +++++ ENTITY +++++++++++++++++++++++++++++++++++++++++++++ //
 	class Entity {
 	public:
-		Entity(int id) : id(id), registry(nullptr) {};
+		Entity() = default;
+		Entity(std::string name, int entityIndex, UUID uuid = UUID()) : index(entityIndex), id(uuid), registry(nullptr) {};
 		Entity(const Entity& entity) = default;
 
-		int GetID() const { return id; }
+		UUID GetID() const { return id; }
+		int GetIndex() const { return index; }
 
 		Entity& operator =(const Entity& other) = default;
-		bool operator ==(const Entity& other) const { return id == other.id; };
-		bool operator !=(const Entity& other) const { return id != other.id; };
-		bool operator < (const Entity& other) const { return id < other.id; };
-		bool operator > (const Entity& other) const { return id > other.id; };
+		bool operator ==(const Entity& other) const { return index == other.index; };
+		bool operator !=(const Entity& other) const { return index != other.index; };
+		bool operator < (const Entity& other) const { return index < other.index; };
+		bool operator > (const Entity& other) const { return index > other.index; };
+		operator bool() const { return this != nullptr; }
+		operator uint32_t() const { return (uint32_t)this; }
 
 		template<typename TComponent,
 			typename ...TArgs>		void AddComponent(TArgs&& ...args);
@@ -40,7 +45,8 @@ namespace Cober {
 		class Registry* registry;	// Alternative to Forward Declaration
 
 	private:
-		int id;
+		int index;
+		UUID id;
 	};
 
 	////////////////////////////////////////////////////////////////
@@ -100,32 +106,28 @@ namespace Cober {
 
 		void Update();
 
-		Entity CreateEntity();
-		//{
-			//Entity entity = { m_Registry.create(), this };
-			//entity.AddComponent<TransformComponent>();
-			//auto& tag = entity.AddComponent<TagComponent>();
-			//tag.Tag = name.empty() ? "Entity" : name;
-			//enttOnScene.push_back(entity);
-			//return entity;
-		//}
+		Entity CreateEntity(std::string name = "Empty Entity");
+		Entity GetEntity(Entity requestedEntity);
+		std::set<Entity> GetAllEntities() { return entities; };
+		void DeleteEntity(Entity entity);
 
 		// Component management
 		template<typename TComponent,
-			typename ...TArgs>		void AddComponent(Entity entity, TArgs&& ...args);
+			typename ...TArgs>			void AddComponent(Entity entity, TArgs&& ...args);
 		template<typename TComponent>	void RemoveComponent(Entity entity);
 		template<typename TComponent>	bool HasComponent(Entity entity) const;
 		template<typename TComponent>	TComponent& GetComponent(Entity entity) const;
 
 		// System management
 		template<typename TSystem,
-			typename ...TArgs> 	void AddSystem(TArgs&& ...args);
+			typename ...TArgs> 			void AddSystem(TArgs&& ...args);
 		template<typename TSystem>		void RemoveSystem();
 		template<typename TSystem>		bool HasSystem() const;
 		template<typename TSystem>		TSystem& GetSystem() const;
 
 		// Add the entity to the systems that are interested in it
 		void AddEntityToSystems(Entity entity);
+		void RemoveEntityFromSystems(Entity entity);
 	private:
 		int numEntities = 0;
 		std::vector<Ref<IPool>> componentPools;
@@ -136,6 +138,7 @@ namespace Cober {
 
 		std::set<Entity> entitiesToBeAdded;
 		std::set<Entity> entitiesToBeKilled;
+		std::set<Entity> entities;
 	};
 
 
@@ -143,7 +146,7 @@ namespace Cober {
 	// +++++ TEMPLATES ++++++++++++++++++++++++++++++++++++++++++ //
 	template <typename TComponent>
 	void System::RequireComponent() {
-		const auto componentID = Component<TComponent>::GetID();
+		const auto componentID = Component<TComponent>::GetComponentIndex();
 		componentSignature.set(componentID);
 	}
 
@@ -172,8 +175,8 @@ namespace Cober {
 
 	template<typename TComponent, typename ...TArgs>
 	void Registry::AddComponent(Entity entity, TArgs&& ...args) {
-		const auto componentID = Component<TComponent>::GetID();
-		const auto entityID = entity.GetID();
+		const auto componentID = Component<TComponent>::GetComponentIndex();
+		const auto entityID = entity.GetIndex();
 
 		if (componentID >= componentPools.size())
 			componentPools.resize(componentID + 1, nullptr);
@@ -192,13 +195,13 @@ namespace Cober {
 		componentPool->Set(entityID, newComponent);
 		entityComponentSignatures[entityID].set(componentID);
 
-		Logger::Log("Component ID = " + std::to_string(componentID) + " was added to entity ID: " + std::to_string(entityID));
+		Logger::Log("Component ID = " + std::to_string(componentID) + " was added to entity: " + entity.GetComponent<Tag>().tag);
 	}
 
 	template<typename TComponent>
 	void Registry::RemoveComponent(Entity entity) {
-		const auto componentID = Component<TComponent>::GetID();
-		const auto entityID = entity.GetID();
+		const auto componentID = Component<TComponent>::GetComponentIndex();
+		const auto entityID = entity.GetIndex();
 
 		entityComponentSignatures[entityID].set(componentID, false);
 		Logger::Log("Component ID = " + std::to_string(componentID) + " was removed from entity ID: " + std::to_string(entityID));
@@ -206,16 +209,16 @@ namespace Cober {
 
 	template<typename TComponent>
 	bool Registry::HasComponent(Entity entity) const {
-		const auto componentID = Component<TComponent>::GetID();
-		const auto entityID = entity.GetID();
+		const auto componentID = Component<TComponent>::GetComponentIndex();
+		const auto entityID = entity.GetIndex();
 
 		return entityComponentSignatures[entityID].test(componentID);
 	}
 
 	template<typename TComponent>
 	TComponent& Registry::GetComponent(Entity entity) const {
-		const auto componentID = Component<TComponent>::GetID();
-		const auto entityID = entity.GetID();
+		const auto componentID = Component<TComponent>::GetComponentIndex();
+		const auto entityID = entity.GetIndex();
 		auto componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentID]);
 
 		return componentPool->Get(entityID);

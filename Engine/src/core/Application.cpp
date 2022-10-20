@@ -13,7 +13,6 @@ namespace Cober {
         _instance = this;
 
         _timestep = CreateUnique<Timestep>();
-        _registry = CreateUnique<Registry>();
         _assetManager = CreateUnique<AssetManager>();
         _events = CreateUnique<Events>();
 

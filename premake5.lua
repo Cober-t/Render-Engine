@@ -130,7 +130,8 @@ project "Engine"
 			"__OPENGL__",
 			"NK_IMPLEMENTATION",
 			"NK_SDL_GL3_IMPLEMENTATION",
-			'SOLUTION_DIR=R"($(SolutionDir))"'
+			'SOLUTION_DIR=R"($(SolutionDir))"',
+			--"__EMSCRIPTEN__"
 		}
 
 	filter "configurations:Debug"

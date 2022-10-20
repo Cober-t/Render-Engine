@@ -39,7 +39,6 @@ namespace Cober {
 
 		void SetGameState(GameState state)  { _gameState = state; }
 		Ref<AssetManager> GetAssetManager() { return _assetManager; }
-		Ref<Registry> GetRegistry()		{ return _registry; }
 		Window&   GetWindow()			{ return *_window; }
 		GameState GetGameState()		{ return _gameState; }
 		uint32_t  GetFrames()			{ return _timestep->frames; }
@@ -48,7 +47,6 @@ namespace Cober {
 		GuiLayer* _GuiLayer;
 		Layer _LayerStack;
 		Ref<Timestep> _timestep;
-		Ref<Registry> _registry;
 		Unique<Window> _window;
 		Unique<Events> _events;
 		Ref<AssetManager> _assetManager;

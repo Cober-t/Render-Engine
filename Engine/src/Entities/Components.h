@@ -2,36 +2,7 @@
 
 #include <xhash> // For generating Universal Unique Identifiers
 #include <random>
-namespace Cober {
-
-	static std::random_device _randomDevice;
-	static std::mt19937_64	  _engine(_randomDevice());
-	static std::uniform_int_distribution<uint64_t> _uniformDistribution;
-
-	class UUID {
-	public:
-		UUID() { _UUID = _uniformDistribution(_engine); }
-		UUID(uint64_t uuid)		{ _UUID = uuid;			}
-		UUID(const UUID& other) { _UUID = other._UUID;	}
-
-		operator uint64_t() { return _UUID; }
-		operator const uint64_t() { return _UUID; }
-	private:
-		uint64_t _UUID;
-	};
-}
-//
-//namespace std {
-//	
-//	// Specialization
-//	template<>
-//	struct hash<Cober::UUID> {
-//		std::size_t operator()(const Cober::UUID& uuid) const {
-//			return hash<uint64_t>()((uint64_t)uuid);
-//		}
-//	};
-//}
-
+#include "core/UUID.h"
 #include <glm/glm.hpp>
 #include <core/Core.h>
 
@@ -41,16 +12,16 @@ namespace Cober {
 	// ID's for componentes
 	struct IComponent {
 	protected:
-		static int nextID;
+		static int nextIndex;
 	};
 
 	// Used to assign an index(ID) to a component type
 	template <typename T>
 	class Component : public IComponent {
 	public:
-		static int GetID() {
-			static auto id = nextID++;
-			return id;
+		static int GetComponentIndex() {
+			static int index = nextIndex++;
+			return index;
 		}
 	};
 
@@ -61,19 +32,20 @@ namespace Cober {
 
 		IDComponent() = default;
 		IDComponent(const IDComponent&) = default;
+		IDComponent(const UUID& id) : ID(id) {}
 	};
 
 
 	// ++++++++++++++++++++
 	// Components for entities
 	struct Transform {
-		glm::vec2 position = { 0.0f, 0.0f };
-		double rotation = 0;
-		glm::vec2 scale = { 0.0f, 0.0f };
+		glm::vec3 position	= { 0.0f, 0.0f, 0.0f };
+		glm::vec3 rotation	= { 0.0f, 0.0f, 0.0f };
+		glm::vec3 scale		= { 1.0f, 1.0f, 1.0f };
 
 		Transform() = default;
 		Transform(const Transform&) = default;
-		Transform(glm::vec2 pos, float rot, glm::vec2 sc)
+		Transform(glm::vec3 pos, glm::vec3 rot = glm::vec3(0.0f), glm::vec3 sc = glm::vec3(1.0f))
 			: position(pos), rotation(rot), scale(sc) {};
 	};
 
@@ -85,22 +57,25 @@ namespace Cober {
 		Tag(const std::string& tag) : tag(tag) {};
 	};
 
-	struct Rigidbody {
+	struct Rigidbody2D {
 		glm::vec2 velocity;
+		const char* type;
 
-		Rigidbody() = default;
-		Rigidbody(const Rigidbody&) = default;
-		Rigidbody(glm::vec2 vel) : velocity(vel) {}
+		Rigidbody2D() = default;
+		Rigidbody2D(const Rigidbody2D&) = default;
+		Rigidbody2D(glm::vec2 vel, const char* bodyType = "Dynamic") 
+			: velocity(vel), type(bodyType) {}
 	};
 
 	struct Sprite {
 		int w, h;
 		std::string assetID;
 		glm::vec2 srcRect;
+		glm::vec4 color;
 
 		Sprite() = default;
 		Sprite(const Sprite&) = default;
-		Sprite(const std::string& ID, int width, int height, glm::vec2 rect = glm::vec2(0.0, 0.0))
-			: assetID(ID), w(width), h(height), srcRect(rect) {}
+		Sprite(const std::string& ID, int width, int height, glm::vec2 rect = glm::vec2(0.0, 0.0), glm::vec4 tintColor = glm::vec4(1.0f))
+			: assetID(ID), w(width), h(height), srcRect(rect), color(tintColor) {}
 	};
 }

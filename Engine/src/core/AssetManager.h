@@ -2,6 +2,8 @@
 
 #include <string>
 #include <map>
+
+// Export to macros
 #include <GL/glew.h> 
 //#include <SDL/SDL_image.h>
 //#include <SDL/SDL_audio.h>

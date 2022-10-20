@@ -5,7 +5,7 @@ namespace Cober {
 
 	MovementSystem::MovementSystem() {
 		RequireComponent<Transform>();
-		RequireComponent<Rigidbody>();
+		RequireComponent<Rigidbody2D>();
 	}
 
 	MovementSystem::~MovementSystem() {
@@ -17,7 +17,7 @@ namespace Cober {
 		
 		for (auto entity : GetSystemEntities()) {
 			auto& transform = entity.GetComponent<Transform>();
-			const auto& rigidbody = entity.GetComponent<Rigidbody>();
+			const auto& rigidbody = entity.GetComponent<Rigidbody2D>();
 
 			transform.position.x += rigidbody.velocity.x * deltaTime;
 			transform.position.y += rigidbody.velocity.y * deltaTime;

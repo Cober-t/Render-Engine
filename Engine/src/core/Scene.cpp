@@ -10,13 +10,22 @@ namespace Cober {
 
 	Scene::Scene()
 	{
-		_registry = Engine::Get().GetRegistry();
+		_registry = CreateRef<Registry>();
+
+		// [+++++ TODO
+		//_registry->AddSystem<TerrainGeneratorSystem>();	// TERRAIN GENERATOR	*(perlin noise, wave function collapse...)
+		//_registry->AddSystem<MaterialSystem>();			// MATERIAL SYSTEM
+		//_registry->AddSystem<DialogueSystem>();			// DIALOGUE SYSTEM		*(excel wrinting with aware of entities and conditions)
+		//_registry->AddSystem<AISystem>();					// AI SYSTEM			*(dijkstra pathfinding, A* star ...)
+		//_registry->AddSystem<ParticleSystem>();			// PARTICLE SYSTEM		*(see Unity options)
+		//_registry->AddSystem<CameraSystem>();				// CAMERA SYSTEM		*(something like Cinemachine in Unity)
+		//_registry->AddSystem<Animation2DSystem>();	    // ANIMATION 2D SYSTEM	*(Interpolation, )
 
 		_registry->AddSystem<MovementSystem>();
 		_registry->AddSystem<PhysicsSystem>();
 		_registry->AddSystem<RenderSystem>();
 		_registry->AddSystem<UISystem>();
-	}
+	}			 
 
 	Scene::~Scene()
 	{

@@ -8,7 +8,6 @@ namespace Cober {
 
 	// Once we have projects, change this
 	extern const std::filesystem::path _assetPath = SOLUTION_DIR + (std::string)"assets";
-	//extern const std::filesystem::path _assetPath = "..\\assets";
 
 	ContentBrowserPanel::ContentBrowserPanel()
 		: _currentDirectory(_assetPath)

@@ -6,9 +6,13 @@
 namespace Cober {
 
 	//extern const std::filesystem::path _AssetPath;
-	EditorLayer::EditorLayer() : Layer("Editor") {
+	EditorLayer::EditorLayer() : Layer("Editor") 
+	{
 
 		_editorCamera = CreateUnique<EditorCamera>(45.0f, 1.778f, 1.0f, 1000.0f);
+
+		_editorScene = Scene::Create();
+		_activeScene = _editorScene;
 
 		_contentBrowserPanel = CreateUnique<ContentBrowserPanel>();
 		_sceneHierarchyPanel = CreateUnique<SceneHierarchyPanel>();
@@ -19,8 +23,8 @@ namespace Cober {
 
 	void EditorLayer::OnAttach() {
 
-		_editorScene = Scene::Create();
-		_activeScene = _editorScene;
+
+		_sceneHierarchyPanel->SetContext(_activeScene);
 
 		// Move to PLAY/STOP button
 		_activeScene->OnRuntimeStart();
@@ -96,6 +100,21 @@ namespace Cober {
 	}
 	*/
 
+	void EditorLayer::OnGuiRender() {
+
+		InitDockspace();
+
+		_sceneHierarchyPanel->OnGuiRender();
+		_contentBrowserPanel->OnGuiRender();
+		_viewportPanel->OnGuiRender(_editorCamera);
+		_menuPanel->OnGuiRender(GAME_2D);
+		_dataPanel->OnGuiRender(GAME_2D);
+
+		ImGui::ShowDemoWindow();
+
+		EndDockspace();
+	}
+
 	void EditorLayer::InitDockspace() {
 
 		// [[----- Init variables & dockspace -----]] (from Cherno)
@@ -148,21 +167,6 @@ namespace Cober {
 		}
 		style.WindowMinSize.x = minWinSizeX;
 		style.WindowMinSize.y = minWinSizeY;
-	}
-
-	void EditorLayer::OnGuiRender() {
-
-		InitDockspace();
-
-		_sceneHierarchyPanel->OnGuiRender();
-		_contentBrowserPanel->OnGuiRender();
-		_viewportPanel->OnGuiRender(_editorCamera);
-		_menuPanel->OnGuiRender(GAME_2D);
-		_dataPanel->OnGuiRender(GAME_2D);
-
-		ImGui::ShowDemoWindow();
-
-		EndDockspace();
 	}
 
 	void EditorLayer::EndDockspace() {
