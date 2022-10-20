@@ -8,9 +8,9 @@
 #define NK_INCLUDE_FONT_BAKING
 #define NK_INCLUDE_DEFAULT_FONT
 #define NK_IMPLEMENTATION
-#define NK_SDL_GL3_IMPLEMENTATION
+#define NK_SDL_GL4_IMPLEMENTATION
 
-#define MAX_VERTEX_MEMORY 512 * 1024
+#define MAX_VERTEX_MEMORY 512 * 1280
 #define MAX_ELEMENT_MEMORY 128 * 1024
 
 #include "UISystem.h"
@@ -26,6 +26,7 @@ namespace Cober {
 
 	UISystem::UISystem() {
 
+        Logger::Log("UI System SYSTEM Added!!");
 	}
 
 	UISystem::~UISystem() {

@@ -1,1 +1,117 @@
-﻿  Editor.vcxproj -> C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Editor.exe
+﻿cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  EditorApp.cpp
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  EditorLayer.cpp
+  ContentBrowserPanel.cpp
+  DataPanel.cpp
+  MenuPanel.cpp
+  SceneHierarchyPanel.cpp
+  ViewportPanel.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\EditorLayer.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\EditorApp.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\EditorLayer.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\EditorLayer.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\EditorApp.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\EditorApp.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Panels\DataPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Panels\ViewportPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Panels\MenuPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\DataPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\DataPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\ViewportPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\ViewportPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\MenuPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\MenuPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Editor\src\Panels\ViewportPanel.cpp(52,32): warning C4312: 'conversión de tipo': conversión de 'uint32_t' a 'void *' de mayor tamaño
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(87,1): warning C4267: 'return': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(87): message : al compilar la función del miembro clase plantilla "int Cober::Pool<TComponent>::GetSize(void) const"
+          with
+          [
+              TComponent=Cober::Rigidbody2D
+          ] (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(191): message : Vea la referencia a la creación de una instancia de la función plantilla "int Cober::Pool<TComponent>::GetSize(void) const" que se está compilando
+          with
+          [
+              TComponent=Cober::Rigidbody2D
+          ] (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\type_traits(327): message : Vea la referencia a la creación de una instancia de clase plantilla "Cober::Pool<TComponent>" que se está compilando
+          with
+          [
+              TComponent=Cober::Rigidbody2D
+          ] (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\memory(1443): message : Vea la referencia a la creación de una instancia de clase plantilla "std::is_convertible<_Yty *,_Ty *>" que se está compilando
+          with
+          [
+              _Yty=Cober::Pool<Cober::Rigidbody2D>,
+              _Ty=Cober::IPool
+          ] (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(177): message : Vea la referencia a la creación de una instancia de clase plantilla "std::_SP_pointer_compatible<Cober::Pool<TComponent>,Cober::IPool>" que se está compilando
+          with
+          [
+              TComponent=Cober::Rigidbody2D
+          ] (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(229): message : Vea la referencia a la creación de una instancia de la función plantilla "void Cober::Registry::AddComponent<TComponent,>(Cober::Entity)" que se está compilando
+          with
+          [
+              TComponent=Cober::Rigidbody2D
+          ] (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Editor\src\Panels\SceneHierarchyPanel.cpp(194): message : Vea la referencia a la creación de una instancia de la función plantilla "void Cober::Entity::AddComponent<T,>(void)" que se está compilando
+          with
+          [
+              T=Cober::Rigidbody2D
+          ]
+C:\Users\jorge\OneDrive\Escritorio\Render Engine\Editor\src\Panels\SceneHierarchyPanel.cpp(222): message : Vea la referencia a la creación de una instancia de la función plantilla "void Cober::SceneHierarchyPanel::AddIfHasComponent<Cober::Rigidbody2D>(std::string)" que se está compilando
+Engine.lib(glew.obj) : warning LNK4099: no se encontró PDB 'vc120.pdb' con 'Engine.lib(glew.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\vc120.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_world.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_world.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_body.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_body.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_polygon_shape.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_polygon_shape.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_settings.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_settings.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_island.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_island.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_dynamic_tree.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_dynamic_tree.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_broad_phase.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_broad_phase.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_fixture.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_fixture.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_contact.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_contact.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_draw.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_draw.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_joint.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_joint.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_distance.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_distance.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_time_of_impact.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_time_of_impact.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_timer.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_timer.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_block_allocator.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_block_allocator.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_contact_manager.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_contact_manager.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_stack_allocator.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_stack_allocator.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_math.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_math.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_contact_solver.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_contact_solver.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_collision.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_collision.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_chain_circle_contact.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_chain_circle_contact.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_chain_polygon_contact.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_chain_polygon_contact.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_circle_contact.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_circle_contact.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_edge_circle_contact.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_edge_circle_contact.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_edge_polygon_contact.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_edge_polygon_contact.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_polygon_circle_contact.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_polygon_circle_contact.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_polygon_contact.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_polygon_contact.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_distance_joint.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_distance_joint.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_friction_joint.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_friction_joint.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_gear_joint.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_gear_joint.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_motor_joint.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_motor_joint.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_mouse_joint.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_mouse_joint.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_prismatic_joint.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_prismatic_joint.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_pulley_joint.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_pulley_joint.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_revolute_joint.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_revolute_joint.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_weld_joint.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_weld_joint.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_wheel_joint.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_wheel_joint.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_world_callbacks.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_world_callbacks.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_collide_edge.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_collide_edge.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_chain_shape.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_chain_shape.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_edge_shape.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_edge_shape.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_collide_circle.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_collide_circle.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_collide_polygon.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_collide_polygon.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  Editor.vcxproj -> C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Editor.exe

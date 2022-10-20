@@ -47,13 +47,19 @@ namespace Cober {
 
 		RequireComponent<Transform>();
 		RequireComponent<Sprite>();
+
+		Logger::Log("Render SYSTEM Added!!");
 	}
 
 	RenderSystem::~RenderSystem() {
+
 		Logger::Log("Render System removed from Registry");
 	}
 
-	void RenderSystem::Start(Ref<AssetManager> assets) {
+	void RenderSystem::Start(const Ref<Scene>& scene) {
+
+		_registry = scene->GetRegistry();
+
 		// ++++++++++++++++++++++++ RENDER TEST
 		shaderTriangle = Shader::Create();
 		CreateTriangle(shaderTriangle);

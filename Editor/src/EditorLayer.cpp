@@ -3,6 +3,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+
 namespace Cober {
 
 	//extern const std::filesystem::path _AssetPath;
@@ -23,11 +24,10 @@ namespace Cober {
 
 	void EditorLayer::OnAttach() {
 
-
 		_sceneHierarchyPanel->SetContext(_activeScene);
 
 		// Move to PLAY/STOP button
-		_activeScene->OnRuntimeStart();
+		_activeScene->OnRuntimeStart(_activeScene);
 	}
 
 	void EditorLayer::OnDetach() {
@@ -110,7 +110,7 @@ namespace Cober {
 		_menuPanel->OnGuiRender(GAME_2D);
 		_dataPanel->OnGuiRender(GAME_2D);
 
-		ImGui::ShowDemoWindow();
+		//ImGui::ShowDemoWindow();
 
 		EndDockspace();
 	}

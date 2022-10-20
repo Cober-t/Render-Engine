@@ -10,7 +10,7 @@ namespace Cober {
 		Scene();
 		~Scene();
 
-		void OnRuntimeStart();
+		void OnRuntimeStart(const Ref<Scene>& scene);
 		void OnRuntimeStop();
 
 		void OnUpdateRuntime(Ref<Timestep> ts);	// Get Camera components from entities

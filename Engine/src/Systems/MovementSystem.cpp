@@ -6,6 +6,8 @@ namespace Cober {
 	MovementSystem::MovementSystem() {
 		RequireComponent<Transform>();
 		RequireComponent<Rigidbody2D>();
+
+		Logger::Log("Movement SYSTEM Added!!");
 	}
 
 	MovementSystem::~MovementSystem() {

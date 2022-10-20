@@ -56,8 +56,6 @@ namespace Cober {
 		ImGui::End();
 	}
 
-	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 	void SceneHierarchyPanel::DrawEntityNode(Entity entity) {
 
 		auto& tag = entity.GetComponent<Tag>().tag;
@@ -76,8 +74,8 @@ namespace Cober {
 			ImGui::EndPopup();
 		}
 
-		/*if (opened)
-			ImGui::TreePop();*/
+		if (opened)
+			ImGui::TreePop();
 
 		if (entityDeleted) {
 			_sceneContext->GetRegistry()->DeleteEntity(entity);
@@ -222,6 +220,8 @@ namespace Cober {
 		if (ImGui::BeginPopup("AddComponent")) {
 			AddIfHasComponent<Sprite>("Sprite Renderer Component");
 			AddIfHasComponent<Rigidbody2D>("Rigidbody 2D Component");
+			// Add if has Rigidbody2D Component
+			// Add if has BoxCollider2D Component
 
 			ImGui::EndPopup();
 		}
@@ -245,6 +245,7 @@ namespace Cober {
 					if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
 						const wchar_t* path = (const wchar_t*)payload->Data;
 						std::filesystem::path texturePath = std::filesystem::path(SOLUTION_DIR + (std::string)"assets") / path;
+						Logger::Log("Texture Path: " + texturePath.string());
 						//component.Texture = Texture2D::Create(texturePath.string());
 					}
 					ImGui::EndDragDropTarget();
@@ -254,21 +255,26 @@ namespace Cober {
 		DrawComponent<Rigidbody2D>("Rigidbody 2D", entity, [](auto& component)
 			{
 				const char* bodyTypeStrings[] = { "Static", "Kinematic", "Dynamic" };
-				const char* currentBodyTypeString = component.type;
+				const char* currentBodyTypeString = bodyTypeStrings[(int)component.type];
 				if (ImGui::BeginCombo("Body Type", currentBodyTypeString)) {
 
 					for (int i = 0; i < 3; i++) {
 						bool isSelected = currentBodyTypeString == bodyTypeStrings[i];
-						if (ImGui::Selectable(bodyTypeStrings[i], isSelected))
-							component.type = bodyTypeStrings[i];
-
+						if (ImGui::Selectable(bodyTypeStrings[i], isSelected)) {
+							currentBodyTypeString = bodyTypeStrings[i];
+							component.type = (BodyType)i;
+						}
 						if (isSelected)
 							ImGui::SetItemDefaultFocus();
 					}
 
 					ImGui::EndCombo();
 				}
-				//ImGui::Checkbox("Fixed Rotation", &component.FixedRotation);
+				ImGui::Checkbox("Fixed Rotation", &component.fixedRotation);
 			});
+
+		// Draw Rigidbody2D Component
+
+		// Draw BoxCollider2D Component
 	}
 }

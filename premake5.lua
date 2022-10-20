@@ -136,17 +136,20 @@ project "Engine"
 
 	filter "configurations:Debug"
 		defines "CB_DEBUG"
-		--buildoptions "/MDd"
+		--buildoptions "/MTd"
+		buildoptions "/MDd"
 		symbols "on"
 
 	filter "configurations:Release"
 		defines "CB_RELEASE"
-		--buildoptions "/MD"
+		--buildoptions "/MT"
+		buildoptions "/MD"
 		optimize "on"
 
 	filter "configurations:Dist"
 		defines "CB_DIST"
-		--buildoptions "/MD"
+		--buildoptions "/MT"
+		buildoptions "/MD"
 		optimize "on"
 
 project "Editor"
@@ -154,6 +157,8 @@ project "Editor"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
+	ignoredefaultlibraries { "MSVCRT" }
+	ignoredefaultlibraries { "LIBCMT" }
 	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -196,14 +201,20 @@ project "Editor"
 
 	filter "configurations:Debug"
 		defines "CB_DEBUG"
+		--buildoptions "/MTd"
+		buildoptions "/MDd"
 		symbols "on"
 
 	filter "configurations:Release"
 		defines "CB_RELEASE"
+		--buildoptions "/MT"
+		buildoptions "/MD"
 		optimize "on"
 
 	filter "configurations:Dist"
 		defines "CB_DIST"
+		--buildoptions "/MT"
+		buildoptions "/MD"
 		optimize "on"
 
 project "Game"
@@ -250,12 +261,15 @@ project "Game"
 
 	filter "configurations:Debug"
 		defines "CB_DEBUG"
+		--buildoptions "/MDd"
 		symbols "on"
 
 	filter "configurations:Release"
 		defines "CB_RELEASE"
+		--buildoptions "/MD"
 		optimize "on"
 
 	filter "configurations:Dist"
 		defines "CB_DIST"
+		--buildoptions "/MD"
 		optimize "on"

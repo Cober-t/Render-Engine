@@ -10,6 +10,7 @@
 #include <core/Layer.h>
 #include <core/Events.h>
 #include <core/Scene.h>
+#include <core/UUID.h>
 
 
 //[++++++++++++++++++++++++++]
@@ -61,6 +62,16 @@
 #include <imgui/imstb_textedit.h>
 #include <imgui/imstb_truetype.h>
 
+
+
+//[++++++++++++++++++++++++++]
+//[+++++++++5 BOX 2D +++++++++]
+//[++++++++++++++++++++++++++]
+#include <box2D/b2_world.h>
+#include <box2D/b2_body.h>
+#include <box2D/b2_fixture.h>
+#include <box2D/b2_polygon_shape.h>
+class b2World;
 
 //[++++++++++++++++++++++++++]
 //[+++ NUKLEAR GUI SYSTEM +++]

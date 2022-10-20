@@ -57,14 +57,34 @@ namespace Cober {
 		Tag(const std::string& tag) : tag(tag) {};
 	};
 
+	enum class BodyType { Static = 0, Kinematic, Dynamic };
 	struct Rigidbody2D {
 		glm::vec2 velocity;
-		const char* type;
+		bool fixedRotation = false;
+
+		BodyType type = BodyType::Dynamic;
+
+		void* runtimeBody;
 
 		Rigidbody2D() = default;
 		Rigidbody2D(const Rigidbody2D&) = default;
-		Rigidbody2D(glm::vec2 vel, const char* bodyType = "Dynamic") 
-			: velocity(vel), type(bodyType) {}
+	};
+
+	struct BoxCollider2D {
+		glm::vec2 offset = { 0.0f, 0.0f };
+		glm::vec2 size = { 1.0f, 1.0f };
+
+		// Make a physics material maybe
+		float density = 1.0f;
+		float friction = 0.5f;
+		float restitution = 0.0f;
+		float restitutionThreshold = 0.5f;
+
+		// Storage for runtime
+		void* runtimeFixture = nullptr;
+
+		BoxCollider2D() = default;
+		BoxCollider2D(const BoxCollider2D&) = default;
 	};
 
 	struct Sprite {

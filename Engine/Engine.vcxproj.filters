@@ -2049,6 +2049,9 @@
     <ClInclude Include="src\core\Timestep.h">
       <Filter>src\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\core\UUID.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
     <ClInclude Include="src\core\Window.h">
       <Filter>src\core</Filter>
     </ClInclude>
@@ -2056,6 +2059,9 @@
       <Filter>src\imgui</Filter>
     </ClInclude>
     <ClInclude Include="src\imgui\imgui.h">
+      <Filter>src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\imgui_freetype.h">
       <Filter>src\imgui</Filter>
     </ClInclude>
     <ClInclude Include="src\imgui\imgui_impl_opengl3.h">
@@ -2082,7 +2088,6 @@
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\UUID.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entities\ECS.cpp">
@@ -2163,6 +2168,9 @@
     <ClCompile Include="src\core\Scene.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\UUID.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
     <ClCompile Include="src\core\Window.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
@@ -2190,6 +2198,5 @@
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\UUID.cpp" />
   </ItemGroup>
 </Project>
