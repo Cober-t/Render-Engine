@@ -195,7 +195,8 @@ namespace Cober {
 		componentPool->Set(entityID, newComponent);
 		entityComponentSignatures[entityID].set(componentID);
 
-		Logger::Log("Component ID = " + std::to_string(componentID) + " was added to entity: " + entity.GetComponent<Tag>().tag);
+		if (componentID != 0 && componentID != 3 && componentID != 4)
+			Logger::Log("Component ID = " + std::to_string(componentID) + " was added to entity: " + entity.GetComponent<Tag>().tag);
 	}
 
 	template<typename TComponent>

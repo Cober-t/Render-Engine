@@ -18,9 +18,11 @@ namespace Cober {
 		if (entityIndex >= entityComponentSignatures.size())
 			entityComponentSignatures.resize(entityIndex + 1);
 
-		entity.AddComponent<Tag>(name);
 		entity.AddComponent<IDComponent>(entity.GetID());
+		entity.AddComponent<Tag>(name);
 		entity.AddComponent<Transform>();
+
+		Logger::Log("Created entity with ID = " + std::to_string(entity.GetID()));
 
 		return entity;
 	}
@@ -35,6 +37,7 @@ namespace Cober {
 	
 	void Registry::DeleteEntity(Entity entity) {
 
+		Logger::Log("Deleted entity with ID = " + std::to_string(entity.GetID()));
 		entitiesToBeKilled.insert(entity);
 	}
 
@@ -46,13 +49,12 @@ namespace Cober {
 
 		entitiesToBeAdded.clear();
 
-		for (auto entity : entitiesToBeAdded)
-			AddEntityToSystems(entity);
-
 		for (auto entity : entitiesToBeKilled) {
 			entities.erase(entity);
 			RemoveEntityFromSystems(entity);
 		}
+
+		entitiesToBeKilled.clear();
 	}
 
 	void Registry::AddEntityToSystems(Entity entity) {

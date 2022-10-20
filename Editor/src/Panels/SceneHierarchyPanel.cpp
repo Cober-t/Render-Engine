@@ -12,6 +12,7 @@
 
 namespace Cober {
 
+	
 	SceneHierarchyPanel::~SceneHierarchyPanel() {
 
 	}
@@ -19,11 +20,12 @@ namespace Cober {
 	void SceneHierarchyPanel::SetContext(const Ref<Scene>& sceneContext)
 	{
 		_sceneContext = sceneContext;
-		_selectionContext = {};
+		_nullEntityContext = Entity("nullContext", -1);
+		_selectionContext = _nullEntityContext;
 	}
 
 	void SceneHierarchyPanel::SetSelectedEntity(Entity entity) {
-		_selectionContext = &entity;
+		_selectionContext = entity;
 	}
 
 	void SceneHierarchyPanel::OnGuiRender() {
@@ -31,22 +33,24 @@ namespace Cober {
 		ImGui::Begin("Scene Hierarchy");
 
 		std::set<Entity> entities = _sceneContext->GetRegistry()->GetAllEntities();
-		for (auto entity : entities)
-			DrawEntityNode(entity);
+		for (auto entity : entities) {
+			if (entity.GetID() != -1)
+				DrawEntityNode(entity);
+		}
 
 		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
-			_selectionContext = {};
+			_selectionContext = _nullEntityContext;
 
 		if (ImGui::BeginPopupContextWindow(0, 1)) {
-			if (ImGui::Selectable("Empty Entity"))
-				_sceneContext->GetRegistry()->CreateEntity();
-
+			if (_selectionContext == _nullEntityContext && ImGui::Selectable("Empty Entity"))
+				_selectionContext = _sceneContext->GetRegistry()->CreateEntity();
+				
 			ImGui::EndPopup();
 		}
 		ImGui::End();
 
 		ImGui::Begin("Properties");
-		if (_selectionContext)
+		if (_selectionContext != _nullEntityContext)
 			DrawComponents(_selectionContext);
 
 		ImGui::End();
@@ -57,28 +61,28 @@ namespace Cober {
 	void SceneHierarchyPanel::DrawEntityNode(Entity entity) {
 
 		auto& tag = entity.GetComponent<Tag>().tag;
-		ImGuiTreeNodeFlags flags = ((_selectionContext == &entity) ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
+		ImGuiTreeNodeFlags flags = ((_selectionContext == entity) ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
 		flags |= ImGuiTreeNodeFlags_SpanAvailWidth;
 		bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)entity, flags, tag.c_str());
 
 		if (ImGui::IsItemClicked())
-			_selectionContext = &entity;
+			_selectionContext = entity;
 
 		// Delete an Entity
 		bool entityDeleted = false;
-		if (ImGui::BeginPopupContextItem()) {
+		if (_selectionContext == entity && ImGui::BeginPopupContextWindow(0, 1)) {
 			if (ImGui::MenuItem("Delete Entity"))
 				entityDeleted = true;
 			ImGui::EndPopup();
 		}
 
-		if (opened)
-			ImGui::TreePop();
+		/*if (opened)
+			ImGui::TreePop();*/
 
 		if (entityDeleted) {
 			_sceneContext->GetRegistry()->DeleteEntity(entity);
-			if (_selectionContext == &entity)
-				_selectionContext = {};
+			if (_selectionContext == entity)
+				_selectionContext = _nullEntityContext;
 		}
 	}
 
@@ -147,14 +151,15 @@ namespace Cober {
 		ImGui::PopID();
 	}
 
+
 	template<typename T, typename UIFunction>
-	void SceneHierarchyPanel::DrawComponent(const std::string& name, Entity* entity, UIFunction uiFunction) {
+	void SceneHierarchyPanel::DrawComponent(const std::string& name, Entity entity, UIFunction uiFunction) {
 
 		const ImGuiTreeNodeFlags treeNodeFlags = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap | ImGuiTreeNodeFlags_FramePadding;
 
-		if (entity->HasComponent<T>()) {
+		if (entity.HasComponent<T>()) {
 
-			auto& component = entity->GetComponent<T>();
+			auto& component = entity.GetComponent<T>();
 			ImVec2 contentRegionAvailable = ImGui::GetContentRegionAvail();
 
 			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{ 4, 4 });
@@ -180,25 +185,25 @@ namespace Cober {
 			}
 
 			if (removeComponent)
-				entity->RemoveComponent<T>();
+				entity.RemoveComponent<T>();
 		}
 	}
 
 	template<typename T>
 	void SceneHierarchyPanel::AddIfHasComponent(std::string name) {
-		if (!_selectionContext->HasComponent<T>()) {
+		if (!_selectionContext.HasComponent<T>()) {
 			if (ImGui::MenuItem(name.c_str())) {
-				_selectionContext->AddComponent<T>();
+				_selectionContext.AddComponent<T>();
 				ImGui::CloseCurrentPopup();
 			}
 		}
 	}
 
-	void SceneHierarchyPanel::DrawComponents(Entity* entity)
+	void SceneHierarchyPanel::DrawComponents(Entity entity)
 	{
-		if (entity->HasComponent<Tag>()) {
+		if (entity.HasComponent<Tag>()) {
 
-			auto& tag = entity->GetComponent<Tag>().tag;
+			auto& tag = entity.GetComponent<Tag>().tag;
 
 			char buffer[256];
 			memset(buffer, 0, sizeof(buffer));
@@ -249,7 +254,7 @@ namespace Cober {
 		DrawComponent<Rigidbody2D>("Rigidbody 2D", entity, [](auto& component)
 			{
 				const char* bodyTypeStrings[] = { "Static", "Kinematic", "Dynamic" };
-				const char* currentBodyTypeString = bodyTypeStrings[(int)component.type];
+				const char* currentBodyTypeString = component.type;
 				if (ImGui::BeginCombo("Body Type", currentBodyTypeString)) {
 
 					for (int i = 0; i < 3; i++) {
