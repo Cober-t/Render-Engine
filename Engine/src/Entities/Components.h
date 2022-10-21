@@ -2,9 +2,12 @@
 
 #include <xhash> // For generating Universal Unique Identifiers
 #include <random>
+
+#include "core/Core.h"
 #include "core/UUID.h"
+#include "Render/Texture.h"
+
 #include <glm/glm.hpp>
-#include <core/Core.h>
 
 namespace Cober {
 	
@@ -92,6 +95,7 @@ namespace Cober {
 		std::string assetID;
 		glm::vec2 srcRect;
 		glm::vec4 color;
+		Ref<Texture> texture;
 
 		Sprite() = default;
 		Sprite(const Sprite&) = default;

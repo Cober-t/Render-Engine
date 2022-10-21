@@ -246,7 +246,7 @@ namespace Cober {
 						const wchar_t* path = (const wchar_t*)payload->Data;
 						std::filesystem::path texturePath = std::filesystem::path(SOLUTION_DIR + (std::string)"assets") / path;
 						Logger::Log("Texture Path: " + texturePath.string());
-						//component.Texture = Texture2D::Create(texturePath.string());
+						component.texture = Texture::Create(texturePath.string());
 					}
 					ImGui::EndDragDropTarget();
 				}

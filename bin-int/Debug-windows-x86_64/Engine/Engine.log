@@ -1,53 +1,5 @@
 ﻿cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  pch.cpp
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  ECS.cpp
-  GuiLayer.cpp
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  OpenGLContext.cpp
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  OpenGLFramebuffer.cpp
-  OpenGLRenderAPI.cpp
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  OpenGLShader.cpp
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  OpenGLES3Context.cpp
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  OpenGLES3Framebuffer.cpp
-  OpenGLES3Shader.cpp
-  EditorCamera.cpp
-  Framebuffer.cpp
-  GraphicsContext.cpp
-  RenderAPI.cpp
-  RenderGlobals.cpp
-  Shader.cpp
-  Texture.cpp
-  MovementSystem.cpp
-  PhysicsSystem.cpp
   RenderSystem.cpp
-  UISystem.cpp
-  Application.cpp
-  AssetManager.cpp
-  Events.cpp
-  Layer.cpp
-  Logger.cpp
-  Scene.cpp
-  UUID.cpp
-  Window.cpp
-  imgui.cpp
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_impl_opengl3.cpp
-  imgui_impl_sdl.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
 SDL2.lib(SDL2.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
 SDL2_image.lib(SDL2_image.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
 SDL2_mixer.lib(SDL2_mixer.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida

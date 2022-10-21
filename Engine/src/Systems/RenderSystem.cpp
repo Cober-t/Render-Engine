@@ -3,50 +3,58 @@
 #include "RenderSystem.h"
 
 #include "core/Logger.h"
+
+#include "Render/VertexArray.h"
+#include "Render/Shader.h"
+
 #include "Render/RenderGlobals.h"
 
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-// ABSTRACT API
-#include <GL/glew.h>
-
 namespace Cober {
 
-	// ++++++++++++++++++++++++ RENDER TEST
-	void CreateTriangle(const Ref<Shader>& shader) {
+	struct QuadVertex
+	{
+		glm::vec3 Position;
+		glm::vec4 Color;
+		glm::vec2 TexCoord;
+		float TexIndex;
+	};
 
-		GLfloat vertices[] = {
-			-0.4f, -0.4f, 0.0f,
-			 0.4f, -0.4f, 0.0f,
-			 0.0f,  0.4f, 0.0f
-		};
+	struct RendererData
+	{
+		static const uint32_t MaxQuads = 20000;
+		static const uint32_t MaxVertices = MaxQuads * 4;
+		static const uint32_t MaxIndices = MaxQuads * 6;
+		static const uint32_t MaxTextureSlots = 32; // TODO: RenderCaps
 
-		GLuint VAO = shader->GetVAO();
-		GLuint VBO = shader->GetVBO();
+		Ref<VertexArray> QuadVertexArray;
+		Ref<VertexBuffer> QuadVertexBuffer;
+		Ref<Shader> TextureShader;
+		Ref<Texture> WhiteTexture;
 
-		glGenVertexArrays(1, &VAO);
-		glBindVertexArray(VAO);
+		uint32_t QuadIndexCount = 0;
+		QuadVertex* QuadVertexBufferBase = nullptr;
+		QuadVertex* QuadVertexBufferPtr = nullptr;
 
-		glGenBuffers(1, &VBO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		std::array<Ref<Texture>, MaxTextureSlots> TextureSlots;
+		uint32_t TextureSlotIndex = 1; // 0 = white texture
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		glEnableVertexAttribArray(0);
+		glm::vec4 QuadVertexPositions[4];
 
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		RenderSystem::Statistics Stats;
+	};
 
-		glBindVertexArray(0);
-
-		shader->SetVAO(VAO);
-		shader->SetVBO(VBO);
-	}
+	static RendererData data;
 
 	RenderSystem::RenderSystem() {
 
 		RequireComponent<Transform>();
 		RequireComponent<Sprite>();
+
+		if(Engine::Get().GetGameState() == GameState::PLAY)
+			//RequireComponent<CameraSystem>();
 
 		Logger::Log("Render SYSTEM Added!!");
 	}
@@ -60,76 +68,201 @@ namespace Cober {
 
 		_registry = scene->GetRegistry();
 
-		// ++++++++++++++++++++++++ RENDER TEST
-		shaderTriangle = Shader::Create();
-		CreateTriangle(shaderTriangle);
-		shaderTriangle->AddShader("vertexShader.glsl", GL_VERTEX_SHADER);
-		shaderTriangle->AddShader("fragmentShader.glsl", GL_FRAGMENT_SHADER);
-		shaderTriangle->CompileShader();
+		data.QuadVertexArray = VertexArray::Create();
 
-		// ++++++++++++++++++++++++ GRID
-		//shaderGrid = Shader::Create();
-		//shaderGrid->AddShader("gridVertex.glsl", GL_VERTEX_SHADER);
-		//shaderGrid->AddShader("gridFragment.glsl", GL_FRAGMENT_SHADER);
-		//shaderGrid->CompileShader();
+		data.QuadVertexBuffer = VertexBuffer::Create(data.MaxVertices * sizeof(QuadVertex));
+		data.QuadVertexBuffer->SetLayout({
+			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float4, "a_Color" },
+			{ ShaderDataType::Float2, "a_TexCoord" },
+			{ ShaderDataType::Float,  "a_TexIndex" },
+			});
+		data.QuadVertexArray->AddVertexBuffer(data.QuadVertexBuffer);
+
+		data.QuadVertexBufferBase = new QuadVertex[data.MaxVertices];
+
+		uint32_t* quadIndices = new uint32_t[data.MaxIndices];
+
+		uint32_t offset = 0;
+		for (uint32_t i = 0; i < data.MaxIndices; i += 6)
+		{
+			quadIndices[i + 0] = offset + 0;
+			quadIndices[i + 1] = offset + 1;
+			quadIndices[i + 2] = offset + 2;
+
+			quadIndices[i + 3] = offset + 2;
+			quadIndices[i + 4] = offset + 3;
+			quadIndices[i + 5] = offset + 0;
+
+			offset += 4;
+		}
+
+		Ref<IndexBuffer> quadIB = IndexBuffer::Create(quadIndices, data.MaxIndices);
+		data.QuadVertexArray->SetIndexBuffer(quadIB);
+		delete[] quadIndices;
+
+		data.WhiteTexture = Texture::Create(1, 1);
+		uint32_t whiteTextureData = 0xffffffff;
+		data.WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
+
+		int32_t samplers[data.MaxTextureSlots];
+		for (uint32_t i = 0; i < data.MaxTextureSlots; i++)
+			samplers[i] = i;
+
+		data.TextureShader = Shader::Create("texture.glsl");
+		data.TextureShader->Bind();
+		data.TextureShader->SetIntArray("u_Textures", samplers, data.MaxTextureSlots);
+
+		// Set all texture slots to 0
+		data.TextureSlots[0] = data.WhiteTexture;
+
+		data.QuadVertexPositions[0] = { -0.5f, -0.5f, 0.0f, 1.0f };
+		data.QuadVertexPositions[1] = {  0.5f, -0.5f, 0.0f, 1.0f };
+		data.QuadVertexPositions[2] = {  0.5f,  0.5f, 0.0f, 1.0f };
+		data.QuadVertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
 	}
 
-	void RenderSystem::Update(Ref<EditorCamera> camera) {
-
+	void RenderSystem::Update(const Ref<EditorCamera>& camera) 
+	{
 		RenderGlobals::SetClearColor(4, 0, 8, 255);
 		RenderGlobals::Clear();
+		//RenderGlobals::SetClearColor(camera->GetSkyboxColor());
+		// or just
+		// camera->RenderSkybox();
 
+		std::set<Entity> entities = _registry->GetAllEntities();
+		//for (auto entity : GetSystemEntities())
+		for (auto entity : entities) {
 
-		// Run Scene Editor or Scene Play
-		// ++++++++++++++++++++++++ RENDER TEST
-		glUseProgram(shaderTriangle->GetShaderProgram());
+			if(entity.HasComponent<Sprite>()) {
+				BeginScene(camera);
 
-		// [+++++++++++++++++++++++++++++++++++++++++++]
-		// [+++++++++++++++ Camera Test +++++++++++++++]
-		// [+++++++++++++++++++++++++++++++++++++++++++]
-		const glm::mat4& projectionMatrix = camera->GetProjection();
-		const glm::mat4& viewMatrix = camera->GetView();
+				Sprite sprite = entity.GetComponent<Sprite>();
+				Transform transform= entity.GetComponent<Transform>();
+				DrawQuad(transform, sprite);
 
-		GLint location = glGetUniformLocation(shaderTriangle->GetShaderProgram(), "_projection");
-		GLCallV(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(projectionMatrix)));
-		location = glGetUniformLocation(shaderTriangle->GetShaderProgram(), "_view");
-		GLCallV(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(viewMatrix)));
+				// SUBMIT
+				data.TextureShader->Bind();
+				data.TextureShader->SetMat4("u_ViewProjection", camera->GetView() * camera->GetProjection());
+				//data.TextureShader->SetMat4("u_Transform", transform);
 
-		glBindVertexArray(shaderTriangle->GetVAO());
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-		glBindVertexArray(0);
-		glUseProgram(0);
+				data.QuadVertexArray->Bind();
+				RenderGlobals::DrawIndexed(data.QuadVertexArray);
+				// END SUBMIT
 
-		// [++++++++++++++++++ GRID +++++++++++++++++++]
-		// [+++++++++++++++++++++++++++++++++++++++++++]
-		//glm::vec3 nearPoint{ 1.0, 0.0, 1.0 };
-		//glm::vec3 farPoint{ 5.0, 0.0, 5.0 };
-		//glm::vec4 color{ 1.0, 0.0, 0.0, 1.0 };
-		//glUseProgram(shaderGrid->GetShaderProgram());
-		//location = glGetUniformLocation(shaderGrid->GetShaderProgram(), "proj");
-		//glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
-		//location = glGetUniformLocation(shaderGrid->GetShaderProgram(), "view");
-		//glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(viewMatrix));
-		//
-		//glBindVertexArray(shaderGrid->GetVAO());
-		//glDrawArrays(GL_TRIANGLES, 0, 3);
-		//glBindVertexArray(0);
-		//glUseProgram(0);
-		
-		for (auto entity : GetSystemEntities()) {
-			auto& transform = entity.GetComponent<Transform>();
-			const auto& sprite = entity.GetComponent<Sprite>();
-
-			int x = sprite.srcRect.x, y = sprite.srcRect.y;
-			int width  = sprite.w, height = sprite.h;
-
-			//glBegin(GL_QUADS);
-			//	glTexCoord2f(0, 0); glVertex3f(x, y, 0);
-			//	glTexCoord2f(1, 0); glVertex3f(x + width, y, 0);
-			//	glTexCoord2f(1, 1); glVertex3f(x + width, y + height, 0);
-			//	glTexCoord2f(0, 1); glVertex3f(x, y + height, 0);
-			//glEnd();
-			//glBindTexture(GL_TEXTURE_2D, assets->GetTexture(sprite.assetID));
+				EndScene();
+			}
 		}
+	}
+
+	void RenderSystem::BeginScene(const Ref<EditorCamera>& camera) {
+	
+		data.TextureShader->Bind();
+		data.TextureShader->SetMat4("u_ViewProjection", camera->GetView() * camera->GetProjection());
+
+		data.QuadIndexCount = 0;
+		data.QuadVertexBufferPtr = data.QuadVertexBufferBase;
+
+		data.TextureSlotIndex = 0;
+	}
+
+	void RenderSystem::DrawQuad(Transform& transformComponent, Sprite& spriteComponent)
+	{
+
+		/*if (data.QuadIndexCount >= RendererData::MaxIndices)
+			FlushAndReset();*/
+
+		constexpr glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+		float textureIndex = 0.0f;
+		/*
+		for (uint32_t i = 1; i < data.TextureSlotIndex; i++)
+		{
+			if (*data.TextureSlots[i].get() == *spriteComponent.texture.get())
+			{
+				textureIndex = (float)i;
+				break;
+			}
+		}
+
+		if (textureIndex == 0.0f)
+		{
+			textureIndex = (float)data.TextureSlotIndex;
+			data.TextureSlots[data.TextureSlotIndex] = spriteComponent.texture;
+			data.TextureSlotIndex++;
+		}*/
+
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), transformComponent.position)
+			* glm::scale(glm::mat4(1.0f), { transformComponent.scale.x, transformComponent.scale.y, 1.0f });
+
+		data.QuadVertexBufferPtr->Position = transform * data.QuadVertexPositions[0];
+		data.QuadVertexBufferPtr->Color = color;
+		data.QuadVertexBufferPtr->TexCoord = { 0.0f, 0.0f };
+		data.QuadVertexBufferPtr->TexIndex = textureIndex;
+		data.QuadVertexBufferPtr++;
+
+		data.QuadVertexBufferPtr->Position = transform * data.QuadVertexPositions[1];
+		data.QuadVertexBufferPtr->Color = color;
+		data.QuadVertexBufferPtr->TexCoord = { 1.0f, 0.0f };
+		data.QuadVertexBufferPtr->TexIndex = textureIndex;
+		data.QuadVertexBufferPtr++;
+
+		data.QuadVertexBufferPtr->Position = transform * data.QuadVertexPositions[2];
+		data.QuadVertexBufferPtr->Color = color;
+		data.QuadVertexBufferPtr->TexCoord = { 1.0f, 1.0f };
+		data.QuadVertexBufferPtr->TexIndex = textureIndex;
+		data.QuadVertexBufferPtr++;
+
+		data.QuadVertexBufferPtr->Position = transform * data.QuadVertexPositions[3];
+		data.QuadVertexBufferPtr->Color = color;
+		data.QuadVertexBufferPtr->TexCoord = { 0.0f, 1.0f };
+		data.QuadVertexBufferPtr->TexIndex = textureIndex;
+		data.QuadVertexBufferPtr++;
+
+		data.QuadIndexCount += 6;
+
+		data.Stats.QuadCount++;
+	}
+
+	void RenderSystem::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform)
+	{
+		/*shader->Bind();
+		shader->SetMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
+		shader->SetMat4("u_Transform", transform);
+
+		vertexArray->Bind();
+		RenderGlobals::DrawIndexed(vertexArray);*/
+	}
+
+
+	// [+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++]
+	// [+++++++++++++++++++++ BATCH SYSTEM ++++++++++++++++++++++++]
+	// [+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++]
+	void RenderSystem::EndScene()
+	{
+	/*	uint32_t dataSize = (uint8_t*)data.QuadVertexBufferPtr - (uint8_t*)data.QuadVertexBufferBase;
+		data.QuadVertexBuffer->SetData(data.QuadVertexBufferBase, dataSize);*/
+
+		//Flush();
+	}
+
+	void RenderSystem::Flush()
+	{
+		// Bind textures
+		for (uint32_t i = 0; i < data.TextureSlotIndex; i++)
+			data.TextureSlots[i]->Bind(i);
+
+		RenderGlobals::DrawIndexed(data.QuadVertexArray, data.QuadIndexCount);
+		data.Stats.DrawCalls++;
+	}
+
+	void RenderSystem::FlushAndReset()
+	{
+		//EndScene();
+
+		data.QuadIndexCount = 0;
+		data.QuadVertexBufferPtr = data.QuadVertexBufferBase;
+
+		data.TextureSlotIndex = 1;
 	}
 }

@@ -2088,6 +2088,14 @@
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Render\Buffer.h" />
+    <ClInclude Include="src\Render\VertexArray.h" />
+    <ClInclude Include="src\Platforms\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Buffer.h" />
+    <ClInclude Include="src\Platforms\OpenGL\OpenGLTexture.h" />
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Texture.h" />
+    <ClInclude Include="src\Platforms\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entities\ECS.cpp">
@@ -2198,5 +2206,13 @@
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Render\Buffer.cpp" />
+    <ClCompile Include="src\Render\VertexArray.cpp" />
+    <ClCompile Include="src\Platforms\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Buffer.cpp" />
+    <ClCompile Include="src\Platforms\OpenGL\OpenGLTexture.cpp" />
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Texture.cpp" />
+    <ClCompile Include="src\Platforms\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3VertexArray.cpp" />
   </ItemGroup>
 </Project>

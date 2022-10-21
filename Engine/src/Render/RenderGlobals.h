@@ -28,6 +28,11 @@ namespace Cober {
 			_api->Clear();
 		}
 
+		static void DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t count = 0)
+		{
+			_api->DrawIndexed(vertexArray, count);
+		}
+
 	private:
 		static Unique<RenderAPI> _api;
 	};

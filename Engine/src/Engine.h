@@ -36,6 +36,7 @@
 #include <Render/Framebuffer.h>
 #include <Render/Shader.h>
 #include <Render/Texture.h>
+#include <Render/Buffer.h>
 #include <Render/RenderGlobals.h>   
 #include <Render/RenderAPI.h>   
 #include <Render/Camera/EditorCamera.h>
