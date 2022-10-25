@@ -10,12 +10,12 @@ namespace Cober {
 	// [+++++++++++++++++++++++ VERTEX BUFFER ++++++++++++++++++++++++++++]
 	// [++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++]
 
-	OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size) {
+	//OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size) {
 
-		GLCallV(glCreateBuffers(1, &_rendererID));
-		GLCallV(glBindBuffer(GL_ARRAY_BUFFER, _rendererID));
-		GLCallV(glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW));
-	}
+	//	GLCallV(glCreateBuffers(1, &_rendererID));
+	//	GLCallV(glBindBuffer(GL_ARRAY_BUFFER, _rendererID));
+	//	GLCallV(glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW));
+	//}
 
 	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
 	{

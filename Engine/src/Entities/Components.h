@@ -93,9 +93,9 @@ namespace Cober {
 	struct Sprite {
 		int w, h;
 		std::string assetID;
-		glm::vec2 srcRect;
-		glm::vec4 color;
-		Ref<Texture> texture;
+		glm::vec2 srcRect{ 0.0f };
+		glm::vec4 color{ 1.0f };
+		Ref<Texture> texture = nullptr;
 
 		Sprite() = default;
 		Sprite(const Sprite&) = default;

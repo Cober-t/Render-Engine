@@ -51,15 +51,10 @@ namespace Cober {
 		std::ifstream in(SHADERS_PATH + filePath, std::ios::in | std::ios::binary);
 		if (in) {
 			in.seekg(0, std::ios::end);
-			size_t size = in.tellg();
-			if (size != -1) {
-				result.resize(size);
-				in.seekg(0, std::ios::beg);
-				in.read(&result[0], size);
-				in.close();
-			}
-			else
-				Logger::Warning("Could not read from file " + filePath);
+			result.resize(in.tellg());
+			in.seekg(0, std::ios::beg);
+			in.read(&result[0], result.size());
+			in.close();
 		}
 		else
 			Logger::Warning("Could not open file " + filePath);

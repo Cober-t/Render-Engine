@@ -71,6 +71,6 @@ namespace Cober {
 		_registry->Update();
 
 		_registry->GetSystem<RenderSystem>().Update(editorCamera);
-		_registry->GetSystem<UISystem>().Update();
+		//_registry->GetSystem<UISystem>().Update();
 	}
 }

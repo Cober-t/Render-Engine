@@ -61,7 +61,7 @@ namespace Cober {
 	private:
 		float _fov = 45.0f, _aspectRatio = 1.778f, _nearClip = 0.1f, _farClip = 1000.0f;
 		//glm::mat4 _viewMatrix;
-		glm::vec3 _position   = { 0.0f, 0.0f, 0.0f };
+		glm::vec3 _position   = { 0.0f, 0.0f,  0.0f };
 		glm::vec3 _focalPoint = { 0.0f, 0.0f, -1.0f };
 
 		glm::vec2 _initialMousePos = { 0.0f, 0.0f };

@@ -34,8 +34,8 @@ namespace Cober {
 		std::string fontFilePath = _fontsPath + (std::string)"Cousine-Regular.ttf";
 		io.Fonts->AddFontFromFileTTF(fontFilePath.c_str(), cfg.SizePixels);
 	
-		Style();
-		//ImGui::StyleColorsDark();
+		//Style();
+		ImGui::StyleColorsDark();
 		
 		ImGui_ImplSDL2_InitForOpenGL(Engine::Get().GetWindow().GetNativeWindow(), Engine::Get().GetWindow().GetContext());
 		ImGui_ImplOpenGL3_Init(glsl_version);

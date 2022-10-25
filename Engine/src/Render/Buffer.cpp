@@ -8,28 +8,28 @@
 
 namespace Cober {
 
-	Ref<VertexBuffer> VertexBuffer::Create(uint32_t size)
+	//VertexBuffer* VertexBuffer::Create(uint32_t size)
+	//{
+	//	switch (RenderAPI::GetAPI())
+	//	{
+	//		case RenderAPI::API::None:    Logger::Error("RendererAPI::None is currently not supported!"); return nullptr;
+	//		case RenderAPI::API::OpenGL:  return new OpenGLVertexBuffer(size);
+
+	//		// Future implementation
+	//		//case RenderAPI::API::OpenGLES:	return CreateRef<OpenGLESVertexBuffer>(size)	return nullptr;
+	//		//case RenderAPI::API::OpenGLES3:	return CreateRef<OpenGLES3VertexBuffer>(size)	return nullptr;
+	//	}
+
+	//	Logger::Error("Unknown RendererAPI!");
+	//	return nullptr;
+	//}
+
+	VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size)
 	{
 		switch (RenderAPI::GetAPI())
 		{
 			case RenderAPI::API::None:    Logger::Error("RendererAPI::None is currently not supported!"); return nullptr;
-			case RenderAPI::API::OpenGL:  return CreateRef<OpenGLVertexBuffer>(size);
-
-			// Future implementation
-			//case RenderAPI::API::OpenGLES:	return CreateRef<OpenGLESVertexBuffer>(size)	return nullptr;
-			//case RenderAPI::API::OpenGLES3:	return CreateRef<OpenGLES3VertexBuffer>(size)	return nullptr;
-		}
-
-		Logger::Error("Unknown RendererAPI!");
-		return nullptr;
-	}
-
-	Ref<VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
-	{
-		switch (RenderAPI::GetAPI())
-		{
-			case RenderAPI::API::None:    Logger::Error("RendererAPI::None is currently not supported!"); return nullptr;
-			case RenderAPI::API::OpenGL:  return CreateRef<OpenGLVertexBuffer>(vertices, size);
+			case RenderAPI::API::OpenGL:  return new OpenGLVertexBuffer(vertices, size);
 
 			// Future implementation
 			//case RenderAPI::API::OpenGLES:	return CreateRef<OpenGLESVertexBuffer>(vertices, size)	return nullptr;
@@ -40,12 +40,12 @@ namespace Cober {
 		return nullptr;
 	}
 
-	Ref<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t size)
+	IndexBuffer* IndexBuffer::Create(uint32_t* indices, uint32_t size)
 	{
 		switch (RenderAPI::GetAPI())
 		{
 			case RenderAPI::API::None:    Logger::Error("RendererAPI::None is currently not supported!"); return nullptr;
-			case RenderAPI::API::OpenGL:  return CreateRef<OpenGLIndexBuffer>(indices, size);
+			case RenderAPI::API::OpenGL:  return new OpenGLIndexBuffer(indices, size);
 
 			// Future implementation
 			//case RenderAPI::API::OpenGLES:	return CreateRef<OpenGLESVertexBuffer>(indices, size)	return nullptr;

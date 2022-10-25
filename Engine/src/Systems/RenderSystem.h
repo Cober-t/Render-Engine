@@ -30,7 +30,7 @@ namespace Cober {
 		void Flush();
 
 		// Primitives
-		void DrawQuad(Transform& transformComponent, Sprite& spriteComponent);
+		void DrawQuad(Transform* transformComponent, Sprite* spriteComponent);
 		//void DrawQuad(Transform& transformComponent, Sprite& spriteComponent, Material shader);
 
 		void Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform);
@@ -41,17 +41,16 @@ namespace Cober {
 			uint32_t QuadCount = 0;
 
 			uint32_t GetTotalVertexCount() { return QuadCount * 4; }
-			uint32_t GetTotalIndexCount() { return QuadCount * 6; }
+			uint32_t GetTotalIndexCount()  { return QuadCount * 6; }
 		};
 		void ResetStats();
 		Statistics GetStats();
+
 	private:
+		/*struct SceneData {
+			glm::mat4 ViewProjectionMatrix;
+		};
+		static Unique<SceneData> _sceneData;*/
 		Ref<Registry> _registry;
-	private:
-		//struct SceneData {
-		//	glm::mat4 ViewProjectionMatrix;
-		//};
-		//static Unique<SceneData> _sceneData;
-		void FlushAndReset();
 	};
 }
