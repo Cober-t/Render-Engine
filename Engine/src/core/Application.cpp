@@ -48,7 +48,7 @@ namespace Cober {
     void Engine::Start() {
 
 #ifndef __EMSCRIPTEN__
-        if (_gameState == GameState::EDITOR) {
+        if (_gameState == GameState::EDITOR || _gameState == GameState::RUNTIME_EDITOR) {
             _GuiLayer = new GuiLayer("#version 430");
             PushOverlay(_GuiLayer);
         }
@@ -57,7 +57,7 @@ namespace Cober {
 
     void Engine::Update() {
 
-        while (_gameState == GameState::PLAY || _gameState == GameState::EDITOR) {
+        while (_gameState == GameState::PLAY || _gameState == GameState::EDITOR || _gameState == GameState::RUNTIME_EDITOR) {
 
             _timestep->Update();  // Allow limit FPS
 
@@ -71,7 +71,7 @@ namespace Cober {
                     layer->OnUpdate(_timestep);
 
 #ifndef __EMSCRIPTEN__
-                if (_gameState == GameState::EDITOR) {
+                if (_gameState == GameState::EDITOR || _gameState == GameState::RUNTIME_EDITOR) {
                     _GuiLayer->Begin();
                     for (Layer* layer : _LayerStack)
                         layer->OnGuiRender();

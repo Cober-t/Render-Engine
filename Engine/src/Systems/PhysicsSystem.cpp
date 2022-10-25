@@ -20,12 +20,10 @@ namespace Cober {
 		delete _physicsWorld;
 		_physicsWorld = nullptr;
 	}
-	Ref<Scene> sceneAuxx;	////////// TEST
 	void PhysicsSystem::Start(const Ref<Scene>& scene) {
-		sceneAuxx = scene;	////////// TEST
 		_registry = scene->GetRegistry();
 
-		_physicsWorld = new b2World({ 0.0f, -98.0f });
+		_physicsWorld = new b2World({ 0.0f, -9.8f });
 		auto entities = _registry->GetAllEntities();	//////////// FIX (GetSystemEntities();)
 		//auto entities = GetSystemEntities();
 		for (auto entity : entities) {
@@ -62,8 +60,6 @@ namespace Cober {
 
 	void PhysicsSystem::Update(double ts)
 	{
-
-
 		const int32_t velocityIterations = 6;
 		const int32_t positionIterations = 2;
 		_physicsWorld->Step(ts, velocityIterations, positionIterations);
@@ -72,25 +68,19 @@ namespace Cober {
 		//auto entities = GetSystemEntities();
 		for (auto entity : entities) {
 			if (entity.HasComponent<Rigidbody2D>() && entity.HasComponent<BoxCollider2D>()) {
+				auto& transform = entity.GetComponent<Transform>();
+				auto& rb2d = entity.GetComponent<Rigidbody2D>();
 
-				if (!sceneAuxx->physicsStarted) {	////////// TEST
-					sceneAuxx->physicsStarted = true;////////// TEST
-				}
-				else {
-					auto& transform = entity.GetComponent<Transform>();
-					auto& rb2d = entity.GetComponent<Rigidbody2D>();
-
-					b2Body* body = (b2Body*)rb2d.runtimeBody;
-					const auto& position = body->GetPosition();
-					transform.position.x = position.x;
-					transform.position.y = position.y;
-					transform.rotation.x = 0.0f;
-					transform.rotation.y = 0.0f;
-					if (rb2d.fixedRotation)
-						transform.rotation.z = 0.0f;
-					else
-						transform.rotation.z = body->GetAngle();
-				}
+				b2Body* body = (b2Body*)rb2d.runtimeBody;
+				const auto& position = body->GetPosition();
+				transform.position.x = position.x;
+				transform.position.y = position.y;
+				transform.rotation.x = 0.0f;
+				transform.rotation.y = 0.0f;
+				if (rb2d.fixedRotation)
+					transform.rotation.z = 0.0f;
+				else
+					transform.rotation.z = body->GetAngle();
 			}
 		}
 	}					  

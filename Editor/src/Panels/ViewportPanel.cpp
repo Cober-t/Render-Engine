@@ -63,4 +63,41 @@ namespace Cober {
 		ImGui::PopStyleVar();
 		ImGui::End();
 	}
+
+	void ViewportPanel::PlayButtonBar(GameState gameState, Ref<Scene>& activeScene, Ref<Scene>& editorScene, Ref<Scene>& runtimeScene) {
+
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 2));
+		ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, ImVec2(0, 0));
+		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+		auto& colors = ImGui::GetStyle().Colors;
+		const auto& buttonHovered = colors[ImGuiCol_ButtonHovered];
+		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(buttonHovered.x, buttonHovered.y, buttonHovered.z, 0.5f));
+		const auto& buttonActive = colors[ImGuiCol_ButtonActive];
+		ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(buttonActive.x, buttonActive.y, buttonActive.z, 0.5f));
+
+		ImGui::Begin("##toolbar", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+		float size = ImGui::GetWindowHeight() - 4.0f;
+		const char* icon = gameState == GameState::EDITOR ? "I>" : "||";
+		ImGui::SetCursorPosX((ImGui::GetWindowContentRegionMax().x * 0.5f) - (size * 0.5f));
+
+		if (ImGui::Button(icon, ImVec2(size, size))) {
+			activeScene = editorScene;	////// TEST
+			if (gameState == GameState::EDITOR) {
+				Engine::Get().SetGameState(GameState::RUNTIME_EDITOR);
+				//runtimeScene = Scene::Copy(editorScene);
+				activeScene = editorScene;
+				activeScene->OnRuntimeStart(activeScene);
+			}
+			else if (gameState == GameState::RUNTIME_EDITOR) {
+				Engine::Get().SetGameState(GameState::EDITOR);
+				activeScene = editorScene;
+				runtimeScene = nullptr;
+				activeScene->OnRuntimeStop();
+			}
+		}
+		ImGui::PopStyleVar(2);
+		ImGui::PopStyleColor(3);
+		ImGui::End();
+	}
 }

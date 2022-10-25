@@ -24,9 +24,6 @@ namespace Cober {
 	void EditorLayer::OnAttach() {
 
 		_sceneHierarchyPanel->SetContext(_activeScene);
-
-		// Move to PLAY/STOP button
-		_activeScene->OnRuntimeStart(_activeScene);
 	}
 
 	void EditorLayer::OnDetach() {
@@ -53,7 +50,12 @@ namespace Cober {
 			}
 			case GameState::PLAY: {
 				//colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
-				//_activeScene->OnUpdateRuntime(ts);
+				_activeScene->OnUpdateRuntime(ts, _editorCamera);
+				break;
+			}
+			case GameState::RUNTIME_EDITOR: {
+				//colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
+				_activeScene->OnUpdateRuntime(ts, _editorCamera);
 				break;
 			}
 		}
@@ -109,7 +111,7 @@ namespace Cober {
 		_menuPanel->OnGuiRender(GAME_2D);
 		_dataPanel->OnGuiRender(GAME_2D);
 
-		//ImGui::ShowDemoWindow();
+		_viewportPanel->PlayButtonBar(Engine::Get().GetGameState(), _activeScene, _editorScene, _runtimeScene);
 
 		EndDockspace();
 	}

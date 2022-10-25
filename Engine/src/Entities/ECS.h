@@ -106,7 +106,7 @@ namespace Cober {
 
 		void Update();
 
-		Entity CreateEntity(std::string name = "Empty Entity");
+		Entity CreateEntity(std::string name = "Empty Entity", UUID uuid = UUID());
 		Entity GetEntity(Entity requestedEntity);
 		std::set<Entity> GetAllEntities() { return entities; };
 		void DeleteEntity(Entity entity);
@@ -127,6 +127,8 @@ namespace Cober {
 
 		// Add the entity to the systems that are interested in it
 		void AddEntityToSystems(Entity entity);
+		void EntitiesToBeAdded(Entity entity) { entitiesToBeAdded.insert(entity); }
+		void EntitiesToBeRemoved(Entity entity) { entitiesToBeAdded.insert(entity); }
 		void RemoveEntityFromSystems(Entity entity);
 	private:
 		int numEntities = 0;
@@ -195,8 +197,8 @@ namespace Cober {
 		componentPool->Set(entityID, newComponent);
 		entityComponentSignatures[entityID].set(componentID);
 
-		if (componentID != 0 && componentID != 3 && componentID != 4)
-			Logger::Log("Component ID = " + std::to_string(componentID) + " was added to entity: " + entity.GetComponent<Tag>().tag);
+		//if (componentID != 0 && componentID != 3 && componentID != 4)
+		//	Logger::Log("Component ID = " + std::to_string(componentID) + " was added to entity: " + entity.GetComponent<Tag>().tag);
 	}
 
 	template<typename TComponent>

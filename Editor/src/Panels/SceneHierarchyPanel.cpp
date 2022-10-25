@@ -182,8 +182,10 @@ namespace Cober {
 				ImGui::TreePop();
 			}
 
-			if (removeComponent)
+			if (removeComponent) {
 				entity.RemoveComponent<T>();
+				_sceneContext->GetRegistry()->EntitiesToBeRemoved(entity);
+			}
 		}
 	}
 
@@ -193,6 +195,7 @@ namespace Cober {
 			if (ImGui::MenuItem(name.c_str())) {
 				_selectionContext.AddComponent<T>();
 				ImGui::CloseCurrentPopup();
+				_sceneContext->GetRegistry()->EntitiesToBeAdded(_selectionContext);
 			}
 		}
 	}

@@ -33,7 +33,6 @@ namespace Cober {
 		void DrawQuad(Transform* transformComponent, Sprite* spriteComponent);
 		//void DrawQuad(Transform& transformComponent, Sprite& spriteComponent, Material shader);
 
-		void Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform);
 		// Stats
 		struct Statistics
 		{

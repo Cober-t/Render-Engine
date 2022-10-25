@@ -51,7 +51,9 @@ namespace Cober {
 
 	void GuiLayer::OnEvent(SDL_Event& event) {
 
-		ImGui_ImplSDL2_ProcessEvent(&event);
+		auto gameState = Engine::Get().GetGameState();
+		if (gameState == GameState::EDITOR || gameState == GameState::RUNTIME_EDITOR)
+			ImGui_ImplSDL2_ProcessEvent(&event);
 	}
 
 	void GuiLayer::Begin() {

@@ -15,7 +15,7 @@
 
 namespace Cober {
 
-	enum class GameState { PLAY, EDITOR, EXIT };
+	enum class GameState { PLAY, EDITOR, RUNTIME_EDITOR, EXIT };
 
 	class GuiLayer;
 

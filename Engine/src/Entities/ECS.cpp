@@ -6,15 +6,15 @@ namespace Cober {
 
 	int IComponent::nextIndex = 0;
 
-	Entity Registry::CreateEntity(std::string name) {
+	Entity Registry::CreateEntity(std::string name, UUID uuid) {
 
 		int entityIndex = numEntities++;
-		Entity entity(name, entityIndex, UUID());
+		Entity entity(name, entityIndex, uuid);
 		entity.registry = this;
 
 		entitiesToBeAdded.insert(entity);
 		entities.insert(entity);
-		
+
 		if (entityIndex >= entityComponentSignatures.size())
 			entityComponentSignatures.resize(entityIndex + 1);
 
@@ -22,8 +22,7 @@ namespace Cober {
 		entity.AddComponent<Tag>(name);
 		entity.AddComponent<Transform>();
 
-		Logger::Log("Created entity with ID = " + std::to_string(entity.GetID()));
-
+		//Logger::Log("Created entity with ID = " + std::to_string(entity.GetID()));
 		return entity;
 	}
 

@@ -97,16 +97,11 @@ namespace Cober {
 
 		BeginScene(camera);
 
-		auto entities = _registry->GetAllEntities();	//////////// FIX (GetSystemEntities();)
-		//auto entities = GetSystemEntities();
-		for (auto entity : entities) {
-		//for (auto entity : GetSystemEntities()) {
-			if (entity.HasComponent<Sprite>()) {
-				Sprite sprite = entity.GetComponent<Sprite>();
-				Transform transform= entity.GetComponent<Transform>();
+		for (auto entity : GetSystemEntities()) {
+			Sprite sprite = entity.GetComponent<Sprite>();
+			Transform transform= entity.GetComponent<Transform>();
 
-				DrawQuad(&transform, &sprite);
-			}
+			DrawQuad(&transform, &sprite);
 		}
 
 		EndScene();
@@ -142,15 +137,5 @@ namespace Cober {
 
 		data->QuadVertexArray->Bind();
 		RenderGlobals::DrawIndexed(data->QuadVertexArray);
-	}
-
-	void RenderSystem::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform)
-	{
-		//shader->Bind();
-		//shader->SetMat4("u_ViewProjection", _sceneData->ViewProjectionMatrix);
-		//shader->SetMat4("u_Transform", transform);
-		//
-		//vertexArray->Bind();
-		//RenderGlobals::DrawIndexed(vertexArray);
 	}
 }

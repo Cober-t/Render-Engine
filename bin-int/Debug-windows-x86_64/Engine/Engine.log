@@ -1,7 +1,1 @@
-﻿cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  PhysicsSystem.cpp
-SDL2.lib(SDL2.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
-SDL2_image.lib(SDL2_image.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
-SDL2_mixer.lib(SDL2_mixer.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
-SDL2_ttf.lib(SDL2_ttf.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
-  Engine.vcxproj -> C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Engine\Engine.lib
+﻿  Engine.vcxproj -> C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Engine\Engine.lib
