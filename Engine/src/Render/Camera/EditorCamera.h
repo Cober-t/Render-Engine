@@ -66,7 +66,7 @@ namespace Cober {
 
 		glm::vec2 _initialMousePos = { 0.0f, 0.0f };
 
-		float _distance = 10.0f;
+		float _distance = 5.0f;
 		float _pitch = 0.0f, _yaw = 0.0f;
 		bool _viewportFocused = false;
 		bool mouseButtonHeld = false;

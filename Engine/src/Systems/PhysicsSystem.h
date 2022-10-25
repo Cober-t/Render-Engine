@@ -10,6 +10,8 @@
 #include <box2D/b2_fixture.h>
 #include <box2D/b2_polygon_shape.h>
 
+class b2World;
+
 namespace Cober {
 
 	class PhysicsSystem : public System {

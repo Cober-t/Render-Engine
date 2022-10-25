@@ -19,6 +19,9 @@ namespace Cober {
 		Ref<Registry> GetRegistry() { return _registry; }
 
 		static Ref<Scene> Create();
+
+		// TEST
+		bool physicsStarted;
 	private:
 		Ref<Registry> _registry;
 	};

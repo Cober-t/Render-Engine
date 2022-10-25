@@ -60,12 +60,25 @@ namespace Cober {
 		Tag(const std::string& tag) : tag(tag) {};
 	};
 
+	struct Sprite {
+		int w, h;
+		std::string assetID;
+		glm::vec2 srcRect{ 0.0f };
+		glm::vec4 color{ 1.0f };
+		Ref<Texture> texture = nullptr;
+
+		Sprite() = default;
+		Sprite(const Sprite&) = default;
+		Sprite(const std::string& ID, int width, int height, glm::vec2 rect = glm::vec2(0.0, 0.0), glm::vec4 tintColor = glm::vec4(1.0f))
+			: assetID(ID), w(width), h(height), srcRect(rect), color(tintColor) {}
+	};
+
 	enum class BodyType { Static = 0, Kinematic, Dynamic };
 	struct Rigidbody2D {
 		glm::vec2 velocity;
 		bool fixedRotation = false;
 
-		BodyType type = BodyType::Dynamic;
+		BodyType type = BodyType::Static;
 
 		void* runtimeBody;
 
@@ -88,18 +101,5 @@ namespace Cober {
 
 		BoxCollider2D() = default;
 		BoxCollider2D(const BoxCollider2D&) = default;
-	};
-
-	struct Sprite {
-		int w, h;
-		std::string assetID;
-		glm::vec2 srcRect{ 0.0f };
-		glm::vec4 color{ 1.0f };
-		Ref<Texture> texture = nullptr;
-
-		Sprite() = default;
-		Sprite(const Sprite&) = default;
-		Sprite(const std::string& ID, int width, int height, glm::vec2 rect = glm::vec2(0.0, 0.0), glm::vec4 tintColor = glm::vec4(1.0f))
-			: assetID(ID), w(width), h(height), srcRect(rect), color(tintColor) {}
 	};
 }

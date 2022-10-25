@@ -12,6 +12,11 @@ namespace Cober {
 	{
 		_registry = CreateRef<Registry>();
 
+		_registry->AddSystem<MovementSystem>();
+		_registry->AddSystem<PhysicsSystem>();
+		_registry->AddSystem<RenderSystem>();
+		_registry->AddSystem<UISystem>();
+
 		// [+++++ TODO
 		//_registry->AddSystem<CameraSystem>();				// CAMERA SYSTEM		*(something like Cinemachine in Unity)
 		//_registry->AddSystem<ScriptingSystem>();			// SCRIPTING			*(With Lua & Sol wrapper)
@@ -22,11 +27,6 @@ namespace Cober {
 		//_registry->AddSystem<ParticleSystem>();			// PARTICLE SYSTEM		*(see Unity options)
 		//_registry->AddSystem<AISystem>();					// AI SYSTEM			*(dijkstra pathfinding, A* star ...)
 		//_registry->AddSystem<DialogueSystem>();			// DIALOGUE SYSTEM		*(excel wrinting with aware of entities and conditions)
-
-		_registry->AddSystem<MovementSystem>();
-		_registry->AddSystem<PhysicsSystem>();
-		_registry->AddSystem<RenderSystem>();
-		_registry->AddSystem<UISystem>();
 	}			 
 
 	Scene::~Scene()
@@ -43,8 +43,10 @@ namespace Cober {
 		return CreateRef<Scene>();
 	}
 
+	Ref<Scene> sceneAux;
 	void Scene::OnRuntimeStart(const Ref<Scene>& scene) {
-
+		sceneAux = scene;
+		sceneAux->physicsStarted = false;
 		_registry->GetSystem<PhysicsSystem>().Start(scene);
 		_registry->GetSystem<RenderSystem>().Start(scene);
 		_registry->GetSystem<UISystem>().Start(Engine::Get().GetWindow().GetNativeWindow());
@@ -72,5 +74,11 @@ namespace Cober {
 
 		_registry->GetSystem<RenderSystem>().Update(editorCamera);
 		//_registry->GetSystem<UISystem>().Update();
+		// 
+		// Quit when UpdatRuntime and UpdateEditor are implemeted
+		if(sceneAux->physicsStarted)			////////////////////// TEST
+			_registry->GetSystem<PhysicsSystem>().Start(sceneAux);
+		
+		_registry->GetSystem<PhysicsSystem>().Update(ts->deltaTime);
 	}
 }

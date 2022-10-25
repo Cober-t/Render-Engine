@@ -11,6 +11,9 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/quaternion.hpp>
+
 namespace Cober {
 
 	struct RendererData
@@ -88,48 +91,25 @@ namespace Cober {
 	{
 		RenderGlobals::SetClearColor(10, 0, 10, 255);
 		RenderGlobals::Clear();
-
 		// RenderGlobals::SetClearColor(camera->GetSkyboxColor());
 		//	or just
 		// camera->RenderSkybox();
 
-		std::set<Entity> entities = _registry->GetAllEntities();
+		BeginScene(camera);
+
+		auto entities = _registry->GetAllEntities();	//////////// FIX (GetSystemEntities();)
+		//auto entities = GetSystemEntities();
 		for (auto entity : entities) {
 		//for (auto entity : GetSystemEntities()) {
-
-			if(entity.HasComponent<Sprite>()) {
-
-				BeginScene(camera);
-				std::cout << camera->GetDistance() << std::endl;
-					
+			if (entity.HasComponent<Sprite>()) {
 				Sprite sprite = entity.GetComponent<Sprite>();
-				//sprite.texture = data->WhiteTexture;
 				Transform transform= entity.GetComponent<Transform>();
 
-				//DrawQuad(&transform, &sprite);
-
-				data->TextureShader->SetFloat4("u_Color", sprite.color);
-				data->WhiteTexture->Bind();
-
-				glm::mat4 trans = glm::translate(glm::mat4(1.0f), transform.position) * glm::scale(glm::mat4(1.0f), { transform.scale.x, transform.scale.y, 1.0f });
-				data->TextureShader->SetMat4("u_Transform", trans);
-				data->QuadVertexArray->Bind();
-				RenderGlobals::DrawIndexed(data->QuadVertexArray);
-
-
-				// Begin Submit
-				//glm::mat4 trans = glm::translate(glm::mat4(1.0f), transform.position) * glm::scale(glm::mat4(1.0f), { transform.scale.x, transform.scale.y, 1.0f });
-				//data->TextureShader->Bind();
-				//data->TextureShader->SetMat4("u_ViewProjection", camera->GetView() * camera->GetProjection());
-				//data->TextureShader->SetMat4("u_Transform", trans);
-				//
-				//data->QuadVertexArray->Bind();
-				//RenderGlobals::DrawIndexed(data->QuadVertexArray);
-				// End Submit
-				
-				EndScene();
+				DrawQuad(&transform, &sprite);
 			}
 		}
+
+		EndScene();
 	}
 
 	void RenderSystem::EndScene()
@@ -145,15 +125,17 @@ namespace Cober {
 
 	void RenderSystem::DrawQuad(Transform* transformComponent, Sprite* spriteComponent)
 	{
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), transformComponent->position) * glm::scale(glm::mat4(1.0f), { transformComponent->scale.x, transformComponent->scale.y, 1.0f });
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), transformComponent->position) * 
+							  glm::toMat4(glm::quat(transformComponent->rotation)) * 
+							  glm::scale(glm::mat4(1.0f), { transformComponent->scale.x, transformComponent->scale.y, 1.0f });
 
+		data->TextureShader->SetFloat4("u_Color", spriteComponent->color);
+		
 		if (spriteComponent->texture) {
-			data->TextureShader->SetFloat4("u_Color", spriteComponent->color);
 			spriteComponent->texture->Bind();
 			data->TextureShader->SetMat4("u_Transform", transform);
 		}
 		else {
-			data->TextureShader->SetFloat4("u_Color", glm::vec4(1.0f));
 			data->WhiteTexture->Bind();
 			data->TextureShader->SetMat4("u_Transform", transform);
 		}
