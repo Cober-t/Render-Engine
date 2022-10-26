@@ -74,7 +74,7 @@ namespace Cober {
 		for (auto& system : systems) {
 			const auto& systemComponentSignature = system.second->GetComponentSignature();
 			bool isInterested = (entityComponentSignature & systemComponentSignature) == systemComponentSignature;
-			if (isInterested)
+			if (!isInterested)
 				// TODO: Add the entity to the system
 				system.second->RemoveEntityFromSystem(entity);
 		}

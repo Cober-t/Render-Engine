@@ -127,9 +127,9 @@ namespace Cober {
 
 		// Add the entity to the systems that are interested in it
 		void AddEntityToSystems(Entity entity);
-		void EntitiesToBeAdded(Entity entity) { entitiesToBeAdded.insert(entity); }
-		void EntitiesToBeRemoved(Entity entity) { entitiesToBeAdded.insert(entity); }
 		void RemoveEntityFromSystems(Entity entity);
+		void EntitiesToBeAdded(Entity entity)   { entitiesToBeAdded.insert(entity); }
+		void EntitiesToBeRemoved(Entity entity) { entitiesToBeKilled.insert(entity); }
 	private:
 		int numEntities = 0;
 		std::vector<Ref<IPool>> componentPools;

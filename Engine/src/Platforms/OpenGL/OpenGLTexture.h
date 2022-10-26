@@ -2,6 +2,7 @@
 
 #include "Render/Texture.h"
 
+#include <SDL/SDL_image.h>
 #include <GL/glew.h>
 
 namespace Cober {
@@ -12,9 +13,6 @@ namespace Cober {
 		OpenGLTexture(uint32_t width, uint32_t height);
 		OpenGLTexture(const std::string& path);
 		virtual ~OpenGLTexture();
-
-		virtual uint32_t GetWidth() const override { return _width; }
-		virtual uint32_t GetHeight() const override { return _height; }
 
 		virtual void SetData(void* data, uint32_t size) override;
 

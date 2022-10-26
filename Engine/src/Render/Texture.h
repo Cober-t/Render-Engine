@@ -2,6 +2,7 @@
 
 #include <string>
 
+#include <SDL/SDL_image.h>
 #include "core/Core.h"
 
 namespace Cober {
@@ -11,8 +12,13 @@ namespace Cober {
 	public:
 		virtual ~Texture() = default;
 
-		virtual uint32_t GetWidth() const = 0;
+		virtual uint32_t GetWidth()  const = 0;
 		virtual uint32_t GetHeight() const = 0;
+
+		virtual void SetWidth(uint32_t width)   = 0;
+		virtual void SetHeight(uint32_t height) = 0;
+
+		virtual SDL_Surface* GetSurface() const = 0;
 
 		virtual void SetData(void* data, uint32_t size) = 0;
 

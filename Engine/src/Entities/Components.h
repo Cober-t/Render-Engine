@@ -63,14 +63,13 @@ namespace Cober {
 	struct Sprite {
 		int w, h;
 		std::string assetID;
-		glm::vec2 srcRect{ 0.0f };
 		glm::vec4 color{ 1.0f };
 		Ref<Texture> texture = nullptr;
 
 		Sprite() = default;
 		Sprite(const Sprite&) = default;
-		Sprite(const std::string& ID, int width, int height, glm::vec2 rect = glm::vec2(0.0, 0.0), glm::vec4 tintColor = glm::vec4(1.0f))
-			: assetID(ID), w(width), h(height), srcRect(rect), color(tintColor) {}
+		Sprite(const std::string& ID, int width, int height, glm::vec4 tintColor = glm::vec4(1.0f))
+			: assetID(ID), w(width), h(height), color(tintColor) {}
 	};
 
 	enum class BodyType { Static = 0, Kinematic, Dynamic };

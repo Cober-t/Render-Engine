@@ -1,11 +1,6 @@
-#include "pch.h"
+	#include "pch.h"
 
 #include "Platforms/OpenGL/OpenGLTexture.h"
-#include "core/Logger.h"
-
-// Does not use this library, use SDL_Image instead to load images
-//#include <stb_image.h>
-#include <SDL/SDL_image.h>
 
 namespace Cober {
 
@@ -25,26 +20,46 @@ namespace Cober {
 		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_T, GL_REPEAT));
 	}
 
+	void FlipSurface(SDL_Surface* surface)
+	{
+		SDL_LockSurface(surface);
+
+		int pitch = surface->pitch; // row size
+		char* temp = new char[pitch]; // intermediate buffer
+		char* pixels = (char*)surface->pixels;
+
+		for (int i = 0; i < surface->h / 2; ++i) {
+			// get pointers to the two rows to swap
+			char* row1 = pixels + i * pitch;
+			char* row2 = pixels + (surface->h - i - 1) * pitch;
+
+			// swap rows
+			memcpy(temp, row1, pitch);
+			memcpy(row1, row2, pitch);
+			memcpy(row2, temp, pitch);
+		}
+
+		delete[] temp;
+
+		SDL_UnlockSurface(surface);
+	}
+
 	OpenGLTexture::OpenGLTexture(const std::string& path)
 		: _path(path)
 	{
-		int width, height, channels;
 		// LOAD IMAGE
-		{
-			/*const char* path = SOLUTION_DIR;
-			const char* file = "assets\\textures\\woodenContainer.png";
-			SDL_Surface* surface = IMG_Load(path + (const char*)file);*/
+		SDL_Surface* texSurface = IMG_Load(path.c_str());
 
-			//stbi_set_flip_vertically_on_load(1);
-			//stbi_uc* data = nullptr;
-			//data = stbi_load(path.c_str(), &width, &height, &channels, 0);
-		}
+		FlipSurface(texSurface);
 
-		Logger::Error("Failed to load image!");
+		if (!texSurface)
+			Logger::Error("Failed to load image!");
+		
+		_width  = texSurface->w;
+		_height = texSurface->h;
 
-		_width = width;
-		_height = height;
-
+		int channels = texSurface->format->BytesPerPixel;
+		std::cout << channels << std::endl;
 		GLenum internalFormat = 0, dataFormat = 0;
 		if (channels == 4)
 		{
@@ -60,8 +75,6 @@ namespace Cober {
 		_internalFormat = internalFormat;
 		_dataFormat = dataFormat;
 
-		//Logger::Warning(internalFormat & dataFormat, "Format not supported!");
-
 		GLCallV(glCreateTextures(GL_TEXTURE_2D, 1, &_rendererID));
 		GLCallV(glTextureStorage2D(_rendererID, 1, internalFormat, _width, _height));
 
@@ -71,9 +84,9 @@ namespace Cober {
 		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_S, GL_REPEAT));
 		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_T, GL_REPEAT));
 
-		//glTextureSubImage2D(_rendererID, 0, 0, 0, _width, _height, dataFormat, GL_UNSIGNED_BYTE, data);
+		GLCallV(glTextureSubImage2D(_rendererID, 0, 0, 0, _width, _height, dataFormat, GL_UNSIGNED_BYTE, texSurface->pixels));
 
-		//stbi_image_free(data);
+		SDL_FreeSurface(texSurface);
 	}
 
 	OpenGLTexture::~OpenGLTexture()
