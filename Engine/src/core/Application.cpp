@@ -9,6 +9,9 @@ namespace Cober {
     Engine::Engine(const std::string& name, uint32_t width, uint32_t height, bool vsync) 
     {
         Logger::Log("2DEngine Constructor!");
+        DEBUG = false;
+        GAME_2D = false;
+        PHYSICS_2D = false;
 
         _instance = this;
 
@@ -61,9 +64,9 @@ namespace Cober {
 
             _timestep->Update();  // Allow limit FPS
 
-            UISystem::StartProcessInputs();
+            //UISystem::StartProcessInputs();
             ProcessInputs();
-            UISystem::EndProcessInputs();
+            //UISystem::EndProcessInputs();
 
             //if(!_minimized) { ...
             {
@@ -90,7 +93,7 @@ namespace Cober {
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
-            UISystem::ProcessInputs(event);
+            //UISystem::ProcessInputs(event);
 
             _events->ProcessEvents(event);
 

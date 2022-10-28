@@ -37,7 +37,11 @@ namespace Cober {
 		void Destroy();
 		void Close() { _gameState = GameState::EXIT; }
 
-		void SetGameState(GameState state)  { _gameState = state; }
+		void  SetGameState(GameState state)  { _gameState = state; }
+		void  SetDebugMode(bool debugMode)  { DEBUG = debugMode; }
+		bool& GetDebugMode() { return DEBUG; }
+		bool& GetGameMode() { return GAME_2D; }
+
 		Ref<AssetManager> GetAssetManager() { return _assetManager; }
 		Window&   GetWindow()			{ return *_window; }
 		GameState GetGameState()		{ return _gameState; }
@@ -50,6 +54,10 @@ namespace Cober {
 		Unique<Window> _window;
 		Unique<Events> _events;
 		Ref<AssetManager> _assetManager;
+	private:
+		bool DEBUG;
+		bool GAME_2D;
+		bool PHYSICS_2D;
 	private:
 		static Engine* _instance;
 		friend int ::main(int argc, char* argv[]);

@@ -37,7 +37,7 @@ namespace Cober {
 		ImGui::End();
 	}
 
-	void MenuPanel::OnGuiRender(bool& game2D) {
+	void MenuPanel::OnGuiRender(bool& game2D, bool& debugMode) {
 
 		if (ImGui::BeginMenuBar()) {
 			if (ImGui::BeginMenu("File")) {
@@ -45,9 +45,9 @@ namespace Cober {
 					Engine::Get().Close();
 
 				ImGui::Checkbox("2D", &game2D);
+
 				if (ImGui::Checkbox("Fullscreen", &_fullscreen))
 					Engine::Get().GetWindow().ChangeFullScreen();
-
 
 				ImGui::EndMenu();
 			}
@@ -61,6 +61,9 @@ namespace Cober {
 					if (ImGui::MenuItem("Grid 3D"))
 						_gridMenuOpen = true;
 				}
+
+				ImGui::Checkbox("Debug Mode", &debugMode);
+
 				ImGui::EndMenu();
 			}
 

@@ -49,10 +49,10 @@ namespace Cober {
 	std::pair<float, float> EditorCamera::PanSpeed() const {
 
 		float x = std::min(_viewportWidth / 1000.0f, 2.4f); // max = 2.4f
-		float xFactor = 0.0366f * (x * x) - 0.1778f * x + 0.3021f;
+		float xFactor = 0.05f * (x * x) - 0.1778f * x + 0.3021f;
 
 		float y = std::min(_viewportHeight / 1000.0f, 2.4f); // max = 2.4f
-		float yFactor = 0.0366f * (y * y) - 0.1778f * y + 0.3021f;
+		float yFactor = 0.05f * (y * y) - 0.1778f * y + 0.3021f;
 
 		return { xFactor, yFactor };
 	}

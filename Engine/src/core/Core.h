@@ -42,10 +42,6 @@
 #define SHADERS_PATH SOLUTION_DIR + (std::string)"assets\\shaders\\"
 #define BIT(x)          (1 << x)
 
-static bool DEBUG = false;
-static bool GAME_2D = false;
-static bool PHYSICS_2D = false;
-
 namespace Cober {
 
 	template<typename T>

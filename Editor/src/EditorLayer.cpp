@@ -37,7 +37,7 @@ namespace Cober {
 
 	void EditorLayer::OnUpdate(Ref<Timestep> ts) {
 
-		_viewportPanel->ResizeViewport(_editorCamera, GAME_2D);
+		_viewportPanel->ResizeViewport(_editorCamera, Engine::Get().GetGameMode());
 
 		_viewportPanel->BindFramebuffer();
 
@@ -108,8 +108,8 @@ namespace Cober {
 		_sceneHierarchyPanel->OnGuiRender();
 		_contentBrowserPanel->OnGuiRender();
 		_viewportPanel->OnGuiRender(_editorCamera);
-		_menuPanel->OnGuiRender(GAME_2D);
-		_dataPanel->OnGuiRender(GAME_2D);
+		_menuPanel->OnGuiRender(Engine::Get().GetGameMode(), Engine::Get().GetDebugMode());
+		_dataPanel->OnGuiRender(Engine::Get().GetGameMode());
 
 		_viewportPanel->PlayButtonBar(Engine::Get().GetGameState(), _activeScene, _editorScene, _runtimeScene);
 

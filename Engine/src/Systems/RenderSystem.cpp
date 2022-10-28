@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "RenderSystem.h"
+#include "PhysicsSystem.h"
 
 #include "core/Logger.h"
 
@@ -41,9 +42,15 @@ namespace Cober {
 		Logger::Log("Render System removed from Registry");
 	}
 
-	void RenderSystem::Start(const Ref<Scene>& scene) 
+	void RenderSystem::Start(const Ref<Scene>& scene, DebugSystem* debug, b2World* pWorld)
 	{
 		RenderGlobals::Init();
+
+		// For debuggin Physics
+			if (Engine::Get().GetDebugMode())
+				SetupDebug();
+			debugSystem  = debug;
+			physicsWorld = pWorld;
 
 		_registry = scene->GetRegistry();
 
@@ -51,10 +58,10 @@ namespace Cober {
 		data->QuadVertexArray = VertexArray::Create();
 
 		float squareVertices[5 * 4] = {
-				0.0,  0.0f, 0.0f, 0.0f, 0.0f,
-				1.0f, 0.0f, 0.0f, 0.1f, 0.0f,
-				1.0f, 1.0f, 0.0f, 0.1f, 0.1f,
-				0.0f, 1.0f, 0.0f, 0.0f, 0.1f
+				-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+				 0.5f, -0.5f, 0.0f, 0.1f, 0.0f,
+				 0.5f,  0.5f, 0.0f, 0.1f, 0.1f,
+				-0.5f,  0.5f, 0.0f, 0.0f, 0.1f
 		};
 
 		// [+++++++++++ VERTEX BUFFER +++++++++++++]
@@ -102,9 +109,26 @@ namespace Cober {
 			Transform transform= entity.GetComponent<Transform>();
 
 			DrawQuad(&transform, &sprite);
+
+			if (Engine::Get().GetDebugMode() && entity.HasComponent<BoxCollider2D>()) {
+				DebugDrawSolidPoligon(entity);
+				// ...
+			}
 		}
 
 		EndScene();
+	}
+
+	void RenderSystem::SetupDebug() {
+	
+		physicsWorld->SetDebugDraw(debugSystem);
+		uint32 flags = 0;
+		flags += b2Draw::e_shapeBit;
+		flags += b2Draw::e_jointBit;
+		flags += b2Draw::e_aabbBit;
+		flags += b2Draw::e_pairBit;
+		flags += b2Draw::e_centerOfMassBit;
+		debugSystem->SetFlags(flags);
 	}
 
 	void RenderSystem::EndScene()
@@ -116,7 +140,6 @@ namespace Cober {
 		delete data;
 		data = nullptr;
 	}
-
 
 	void RenderSystem::DrawQuad(Transform* transformComponent, Sprite* spriteComponent)
 	{
@@ -137,5 +160,15 @@ namespace Cober {
 
 		data->QuadVertexArray->Bind();
 		RenderGlobals::DrawIndexed(data->QuadVertexArray);
+	}
+
+	void RenderSystem::DebugDrawSolidPoligon(Entity& entity, b2Color color) {
+
+		if (entity.HasComponent<BoxCollider2D>()) {
+			auto& shape = entity.GetComponent<BoxCollider2D>().shape;
+			debugSystem->DrawSolidPolygon(shape.m_vertices, shape.m_count, color);
+		}
+		else
+			Logger::Warning("Cannot get Collider Component!!");
 	}
 }

@@ -184,7 +184,7 @@ namespace Cober {
 
 			if (removeComponent) {
 				entity.RemoveComponent<T>();
-				_sceneContext->GetRegistry()->EntitiesToBeRemoved(entity);
+				_sceneContext->GetRegistry()->RemoveEntityFromSystems(entity);
 			}
 		}
 	}
@@ -195,7 +195,7 @@ namespace Cober {
 			if (ImGui::MenuItem(name.c_str())) {
 				_selectionContext.AddComponent<T>();
 				ImGui::CloseCurrentPopup();
-				_sceneContext->GetRegistry()->EntitiesToBeAdded(_selectionContext);
+				_sceneContext->GetRegistry()->AddEntityToSystems(_selectionContext);
 			}
 		}
 	}

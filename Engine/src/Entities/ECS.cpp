@@ -49,8 +49,9 @@ namespace Cober {
 		entitiesToBeAdded.clear();
 
 		for (auto entity : entitiesToBeKilled) {
+			for (auto& system : systems)
+				system.second->RemoveEntityFromSystem(entity);
 			entities.erase(entity);
-			RemoveEntityFromSystems(entity);
 		}
 
 		entitiesToBeKilled.clear();

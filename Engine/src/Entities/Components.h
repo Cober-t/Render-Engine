@@ -7,6 +7,8 @@
 #include "core/UUID.h"
 #include "Render/Texture.h"
 
+#include <box2D/b2_polygon_shape.h>
+
 #include <glm/glm.hpp>
 
 namespace Cober {
@@ -85,9 +87,13 @@ namespace Cober {
 		Rigidbody2D(const Rigidbody2D&) = default;
 	};
 
+	//class b2Shape;
 	struct BoxCollider2D {
 		glm::vec2 offset = { 0.0f, 0.0f };
 		glm::vec2 size = { 1.0f, 1.0f };
+
+		b2Shape* body;
+		b2PolygonShape shape;
 
 		// Make a physics material maybe
 		float density = 1.0f;

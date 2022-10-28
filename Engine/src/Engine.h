@@ -20,6 +20,7 @@
 #include <Systems/MovementSystem.h>
 #include <Systems/RenderSystem.h>
 #include <Systems/PhysicsSystem.h>
+#include <Systems/DebugSystem.h>
 
 
 //[++++++++++++++++++++++++++]
