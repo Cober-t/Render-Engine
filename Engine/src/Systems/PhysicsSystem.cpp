@@ -28,8 +28,8 @@ namespace Cober {
 
 		_registry = scene->GetRegistry();
 
-		for (auto entity : _registry->GetAllEntities())
-			_registry->AddEntityToSystems(entity);
+		//for (auto entity : _registry->GetAllEntities())
+			//_registry->AddEntityToSystems(entity);
 
 		_physicsWorld = new b2World({ 0.0f, -9.8f });
 		for (auto entity : GetSystemEntities()) {
@@ -50,7 +50,7 @@ namespace Cober {
 			// BOX COLLIDER 2D
 			if (entity.HasComponent<BoxCollider2D>()) {
 				auto& bc2d = entity.GetComponent<BoxCollider2D>();
-				boxShape.SetAsBox((bc2d.size.x * transform.scale.x) + bc2d.offset.x, 
+				bc2d.shape.SetAsBox((bc2d.size.x * transform.scale.x) + bc2d.offset.x,
 					(bc2d.size.y * transform.scale.y) + bc2d.offset.y);
 			}
 
@@ -88,11 +88,9 @@ namespace Cober {
 			// BOX COLLIDER
 			if (entity.HasComponent<BoxCollider2D>()) {
 				auto& bc2d = entity.GetComponent<BoxCollider2D>();
-				boxShape.SetAsBox((bc2d.size.x * transform.scale.x) + bc2d.offset.x,
+				bc2d.shape.SetAsBox((bc2d.size.x * transform.scale.x) + bc2d.offset.x,
 					(bc2d.size.y * transform.scale.y) + bc2d.offset.y);
 
-				bc2d.shape = boxShape;
-			
 				b2FixtureDef fixtureDef;
 				fixtureDef.shape = &bc2d.shape;
 				fixtureDef.density = bc2d.density;
@@ -108,5 +106,43 @@ namespace Cober {
 			// ...
 			// SPHERE COLLIDER
 		}
-	}				
+	}
+
+	void PhysicsSystem::UpdateData()
+	{
+		//_physicsWorld->DebugDraw();
+
+		for (auto entity : GetSystemEntities()) {
+			auto& transform = entity.GetComponent<Transform>();
+			auto& rb2d = entity.GetComponent<Rigidbody2D>();
+			
+			b2BodyDef bodyDef;
+			bodyDef.type = (b2BodyType)rb2d.type;
+			bodyDef.position.Set(transform.position.x, transform.position.y);
+			bodyDef.angle = transform.rotation.z;
+
+			body = _physicsWorld->CreateBody(&bodyDef);
+			rb2d.runtimeBody = body;
+
+			// BOX COLLIDER
+			if (entity.HasComponent<BoxCollider2D>()) {
+				auto& bc2d = entity.GetComponent<BoxCollider2D>();
+				bc2d.shape.SetAsBox((bc2d.size.x * transform.scale.x) + bc2d.offset.x, (bc2d.size.y * transform.scale.y) + bc2d.offset.y);
+
+				b2FixtureDef fixtureDef;
+				fixtureDef.shape = &bc2d.shape;
+				fixtureDef.density = bc2d.density;
+				fixtureDef.friction = bc2d.friction;
+				fixtureDef.restitution = bc2d.restitution;
+				fixtureDef.restitutionThreshold = bc2d.restitutionThreshold;
+				body->CreateFixture(&fixtureDef);
+			}
+
+			// BOX COLLIDER 3D
+			// ...
+			// CIRCLE COLLIDER
+			// ...
+			// SPHERE COLLIDER
+		}
+	}
 }

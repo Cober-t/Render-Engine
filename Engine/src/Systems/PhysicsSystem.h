@@ -25,6 +25,7 @@ namespace Cober {
 
 		void Start(const Ref<Scene>& scene);
 		void Update(double ts);
+		void UpdateData();
 
 		DebugSystem* GetDebugSystem() { return _debugPhysics; }
 		b2World* GetPhysicsWorld() { return _physicsWorld; }

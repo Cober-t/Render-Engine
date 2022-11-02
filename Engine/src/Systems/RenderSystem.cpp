@@ -96,7 +96,8 @@ namespace Cober {
 
 	void RenderSystem::Update(const Ref<EditorCamera>& camera) 
 	{
-		RenderGlobals::SetClearColor(10, 0, 10, 255);
+		//RenderGlobals::SetClearColor(10, 0, 10, 255);
+		RenderGlobals::SetClearColor(225, 225, 255, 255);
 		RenderGlobals::Clear();
 		// RenderGlobals::SetClearColor(camera->GetSkyboxColor());
 		//	or just
@@ -108,12 +109,12 @@ namespace Cober {
 			Sprite sprite = entity.GetComponent<Sprite>();
 			Transform transform= entity.GetComponent<Transform>();
 
-			DrawQuad(&transform, &sprite);
-
-			if (Engine::Get().GetDebugMode() && entity.HasComponent<BoxCollider2D>()) {
+			if (Engine::Get().GetDebugMode()) {
 				DebugDrawSolidPoligon(entity);
 				// ...
 			}
+
+			DrawQuad(&transform, &sprite);
 		}
 
 		EndScene();

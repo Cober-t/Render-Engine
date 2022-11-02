@@ -90,7 +90,7 @@ namespace Cober {
 	//class b2Shape;
 	struct BoxCollider2D {
 		glm::vec2 offset = { 0.0f, 0.0f };
-		glm::vec2 size = { 1.0f, 1.0f };
+		glm::vec2 size = { 0.0f, 0.0f };
 
 		b2Shape* body;
 		b2PolygonShape shape;

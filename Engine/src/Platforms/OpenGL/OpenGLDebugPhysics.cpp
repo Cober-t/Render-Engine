@@ -37,7 +37,7 @@ namespace Cober {
 
         //draw lines
         GLCallV(glLineWidth(3)); //fat lines
-        GLCallV(glColor4f(0, 0, 1, 1)); //blue
+        GLCallV(glColor4f(1, 0, 0, 1)); //blue
         GLCallV(glDrawArrays(GL_LINE_LOOP, 0, vertexCount));
     }
 
