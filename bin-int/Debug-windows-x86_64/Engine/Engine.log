@@ -1,5 +1,8 @@
 ﻿cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  RenderSystem.cpp
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  OpenGLTexture.cpp
+  Render2D.cpp
 SDL2.lib(SDL2.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
 SDL2_image.lib(SDL2_image.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
 SDL2_mixer.lib(SDL2_mixer.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida

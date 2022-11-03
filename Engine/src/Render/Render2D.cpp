@@ -271,6 +271,7 @@ namespace Cober {
 		constexpr size_t quadVertexCount = 4;
 		constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 		float textureIndex = 0.0f;
+		const float tilingFactor = 1.0f;
 
 		if (data.QuadIndexCount >= RenderData::MaxIndices)
 			Render2D::NextBatch();
@@ -300,6 +301,7 @@ namespace Cober {
 			data.QuadVertexBufferPtr->Color = spriteComponent->color;
 			data.QuadVertexBufferPtr->TexCoord = textureCoords[i];
 			data.QuadVertexBufferPtr->TexIndex = textureIndex;
+			data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
 			data.QuadVertexBufferPtr->EntityID = 1;//entityID;
 			data.QuadVertexBufferPtr++;
 		}
