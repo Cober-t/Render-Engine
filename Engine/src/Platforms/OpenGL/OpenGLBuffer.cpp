@@ -10,12 +10,12 @@ namespace Cober {
 	// [+++++++++++++++++++++++ VERTEX BUFFER ++++++++++++++++++++++++++++]
 	// [++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++]
 
-	//OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size) {
-
-	//	GLCallV(glCreateBuffers(1, &_rendererID));
-	//	GLCallV(glBindBuffer(GL_ARRAY_BUFFER, _rendererID));
-	//	GLCallV(glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW));
-	//}
+	OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size) {
+	
+		GLCallV(glCreateBuffers(1, &_rendererID));
+		GLCallV(glBindBuffer(GL_ARRAY_BUFFER, _rendererID));
+		GLCallV(glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW));
+	}
 
 	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
 	{
@@ -74,4 +74,23 @@ namespace Cober {
 	{
 		GLCallV(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 	}
+
+	OpenGLUniformBuffer::OpenGLUniformBuffer(uint32_t size, uint32_t binding)
+	{
+		GLCallV(glCreateBuffers(1, &m_RendererID));
+		GLCallV(glNamedBufferData(m_RendererID, size, nullptr, GL_DYNAMIC_DRAW)); // TODO: investigate usage hint
+		GLCallV(glBindBufferBase(GL_UNIFORM_BUFFER, binding, m_RendererID));
+	}
+
+	OpenGLUniformBuffer::~OpenGLUniformBuffer()
+	{
+		GLCallV(glDeleteBuffers(1, &m_RendererID));
+	}
+
+
+	void OpenGLUniformBuffer::SetData(const void* data, uint32_t size, uint32_t offset)
+	{
+		GLCallV(glNamedBufferSubData(m_RendererID, offset, size, data));
+	}
+
 }

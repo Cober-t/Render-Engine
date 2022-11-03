@@ -82,7 +82,10 @@ namespace Cober {
 	}
 
 	void System::AddEntityToSystem(Entity entity) {
-		entities.push_back(entity);
+		if (std::find(entities.begin(), entities.end(), entity) == entities.end()) {
+			entities.push_back(entity);
+			Logger::Warning("Added to system");
+		}
 	}
 
 	void System::RemoveEntityFromSystem(Entity entity) {

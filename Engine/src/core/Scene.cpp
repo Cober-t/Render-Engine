@@ -38,10 +38,8 @@ namespace Cober {
 
 		// PHYSICS FIRST!
 		scene->_registry->AddSystem<PhysicsSystem>();
-		scene->_registry->GetSystem<PhysicsSystem>().Start(scene);
 		scene->_registry->AddSystem<RenderSystem>();
-		scene->_registry->GetSystem<RenderSystem>().Start(scene, scene->_registry->GetSystem<PhysicsSystem>().GetDebugSystem(), scene->_registry->GetSystem<PhysicsSystem>().GetPhysicsWorld());
-		scene->_registry->GetSystem<RenderSystem>().SetupDebug();
+		scene->_registry->GetSystem<RenderSystem>().Start(scene);
 		//scene->_registry->AddSystem<UISystem>();
 		//scene->_registry->GetSystem<UISystem>().Start(Engine::Get().GetWindow().GetNativeWindow());
 		
@@ -50,25 +48,21 @@ namespace Cober {
 
 	void Scene::OnRuntimeStart(const Ref<Scene>& scene) {
 
-		//_registry->AddSystem<PhysicsSystem>();
-		_registry->GetSystem<PhysicsSystem>().Start(scene);
+		_registry->GetSystem<PhysicsSystem>().Start();
 		//_registry->AddSystem<MovementSystem>();
 		//_registry->GetSystem<MovementSystem>().Start(scene);
 	}
 
 	void Scene::OnRuntimeStop() {
-	
+
+		//_registry->RemoveSystem<PhysicsSystem>();
 	}
 
 	void Scene::OnUpdateRuntime(Ref<Timestep> ts, Ref<EditorCamera> camera) {
-
-		_registry->Update();
-
-		// Get Camera components from entities
-		_registry->GetSystem<RenderSystem>().Update(camera);
-		//_registry->GetSystem<UISystem>().Update();
-
+		
 		_registry->GetSystem<PhysicsSystem>().Update(ts->deltaTime);
+		_registry->GetSystem<RenderSystem>().Update(camera);	// Get Camera components from entities
+		//_registry->GetSystem<UISystem>().Update();
 	}
 
 	void Scene::OnUpdateEditor(Ref<Timestep> ts, Ref<EditorCamera> editorCamera) {
@@ -77,6 +71,5 @@ namespace Cober {
 
 		_registry->GetSystem<RenderSystem>().Update(editorCamera);
 		//_registry->GetSystem<UISystem>().Update();
-		_registry->GetSystem<PhysicsSystem>().UpdateData();
 	}
 }

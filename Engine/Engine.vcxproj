@@ -761,7 +761,6 @@
     <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3VertexArray.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLContext.h" />
-    <ClInclude Include="src\Platforms\OpenGL\OpenGLDebugPhysics.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLRenderAPI.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLShader.h" />
@@ -775,12 +774,13 @@
     <ClInclude Include="src\Render\Camera\EditorCamera.h" />
     <ClInclude Include="src\Render\Framebuffer.h" />
     <ClInclude Include="src\Render\GraphicsContext.h" />
+    <ClInclude Include="src\Render\Render2D.h" />
     <ClInclude Include="src\Render\RenderAPI.h" />
     <ClInclude Include="src\Render\RenderGlobals.h" />
     <ClInclude Include="src\Render\Shader.h" />
     <ClInclude Include="src\Render\Texture.h" />
     <ClInclude Include="src\Render\VertexArray.h" />
-    <ClInclude Include="src\Systems\DebugSystem.h" />
+    <ClInclude Include="src\Render\DebugRenderer.h" />
     <ClInclude Include="src\Systems\MovementSystem.h" />
     <ClInclude Include="src\Systems\PhysicsSystem.h" />
     <ClInclude Include="src\Systems\RenderSystem.h" />
@@ -815,7 +815,6 @@
     <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3VertexArray.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLContext.cpp" />
-    <ClCompile Include="src\Platforms\OpenGL\OpenGLDebugPhysics.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLFramebuffer.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLRenderAPI.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLShader.cpp" />
@@ -828,12 +827,13 @@
     <ClCompile Include="src\Render\Camera\EditorCamera.cpp" />
     <ClCompile Include="src\Render\Framebuffer.cpp" />
     <ClCompile Include="src\Render\GraphicsContext.cpp" />
+    <ClCompile Include="src\Render\Render2D.cpp" />
     <ClCompile Include="src\Render\RenderAPI.cpp" />
     <ClCompile Include="src\Render\RenderGlobals.cpp" />
     <ClCompile Include="src\Render\Shader.cpp" />
     <ClCompile Include="src\Render\Texture.cpp" />
     <ClCompile Include="src\Render\VertexArray.cpp" />
-    <ClCompile Include="src\Systems\DebugSystem.cpp" />
+    <ClCompile Include="src\Render\DebugRenderer.cpp" />
     <ClCompile Include="src\Systems\MovementSystem.cpp" />
     <ClCompile Include="src\Systems\PhysicsSystem.cpp" />
     <ClCompile Include="src\Systems\RenderSystem.cpp" />

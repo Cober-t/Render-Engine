@@ -2096,8 +2096,8 @@
     <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Texture.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3VertexArray.h" />
-    <ClInclude Include="src\Platforms\OpenGL\OpenGLDebugPhysics.h" />
-    <ClInclude Include="src\Systems\DebugSystem.h" />
+    <ClInclude Include="src\Render\DebugRenderer.h" />
+    <ClInclude Include="src\Render\Render2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entities\ECS.cpp">
@@ -2216,7 +2216,7 @@
     <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Texture.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3VertexArray.cpp" />
-    <ClCompile Include="src\Platforms\OpenGL\OpenGLDebugPhysics.cpp" />
-    <ClCompile Include="src\Systems\DebugSystem.cpp" />
+    <ClCompile Include="src\Render\DebugRenderer.cpp" />
+    <ClCompile Include="src\Render\Render2D.cpp" />
   </ItemGroup>
 </Project>

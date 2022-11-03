@@ -24,8 +24,9 @@ namespace Cober {
 		//ImGui::Text("Hovered Entity: %s", name.c_str());
 
 		ImGui::Text("Renderer Stats:");
-		uint32_t frames = Engine::Get().GetFrames();
-		ImGui::Text("Frames: %d", frames);
+		ImGui::Text("Frames: %d", Engine::Get().GetFrames());
+		ImGui::Text("Draw Calls: %d", Render2D::GetStats().DrawCalls);
+		ImGui::Text("Frames: %d", Render2D::GetStats().QuadCount);
 		ImGui::End();
 	}
 

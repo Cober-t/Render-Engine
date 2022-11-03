@@ -7,12 +7,13 @@ namespace Cober {
 
 	void OpenGLRenderAPI::Init() {
 
-		//glEnable(GL_TEXTURE_2D);
-		//glEnableClientState(GL_VERTEX_ARRAY);
+		glEnable(GL_TEXTURE_2D);
+		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_ALPHA);
 
 		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_LINE_SMOOTH);
 	}
 
 	void OpenGLRenderAPI::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) {
@@ -38,8 +39,19 @@ namespace Cober {
 
 	void OpenGLRenderAPI::DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t indexCount)
 	{
-		//uint32_t count = indexCount ? vertexArray->GetIndexBuffer()->GetCount() : indexCount;
-		GLCallV(glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr));
-		GLCallV(glBindTexture(GL_TEXTURE_2D, 0));
+		vertexArray->Bind();
+		uint32_t count = indexCount ? indexCount : vertexArray->GetIndexBuffer()->GetCount();
+		GLCallV(glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr));
+	}
+
+	void OpenGLRenderAPI::DrawLines(const Ref<VertexArray>& vertexArray, uint32_t vertexCount)
+	{
+		vertexArray->Bind();
+		GLCallV(glDrawArrays(GL_LINES, 0, vertexCount));
+	}
+
+	void OpenGLRenderAPI::SetLineWidth(float width)
+	{
+		GLCallV(glLineWidth(width));
 	}
 }

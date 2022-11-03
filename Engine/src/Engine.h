@@ -20,7 +20,6 @@
 #include <Systems/MovementSystem.h>
 #include <Systems/RenderSystem.h>
 #include <Systems/PhysicsSystem.h>
-#include <Systems/DebugSystem.h>
 
 
 //[++++++++++++++++++++++++++]
@@ -40,6 +39,8 @@
 #include <Render/Buffer.h>
 #include <Render/RenderGlobals.h>   
 #include <Render/RenderAPI.h>   
+#include <Render/Render2D.h>   
+#include <Render/DebugRenderer.h>
 #include <Render/Camera/EditorCamera.h>
 
 
