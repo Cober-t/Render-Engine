@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "RenderAPI.h"
 
-#include "Platforms/OpenGL/OpenGLRenderAPI.h"
-//#include "Platforms/OpenGLES3/OpenGLES3RenderAPI.h"
-//#include "Platforms/OpenGLES3/OpenGLES3Context.h"
+#ifndef __EMSCRIPTEN__
+	#include "Platforms/OpenGL/OpenGLRenderAPI.h"
+#endif
+#include "Platforms/OpenGLES3/OpenGLES3RenderAPI.h"
 
 #include <core/Logger.h>
 
@@ -23,12 +24,14 @@ namespace Cober {
 
 
 		switch (_api) {
+#ifndef __EMSCRIPTEN__
 			case RenderAPI::API::None:		Logger::Log("RenderAPI::None means there is not render defined!!"); return nullptr;
 			case RenderAPI::API::OpenGL:	return CreateUnique<OpenGLRenderAPI>();
 
 			// Future implementation
 			//case RenderAPI::API::OpenGLES:	return CreateUnique<OpenGLESRenderAPI>();
-			//case RenderAPI::API::OpenGLES3:	return CreateUnique<OpenGLES3RenderAPI>();
+#endif
+			case RenderAPI::API::OpenGLES3:	return CreateUnique<OpenGLES3RenderAPI>();
 		}
 		Logger::Error("Unknown RenderAPI!");
 		return nullptr;

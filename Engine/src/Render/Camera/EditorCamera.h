@@ -2,11 +2,8 @@
 
 #include "Camera.h"
 #include "core/Timestep.h"
-//#include "core/MouseEvents.h"
 
-#include <core/Core.h>
-
-//#include <glm/glm.hpp>
+#include "core/Core.h"
 
 namespace Cober {
 

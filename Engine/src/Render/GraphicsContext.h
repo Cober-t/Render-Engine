@@ -1,5 +1,6 @@
 #pragma once
 
+#include "core/Core.h"
 
 namespace Cober {
 

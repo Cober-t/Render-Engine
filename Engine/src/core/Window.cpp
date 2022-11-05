@@ -9,10 +9,12 @@ namespace Cober {
 	{
 		if (!CreateWindow())
 			return;
+		Logger::Log("Window Created!");
 
 		_context = GraphicsContext::Create(_window);
 		if (!_context)
 			return;
+		Logger::Log("Context Created!");
 	}
 	Window::~Window() {
 		Logger::Log("Window Destructor called!");
@@ -37,6 +39,7 @@ namespace Cober {
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			_data.width, _data.height,
 			SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_SHOWN);
+
 		if (_window == nullptr)
 			GET_SDL_ERROR();
 

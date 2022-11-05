@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 #define GET_SDL_ERROR()     Cober::Logger::Error(SDL_GetError());
 #define ASSERT(x) if (!(x)) __debugbreak();

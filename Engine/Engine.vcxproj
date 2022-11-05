@@ -76,7 +76,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGL__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";CB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGLES3__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";__EMSCRIPTEN__;CB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -92,8 +92,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>lib\GL;lib\box2D;lib\lua;lib\SDL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;libEGL.lib;libGLESv2.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib\GL;lib\GLES3;lib\box2D;lib\lua;lib\SDL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -101,7 +101,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGL__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";CB_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGLES3__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";__EMSCRIPTEN__;CB_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -120,8 +120,8 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>lib\GL;lib\box2D;lib\lua;lib\SDL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;libEGL.lib;libGLESv2.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib\GL;lib\GLES3;lib\box2D;lib\lua;lib\SDL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -129,7 +129,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGL__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";CB_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGLES3__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";__EMSCRIPTEN__;CB_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>include;include\SDL;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -148,8 +148,8 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>lib\GL;lib\box2D;lib\lua;lib\SDL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;libEGL.lib;libGLESv2.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib\GL;lib\GLES3;lib\box2D;lib\lua;lib\SDL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -157,6 +157,11 @@
     <ClInclude Include="include\GL\glew.h" />
     <ClInclude Include="include\GL\glxew.h" />
     <ClInclude Include="include\GL\wglew.h" />
+    <ClInclude Include="include\GLES3\gl2ext.h" />
+    <ClInclude Include="include\GLES3\gl3.h" />
+    <ClInclude Include="include\GLES3\gl31.h" />
+    <ClInclude Include="include\GLES3\gl32.h" />
+    <ClInclude Include="include\GLES3\gl3platform.h" />
     <ClInclude Include="include\SDL\SDL.h" />
     <ClInclude Include="include\SDL\SDL_assert.h" />
     <ClInclude Include="include\SDL\SDL_atomic.h" />
@@ -756,22 +761,24 @@
     <ClInclude Include="src\EntryPoint.h" />
     <ClInclude Include="src\GUISystem\GuiLayer.h" />
     <ClInclude Include="src\GUISystem\ImGui.h" />
-    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Buffer.h" />
-    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Texture.h" />
-    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3VertexArray.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLRenderAPI.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLShader.h" />
-    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Context.h" />
-    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Framebuffer.h" />
-    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Shader.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Buffer.h" />
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Context.h" />
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Framebuffer.h" />
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3RenderAPI.h" />
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Shader.h" />
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Texture.h" />
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3VertexArray.h" />
     <ClInclude Include="src\Render\Buffer.h" />
     <ClInclude Include="src\Render\Camera\Camera.h" />
     <ClInclude Include="src\Render\Camera\EditorCamera.h" />
+    <ClInclude Include="src\Render\DebugRenderer.h" />
     <ClInclude Include="src\Render\Framebuffer.h" />
     <ClInclude Include="src\Render\GraphicsContext.h" />
     <ClInclude Include="src\Render\Render2D.h" />
@@ -780,7 +787,6 @@
     <ClInclude Include="src\Render\Shader.h" />
     <ClInclude Include="src\Render\Texture.h" />
     <ClInclude Include="src\Render\VertexArray.h" />
-    <ClInclude Include="src\Render\DebugRenderer.h" />
     <ClInclude Include="src\Systems\MovementSystem.h" />
     <ClInclude Include="src\Systems\PhysicsSystem.h" />
     <ClInclude Include="src\Systems\RenderSystem.h" />
@@ -810,21 +816,23 @@
   <ItemGroup>
     <ClCompile Include="src\Entities\ECS.cpp" />
     <ClCompile Include="src\GUISystem\GuiLayer.cpp" />
-    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Buffer.cpp" />
-    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Texture.cpp" />
-    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3VertexArray.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLFramebuffer.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLRenderAPI.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLShader.cpp" />
-    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Context.cpp" />
-    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Framebuffer.cpp" />
-    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Shader.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\Platforms\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Buffer.cpp" />
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Context.cpp" />
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Framebuffer.cpp" />
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3RenderAPI.cpp" />
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Shader.cpp" />
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Texture.cpp" />
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3VertexArray.cpp" />
     <ClCompile Include="src\Render\Buffer.cpp" />
     <ClCompile Include="src\Render\Camera\EditorCamera.cpp" />
+    <ClCompile Include="src\Render\DebugRenderer.cpp" />
     <ClCompile Include="src\Render\Framebuffer.cpp" />
     <ClCompile Include="src\Render\GraphicsContext.cpp" />
     <ClCompile Include="src\Render\Render2D.cpp" />
@@ -833,7 +841,6 @@
     <ClCompile Include="src\Render\Shader.cpp" />
     <ClCompile Include="src\Render\Texture.cpp" />
     <ClCompile Include="src\Render\VertexArray.cpp" />
-    <ClCompile Include="src\Render\DebugRenderer.cpp" />
     <ClCompile Include="src\Systems\MovementSystem.cpp" />
     <ClCompile Include="src\Systems\PhysicsSystem.cpp" />
     <ClCompile Include="src\Systems\RenderSystem.cpp" />

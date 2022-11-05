@@ -8,7 +8,7 @@ Game2D::Game2D() : Layer("First 2D Game!") {
 void Game2D::OnAttach() {
 
 	_activeScene = Scene::Create();
-	_activeScene->OnRuntimeStart();
+	_activeScene->OnRuntimeStart(_activeScene);
 }
 
 void Game2D::OnDetach() {
@@ -22,7 +22,7 @@ void Game2D::OnUpdate(Ref<Timestep> ts) {
 	bool ortho = false;
 	_camera->SetViewportSize(1280, 720, ortho);
 	_camera->OnUpdate(ts);
-	_activeScene->OnUpdateEditor(ts, _camera);
+	_activeScene->OnUpdateRuntime(ts, _camera);
 
 	// Render Scene (Game), when it has a cam
 	//_activeScene->OnUpdateRuntime(ts);

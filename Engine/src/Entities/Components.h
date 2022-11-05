@@ -1,6 +1,8 @@
 #pragma once
 
-#include <xhash> // For generating Universal Unique Identifiers
+#ifndef __EMSCRIPTEN__
+	#include <xhash> // For generating Universal Unique Identifiers
+#endif
 #include <random>
 
 #include "core/Core.h"

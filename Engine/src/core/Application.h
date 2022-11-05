@@ -1,6 +1,6 @@
 #pragma once
 
-#include <core/Core.h>
+#include "Core.h"
 
 #include "Window.h"
 #include "Timestep.h"
@@ -60,7 +60,7 @@ namespace Cober {
 		bool PHYSICS_2D;
 	private:
 		static Engine* _instance;
-		friend int ::main(int argc, char* argv[]);
+		//friend int ::main(int argc, char** argv);
 	};
 
 	Engine* CreateApplication();

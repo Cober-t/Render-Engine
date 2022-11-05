@@ -1,9 +1,10 @@
 #pragma once
 
 #include <SDL/SDL.h>
-#include "Render/RenderGlobals.h"
-#include "Render/GraphicsContext.h"
 
+#include "Render/GraphicsContext.h"
+#include "Render/RenderGlobals.h"
+	
 namespace Cober {
 
 	class Window {

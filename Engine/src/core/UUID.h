@@ -1,6 +1,5 @@
 #pragma once
 
-#include <xhash>
 
 namespace Cober {
 
@@ -18,6 +17,8 @@ namespace Cober {
 	};
 }
 
+#ifndef __EMSCRIPTEN__
+	#include <xhash>
 namespace std {
 
 	// Specialization
@@ -29,3 +30,4 @@ namespace std {
 		}
 	};
 }
+#endif

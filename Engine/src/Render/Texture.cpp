@@ -4,7 +4,10 @@
 #include "Render/RenderAPI.h"
 #include "Systems/RenderSystem.h"
 
+#ifndef __EMSCRIPTEN__
 #include "Platforms/OpenGL/OpenGLTexture.h"
+#endif
+#include "Platforms/OpenGLES3/OpenGLES3Texture.h"
 
 namespace Cober {
 
@@ -12,12 +15,14 @@ namespace Cober {
 	{
 		switch (RenderAPI::GetAPI())
 		{
+#ifndef __EMSCRIPTEN__
 			case RenderAPI::API::None:    Logger::Warning("RendererAPI::None is currently not supported!"); return nullptr;
 			case RenderAPI::API::OpenGL:  return CreateRef<OpenGLTexture>(width, height);
+#endif
 
 			// Future implementation
-			//case RenderAPI::API::OpenGLES:	return CreateRef<OpenGLESTexture>(width, height)	return nullptr;
-			//case RenderAPI::API::OpenGLES3:	return CreateRef<OpenGLES3Texture>(width, height)	return nullptr;
+			//case RenderAPI::API::OpenGLES:	return CreateRef<OpenGLESTexture>(width, height);
+			//case RenderAPI::API::OpenGLES3:	return CreateRef<OpenGLES3Texture>(width, height);
 		}
 
 		Logger::Log("Unknown RendererAPI!");
@@ -28,12 +33,14 @@ namespace Cober {
 	{
 		switch (RenderAPI::GetAPI())
 		{
+#ifndef __EMSCRIPTEN__
 			case RenderAPI::API::None:    Logger::Warning("RendererAPI::None is currently not supported!"); return nullptr;
 			case RenderAPI::API::OpenGL:  return CreateRef<OpenGLTexture>(path);
+#endif
 
 			// Future implementation
-			//case RenderAPI::API::OpenGLES:	return CreateRef<OpenGLESTexture>(path)	return nullptr;
-			//case RenderAPI::API::OpenGLES3:	return CreateRef<OpenGLES3Texture>(path)	return nullptr;
+			//case RenderAPI::API::OpenGLES:	return CreateRef<OpenGLESTexture>(path);
+			//case RenderAPI::API::OpenGLES3:	return CreateRef<OpenGLES3Texture>(path);
 		}
 
 		Logger::Log("Unknown RendererAPI!");

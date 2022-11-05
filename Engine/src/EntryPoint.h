@@ -1,24 +1,16 @@
 ﻿#include "core/Core.h"
-
-#ifdef __EMSCRIPTEN__
-#include <emscripten.h>
-#endif
+#include "core/Application.h"
 
 
 extern Cober::Engine* Cober::CreateApplication();
 
-int main(int argc, char* argv[]) {
+int main(int argc, char** argv) {
 
 	auto app = Cober::CreateApplication();
 
 	app->Start();
 
-#ifdef __EMSCRIPTEN__
-	int fps = 0; // Use browser's requestAnimationFrame
-	emscripten_set_main_loop_arg(app->Update(), NULL, 0, true);
-#else
 	app->Update();
-#endif
 	
 	app->Destroy();
 

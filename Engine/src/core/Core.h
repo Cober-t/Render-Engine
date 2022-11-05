@@ -38,8 +38,9 @@
 #   error "Unknown compiler"
 #endif
 
-
-#define SHADERS_PATH SOLUTION_DIR + (std::string)"assets\\shaders\\"
+#ifndef __EMSCRIPTEN__
+	#define SHADERS_PATH SOLUTION_DIR + (std::string)"assets\\shaders\\"
+#endif
 #define BIT(x)          (1 << x)
 
 namespace Cober {

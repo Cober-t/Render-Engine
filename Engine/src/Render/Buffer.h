@@ -27,6 +27,7 @@ namespace Cober {
 		case ShaderDataType::Int3:     return 4 * 3;
 		case ShaderDataType::Int4:     return 4 * 4;
 		case ShaderDataType::Bool:     return 1;
+		default:		break;
 		}
 
 		Logger::Warning("Unknown ShaderDataType!");
@@ -44,7 +45,7 @@ namespace Cober {
 		BufferElement() = default;
 
 		BufferElement(ShaderDataType Type, const std::string& Name, bool Normalized = false)
-			: name(Name), type(Type), size(ShaderDataTypeSize(type)), offset(0), normalized(normalized)
+			: name(Name), type(Type), size(ShaderDataTypeSize(type)), offset(0), normalized(Normalized)
 		{
 		}
 
@@ -63,6 +64,7 @@ namespace Cober {
 			case ShaderDataType::Int3:    return 3;
 			case ShaderDataType::Int4:    return 4;
 			case ShaderDataType::Bool:    return 1;
+			default:		break;
 			}
 
 			Logger::Warning("Unknown ShaderDataType!");

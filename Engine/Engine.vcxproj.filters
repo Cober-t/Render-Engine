@@ -7,6 +7,9 @@
     <Filter Include="include\GL">
       <UniqueIdentifier>{4B40B8DA-37F8-F927-A0FF-D2838CD69418}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\GLES3">
+      <UniqueIdentifier>{D690FAA2-4251-76D9-0B8C-BF56770BBBB5}</UniqueIdentifier>
+    </Filter>
     <Filter Include="include\SDL">
       <UniqueIdentifier>{FB7BC031-6731-3927-F025-33FE5CDA2F2B}</UniqueIdentifier>
     </Filter>
@@ -170,6 +173,21 @@
     </ClInclude>
     <ClInclude Include="include\GL\wglew.h">
       <Filter>include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLES3\gl2ext.h">
+      <Filter>include\GLES3</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLES3\gl3.h">
+      <Filter>include\GLES3</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLES3\gl31.h">
+      <Filter>include\GLES3</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLES3\gl32.h">
+      <Filter>include\GLES3</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLES3\gl3platform.h">
+      <Filter>include\GLES3</Filter>
     </ClInclude>
     <ClInclude Include="include\SDL\SDL.h">
       <Filter>include\SDL</Filter>
@@ -1968,6 +1986,9 @@
     <ClInclude Include="src\GUISystem\ImGui.h">
       <Filter>src\GUISystem</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platforms\OpenGL\OpenGLBuffer.h">
+      <Filter>src\Platforms\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platforms\OpenGL\OpenGLContext.h">
       <Filter>src\Platforms\OpenGL</Filter>
     </ClInclude>
@@ -1980,14 +2001,35 @@
     <ClInclude Include="src\Platforms\OpenGL\OpenGLShader.h">
       <Filter>src\Platforms\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platforms\OpenGL\OpenGLTexture.h">
+      <Filter>src\Platforms\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platforms\OpenGL\OpenGLVertexArray.h">
+      <Filter>src\Platforms\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Buffer.h">
+      <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Context.h">
       <Filter>src\Platforms\OpenGLES3</Filter>
     </ClInclude>
     <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Framebuffer.h">
       <Filter>src\Platforms\OpenGLES3</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3RenderAPI.h">
+      <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Shader.h">
       <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Texture.h">
+      <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3VertexArray.h">
+      <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Render\Buffer.h">
+      <Filter>src\Render</Filter>
     </ClInclude>
     <ClInclude Include="src\Render\Camera\Camera.h">
       <Filter>src\Render\Camera</Filter>
@@ -1995,10 +2037,16 @@
     <ClInclude Include="src\Render\Camera\EditorCamera.h">
       <Filter>src\Render\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="src\Render\DebugRenderer.h">
+      <Filter>src\Render</Filter>
+    </ClInclude>
     <ClInclude Include="src\Render\Framebuffer.h">
       <Filter>src\Render</Filter>
     </ClInclude>
     <ClInclude Include="src\Render\GraphicsContext.h">
+      <Filter>src\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Render\Render2D.h">
       <Filter>src\Render</Filter>
     </ClInclude>
     <ClInclude Include="src\Render\RenderAPI.h">
@@ -2011,6 +2059,9 @@
       <Filter>src\Render</Filter>
     </ClInclude>
     <ClInclude Include="src\Render\Texture.h">
+      <Filter>src\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Render\VertexArray.h">
       <Filter>src\Render</Filter>
     </ClInclude>
     <ClInclude Include="src\Systems\MovementSystem.h">
@@ -2088,16 +2139,6 @@
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Render\Buffer.h" />
-    <ClInclude Include="src\Render\VertexArray.h" />
-    <ClInclude Include="src\Platforms\OpenGL\OpenGLBuffer.h" />
-    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Buffer.h" />
-    <ClInclude Include="src\Platforms\OpenGL\OpenGLTexture.h" />
-    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3Texture.h" />
-    <ClInclude Include="src\Platforms\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="src\Platforms\OpenGLES3\OpenGLES3VertexArray.h" />
-    <ClInclude Include="src\Render\DebugRenderer.h" />
-    <ClInclude Include="src\Render\Render2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entities\ECS.cpp">
@@ -2105,6 +2146,9 @@
     </ClCompile>
     <ClCompile Include="src\GUISystem\GuiLayer.cpp">
       <Filter>src\GUISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platforms\OpenGL\OpenGLBuffer.cpp">
+      <Filter>src\Platforms\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platforms\OpenGL\OpenGLContext.cpp">
       <Filter>src\Platforms\OpenGL</Filter>
@@ -2118,22 +2162,49 @@
     <ClCompile Include="src\Platforms\OpenGL\OpenGLShader.cpp">
       <Filter>src\Platforms\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platforms\OpenGL\OpenGLTexture.cpp">
+      <Filter>src\Platforms\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platforms\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>src\Platforms\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Buffer.cpp">
+      <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Context.cpp">
       <Filter>src\Platforms\OpenGLES3</Filter>
     </ClCompile>
     <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Framebuffer.cpp">
       <Filter>src\Platforms\OpenGLES3</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3RenderAPI.cpp">
+      <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Shader.cpp">
       <Filter>src\Platforms\OpenGLES3</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Texture.cpp">
+      <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3VertexArray.cpp">
+      <Filter>src\Platforms\OpenGLES3</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\Buffer.cpp">
+      <Filter>src\Render</Filter>
+    </ClCompile>
     <ClCompile Include="src\Render\Camera\EditorCamera.cpp">
       <Filter>src\Render\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\DebugRenderer.cpp">
+      <Filter>src\Render</Filter>
     </ClCompile>
     <ClCompile Include="src\Render\Framebuffer.cpp">
       <Filter>src\Render</Filter>
     </ClCompile>
     <ClCompile Include="src\Render\GraphicsContext.cpp">
+      <Filter>src\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\Render2D.cpp">
       <Filter>src\Render</Filter>
     </ClCompile>
     <ClCompile Include="src\Render\RenderAPI.cpp">
@@ -2146,6 +2217,9 @@
       <Filter>src\Render</Filter>
     </ClCompile>
     <ClCompile Include="src\Render\Texture.cpp">
+      <Filter>src\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Render\VertexArray.cpp">
       <Filter>src\Render</Filter>
     </ClCompile>
     <ClCompile Include="src\Systems\MovementSystem.cpp">
@@ -2208,15 +2282,5 @@
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Render\Buffer.cpp" />
-    <ClCompile Include="src\Render\VertexArray.cpp" />
-    <ClCompile Include="src\Platforms\OpenGL\OpenGLBuffer.cpp" />
-    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Buffer.cpp" />
-    <ClCompile Include="src\Platforms\OpenGL\OpenGLTexture.cpp" />
-    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3Texture.cpp" />
-    <ClCompile Include="src\Platforms\OpenGL\OpenGLVertexArray.cpp" />
-    <ClCompile Include="src\Platforms\OpenGLES3\OpenGLES3VertexArray.cpp" />
-    <ClCompile Include="src\Render\DebugRenderer.cpp" />
-    <ClCompile Include="src\Render\Render2D.cpp" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #pragma once
 #include "Components.h"
-#include "UUID.h"
+#include "core/UUID.h"
+#include "core/Core.h"
 
 #include <vector>
 #include <bitset>
@@ -9,7 +10,6 @@
 #include <memory>
 #include <set>
 #include <core/Logger.h>
-#include <core/Core.h>
 
 
 const unsigned int MAX_COMPONENTS = 32;
@@ -152,7 +152,7 @@ namespace Cober {
 
 	template<typename TSystem, typename ... TArgs>
 	void Registry::AddSystem(TArgs&& ...args) {
-		Ref<TSystem> newSystem(CreateRef<TSystem>(std::forward<TAgs>(args)...));
+		Ref<TSystem> newSystem(CreateRef<TSystem>(std::forward<TArgs>(args)...));
 		systems.insert(std::make_pair(std::type_index(typeid(TSystem)), newSystem));
 	}
 

@@ -19,10 +19,11 @@ namespace Cober {
         _assetManager = CreateUnique<AssetManager>();
         _events = CreateUnique<Events>();
 
-        if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-            Logger::Error("Error initializating SDL");
+        if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+            GET_SDL_ERROR();
             return;
         }
+        Logger::Log("SDL Initilize!");
 
         _window = Window::Create(name, width, height, vsync);
         if (_window->GetVSync())
@@ -50,7 +51,7 @@ namespace Cober {
 
     void Engine::Start() {
 
-#ifndef __EMSCRIPTEN__
+#ifndef __EMSCRIPTEN__ && __OPENGLES3__
         if (_gameState == GameState::EDITOR || _gameState == GameState::RUNTIME_EDITOR) {
             _GuiLayer = new GuiLayer("#version 430");
             PushOverlay(_GuiLayer);
@@ -73,7 +74,7 @@ namespace Cober {
                 for (Layer* layer : _LayerStack)
                     layer->OnUpdate(_timestep);
 
-#ifndef __EMSCRIPTEN__
+#ifndef __EMSCRIPTEN__ & __OPENGLES3__
                 if (_gameState == GameState::EDITOR || _gameState == GameState::RUNTIME_EDITOR) {
                     _GuiLayer->Begin();
                     for (Layer* layer : _LayerStack)

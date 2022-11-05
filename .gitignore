@@ -2,6 +2,8 @@
 .vs/
 bin/
 bin-int/
+premake/
+emsdk/
 
 # Visual Studio files and folder
 **.sln

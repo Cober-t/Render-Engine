@@ -1,6 +1,6 @@
 workspace "GameEngine"
 	architecture "x64"
-	startproject "Editor"
+	startproject "Game"
 
 	configurations
 	{
@@ -37,6 +37,7 @@ project "Engine"
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
         	"%{prj.name}/include/GL/**.h",
+        	"%{prj.name}/include/GLES3/**.h",
 		"%{prj.name}/include/SDL/**.h",
 		"%{prj.name}/include/glm/**.h",
 		"%{prj.name}/include/glm/**.hpp",
@@ -88,6 +89,7 @@ project "Engine"
 	libdirs
 	{
         	"%{prj.name}/lib/GL",
+        	"%{prj.name}/lib/GLES3",
         	"%{prj.name}/lib/box2D",
         	"%{prj.name}/lib/lua",
         	"%{prj.name}/lib/SDL",
@@ -96,7 +98,9 @@ project "Engine"
 	links
 	{
 		"opengl32",
-		"glew32s",		
+		"glew32s",	
+		"libEGL",
+		"libGLESv2",
 		"Box2D",
 		"SDL2",
 		"SDL2main",
@@ -127,11 +131,11 @@ project "Engine"
 			"GL_GLEXT_PROTOTYPES=1",
 			"CB_BUILD_DLL",
 			"GLEW_STATIC",
-			"__OPENGL__",
+			"__OPENGLES3__",
 			"NK_IMPLEMENTATION",
 			"NK_SDL_GL3_IMPLEMENTATION",
 			'SOLUTION_DIR=R"($(SolutionDir))"',
-			--"__EMSCRIPTEN__"
+			"__EMSCRIPTEN__"
 		}
 
 	filter "configurations:Debug"
@@ -192,7 +196,7 @@ project "Editor"
 			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM=<SDL_opengl.h>",
 			"GL_GLEXT_PROTOTYPES=1",
 			"GLEW_STATIC",
-			"__OPENGL__",
+			"__OPENGLES3__",
 			"NK_IMPLEMENTATION",
 			"NK_SDL_GL3_IMPLEMENTATION",
 			'SOLUTION_DIR=R"($(SolutionDir))"'
@@ -254,22 +258,23 @@ project "Game"
 			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM=<SDL_opengl.h>",
 			"GL_GLEXT_PROTOTYPES=1",
 			"GLEW_STATIC",
-			"__OPENGL__",
+			"__OPENGLES3__",
 			"NK_IMPLEMENTATION",
-			'SOLUTION_DIR=R"($(SolutionDir))"'
+			'SOLUTION_DIR=R"($(SolutionDir))"',
+			"__EMSCRIPTEN__"
 		}
 
 	filter "configurations:Debug"
 		defines "CB_DEBUG"
-		--buildoptions "/MDd"
+		buildoptions "/MDd"
 		symbols "on"
 
 	filter "configurations:Release"
 		defines "CB_RELEASE"
-		--buildoptions "/MD"
+		buildoptions "/MD"
 		optimize "on"
 
 	filter "configurations:Dist"
 		defines "CB_DIST"
-		--buildoptions "/MD"
+		buildoptions "/MD"
 		optimize "on"

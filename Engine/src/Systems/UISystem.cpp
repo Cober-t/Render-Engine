@@ -1,5 +1,7 @@
 #include "pch.h"
 
+#ifndef __EMSCRIPTEN__
+
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO
 #define NK_INCLUDE_STANDARD_VARARGS
@@ -116,3 +118,5 @@ namespace Cober {
 		nk_sdl_render(NK_ANTI_ALIASING_ON, MAX_VERTEX_MEMORY, MAX_ELEMENT_MEMORY);
 	}
 }
+
+#endif

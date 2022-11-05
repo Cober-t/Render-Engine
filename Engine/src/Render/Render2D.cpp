@@ -1,11 +1,13 @@
 #include "pch.h"
 #include "Render2D.h"
 
+#include "Render/RenderGlobals.h"
+
 namespace Cober {
 
 	// [+++++++++++++++++++++++++++]
-// [+++++ PRIMITIVES DATA +++++]
-	static struct QuadVertex
+	// [+++++ PRIMITIVES DATA +++++]
+	struct QuadVertex
 	{
 		glm::vec3 Position;
 		glm::vec4 Color;
@@ -17,7 +19,7 @@ namespace Cober {
 		int EntityID;
 	};
 
-	static struct CircleVertex
+	struct CircleVertex
 	{
 		glm::vec3 WorldPosition;
 		glm::vec3 LocalPosition;
@@ -29,7 +31,7 @@ namespace Cober {
 		int EntityID;
 	};
 
-	static struct LineVertex
+	struct LineVertex
 	{
 		glm::vec3 Position;
 		glm::vec4 Color;
@@ -38,7 +40,7 @@ namespace Cober {
 		int EntityID;
 	};
 
-	static struct RenderData
+	struct RenderData
 	{
 		static const uint32_t MaxQuads = 20000;
 		static const uint32_t MaxVertices = MaxQuads * 4;

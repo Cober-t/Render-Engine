@@ -17,15 +17,15 @@ namespace Cober {
 
 	class DebugRenderer : public b2Draw {
 	public:
-		static void DrawPolygon(const b2Vec2* vertices, int vertexCount, const b2Color& color);
+		static void DrawPolygon(Entity& entity);
 		static void DrawSolidPolygon(Entity& entity);
-		static void DrawCircle(const b2Vec2& center, float radius, const b2Color& color);
-		static void DrawSolidCircle(const b2Vec2& center, float radius, const b2Vec2& axis, const b2Color& color);
-		static void DrawPoint(const b2Vec2& p, float size, const b2Color& color);
-		static void DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color);
-		static void DrawTransform(const b2Transform& xf);
-		static void DrawString(int x, int y, const char* string, ...);
-		static void DrawAABB(b2AABB* aabb, const b2Color& color);
+		static void DrawCircle(Entity& entity);
+		static void DrawSolidCircle(Entity& entity);
+		static void DrawPoint(Entity& entity);
+		static void DrawSegment(Entity& entity);
+		static void DrawTransform(Entity& entity);
+		static void DrawString(Entity& entity);
+		static void DrawAABB(Entity& entity);
 	};
 }
 

@@ -3,11 +3,12 @@
 #ifdef __OPENGL__
 	#include <GL/glew.h>
 #elif  __OPENGLES__
-	//#include <GLES/...>
+	#include <GLES3/gl2.h>
 #elif  __OPENGLES3__
-	//#include <GLES3/...>
-#else
-	//#include <other...>
+	#ifndef __EMSCRIPTEN__
+		#include <GLES3/gl32.h>
+		#include <GLES3/gl3platform.h>
+	#endif
 #endif
 
 #include "Logger.h"
@@ -55,11 +56,14 @@ namespace Cober {
 
 	void Logger::GLClearErrors() {
 
+#ifndef __EMSCRIPTEN__
 		while (glGetError());
+#endif
 	}
 
 	bool Logger::GLCheckErrors(const char* function, const char* file, int line) {	
 
+#ifndef __EMSCRIPTEN__
 		while (GLenum error = glGetError()) {
 			std::string fileName = (std::string)file;
 			std::string solutionDir = SOLUTION_DIR;
@@ -68,6 +72,9 @@ namespace Cober {
 			return false;
 		}
 		return true;
+#endif
+
+
 	}
 }
 

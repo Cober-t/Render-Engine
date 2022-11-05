@@ -1,16 +1,18 @@
 #pragma once
 
-//#include <SDL/SDL.h>
-//#include "core/Window.h"
+#include <SDL/SDL.h>
+
+#include "Render/GraphicsContext.h"
 
 namespace Cober {
 
-	//class OpenGLES3Context : public Context {
-	//public:
-	//	OpenGLES3Context();
-	//	virtual void SwapBuffers(SDL_Window* _windowHandle) override;
-	//	SDL_GLContext GetContext() override { return _context; }
-	//public:
-	//	SDL_GLContext _context;
-	//};
+	class OpenGLES3Context : public GraphicsContext {
+	public:
+		OpenGLES3Context(SDL_Window* _windowHandle);
+		virtual void SwapBuffers() override;
+		SDL_GLContext GetContext() override;
+	public:
+		SDL_Window* _windowHandle;
+		SDL_GLContext _context;
+	};
 }

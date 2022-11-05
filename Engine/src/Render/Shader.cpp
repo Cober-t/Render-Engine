@@ -2,21 +2,24 @@
 
 #include "Render/RenderAPI.h"
 #include "Shader.h"
+#ifndef __EMSCRIPTEN__
 #include "Platforms/OpenGL/OpenGLShader.h"
+#endif
 //#include "Platforms/OpenGLES/OpenGLESShader.h"
-//#include "Platforms/OpenGLES3/OpenGLES3Shader.h"
+#include "Platforms/OpenGLES3/OpenGLES3Shader.h"
 
 namespace Cober {
 
 	Ref<Shader> Shader::Create(const std::string& filepath) {
 
 		switch (RenderAPI::GetAPI()) {
+#ifndef __EMSCRIPTEN__
 			case RenderAPI::API::None:		Logger::Warning("RenderAPI::None means there is not render defined!!");		return nullptr;
 			case RenderAPI::API::OpenGL:	return CreateRef<OpenGLShader>(filepath);
-
+#endif
 			// Future implementation
-			//case RenderAPI::API::OpenGLES:	return CreateUnique<OpenGLESShader>(filePath)		return nullptr;
-			//case RenderAPI::API::OpenGLES3:	return CreateUnique<OpenGLES3Shader>(filePath)		return nullptr;
+			//case RenderAPI::API::OpenGLES:	return CreateUnique<OpenGLESShader>(filePath);
+			//case RenderAPI::API::OpenGLES3:	return CreateUnique<OpenGLES3Shader>(filePath);
 		}
 		Logger::Warning("Unknown Shader RenderAPI!");
 		return nullptr;
@@ -26,12 +29,14 @@ namespace Cober {
 	{
 		switch (RenderAPI::GetAPI())
 		{
+#ifndef __EMSCRIPTEN__
 			case RenderAPI::API::None:		Logger::Warning("RenderAPI::None means there is not render defined!!");		return nullptr;
 			case RenderAPI::API::OpenGL:	return CreateRef<OpenGLShader>(name, vertexSrc, fragmentSrc);
 
+#endif
 			// Future implementation
 			//case RenderAPI::API::OpenGLES:	return CreateUnique<OpenGLESShader>(name, vertexSrc, fragmentSrc)		return nullptr;
-			//case RenderAPI::API::OpenGLES3:	return CreateUnique<OpenGLES3Shader>(name, vertexSrc, fragmentSrc)		return nullptr;
+			//case RenderAPI::API::OpenGLES3:	return CreateUnique<OpenGLES3Shader>(name, vertexSrc, fragmentSrc);
 		}
 
 		Logger::Warning("Unknown RendererAPI!");

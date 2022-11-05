@@ -2,6 +2,8 @@
 
 #include "PhysicsSystem.h"
 
+#ifndef __EMSCRIPTEN__
+
 namespace Cober {
 
 	PhysicsSystem::PhysicsSystem()
@@ -95,3 +97,5 @@ namespace Cober {
 		}
 	}
 }
+
+#endif

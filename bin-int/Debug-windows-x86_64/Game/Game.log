@@ -1,7 +1,14 @@
-﻿  Game2D.cpp
+﻿cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  Game2D.cpp
   GameApp.cpp
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\GameApp.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Game2D.cpp)
-Engine.lib(glew.obj) : warning LNK4099: no se encontró PDB 'vc120.pdb' con 'Engine.lib(glew.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Game\vc120.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-LINK : warning LNK4098: la biblioteca predeterminada'LIBCMT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
-  Game.vcxproj -> C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Game\Game.exe
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Game2D.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\GameApp.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(37,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Game2D.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(37,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Game2D.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(37,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\GameApp.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(37,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\GameApp.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Render\Render2D.h(49): warning C4091: 'static ': se ha omitido a la izquierda de 'Cober::Render2D::Statistics' cuando no hay ninguna variable declarada (compilando archivo de origen src\Game2D.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Render\Render2D.h(49): warning C4091: 'static ': se ha omitido a la izquierda de 'Cober::Render2D::Statistics' cuando no hay ninguna variable declarada (compilando archivo de origen src\GameApp.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\EntryPoint.h(5,10): fatal  error C1083: No se puede abrir el archivo incluir: 'emscripten.h': No such file or directory (compilando archivo de origen src\GameApp.cpp)

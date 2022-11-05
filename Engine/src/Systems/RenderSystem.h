@@ -3,8 +3,9 @@
 //#include "core/AssetManager.h"
 #include "Render/Render2D.h"
 
-#include "Render/Camera/EditorCamera.h"
 #include "core/Core.h"
+#include "core/Scene.h"
+#include "Render/Camera/EditorCamera.h"
 
 namespace Cober {
 

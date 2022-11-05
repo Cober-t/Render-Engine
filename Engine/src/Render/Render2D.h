@@ -10,8 +10,6 @@
 #include "Render/Shader.h"
 #include "Render/Camera/EditorCamera.h"
 
-#include "core/Scene.h"
-
 #include <glm/gtc/matrix_transform.hpp>
 
 #define GLM_ENABLE_EXPERIMENTAL
@@ -39,7 +37,7 @@ namespace Cober {
 		static void DrawSolidPolygon(Entity& entity);
 
 	public:
-		static struct Statistics
+		struct Statistics
 		{
 			uint32_t DrawCalls = 0;
 			uint32_t QuadCount = 0;
