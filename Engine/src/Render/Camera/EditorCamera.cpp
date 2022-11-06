@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "EditorCamera.h"
 
+#include "core/Application.h"
+
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
-
-#include "core/Application.h"
 
 namespace Cober {
 
@@ -16,7 +16,7 @@ namespace Cober {
 
 	EditorCamera::~EditorCamera() {
 
-		Logger::Log("Editor Camera Destroyed!!");
+		LOG("Editor Camera Destroyed!!");
 	}
 
 	void EditorCamera::UpdateProjection(bool& ortho) {

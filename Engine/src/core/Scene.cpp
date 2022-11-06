@@ -24,7 +24,7 @@ namespace Cober {
 
 	Scene::~Scene()
 	{
-		Logger::Log("Scene finished, removing systems from registry...");
+		LOG("Scene finished, removing systems from registry...");
 		//_registry->RemoveSystem<MovementSystem>();
 		//_registry->RemoveSystem<PhysicsSystem>();
 		_registry->RemoveSystem<RenderSystem>();
@@ -32,8 +32,6 @@ namespace Cober {
 	}
 
 	Ref<Scene> Scene::Create() {
-
-		Logger::Log("Scene Created!");
 
 		Ref<Scene> scene = CreateRef<Scene>();
 		scene->_registry = CreateRef<Registry>();
@@ -43,18 +41,23 @@ namespace Cober {
 		scene->_registry->GetSystem<RenderSystem>().Start(scene);
 		//scene->_registry->AddSystem<UISystem>();
 		//scene->_registry->GetSystem<UISystem>().Start(Engine::Get().GetWindow().GetNativeWindow());
-		
+
+		LOG("Scene Created!");
 		return scene;
 	}
-
+	Entity entity;
 	void Scene::OnRuntimeStart(const Ref<Scene>& scene) {
-
-		Logger::Log("Scene->OnRuntimeStart()");
 
 		//_registry->GetSystem<PhysicsSystem>().Start();
 
 		//_registry->AddSystem<MovementSystem>();
 		//_registry->GetSystem<MovementSystem>().Start(scene);
+
+		// Emscripten Test
+		entity = _registry->CreateEntity();
+		entity.AddComponent<Sprite>();
+		entity.GetComponent<Sprite>().color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+		LOG("On Runtime Start!");
 	}
 
 	void Scene::OnRuntimeStop() {

@@ -23,7 +23,7 @@ namespace Cober {
 		case ShaderDataType::Bool:     return GL_BOOL;
 		}
 
-		Logger::Warning("Unknown ShaderDataType!");
+		LOG_WARNING("Unknown ShaderDataType!");
 		return 0;
 	}*/
 
@@ -50,7 +50,7 @@ namespace Cober {
 	void OpenGLES3VertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
 	{
 		//if(vertexBuffer->GetLayout().GetElements().size())
-			//Logger::Warning("Vertex Buffer has no layout!");
+			//LOG_WARNING("Vertex Buffer has no layout!");
 
 		/*GLCallV(glBindVertexArray(_rendererID));
 		vertexBuffer->Bind();

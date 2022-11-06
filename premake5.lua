@@ -73,6 +73,11 @@ project "Engine"
 	{
 		"%{prj.name}/include",
 		"%{prj.name}/include/SDL",
+		"%{prj.name}/include/glm",
+		"%{prj.name}/include/box2D",
+		"%{prj.name}/include/nuklear",
+		"%{prj.name}/include/sol",
+		"%{prj.name}/include/lua",
 		"%{prj.name}/src",
 		"%{prj.name}/src/imgui",
 		"%{prj.name}/src/core",
@@ -131,6 +136,7 @@ project "Engine"
 			"GL_GLEXT_PROTOTYPES=1",
 			"CB_BUILD_DLL",
 			"GLEW_STATIC",
+			--"__OPENGL__",
 			"__OPENGLES3__",
 			"NK_IMPLEMENTATION",
 			"NK_SDL_GL3_IMPLEMENTATION",
@@ -196,7 +202,7 @@ project "Editor"
 			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM=<SDL_opengl.h>",
 			"GL_GLEXT_PROTOTYPES=1",
 			"GLEW_STATIC",
-			"__OPENGLES3__",
+			"__OPENGL__",
 			"NK_IMPLEMENTATION",
 			"NK_SDL_GL3_IMPLEMENTATION",
 			'SOLUTION_DIR=R"($(SolutionDir))"'

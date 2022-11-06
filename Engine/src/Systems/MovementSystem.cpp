@@ -7,12 +7,12 @@ namespace Cober {
 		RequireComponent<Transform>();
 		RequireComponent<Rigidbody2D>();
 
-		Logger::Log("Movement SYSTEM Added!!");
+		LOG("Movement SYSTEM Added!!");
 	}
 
 	MovementSystem::~MovementSystem() {
 
-		Logger::Log("Movement System removed from Registry");
+		LOG("Movement System removed from Registry");
 	}
 
 	void MovementSystem::Update(double deltaTime) {
@@ -24,7 +24,7 @@ namespace Cober {
 			transform.position.x += rigidbody.velocity.x * deltaTime;
 			transform.position.y += rigidbody.velocity.y * deltaTime;
 
-			//Logger::Log("Entity ID = " +
+			//LOG("Entity ID = " +
 			//	std::to_string(entity.GetID()) +
 			//	" position is now (" +
 			//	std::to_string(transform.position.x) +

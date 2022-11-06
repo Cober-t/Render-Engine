@@ -12,17 +12,35 @@
 //#define GLCall(x, y)  Cober::Logger::GLCheckError(y);\
 //					  x;\
 //				      ASSERT(Cober::Logger::GLCheckError(y))
-#define GLCallV( x ) \
-		Cober::Logger::GLClearErrors(); \
-		x; \
-		ASSERT(Cober::Logger::GLCheckErrors(#x, __FILE__, __LINE__))
+#ifdef __EMSCRIPTEN__
+	#define GLCallV( x ) \
+			Cober::Logger::GLClearErrors(); \
+			x;\
+			Cober::Logger::GLCheckErrors(#x, __FILE__, __LINE__)
 
-#define GLCall( x ) [&]() { \
-		Cober::Logger::GLClearErrors(); \
-		auto retVal = x; \
-		ASSERT(Cober::Logger::GLCheckErrors(#x, __FILE__, __LINE__)); \
-		return retVal; \
-	}()
+	#define GLCall( x ) [&]() { \
+			Cober::Logger::GLClearErrors(); \
+			auto retVal = x; \
+			Cober::Logger::GLCheckErrors(#x, __FILE__, __LINE__); \
+			return retVal; \
+		}()
+#else
+	#define GLCallV( x ) \
+			Cober::Logger::GLClearErrors(); \
+			x; \
+			ASSERT(Cober::Logger::GLCheckErrors(#x, __FILE__, __LINE__))
+
+	#define GLCall( x ) [&]() { \
+			Cober::Logger::GLClearErrors(); \
+			auto retVal = x; \
+			ASSERT(Cober::Logger::GLCheckErrors(#x, __FILE__, __LINE__)); \
+			return retVal; \
+		}()
+#endif
+
+#define LOG( x )		 Cober::Logger::Log(#x, __FILE__, __LINE__)
+#define LOG_WARNING( x ) Cober::Logger::Warning(#x, __FILE__, __LINE__)
+#define LOG_ERROR( x )	 Cober::Logger::Error(#x, __FILE__, __LINE__)
 
 namespace Cober {
 
@@ -38,9 +56,9 @@ namespace Cober {
 	class Logger {
 	public:
 		static std::vector<LogEntry> messages;
-		static void Log(const std::string& message);
-		static void Warning(const std::string& message);
-		static void Error(const std::string& message);
+		static void Log(const std::string& message, const char* file = __FILE__, int line = __LINE__);
+		static void Warning(const std::string& message, const char* file = __FILE__, int line = __LINE__);
+		static void Error(const std::string& message, const char* file = __FILE__, int line = __LINE__);
 
 		// Handle Errors
 		static void GLClearErrors();

@@ -14,7 +14,9 @@ namespace Cober {
 
     void Events::WindowResizeEvent(int width, int height)
     {
+#ifndef __EMSCRIPTEN__
         RenderGlobals::SetViewport(0, 0, width, height);
+#endif
     }
 
     void Events::ProcessEvents(SDL_Event& event)
@@ -22,8 +24,11 @@ namespace Cober {
         switch (event.type) {
             case SDL_KEYDOWN: {
                 auto key = event.key.keysym.sym;
-                if (key == SDLK_ESCAPE)
+#ifndef __EMSCRIPTEN__
+                if (key == SDLK_ESCAPE) {
                     Engine::Get().Close();
+                }
+#endif
                 break;
             }
             case SDL_QUIT:
@@ -33,11 +38,13 @@ namespace Cober {
             }
             case SDL_WINDOWEVENT:
             {
+#ifndef __EMSCRIPTEN__
                 if (event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
                 {
                     int width = event.window.data1, height = event.window.data2;
                     WindowResizeEvent(width, height);
                 }
+#endif
                 break;
             }
             case SDL_MOUSEWHEEL:

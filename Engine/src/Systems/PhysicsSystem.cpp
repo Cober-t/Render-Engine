@@ -12,12 +12,12 @@ namespace Cober {
 		RequireComponent<Rigidbody2D>();
 		//RequireComponent<BoxCollider2D>();
 		
-		Logger::Log("Physics SYSTEM Added!!");
+		LOG("Physics SYSTEM Added!!");
 	}
 
 	PhysicsSystem::~PhysicsSystem()
 	{
-		Logger::Log("Physics System removed from Registry");
+		LOG("Physics System removed from Registry");
 
 		delete _physicsWorld;
 		_physicsWorld = nullptr;
@@ -27,7 +27,7 @@ namespace Cober {
 	{
 		_physicsWorld = new b2World({ 0.0f, -9.8f });
 
-		for (auto entity : GetSystemEntities()) {
+		for (auto& entity : GetSystemEntities()) {
 
 			auto& transform = entity.GetComponent<Transform>();
 			auto& rb2d = entity.GetComponent<Rigidbody2D>();
@@ -77,7 +77,7 @@ namespace Cober {
 		const int32_t positionIterations = 2;
 		_physicsWorld->Step(ts, velocityIterations, positionIterations);
 
-		for (auto entity : GetSystemEntities()) {
+		for (auto& entity : GetSystemEntities()) {
 			auto& transform = entity.GetComponent<Transform>();
 			auto& rb2d = entity.GetComponent<Rigidbody2D>();
 			

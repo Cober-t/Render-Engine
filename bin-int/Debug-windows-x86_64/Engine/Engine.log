@@ -1,6 +1,79 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(562,5): error MSB6003: No se pudo ejecutar la tarea ejecutable especificada "CL.exe". System.IO.IOException: El proceso no puede obtener acceso al archivo 'C:\USERS\JORGE\ONEDRIVE\ESCRITORIO\RENDER_ENGINE\BIN-INT\DEBUG-WINDOWS-X86_64\ENGINE\ENGINE.PCH' porque está siendo utilizado en otro proceso.
-C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(562,5): error MSB6003:    en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
-C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(562,5): error MSB6003:    en System.IO.FileInfo.Delete()
-C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(562,5): error MSB6003:    en Microsoft.Build.CPPTasks.TrackedVCToolTask.DeleteFiles(ITaskItem[] filesToDelete)
-C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(562,5): error MSB6003:    en Microsoft.Build.CPPTasks.CL.ComputeOutOfDateSources()
-C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(562,5): error MSB6003:    en Microsoft.Build.Utilities.ToolTask.Execute()
+﻿cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  pch.cpp
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  ECS.cpp
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  GuiLayer.cpp
+  OpenGLBuffer.cpp
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  OpenGLContext.cpp
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  OpenGLFramebuffer.cpp
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  OpenGLRenderAPI.cpp
+  OpenGLShader.cpp
+  OpenGLTexture.cpp
+  OpenGLVertexArray.cpp
+  OpenGLES3Buffer.cpp
+  OpenGLES3Context.cpp
+  OpenGLES3Framebuffer.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\Entities\ECS.cpp)
+  OpenGLES3RenderAPI.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Render\Shader.h(11,11): fatal  error C1083: No se puede abrir el archivo incluir: 'glm.hpp': No such file or directory (compilando archivo de origen src\Platforms\OpenGL\OpenGLShader.cpp)
+  OpenGLES3Shader.cpp
+  OpenGLES3Texture.cpp
+  OpenGLES3VertexArray.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Render\Shader.h(11,11): fatal  error C1083: No se puede abrir el archivo incluir: 'glm.hpp': No such file or directory (compilando archivo de origen src\Platforms\OpenGLES3\OpenGLES3Shader.cpp)
+  Buffer.cpp
+  EditorCamera.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\Render\Buffer.cpp)
+  DebugRenderer.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Render\Camera\Camera.h(6,11): fatal  error C1083: No se puede abrir el archivo incluir: 'glm.hpp': No such file or directory (compilando archivo de origen src\Render\Camera\EditorCamera.cpp)
+  Framebuffer.cpp
+  GraphicsContext.cpp
+  Render2D.cpp
+  RenderAPI.cpp
+  RenderGlobals.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\GUISystem\GuiLayer.cpp)
+  Shader.cpp
+  Texture.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\Render\DebugRenderer.cpp)
+  VertexArray.cpp
+  MovementSystem.cpp
+  PhysicsSystem.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\Systems\MovementSystem.cpp)
+  RenderSystem.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\Systems\PhysicsSystem.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\Render\Render2D.cpp)
+  UISystem.cpp
+  Application.cpp
+  AssetManager.cpp
+  Events.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\Systems\RenderSystem.cpp)
+  Layer.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\Render\Texture.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Render\Shader.h(11,11): fatal  error C1083: No se puede abrir el archivo incluir: 'glm.hpp': No such file or directory (compilando archivo de origen src\Render\Shader.cpp)
+  Logger.cpp
+  Scene.cpp
+  UUID.cpp
+  Window.cpp
+  imgui.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\Render\VertexArray.cpp)
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_opengl3.cpp
+  imgui_impl_sdl.cpp
+  imgui_tables.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\core\Application.cpp)
+  imgui_widgets.cpp
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\core\Events.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\core\Scene.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\imgui\imgui_impl_opengl3.cpp(124,10): fatal  error C1083: No se puede abrir el archivo incluir: 'GLES2/gl2.h': No such file or directory

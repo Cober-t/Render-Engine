@@ -13,7 +13,7 @@ namespace Cober {
 		if (type == "fragment" || type == "pixel")
 			return GL_FRAGMENT_SHADER;
 
-		Logger::Warning("Unknown shader type!");
+		LOG_WARNING("Unknown shader type!");
 		return 0;
 	}
 
@@ -57,7 +57,7 @@ namespace Cober {
 			in.close();
 		}
 		else
-			Logger::Warning("Could not open file " + filePath);
+			LOG_WARNING("Could not open file " + filePath);
 
 		return result;
 	}
@@ -74,18 +74,18 @@ namespace Cober {
 			size_t eol = source.find_first_of("\r\n", pos); //End of shader type declaration line
 
 			if (eol == std::string::npos)
-				Logger::Warning("Syntax error");
+				LOG_WARNING("Syntax error");
 
 			size_t begin = pos + typeTokenLength + 1; //Start of shader type name (after "#type " keyword)
 			std::string type = source.substr(begin, eol - begin);
 
 			if (!ShaderTypeFromString(type))
-				Logger::Warning("Invalid shader type specified");
+				LOG_WARNING("Invalid shader type specified");
 
 			size_t nextLinePos = source.find_first_not_of("\r\n", eol); //Start of shader code after shader type declaration line
 
 			if (nextLinePos == std::string::npos)
-				Logger::Warning("Syntax error");
+				LOG_WARNING("Syntax error");
 
 			pos = source.find(typeToken, nextLinePos); //Start of next shader type declaration line
 			shaderSources[ShaderTypeFromString(type)] = (pos == std::string::npos) ? source.substr(nextLinePos) : source.substr(nextLinePos, pos - nextLinePos);
@@ -99,7 +99,7 @@ namespace Cober {
 		GLuint program = GLCall(glCreateProgram());
 
 		if(shaderSources.size() > 2)
-			Logger::Warning("We only support 2 shaders for now");
+			LOG_WARNING("We only support 2 shaders for now");
 
 		std::array<GLenum, 2> glShaderIDs;
 		int glShaderIDIndex = 0;
@@ -128,8 +128,8 @@ namespace Cober {
 
 				GLCallV(glDeleteShader(shader));
 
-				Logger::Error(infoLog.data());
-				Logger::Error("Shader link failure!");
+				LOG_ERROR(infoLog.data());
+				LOG_ERROR("Shader link failure!");
 				break;
 			}
 
@@ -160,8 +160,8 @@ namespace Cober {
 			for (auto id : glShaderIDs)
 				glDeleteShader(id);
 
-			Logger::Error(infoLog.data());
-			Logger::Error("Shader link failure!");
+			LOG_ERROR(infoLog.data());
+			LOG_ERROR("Shader link failure!");
 			return;
 		}
 

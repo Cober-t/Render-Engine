@@ -14,15 +14,17 @@ namespace Cober {
 
 		switch (RenderAPI::GetAPI()) {
 #ifndef __EMSCRIPTEN__
-			case RenderAPI::API::None:		Logger::Error("RenderAPI::None means there is not render defined!!");		return nullptr;
+			case RenderAPI::API::None:		LOG_ERROR("RenderAPI::None means there is not render defined!!");		return nullptr;
 			case RenderAPI::API::OpenGL:	return CreateRef<OpenGLFramebuffer>(width, height);
+#else
+			case RenderAPI::API::None:		LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGL:	LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGLES:	break; //return CreateRef<OpenGLESFramebuffer>(spec);
+			case RenderAPI::API::OpenGLES3:	break; //return CreateRef<OpenGLES3Framebuffer>(spec);
+			default:	LOG_ERROR("Unknown RendererAPI!"); break;
 #endif
-
-			// Future implementation
-			//case RenderAPI::API::OpenGLES:	return CreateRef<OpenGLESFramebuffer>(spec)	return nullptr;
-			//case RenderAPI::API::OpenGLES3:	return CreateRef<OpenGLES3Framebuffer>(spec)	return nullptr;
 		}
-		Logger::Error("Unknown Framebuffer RenderAPI!");
+		LOG_ERROR("Unknown Framebuffer RenderAPI!");
 		return nullptr;
 	}
 }

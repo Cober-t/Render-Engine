@@ -13,6 +13,8 @@
 
 #include "Events.h"
 
+int main(int argc, char** argv);
+
 namespace Cober {
 
 	enum class GameState { PLAY, EDITOR, RUNTIME_EDITOR, EXIT };
@@ -60,7 +62,7 @@ namespace Cober {
 		bool PHYSICS_2D;
 	private:
 		static Engine* _instance;
-		//friend int ::main(int argc, char** argv);
+		friend int ::main(int argc, char** argv);
 	};
 
 	Engine* CreateApplication();

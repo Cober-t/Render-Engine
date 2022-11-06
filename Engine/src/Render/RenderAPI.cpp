@@ -25,15 +25,17 @@ namespace Cober {
 
 		switch (_api) {
 #ifndef __EMSCRIPTEN__
-			case RenderAPI::API::None:		Logger::Log("RenderAPI::None means there is not render defined!!"); return nullptr;
+			case RenderAPI::API::None:		LOG("RenderAPI::None means there is not render defined!!"); return nullptr;
 			case RenderAPI::API::OpenGL:	return CreateUnique<OpenGLRenderAPI>();
-
-			// Future implementation
-			//case RenderAPI::API::OpenGLES:	return CreateUnique<OpenGLESRenderAPI>();
+#else		
+			case RenderAPI::API::None:		LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGL:	LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGLES:	LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGLES3:	LOG("Creating OpenGLES3 API..."); return CreateUnique<OpenGLES3RenderAPI>();
+			default:	LOG_ERROR("Unknown RendererAPI!"); break;
 #endif
-			case RenderAPI::API::OpenGLES3:	return CreateUnique<OpenGLES3RenderAPI>();
 		}
-		Logger::Error("Unknown RenderAPI!");
+		LOG("Unknown RenderAPI!");
 		return nullptr;
 	}
 }

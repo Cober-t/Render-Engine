@@ -10,3 +10,9 @@ emsdk/
 **.vcxproj
 **.vcxproj.filters
 **.vcxproj.user
+**.obj
+**.tlog
+**.exe
+**.log
+**.idb
+**.pdb

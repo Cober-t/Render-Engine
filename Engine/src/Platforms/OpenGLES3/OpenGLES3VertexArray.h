@@ -16,8 +16,8 @@ namespace Cober {
 		virtual void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
 		virtual void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
 
-		virtual const std::vector<Ref<VertexBuffer>>& GetVertexBuffers() const { return _vertexBuffers; }
-		virtual const Ref<IndexBuffer>& GetIndexBuffer() const { return _indexBuffer; }
+		virtual const std::vector<Ref<VertexBuffer>>& GetVertexBuffers() const override { return _vertexBuffers; }
+		virtual const Ref<IndexBuffer>& GetIndexBuffer() const override { return _indexBuffer; }
 	private:
 		uint32_t _rendererID;
 		uint32_t _vertexBufferIndex = 0;

@@ -6,12 +6,12 @@
 namespace Cober {
 
 	AssetManager::AssetManager() {
-		Logger::Log("AssetManager constructor called!");
+		LOG("AssetManager constructor called!");
 	}
 
 	AssetManager::~AssetManager() {
 		ClearAssets();
-		Logger::Log("AssetManager destructor called!");
+		LOG("AssetManager destructor called!");
 	}
 
 	void AssetManager::ClearAssets() {
@@ -47,7 +47,7 @@ namespace Cober {
 		//SDL_FreeSurface(surface);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
-		Logger::Log("New texture added to the Asset Store with ID = " + assetID);
+		LOG("New texture added to the Asset Store with ID = " + assetID);
 		*/
 	}
 }

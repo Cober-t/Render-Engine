@@ -47,10 +47,17 @@
 //[++++++++++++++++++++++++++]
 //[+++++++++ Platform +++++++++]
 //[++++++++++++++++++++++++++]
-//#include <Platforms/OpenGL/OpenGLContext.h>
-//#include <Platforms/OpenGL/OpenGLFramebuffer.h>
-//#include <Platforms/OpenGL/OpenGLRenderAPI.h>
-//#include <Platforms/OpenGL/OpenGLShader.h>
+#ifndef __EMSCRIPTEN__
+	#include <Platforms/OpenGL/OpenGLContext.h>
+	#include <Platforms/OpenGL/OpenGLFramebuffer.h>
+	#include <Platforms/OpenGL/OpenGLRenderAPI.h>
+	#include <Platforms/OpenGL/OpenGLShader.h>
+#else
+	//#include <Platforms/OpenGL/OpenGLES3Context.h>
+	//#include <Platforms/OpenGL/OpenGLES3Framebuffer.h>
+	//#include <Platforms/OpenGL/OpenGLES3RenderAPI.h>
+	//#include <Platforms/OpenGL/OpenGLES3Shader.h>
+#endif
 
 
 //[++++++++++++++++++++++++++]
@@ -74,11 +81,12 @@
 //[++++++++++++++++++++++++++]
 //[+++++++++5 BOX 2D +++++++++]
 //[++++++++++++++++++++++++++]
-#include <box2D/b2_world.h>
-#include <box2D/b2_body.h>
-#include <box2D/b2_fixture.h>
-#include <box2D/b2_polygon_shape.h>
-class b2World;
+// 
+//#include <box2D/b2_world.h>
+//#include <box2D/b2_body.h>
+//#include <box2D/b2_fixture.h>
+//#include <box2D/b2_polygon_shape.h>
+//class b2World;
 
 //[++++++++++++++++++++++++++]
 //[+++ NUKLEAR GUI SYSTEM +++]

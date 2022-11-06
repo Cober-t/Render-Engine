@@ -28,12 +28,12 @@ namespace Cober {
 
 	UISystem::UISystem() {
 
-        Logger::Log("UI System SYSTEM Added!!");
+        LOG("UI System SYSTEM Added!!");
 	}
 
 	UISystem::~UISystem() {
 
-		Logger::Log("UI System removed from Registry");
+		LOG("UI System removed from Registry");
 		nk_sdl_shutdown();
 	}
 

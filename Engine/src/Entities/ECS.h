@@ -33,7 +33,6 @@ namespace Cober {
 		bool operator !=(const Entity& other) const { return index != other.index; };
 		bool operator < (const Entity& other) const { return index < other.index; };
 		bool operator > (const Entity& other) const { return index > other.index; };
-		operator bool() const { return this != nullptr; }
 		operator uint32_t() const { return (uint32_t)this; }
 
 		template<typename TComponent,
@@ -101,8 +100,8 @@ namespace Cober {
 	// +++++ REGISTRY +++++++++++++++++++++++++++++++++++++++++++ //
 	class Registry {
 	public:
-		Registry()  { Logger::Log("Registry constructor called"); };
-		~Registry() { Logger::Log("Registry destructor called"); };
+		Registry()  { LOG("Registry constructor called"); };
+		~Registry() { LOG("Registry destructor called"); };
 
 		void Update();
 
@@ -196,7 +195,7 @@ namespace Cober {
 		entityComponentSignatures[entityID].set(componentID);
 
 		//if (componentID != 0 && componentID != 3 && componentID != 4)
-		//	Logger::Log("Component ID = " + std::to_string(componentID) + " was added to entity: " + entity.GetComponent<Tag>().tag);
+		//	LOG("Component ID = " + std::to_string(componentID) + " was added to entity: " + entity.GetComponent<Tag>().tag);
 	}
 
 	template<typename TComponent>
@@ -205,7 +204,7 @@ namespace Cober {
 		const auto entityID = entity.GetIndex();
 
 		entityComponentSignatures[entityID].set(componentID, false);
-		Logger::Log("Component ID = " + std::to_string(componentID) + " was removed from entity ID: " + std::to_string(entityID));
+		//LOG("Component ID = " + std::to_string(componentID) + " was removed from entity ID: " + std::to_string(entityID));
 	}
 
 	template<typename TComponent>

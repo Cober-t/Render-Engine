@@ -34,8 +34,11 @@
 #include <unordered_set>
 
 #include <SDL/SDL.h>
-#include <core/Logger.h>
+#ifdef __EMSCRIPTEN__
+#include <SDL/SDL_opengles2.h>
+#endif
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
 #include <SDL/SDL_ttf.h>
 #include <glm/glm.hpp>
+#include <core/Logger.h>

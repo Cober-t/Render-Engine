@@ -26,11 +26,11 @@ namespace Cober {
 
 		_context = SDL_GL_CreateContext(_windowHandle);
 		if (_context == nullptr)
-			Logger::Error(SDL_GetError());
+			LOG_ERROR(SDL_GetError());
 
 		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK)
-			Logger::Error("Something go wrong initializing Glew!!");
+			LOG_ERROR("Something go wrong initializing Glew!!");
 
 		int bufferWidth, bufferHeight;
 		SDL_GL_GetDrawableSize(_windowHandle, &bufferWidth, &bufferHeight);

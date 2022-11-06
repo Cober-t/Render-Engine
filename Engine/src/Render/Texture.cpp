@@ -16,16 +16,16 @@ namespace Cober {
 		switch (RenderAPI::GetAPI())
 		{
 #ifndef __EMSCRIPTEN__
-			case RenderAPI::API::None:    Logger::Warning("RendererAPI::None is currently not supported!"); return nullptr;
-			case RenderAPI::API::OpenGL:  return CreateRef<OpenGLTexture>(width, height);
+			case RenderAPI::API::None:    LOG_WARNING("RendererAPI::None is currently not supported!"); return nullptr;
+			case RenderAPI::API::OpenGL:  break; // return CreateRef<OpenGLTexture>(width, height);
+#else		
+			case RenderAPI::API::None:			LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGL:		LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGLES:		break; //return CreateRef<OpenGLESTexture>(width, height);
+			case RenderAPI::API::OpenGLES3:		break; //return CreateRef<OpenGLES3Texture>(width, height);
+			default:	LOG_ERROR("Unknown RendererAPI!"); break;
 #endif
-
-			// Future implementation
-			//case RenderAPI::API::OpenGLES:	return CreateRef<OpenGLESTexture>(width, height);
-			//case RenderAPI::API::OpenGLES3:	return CreateRef<OpenGLES3Texture>(width, height);
 		}
-
-		Logger::Log("Unknown RendererAPI!");
 		return nullptr;
 	}
 
@@ -34,16 +34,16 @@ namespace Cober {
 		switch (RenderAPI::GetAPI())
 		{
 #ifndef __EMSCRIPTEN__
-			case RenderAPI::API::None:    Logger::Warning("RendererAPI::None is currently not supported!"); return nullptr;
-			case RenderAPI::API::OpenGL:  return CreateRef<OpenGLTexture>(path);
+			case RenderAPI::API::None:    LOG_WARNING("RendererAPI::None is currently not supported!"); return nullptr;
+			case RenderAPI::API::OpenGL:  break; // return CreateRef<OpenGLTexture>(path);
+#else		
+			case RenderAPI::API::None:			LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGL:		LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGLES:		break; //return CreateRef<OpenGLESTexture>(path);
+			case RenderAPI::API::OpenGLES3:		break; //return CreateRef<OpenGLES3Texture>(path);
+			default:	LOG_ERROR("Unknown RendererAPI!"); break;
 #endif
-
-			// Future implementation
-			//case RenderAPI::API::OpenGLES:	return CreateRef<OpenGLESTexture>(path);
-			//case RenderAPI::API::OpenGLES3:	return CreateRef<OpenGLES3Texture>(path);
 		}
-
-		Logger::Log("Unknown RendererAPI!");
 		return nullptr;
 	}
 }

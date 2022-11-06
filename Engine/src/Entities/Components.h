@@ -4,14 +4,12 @@
 	#include <xhash> // For generating Universal Unique Identifiers
 #endif
 #include <random>
+#include <box2D/b2_polygon_shape.h>
+#include <glm/glm.hpp>
 
 #include "core/Core.h"
 #include "core/UUID.h"
 #include "Render/Texture.h"
-
-#include <box2D/b2_polygon_shape.h>
-
-#include <glm/glm.hpp>
 
 namespace Cober {
 	

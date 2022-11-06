@@ -16,16 +16,17 @@ namespace Cober {
 		switch (RenderAPI::GetAPI())
 		{
 #ifndef __EMSCRIPTEN__
-			case RenderAPI::API::None:    Logger::Error("RendererAPI::None is currently not supported!"); return nullptr;
+			case RenderAPI::API::None:    LOG_ERROR("RendererAPI::None is currently not supported!"); return nullptr;
 			case RenderAPI::API::OpenGL:  return CreateRef<OpenGLVertexBuffer>(size);
-#endif
-
-			// Future implementation
-			//case RenderAPI::API::OpenGLES:	return CreateRef<OpenGLESVertexBuffer>(size);
+#else
+			case RenderAPI::API::None:		LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGL:	LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGLES:	LOG_ERROR("Wrong API");	break;
 			case RenderAPI::API::OpenGLES3:	return CreateRef<OpenGLES3VertexBuffer>(size);
+			default:	LOG_ERROR("Unknown RendererAPI!"); break;
+#endif
 		}
 
-		Logger::Error("Unknown RendererAPI!");
 		return nullptr;
 	}
 
@@ -34,16 +35,18 @@ namespace Cober {
 		switch (RenderAPI::GetAPI())
 		{
 #ifndef __EMSCRIPTEN__
-			case RenderAPI::API::None:    Logger::Error("RendererAPI::None is currently not supported!"); return nullptr;
+			case RenderAPI::API::None:    LOG_ERROR("RendererAPI::None is currently not supported!"); return nullptr;
 			case RenderAPI::API::OpenGL:  return CreateRef<OpenGLVertexBuffer>(vertices, size);
-#endif
-
-			// Future implementation
-			//case RenderAPI::API::OpenGLES:	return CreateRef<OpenGLESVertexBuffer>(vertices, size);	return nullptr;
+#else
+			case RenderAPI::API::None:		LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGL:	LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGLES:	LOG_ERROR("Wrong API");	break;
 			case RenderAPI::API::OpenGLES3:	return CreateRef<OpenGLES3VertexBuffer>(vertices, size);
+			default:	LOG_ERROR("Unknown RendererAPI!"); break;
+#endif
 		}
 
-		Logger::Error("Unknown RendererAPI!");
+		LOG_ERROR("Unknown RendererAPI!");
 		return nullptr;
 	}
 
@@ -52,30 +55,31 @@ namespace Cober {
 		switch (RenderAPI::GetAPI())
 		{
 #ifndef __EMSCRIPTEN__
-			case RenderAPI::API::None:    Logger::Error("RendererAPI::None is currently not supported!"); return nullptr;
+			case RenderAPI::API::None:    LOG_ERROR("RendererAPI::None is currently not supported!"); return nullptr;
 			case RenderAPI::API::OpenGL:  return CreateRef<OpenGLIndexBuffer>(indices, size);
-#endif
-
-			// Future implementation
-			//case RenderAPI::API::OpenGLES:	return CreateRef<OpenGLESVertexBuffer>(indices, size)	return nullptr;
+#else
+			case RenderAPI::API::None:		LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGL:	LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGLES:	LOG_ERROR("Wrong API");	break;
 			case RenderAPI::API::OpenGLES3:	return CreateRef<OpenGLES3IndexBuffer>(indices, size);
+			default:	LOG_ERROR("Unknown RendererAPI!"); break;
+#endif
 		}
 
-		Logger::Error("Unknown RendererAPI!");
+		LOG_ERROR("Unknown RendererAPI!");
 		return nullptr;
 	}
 
 	Ref<UniformBuffer> UniformBuffer::Create(uint32_t size, uint32_t binding)
 	{
+#ifndef __EMSCRIPTEN__
 		switch (RenderAPI::GetAPI()) 
 		{
-#ifndef __EMSCRIPTEN__
-		case RenderAPI::API::None:    Logger::Error("RendererAPI::None is currently not supported!"); return nullptr;
+		case RenderAPI::API::None:    LOG_ERROR("RendererAPI::None is currently not supported!"); return nullptr;
 		case RenderAPI::API::OpenGL:  return CreateRef<OpenGLUniformBuffer>(size, binding);
-#endif
+		default:	LOG_ERROR("Unknown RendererAPI!"); break;
 		}
-
-		Logger::Error("Unknown RendererAPI!");
+#endif
 		return nullptr;
 	}
 }

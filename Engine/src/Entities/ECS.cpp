@@ -22,13 +22,12 @@ namespace Cober {
 		entity.AddComponent<Tag>(name);
 		entity.AddComponent<Transform>();
 
-		//Logger::Log("Created entity with ID = " + std::to_string(entity.GetID()));
 		return entity;
 	}
 
 	Entity Registry::GetEntity(Entity requestedEntity) {
 
-		for (auto entity : entities) {
+		for (auto& entity : entities) {
 			if (entity == requestedEntity)
 				return entity;
 		}
@@ -36,19 +35,18 @@ namespace Cober {
 	
 	void Registry::DeleteEntity(Entity entity) {
 
-		Logger::Log("Deleted entity with ID = " + std::to_string(entity.GetID()));
 		entitiesToBeKilled.insert(entity);
 	}
 
 	void Registry::Update() {
 		// TODO: Add the entities that are waiting to be created to the active Systems
 
-		for (auto entity : entitiesToBeAdded)
+		for (auto& entity : entitiesToBeAdded)
 			AddEntityToSystems(entity);
 
 		entitiesToBeAdded.clear();
 
-		for (auto entity : entitiesToBeKilled) {
+		for (auto& entity : entitiesToBeKilled) {
 			for (auto& system : systems)
 				system.second->RemoveEntityFromSystem(entity);
 			entities.erase(entity);
@@ -64,7 +62,6 @@ namespace Cober {
 			const auto& systemComponentSignature = system.second->GetComponentSignature();
 			bool isInterested = (entityComponentSignature & systemComponentSignature) == systemComponentSignature;
 			if (isInterested)
-				// TODO: Add the entity to the system
 				system.second->AddEntityToSystem(entity);
 		}
 	}
@@ -76,7 +73,6 @@ namespace Cober {
 			const auto& systemComponentSignature = system.second->GetComponentSignature();
 			bool isInterested = (entityComponentSignature & systemComponentSignature) == systemComponentSignature;
 			if (!isInterested)
-				// TODO: Add the entity to the system
 				system.second->RemoveEntityFromSystem(entity);
 		}
 	}
@@ -84,7 +80,6 @@ namespace Cober {
 	void System::AddEntityToSystem(Entity entity) {
 		if (std::find(entities.begin(), entities.end(), entity) == entities.end()) {
 			entities.push_back(entity);
-			Logger::Warning("Added to system");
 		}
 	}
 

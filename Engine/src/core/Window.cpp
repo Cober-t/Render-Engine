@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "Window.h"
+#include <SDL/SDL_opengles2.h>
 
 namespace Cober {
 
@@ -9,15 +10,16 @@ namespace Cober {
 	{
 		if (!CreateWindow())
 			return;
-		Logger::Log("Window Created!");
+
+		if (data.VSync)
+			SDL_GL_SetSwapInterval(1);
 
 		_context = GraphicsContext::Create(_window);
 		if (!_context)
 			return;
-		Logger::Log("Context Created!");
 	}
 	Window::~Window() {
-		Logger::Log("Window Destructor called!");
+		LOG("Window Destructor called!");
 	}
 
 	Unique<Window> Window::Create(const std::string& name, uint32_t width, uint32_t height, bool VSync) {
@@ -38,27 +40,30 @@ namespace Cober {
 		_window = SDL_CreateWindow(_data.title.c_str(),
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			_data.width, _data.height,
-			SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_SHOWN);
+			SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
 		if (_window == nullptr)
 			GET_SDL_ERROR();
 
+#ifndef __EMSCRIPTEN__
 		SDL_SetWindowBordered(_window, SDL_FALSE);
+#endif
 		
 		return _window;
 	}
 
-	void Window::ClearWindow(float red, float green, float blue, float black) {
+	//void Window::ClearWindow(float red, float green, float blue, float black) {
 
-		RenderGlobals::SetClearColor(red, green, blue, black);
-		RenderGlobals::Clear();
-	}
+	//	RenderGlobals::SetClearColor(red, green, blue, black);
+	//	RenderGlobals::Clear();
+	//}
 
 	void Window::UpdateViewport(const uint32_t width, const uint32_t height) {
 
 		_data.width = width;
 		_data.height = height;
-		RenderGlobals::SetViewport(0, 0, width, height);
+		GLCallV(glViewport(0, 0, width, height));
+		//RenderGlobals::SetViewport(0, 0, width, height);
 	}
 
 	void Window::CloseWindow() {

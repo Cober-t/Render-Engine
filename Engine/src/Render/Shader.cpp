@@ -2,6 +2,7 @@
 
 #include "Render/RenderAPI.h"
 #include "Shader.h"
+
 #ifndef __EMSCRIPTEN__
 #include "Platforms/OpenGL/OpenGLShader.h"
 #endif
@@ -14,14 +15,16 @@ namespace Cober {
 
 		switch (RenderAPI::GetAPI()) {
 #ifndef __EMSCRIPTEN__
-			case RenderAPI::API::None:		Logger::Warning("RenderAPI::None means there is not render defined!!");		return nullptr;
+			case RenderAPI::API::None:		LOG_ERROR("RenderAPI::None means there is not render defined!!");		return nullptr;
 			case RenderAPI::API::OpenGL:	return CreateRef<OpenGLShader>(filepath);
+#else		
+			case RenderAPI::API::None:			LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGL:		LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGLES:		LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGLES3:		break;// return CreateUnique<OpenGLES3Shader>(filePath);
+			default:	LOG_ERROR("Unknown RendererAPI!"); break;
 #endif
-			// Future implementation
-			//case RenderAPI::API::OpenGLES:	return CreateUnique<OpenGLESShader>(filePath);
-			//case RenderAPI::API::OpenGLES3:	return CreateUnique<OpenGLES3Shader>(filePath);
 		}
-		Logger::Warning("Unknown Shader RenderAPI!");
 		return nullptr;
 	}
 
@@ -30,23 +33,24 @@ namespace Cober {
 		switch (RenderAPI::GetAPI())
 		{
 #ifndef __EMSCRIPTEN__
-			case RenderAPI::API::None:		Logger::Warning("RenderAPI::None means there is not render defined!!");		return nullptr;
+			case RenderAPI::API::None:		LOG_ERROR("RenderAPI::None means there is not render defined!!");		return nullptr;
 			case RenderAPI::API::OpenGL:	return CreateRef<OpenGLShader>(name, vertexSrc, fragmentSrc);
-
+#else		
+			case RenderAPI::API::None:			LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGL:		LOG_ERROR("Wrong API"); break;
+			case RenderAPI::API::OpenGLES:		break; //return CreateUnique<OpenGLESShader>(name, vertexSrc, fragmentSrc);
+			case RenderAPI::API::OpenGLES3:		break; //return CreateUnique<OpenGLES3Shader>(name, vertexSrc, fragmentSrc);
+			default:	LOG_ERROR("Unknown RendererAPI!"); break;
 #endif
-			// Future implementation
-			//case RenderAPI::API::OpenGLES:	return CreateUnique<OpenGLESShader>(name, vertexSrc, fragmentSrc)		return nullptr;
-			//case RenderAPI::API::OpenGLES3:	return CreateUnique<OpenGLES3Shader>(name, vertexSrc, fragmentSrc);
 		}
-
-		Logger::Warning("Unknown RendererAPI!");
+		LOG_ERROR("Unknown RendererAPI!");
 		return nullptr;
 	}
 
 	void ShaderLibrary::Add(const std::string& name, const Ref<Shader>& shader)
 	{
 		//if (!Exists(name))
-			//Logger::Warning("Shader already exists!");
+			//LOG_WARNING("Shader already exists!");
 		_shaders[name] = shader;
 	}
 
@@ -73,7 +77,7 @@ namespace Cober {
 	Ref<Shader> ShaderLibrary::Get(const std::string& name)
 	{
 		if(Exists(name))
-			Logger::Warning("Shader not found!");
+			LOG_WARNING("Shader not found!");
 		return _shaders[name];
 	}
 

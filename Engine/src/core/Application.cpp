@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Application.h"
+#include "Render/RenderGlobals.h"
 
 namespace Cober {
 
@@ -8,33 +9,29 @@ namespace Cober {
     
     Engine::Engine(const std::string& name, uint32_t width, uint32_t height, bool vsync) 
     {
-        Logger::Log("2DEngine Constructor!");
+        LOG("Engine Constructor!");
         DEBUG = false;
         GAME_2D = false;
         PHYSICS_2D = false;
 
         _instance = this;
 
-        _timestep = CreateUnique<Timestep>();
-        _assetManager = CreateUnique<AssetManager>();
-        _events = CreateUnique<Events>();
-
-        if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        //if (SDL_Init((SDL_INIT_EVERYTHING) | ~(SDL_INIT_SENSOR, SDL_INIT_HAPTIC)) < 0)
+        if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0)
             GET_SDL_ERROR();
-            return;
-        }
-        Logger::Log("SDL Initilize!");
 
         _window = Window::Create(name, width, height, vsync);
-        if (_window->GetVSync())
-            SDL_GL_SetSwapInterval(1);
 
-        //_timestep->SetFPSLimit(60);
+        _timestep = CreateUnique<Timestep>();
+        _events = CreateUnique<Events>();
+        //_assetManager = CreateUnique<AssetManager>();
+
         _gameState = GameState::PLAY;
+        //_timestep->SetFPSLimit(60);
     }
 
     Engine::~Engine() {
-        Logger::Log("Engine Destructor!");
+        LOG("Engine Destructor!");
     }
 
     void Engine::PushLayer(Layer* layer) {
@@ -51,11 +48,13 @@ namespace Cober {
 
     void Engine::Start() {
 
-#ifndef __EMSCRIPTEN__ && __OPENGLES3__
+#ifndef __OPENGLES3__
+#ifndef __EMSCRIPTEN__
         if (_gameState == GameState::EDITOR || _gameState == GameState::RUNTIME_EDITOR) {
             _GuiLayer = new GuiLayer("#version 430");
             PushOverlay(_GuiLayer);
         }
+#endif
 #endif
     }
 
@@ -65,6 +64,9 @@ namespace Cober {
 
             _timestep->Update();  // Allow limit FPS
 
+#ifdef __EMSCRIPTEN__
+            std::cout << "Frames: -- " << _timestep->frames << "fps\t\t" << "DeltaTime: -- " << _timestep->DeltaTime() << std::endl;
+#endif
             //UISystem::StartProcessInputs();
             ProcessInputs();
             //UISystem::EndProcessInputs();
@@ -74,7 +76,7 @@ namespace Cober {
                 for (Layer* layer : _LayerStack)
                     layer->OnUpdate(_timestep);
 
-#ifndef __EMSCRIPTEN__ & __OPENGLES3__
+#ifndef __EMSCRIPTEN__
                 if (_gameState == GameState::EDITOR || _gameState == GameState::RUNTIME_EDITOR) {
                     _GuiLayer->Begin();
                     for (Layer* layer : _LayerStack)

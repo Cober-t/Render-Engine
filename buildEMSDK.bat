@@ -23,6 +23,8 @@ set Camera="%~dp0Engine\src\Render\Camera"
 set Entities="%~dp0Engine\src\Entities"
 set Platforms="%~dp0Engine\src\Platforms\OpenGLES3"
 set Systems="%~dp0Engine\src\Systems"
+set GLES3="%~dp0Engine\include\GLES3"
+set SDL="%~dp0Engine\include\SDL"
 set glm="%~dp0Engine\include\glm"
 set box2D="%~dp0Engine\include\box2D"
 set nuklear="%~dp0Engine\include\nuklear"
@@ -73,12 +75,13 @@ goto :error
 :embuild	
 
 echo %CPP%
-	if exist ".\assets" (
-		echo Starting Build with assets...
-		call em++ -std=c++17 -sUSE_WEBGL2 -sUSE_SDL=2 -sWASM=1 %CPP% -o .\bin\WebGL2-build\index.html -I%IncludeFolder% -I%ENGINE% -I%GAME% -I%core% -I%Render% -I%Camera% -I%Entities% -I%Platforms% -I%Systems% -I%glm% -I%box2D% -I%nuklear% --preload-file .\assets
-	) else (
+	if not exist ".\assetss" (
 		echo Starting Build without assets...
-		call em++ -std=c++17 -sUSE_SDL=2 -sLLD_REPORT_UNDEFINED -sLINKABLE=1 -sEXPORT_ALL=1 -sFULL_ES3=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 %CPP% -o .\bin\WebGL2-build\index.html -I%IncludeFolder% -I%ENGINE% -I%GAME% -I%core% -I%Render% -I%Camera% -I%Entities% -I%Platforms% -I%Systems% -I%glm% -I%box2D% -I%nuklear% 
+		set EMCC_AUTODEBUG=1
+		call em++ -std=c++17 -O2 -sASSERTIONS=2 -sSAFE_HEAP=1 -sALLOW_MEMORY_GROWTH=1 -sUSE_WEBGL2=1 -sUSE_SDL=2 -sFULL_ES3=1 -sWASM=1 %CPP% -o .\bin\WebGL2-build\index.html -I%ENGINE% -I%GAME% -I%core% -I%Render% -I%Camera% -I%Entities% -I%Platforms% -I%Systems% -I%SDL% -I%glm% -I%box2D%
+	) else (
+		echo Starting Build with assets...
+		call em++ -std=c++17 -sSTACK_OVERFLOW_CHECK=2 -sUSE_SDL=2 -sUSE_WEBGL2=1 -sFULL_ES3=1 -sLLD_REPORT_UNDEFINED -sLINKABLE=1 -sEXPORT_ALL=1 -sMAX_WEBGL_VERSION=2 -sMIN_WEBGL_VERSION=2 %CPP% -o .\bin\WebGL2-build\index.html -I%IncludeFolder% -I%ENGINE% -I%GAME% -I%core% -I%Render% -I%Camera% -I%Entities% -I%Platforms% -I%Systems% -I%glm% -I%box2D% -I%nuklear% --preload-file .\assets
 	)
 	
 	echo Build Completed

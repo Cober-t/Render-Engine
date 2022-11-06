@@ -3,7 +3,8 @@
 #include <SDL/SDL.h>
 
 #include "Render/GraphicsContext.h"
-#include "Render/RenderGlobals.h"
+#include "core/Logger.h"
+//#include "Render/RenderGlobals.h"
 	
 namespace Cober {
 
@@ -31,7 +32,7 @@ namespace Cober {
 		static Unique<Window> Create(const std::string& name = "Render Engine ;)", uint32_t width = 1280, uint32_t height = 720, bool VSync = true);
 
 		bool CreateWindow();
-		void ClearWindow(float red = 21, float green = 21, float blue = 36, float black = 255);
+		//void ClearWindow(float red = 21, float green = 21, float blue = 36, float black = 255);
 		void SwapBuffers();
 		void UpdateViewport(const uint32_t width, const uint32_t height);
 		void CloseWindow();

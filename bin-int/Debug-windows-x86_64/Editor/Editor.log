@@ -13,38 +13,32 @@ cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
   MenuPanel.cpp
   SceneHierarchyPanel.cpp
   ViewportPanel.cpp
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\EditorApp.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\EditorLayer.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\EditorApp.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\EditorLayer.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\EditorApp.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\EditorLayer.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Render\Render2D.h(49): warning C4091: 'static ': se ha omitido a la izquierda de 'Cober::Render2D::Statistics' cuando no hay ninguna variable declarada (compilando archivo de origen src\EditorLayer.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Render\Render2D.h(49): warning C4091: 'static ': se ha omitido a la izquierda de 'Cober::Render2D::Statistics' cuando no hay ninguna variable declarada (compilando archivo de origen src\EditorApp.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Panels\MenuPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Panels\ViewportPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Panels\DataPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\MenuPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\MenuPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\ViewportPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\ViewportPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\DataPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(37,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\DataPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Render\Render2D.h(49): warning C4091: 'static ': se ha omitido a la izquierda de 'Cober::Render2D::Statistics' cuando no hay ninguna variable declarada (compilando archivo de origen src\Panels\MenuPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Render\Render2D.h(49): warning C4091: 'static ': se ha omitido a la izquierda de 'Cober::Render2D::Statistics' cuando no hay ninguna variable declarada (compilando archivo de origen src\Panels\ViewportPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Render\Render2D.h(49): warning C4091: 'static ': se ha omitido a la izquierda de 'Cober::Render2D::Statistics' cuando no hay ninguna variable declarada (compilando archivo de origen src\Panels\DataPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Render\Render2D.h(49): warning C4091: 'static ': se ha omitido a la izquierda de 'Cober::Render2D::Statistics' cuando no hay ninguna variable declarada (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Editor\src\Panels\ViewportPanel.cpp(52,32): warning C4312: 'conversión de tipo': conversión de 'uint32_t' a 'void *' de mayor tamaño
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(87,1): warning C4267: 'return': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(87): message : al compilar la función del miembro clase plantilla "int Cober::Pool<TComponent>::GetSize(void) const"
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\EditorLayer.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\EditorApp.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(36,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\EditorLayer.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(36,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\EditorLayer.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(36,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\EditorApp.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(36,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\EditorApp.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Panels\DataPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Panels\MenuPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Panels\ViewportPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(36,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\DataPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(36,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\DataPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(36,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\MenuPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(36,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\MenuPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(36,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(36,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(36,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\ViewportPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(36,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t' (compilando archivo de origen src\Panels\ViewportPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Editor\src\Panels\ViewportPanel.cpp(52,32): warning C4312: 'conversión de tipo': conversión de 'uint32_t' a 'void *' de mayor tamaño
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(86,1): warning C4267: 'return': conversión de 'size_t' a 'int'; posible pérdida de datos (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(86): message : al compilar la función del miembro clase plantilla "int Cober::Pool<TComponent>::GetSize(void) const"
           with
           [
               TComponent=Cober::BoxCollider2D
           ] (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(191): message : Vea la referencia a la creación de una instancia de la función plantilla "int Cober::Pool<TComponent>::GetSize(void) const" que se está compilando
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(192): message : Vea la referencia a la creación de una instancia de la función plantilla "int Cober::Pool<TComponent>::GetSize(void) const" que se está compilando
           with
           [
               TComponent=Cober::BoxCollider2D
@@ -60,20 +54,24 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.3162
               _Yty=Cober::Pool<Cober::BoxCollider2D>,
               _Ty=Cober::IPool
           ] (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(177): message : Vea la referencia a la creación de una instancia de clase plantilla "std::_SP_pointer_compatible<Cober::Pool<TComponent>,Cober::IPool>" que se está compilando
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(178): message : Vea la referencia a la creación de una instancia de clase plantilla "std::_SP_pointer_compatible<Cober::Pool<TComponent>,Cober::IPool>" que se está compilando
           with
           [
               TComponent=Cober::BoxCollider2D
           ] (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Engine\src\Entities\ECS.h(229): message : Vea la referencia a la creación de una instancia de la función plantilla "void Cober::Registry::AddComponent<TComponent,>(Cober::Entity)" que se está compilando
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\ECS.h(230): message : Vea la referencia a la creación de una instancia de la función plantilla "void Cober::Registry::AddComponent<TComponent,>(Cober::Entity)" que se está compilando
           with
           [
               TComponent=Cober::BoxCollider2D
           ] (compilando archivo de origen src\Panels\SceneHierarchyPanel.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Editor\src\Panels\SceneHierarchyPanel.cpp(196): message : Vea la referencia a la creación de una instancia de la función plantilla "void Cober::Entity::AddComponent<T,>(void)" que se está compilando
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Editor\src\Panels\SceneHierarchyPanel.cpp(196): message : Vea la referencia a la creación de una instancia de la función plantilla "void Cober::Entity::AddComponent<T,>(void)" que se está compilando
           with
           [
               T=Cober::BoxCollider2D
           ]
-C:\Users\jorge\OneDrive\Escritorio\Render Engine\Editor\src\Panels\SceneHierarchyPanel.cpp(226): message : Vea la referencia a la creación de una instancia de la función plantilla "void Cober::SceneHierarchyPanel::AddIfHasComponent<Cober::BoxCollider2D>(std::string)" que se está compilando
-  Editor.vcxproj -> C:\Users\jorge\OneDrive\Escritorio\Render Engine\bin\Debug-windows-x86_64\Editor\Editor.exe
+C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Editor\src\Panels\SceneHierarchyPanel.cpp(226): message : Vea la referencia a la creación de una instancia de la función plantilla "void Cober::SceneHierarchyPanel::AddIfHasComponent<Cober::BoxCollider2D>(std::string)" que se está compilando
+Engine.lib(b2_polygon_shape.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_polygon_shape.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render_Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_block_allocator.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_block_allocator.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render_Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(b2_settings.obj) : warning LNK4099: no se encontró PDB 'Box2D.pdb' con 'Engine.lib(b2_settings.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render_Engine\bin\Debug-windows-x86_64\Editor\Box2D.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Engine.lib(glew.obj) : warning LNK4099: no se encontró PDB 'vc120.pdb' con 'Engine.lib(glew.obj)' o en 'C:\Users\jorge\OneDrive\Escritorio\Render_Engine\bin\Debug-windows-x86_64\Editor\vc120.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  Editor.vcxproj -> C:\Users\jorge\OneDrive\Escritorio\Render_Engine\bin\Debug-windows-x86_64\Editor\Editor.exe

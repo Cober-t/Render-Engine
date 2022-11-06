@@ -53,7 +53,7 @@ namespace Cober {
 		FlipSurface(texSurface);
 
 		if (!texSurface)
-			Logger::Error("Failed to load image!");
+			LOG_ERROR("Failed to load image!");
 		
 		_width  = texSurface->w;
 		_height = texSurface->h;
@@ -97,7 +97,7 @@ namespace Cober {
 	{
 		uint32_t bpp = _dataFormat == GL_RGBA ? 4 : 3;
 		if (size != _width * _height * bpp)
-			Logger::Warning("Data must be entire texture!");
+			LOG_WARNING("Data must be entire texture!");
 
 		GLCallV(glTextureSubImage2D(_rendererID, 0, 0, 0, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, data));
 	}

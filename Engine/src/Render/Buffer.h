@@ -30,7 +30,7 @@ namespace Cober {
 		default:		break;
 		}
 
-		Logger::Warning("Unknown ShaderDataType!");
+		LOG_WARNING("Unknown ShaderDataType!");
 		return 0;
 	}
 
@@ -67,7 +67,7 @@ namespace Cober {
 			default:		break;
 			}
 
-			Logger::Warning("Unknown ShaderDataType!");
+			LOG_WARNING("Unknown ShaderDataType!");
 			return 0;
 		}
 	};

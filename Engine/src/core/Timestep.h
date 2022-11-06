@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include <SDL/SDL.h>
+
 namespace Cober {
 
 	class Timestep {
@@ -22,7 +24,7 @@ namespace Cober {
 			_countedFrames++;
 
 			if (lastFrameTime / 1000 - auxTime == 1) {
-				//Logger::Log("Frames: " + std::to_string(frames));
+				//LOG("Frames: " + std::to_string(frames));
 				auxTime = lastFrameTime / 1000;
 				frames = _countedFrames;
 				_countedFrames = 0;

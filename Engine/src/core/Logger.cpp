@@ -4,11 +4,11 @@
 	#include <GL/glew.h>
 #elif  __OPENGLES__
 	#include <GLES3/gl2.h>
+#elif __EMSCRIPTEN__
+	#include <SDL/SDL_opengles2.h>
 #elif  __OPENGLES3__
-	#ifndef __EMSCRIPTEN__
 		#include <GLES3/gl32.h>
 		#include <GLES3/gl3platform.h>
-	#endif
 #endif
 
 #include "Logger.h"
@@ -17,64 +17,72 @@ namespace Cober {
 
 	std::vector<LogEntry> Logger::messages;
 
-	void Logger::Log(const std::string& message) {
+	void Logger::Log(const std::string& message, const char* file, int line) {
 
 		LogEntry logEntry;
 		logEntry.type = LOG_INFO;
 		logEntry.message = message;
-		//std::string fileName = __FILE__;
-		//fileName = fileName.substr(fileName.find_last_of("/\\") + 1);
-		//std::cout << "\x1B[32m" << "LOG: [" << fileName << " " << "Line: " << __LINE__ << "] --- " << logEntry.message << "\033[0m" << std::endl;
-		std::cout << "\033[94m" << " --- LOG: [" << logEntry.message << "]  " << "\033[0m" << std::endl;
-		messages.push_back(logEntry);
+		std::string fileName = (std::string)file;
+		fileName = fileName.substr(fileName.find_last_of("/\\") + 1);
+
+#ifdef __EMSCRIPTEN__
+		std::cout << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "]" << "---" << logEntry.message << std::endl;
+#else
+		std::cout << "\033[94m" << "LOG: [" << fileName << " " << "Line: " << __LINE__ << "] --- " << logEntry.message << "\033[0m" << std::endl;
+#endif
+		//messages.push_back(logEntry);
 	}
 
-	void Logger::Warning(const std::string& message) {
+	void Logger::Warning(const std::string& message, const char* file, int line) {
 
 		LogEntry logEntry;
 		logEntry.type = LOG_INFO;
 		logEntry.message = message;
-		//std::string fileName = __FILE__;
-		//fileName = fileName.substr(fileName.find_last_of("/\\") + 1);
-		//std::cout << "\x1B[32m" << "LOG: [" << fileName << " " << "Line: " << __LINE__ << "] --- " << logEntry.message << "\033[0m" << std::endl;
-		std::cout << "\033[93m" << " --- LOG: [" << logEntry.message << "]  " << "\033[0m" << std::endl;
-		messages.push_back(logEntry);
+		std::string fileName = (std::string)file;
+		fileName = fileName.substr(fileName.find_last_of("/\\") + 1);
+
+#ifdef __EMSCRIPTEN__
+		std::cout << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "]" << "---" << logEntry.message << std::endl;
+#else
+		std::cout << "\033[93m" << "LOG: [" << fileName << " " << "Line: " << __LINE__ << "] --- " << logEntry.message << "\033[0m" << std::endl;
+#endif
+		//messages.push_back(logEntry);
 	}
 
 
-	void Logger::Error(const std::string& message) {
+	void Logger::Error(const std::string& message, const char* file, int line) {
 
 		LogEntry logEntry;
 		logEntry.type = LOG_ERROR;
 		logEntry.message = message;
-		//std::string fileName = __FILE__;
-		//fileName = fileName.substr(fileName.find_last_of("/\\") + 1);
-		//std::cout << "\x1B[91m" << "ERR: [" << fileName << " " << "Line: " << __LINE__ << "] --- " << logEntry.message << "\033[0m" << std::endl;
-		std::cout << "\033[91m" << " --- ERR: [" << logEntry.message << "]  " << "\033[0m" << std::endl;
-		messages.push_back(logEntry);
+		std::string fileName = (std::string)file;
+		fileName = fileName.substr(fileName.find_last_of("/\\") + 1);
+#ifdef __EMSCRIPTEN__
+		std::cout << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "]" << "---" << logEntry.message << std::endl;
+#else
+		std::cout << "\033[91m" << "LOG: [" << fileName << " " << "Line: " << __LINE__ << "] --- " << logEntry.message << "\033[0m" << std::endl;
+#endif
+		//messages.push_back(logEntry);
 	}
 
 	void Logger::GLClearErrors() {
 
-#ifndef __EMSCRIPTEN__
+//#ifndef __EMSCRIPTEN__
 		while (glGetError());
-#endif
+//#endif
 	}
 
 	bool Logger::GLCheckErrors(const char* function, const char* file, int line) {	
 
-#ifndef __EMSCRIPTEN__
+//#ifndef __EMSCRIPTEN__
 		while (GLenum error = glGetError()) {
 			std::string fileName = (std::string)file;
-			std::string solutionDir = SOLUTION_DIR;
-			fileName = fileName.substr(solutionDir.length());
+			fileName = fileName.substr(fileName.find_last_of("/\\") + 1);
 			Logger::Error("[OpenGL Error] (" + std::to_string(error) + (std::string)") " + function + "\n\t\t" + fileName + ":" + std::to_string(line));
 			return false;
 		}
+//#endif
 		return true;
-#endif
-
-
 	}
 }
 

@@ -3,10 +3,6 @@
 #include "Platforms/OpenGLES3/OpenGLES3Texture.h"
 #include "core/Logger.h"
 
-// Does not use this library, use SDL_Image instead to load images
-//#include <stb_image.h>
-#include <SDL/SDL_image.h>
-
 namespace Cober {
 
 	OpenGLES3Texture::OpenGLES3Texture(uint32_t width, uint32_t height)
@@ -38,7 +34,7 @@ namespace Cober {
 			//data = stbi_load(path.c_str(), &width, &height, &channels, 0);
 		}
 
-		Logger::Warning("Failed to load image!");
+		LOG_WARNING("Failed to load image!");
 
 		_width = width;
 		_height = height;
@@ -58,8 +54,8 @@ namespace Cober {
 		_internalFormat = internalFormat;
 		_dataFormat = dataFormat;
 
-		Logger::Warning("Format not supported!");
-		//Logger::Warning(internalFormat & dataFormat, "Format not supported!");
+		LOG_WARNING("Format not supported!");
+		LOG_WARNING(internalFormat & dataFormat, "Format not supported!");
 
 		GLCallV(glCreateTextures(GL_TEXTURE_2D, 1, &_rendererID));
 		GLCallV(glTextureStorage2D(_rendererID, 1, internalFormat, _width, _height));
@@ -84,8 +80,8 @@ namespace Cober {
 	{
 		/*
 		uint32_t bpp = _dataFormat == GL_RGBA ? 4 : 3;
-		Logger::Warning("Data must be entire texture!");
-		//Logger::Warning(size == m_Width * m_Height * bpp, "Data must be entire texture!");
+		LOG_WARNING("Data must be entire texture!");
+		//LOG_WARNING(size == m_Width * m_Height * bpp, "Data must be entire texture!");
 		GLCallV(glTextureSubImage2D(_rendererID, 0, 0, 0, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, data));
 		*/
 	}

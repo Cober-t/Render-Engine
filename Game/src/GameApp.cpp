@@ -10,10 +10,8 @@ namespace Cober {
 		Game() {
 			PushLayer(new Game2D());
 			Engine::Get().SetGameState(GameState::PLAY);
-			Logger::Log("Game Constructor Called!");
 		}
 		~Game() {
-			Logger::Log("Game Destructor Called!");
 		}
 	};
 

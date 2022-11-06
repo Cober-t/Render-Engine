@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Render2D.h"
 
+#include "Render/RenderAPI.h"
 #include "Render/RenderGlobals.h"
 
 namespace Cober {
@@ -270,10 +271,10 @@ namespace Cober {
 			glm::toMat4(glm::quat(transformComponent->rotation)) *
 			glm::scale(glm::mat4(1.0f), { transformComponent->scale.x, transformComponent->scale.y, 1.0f });
 
-		constexpr size_t quadVertexCount = 4;
-		constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
+		size_t quadVertexCount = 4;
+		glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 		float textureIndex = 0.0f;
-		const float tilingFactor = 1.0f;
+		float tilingFactor = 1.0f;
 
 		if (data.QuadIndexCount >= RenderData::MaxIndices)
 			Render2D::NextBatch();
@@ -326,10 +327,10 @@ namespace Cober {
 				* glm::toMat4(glm::quat(enttTrans.rotation))
 				* glm::scale(glm::mat4(1.0f), scale);
 
-			constexpr size_t quadVertexCount = 4;
-			const float textureIndex = 0.0f; // White Texture
-			constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
-			const float tilingFactor = 1.0f;
+			size_t quadVertexCount = 4;
+			float textureIndex = 0.0f; // White Texture
+			glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
+			float tilingFactor = 1.0f;
 
 			if (data.QuadIndexCount >= data.MaxIndices)
 				Render2D::NextBatch();

@@ -1,9 +1,9 @@
 #include "pch.h"
-#include "Platforms/OpenGLES3/OpenGLES3Shader.h"
 
-#include <glm/gtc/type_ptr.hpp>
+#include "Platforms/OpenGLES3/OpenGLES3Shader.h"
 #include <fstream>
 
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Cober {
 
@@ -14,7 +14,7 @@ namespace Cober {
 	//	if (type == "fragment" || type == "pixel")
 	//		return GL_FRAGMENT_SHADER;
 
-	//	Logger::Warning("Unknown shader type!");*/
+	//	LOG_WARNING("Unknown shader type!");*/
 	//	return 0;
 	//}
 
@@ -51,10 +51,10 @@ namespace Cober {
 	//			in.close();
 	//		}
 	//		else
-	//			Logger::Warning("Could not read from file " + filePath);
+	//			LOG_WARNING("Could not read from file " + filePath);
 	//	}
 	//	else
-	//		Logger::Log("Could not open file " + filePath);
+	//		LOG("Could not open file " + filePath);
 	//
 	//	return result;
 	//}
@@ -71,18 +71,18 @@ namespace Cober {
 	//		size_t eol = source.find_first_of("\r\n", pos); //End of shader type declaration line
 
 	//		if (eol != std::string::npos)
-	//			Logger::Warning("Syntax error");
+	//			LOG_WARNING("Syntax error");
 
 	//		size_t begin = pos + typeTokenLength + 1; //Start of shader type name (after "#type " keyword)
 	//		std::string type = source.substr(begin, eol - begin);
 
 	//		if (ShaderTypeFromString(type))
-	//			Logger::Log("Invalid shader type specified");
+	//			LOG("Invalid shader type specified");
 
 	//		size_t nextLinePos = source.find_first_not_of("\r\n", eol); //Start of shader code after shader type declaration line
 
 	//		if (nextLinePos != std::string::npos)
-	//			Logger::Log("Syntax error");
+	//			LOG("Syntax error");
 
 	//		pos = source.find(typeToken, nextLinePos); //Start of next shader type declaration line
 	//		shaderSources[ShaderTypeFromString(type)] = (pos == std::string::npos) ? source.substr(nextLinePos) : source.substr(nextLinePos, pos - nextLinePos);
@@ -97,7 +97,7 @@ namespace Cober {
 		GLuint program = GLCall(glCreateProgram());
 
 		if (shaderSources.size() <= 2)
-			Logger::Log("We only support 2 shaders for now");
+			LOG("We only support 2 shaders for now");
 
 		std::array<GLenum, 2> glShaderIDs;
 		int glShaderIDIndex = 0;
@@ -126,8 +126,8 @@ namespace Cober {
 
 				GLCallV(glDeleteShader(shader));
 
-				Logger::Log(infoLog.data());
-				Logger::Log("Shader link failure!");
+				LOG(infoLog.data());
+				LOG("Shader link failure!");
 				break;
 			}
 
@@ -158,8 +158,8 @@ namespace Cober {
 			for (auto id : glShaderIDs)
 				glDeleteShader(id);
 
-			Logger::Log(infoLog.data());
-			Logger::Log("Shader link failure!");
+			LOG(infoLog.data());
+			LOG("Shader link failure!");
 			return;
 		}
 

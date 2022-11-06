@@ -10,7 +10,6 @@
 #include <box2D/b2_fixture.h>
 #include <box2D/b2_polygon_shape.h>
 #include <box2D/b2_draw.h>
-
 class b2World;
 
 namespace Cober {
