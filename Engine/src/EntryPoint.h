@@ -10,7 +10,7 @@ extern Cober::Engine* Cober::CreateApplication();
 auto app = Cober::CreateApplication();
 
 #ifdef __EMSCRIPTEN__
-static void main_loop() { app->Update(); }
+void main_loop() { app->main_loop(); }
 #endif
 
 int main(int argc, char** argv) {

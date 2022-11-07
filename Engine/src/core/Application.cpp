@@ -1,11 +1,11 @@
 #include "pch.h"
 #include "Application.h"
+#include "Render/RenderAPI.h"
 #include "Render/RenderGlobals.h"
 
 namespace Cober {
 
     Engine* Engine::_instance = nullptr;
-    //static Window* window;
     
     Engine::Engine(const std::string& name, uint32_t width, uint32_t height, bool vsync) 
     {
@@ -15,9 +15,14 @@ namespace Cober {
         PHYSICS_2D = false;
 
         _instance = this;
+        RenderGlobals::Create();
 
-        //if (SDL_Init((SDL_INIT_EVERYTHING) | ~(SDL_INIT_SENSOR, SDL_INIT_HAPTIC)) < 0)
-        if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0)
+#ifdef __EMSCRIPTEN__
+        unsigned int flags = SDL_INIT_VIDEO | SDL_INIT_EVENTS;
+#else
+        unsigned int flags = SDL_INIT_EVERYTHING;
+#endif
+        if (SDL_Init(flags))
             GET_SDL_ERROR();
 
         _window = Window::Create(name, width, height, vsync);
@@ -59,36 +64,35 @@ namespace Cober {
     }
 
     void Engine::Update() {
+     
+        while (_gameState == GameState::PLAY || _gameState == GameState::EDITOR || _gameState == GameState::RUNTIME_EDITOR)
+            main_loop();
+    }
 
-        while (_gameState == GameState::PLAY || _gameState == GameState::EDITOR || _gameState == GameState::RUNTIME_EDITOR) {
+    void Engine::main_loop() {
+        _timestep->Update();  // Allow limit FPS
 
-            _timestep->Update();  // Allow limit FPS
+        //UISystem::StartProcessInputs();
+        ProcessInputs();
+        //UISystem::EndProcessInputs();
 
-#ifdef __EMSCRIPTEN__
-            std::cout << "Frames: -- " << _timestep->frames << "fps\t\t" << "DeltaTime: -- " << _timestep->DeltaTime() << std::endl;
-#endif
-            //UISystem::StartProcessInputs();
-            ProcessInputs();
-            //UISystem::EndProcessInputs();
-
-            //if(!_minimized) { ...
-            {
-                for (Layer* layer : _LayerStack)
-                    layer->OnUpdate(_timestep);
+        //if(!_minimized) { ...
+        {
+            for (Layer* layer : _LayerStack)
+                layer->OnUpdate(_timestep);
 
 #ifndef __EMSCRIPTEN__
-                if (_gameState == GameState::EDITOR || _gameState == GameState::RUNTIME_EDITOR) {
-                    _GuiLayer->Begin();
-                    for (Layer* layer : _LayerStack)
-                        layer->OnGuiRender();
-                    _GuiLayer->End();
-                }
-#endif
+            if (_gameState == GameState::EDITOR || _gameState == GameState::RUNTIME_EDITOR) {
+                _GuiLayer->Begin();
+                for (Layer* layer : _LayerStack)
+                    layer->OnGuiRender();
+                _GuiLayer->End();
             }
-            // ... }
-
-            _window->SwapBuffers();
+#endif
         }
+        // ... }
+
+        _window->SwapBuffers();
     }
 
     void Engine::ProcessInputs() {

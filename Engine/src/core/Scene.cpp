@@ -54,9 +54,9 @@ namespace Cober {
 		//_registry->GetSystem<MovementSystem>().Start(scene);
 
 		// Emscripten Test
-		entity = _registry->CreateEntity();
+		/*entity = _registry->CreateEntity();
 		entity.AddComponent<Sprite>();
-		entity.GetComponent<Sprite>().color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+		entity.GetComponent<Sprite>().color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);*/
 		LOG("On Runtime Start!");
 	}
 

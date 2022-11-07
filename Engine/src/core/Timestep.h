@@ -23,10 +23,13 @@ namespace Cober {
 			deltaTime = (SDL_GetTicks() - lastFrameTime) / 1000.0;
 			_countedFrames++;
 
-			if (lastFrameTime / 1000 - auxTime == 1) {
-				//LOG("Frames: " + std::to_string(frames));
+			if (lastFrameTime / 1000 - auxTime >= 1) {
 				auxTime = lastFrameTime / 1000;
+
 				frames = _countedFrames;
+#ifdef __EMSCRIPTEN__
+				std::cout << "Frames: " << frames << "\t--\t" << "DeltaTime: " << deltaTime << std::endl;
+#endif
 				_countedFrames = 0;
 			}
 

@@ -25,7 +25,6 @@ namespace Cober {
 	{
 		_registry = scene->GetRegistry();
 
-		LOG("Render System Init");
 #ifndef __EMSCRIPTEN__
 		RenderGlobals::Init();
 		Render2D::Start();
@@ -40,7 +39,13 @@ namespace Cober {
 	void RenderSystem::Update(const Ref<EditorCamera>& camera)
 	{
 		//RenderGlobals::SetClearColor(10, 0, 10, 255);
-		RenderGlobals::SetClearColor(225,225, 255, 255);
+		int random = 0 + (std::rand() % 3);
+		switch (random) {
+			case 0:  RenderGlobals::SetClearColor(225, 225, 255, 255);	break;
+			case 1:  RenderGlobals::SetClearColor(10, 0, 10, 255);		break;
+			case 2:  RenderGlobals::SetClearColor(20, 225, 80, 255);	break;
+			default: RenderGlobals::SetClearColor(220, 80, 10, 255);	break;
+		}
 		RenderGlobals::Clear();
 		// RenderGlobals::SetClearColor(camera->GetSkyboxColor());
 		//	or just

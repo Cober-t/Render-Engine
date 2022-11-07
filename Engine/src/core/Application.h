@@ -30,6 +30,7 @@ namespace Cober {
 
 		void Start();
 		void Update();
+		void main_loop();	// For EMSCRIPTEN
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);

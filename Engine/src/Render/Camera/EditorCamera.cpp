@@ -116,6 +116,11 @@ namespace Cober {
 		auto [xSpeed, ySpeed] = PanSpeed();
 		_focalPoint += -GetRightDirection() * delta.x * xSpeed * _distance;
 		_focalPoint += GetUpDirection() * delta.y * ySpeed * _distance;
+#ifdef __EMSCRITEN__	// Emscripten Test
+		int mouseX, mouseY;
+		SDL_GetMouseState(&mouseX, &mouseY);
+		std::cout << "MouxeX: " << mouseX << "\t MouseY: " << mouseY << std::endl;
+#endif
 	}
 
 	void EditorCamera::MouseRotate(const glm::vec2& delta)

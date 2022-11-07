@@ -24,11 +24,13 @@ namespace Cober {
         switch (event.type) {
             case SDL_KEYDOWN: {
                 auto key = event.key.keysym.sym;
-#ifndef __EMSCRIPTEN__
                 if (key == SDLK_ESCAPE) {
+#ifndef __EMSCRIPTEN__
                     Engine::Get().Close();
-                }
+#else
+                    std::cout << "Pressed!" << std::endl;
 #endif
+                }
                 break;
             }
             case SDL_QUIT:
