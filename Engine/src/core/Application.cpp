@@ -15,7 +15,6 @@ namespace Cober {
         PHYSICS_2D = false;
 
         _instance = this;
-        RenderGlobals::Create();
 
 #ifdef __EMSCRIPTEN__
         unsigned int flags = SDL_INIT_VIDEO | SDL_INIT_EVENTS;
@@ -53,13 +52,11 @@ namespace Cober {
 
     void Engine::Start() {
 
-#ifndef __OPENGLES3__
-#ifndef __EMSCRIPTEN__
+#ifdef __OPENGL__
         if (_gameState == GameState::EDITOR || _gameState == GameState::RUNTIME_EDITOR) {
-            _GuiLayer = new GuiLayer("#version 430");
+            _GuiLayer = new GuiLayer("#version 460");
             PushOverlay(_GuiLayer);
         }
-#endif
 #endif
     }
 
@@ -81,7 +78,7 @@ namespace Cober {
             for (Layer* layer : _LayerStack)
                 layer->OnUpdate(_timestep);
 
-#ifndef __EMSCRIPTEN__
+#ifdef __OPENGL__
             if (_gameState == GameState::EDITOR || _gameState == GameState::RUNTIME_EDITOR) {
                 _GuiLayer->Begin();
                 for (Layer* layer : _LayerStack)

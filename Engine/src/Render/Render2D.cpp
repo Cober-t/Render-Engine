@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "Render2D.h"
 
-#include "Render/RenderAPI.h"
 #include "Render/RenderGlobals.h"
 
 namespace Cober {
@@ -81,13 +80,14 @@ namespace Cober {
 		glm::vec4 QuadVertexPositions[4];
 
 		Render2D::Statistics Stats;
-
 		struct CameraData
 		{
 			glm::mat4 ViewProjection;
 		};
 		CameraData CameraBuffer;
+#ifdef __OPENGL__
 		Ref<UniformBuffer> CameraUniformBuffer;
+#endif
 	};
 
 	static RenderData data;
@@ -159,6 +159,7 @@ namespace Cober {
 
 		data.WhiteTexture = Texture::Create(1, 1);
 		uint32_t whiteTextureData = 0xffffffff;
+		data.WhiteTexture->Bind();
 		data.WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
 		int32_t samplers[data.MaxTextureSlots];
@@ -166,8 +167,8 @@ namespace Cober {
 			samplers[i] = i;
 
 		data.QuadShader = Shader::Create("Render_Quad.glsl");
-		data.CircleShader = Shader::Create("Render_Circle.glsl");
-		data.LineShader = Shader::Create("Render_Line.glsl");
+		//data.CircleShader = Shader::Create("Render_Circle.glsl");
+		//data.LineShader = Shader::Create("Render_Line.glsl");
 
 		// Set first texture slot to 0
 		data.TextureSlots[0] = data.WhiteTexture;
@@ -177,14 +178,21 @@ namespace Cober {
 		data.QuadVertexPositions[2] = {  0.5f,  0.5f, 0.0f, 1.0f };
 		data.QuadVertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
 
+#ifdef __OPENGL__
 		data.CameraUniformBuffer = UniformBuffer::Create(sizeof(RenderData::CameraData), 0);
-
+#endif
 	}
 
 	void Render2D::BeginScene(const Ref<EditorCamera>& camera) {
 
-		data.CameraBuffer.ViewProjection = camera->GetProjection() * camera->GetView();
+#ifdef __OPENGL__
+		data.CameraBuffer.ViewProjection = camera->GetPV();
 		data.CameraUniformBuffer->SetData(&data.CameraBuffer, sizeof(RenderData::CameraData));
+#else
+		data.QuadShader->Bind();
+		data.QuadShader->SetMat4("u_ViewProjection", camera->GetPV());
+		// ... CircleShader .. LineShader ...
+#endif
 
 		Render2D::StartBatch();
 	}
@@ -202,6 +210,7 @@ namespace Cober {
 
 			data.QuadShader->Bind();
 			RenderGlobals::DrawIndexed(data.QuadVertexArray, data.QuadIndexCount);
+			// ... CircleShader .. LineShader ...
 			data.Stats.DrawCalls++;
 		}
 

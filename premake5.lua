@@ -104,7 +104,7 @@ project "Engine"
 	{
 		"opengl32",
 		"glew32s",	
-		"libEGL",
+		--"libEGL",
 		"libGLESv2",
 		"Box2D",
 		"SDL2",
@@ -132,16 +132,15 @@ project "Engine"
 		defines
 		{
 			"CB_PLATFORM_WINDOWS",
-			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM=<SDL_opengl.h>",
-			"GL_GLEXT_PROTOTYPES=1",
+			'SOLUTION_DIR=R"($(SolutionDir))"',
 			"CB_BUILD_DLL",
+			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM=<SDL_opengl.h>",
+			"NK_IMPLEMENTATION",
+			--"NK_SDL_GL3_IMPLEMENTATION",
+			"GL_GLEXT_PROTOTYPES=1",
 			"GLEW_STATIC",
 			--"__OPENGL__",
 			"__OPENGLES3__",
-			"NK_IMPLEMENTATION",
-			"NK_SDL_GL3_IMPLEMENTATION",
-			'SOLUTION_DIR=R"($(SolutionDir))"',
-			"__EMSCRIPTEN__"
 		}
 
 	filter "configurations:Debug"
@@ -183,7 +182,12 @@ project "Editor"
 	includedirs
 	{
 		"Engine/include",
+		"Engine/include/SDL",
 		"Engine/include/glm",
+		"Engine/include/box2D",
+		"Engine/include/nuklear",
+		"Engine/include/sol",
+		"Engine/include/lua",
 		"Engine/include/imgui",
 		"Engine/src",
 	}
@@ -199,13 +203,13 @@ project "Editor"
 		defines 
 		{
 			"CB_PLATFORM_WINDOWS",
+			'SOLUTION_DIR=R"($(SolutionDir))"',
+			"NK_IMPLEMENTATION",
+			"NK_SDL_GL3_IMPLEMENTATION",
 			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM=<SDL_opengl.h>",
 			"GL_GLEXT_PROTOTYPES=1",
 			"GLEW_STATIC",
 			"__OPENGL__",
-			"NK_IMPLEMENTATION",
-			"NK_SDL_GL3_IMPLEMENTATION",
-			'SOLUTION_DIR=R"($(SolutionDir))"'
 		}
 
 
@@ -246,7 +250,12 @@ project "Game"
 	includedirs
 	{
 		"Engine/include",
+		"Engine/include/SDL",
 		"Engine/include/glm",
+		"Engine/include/box2D",
+		"Engine/include/nuklear",
+		"Engine/include/sol",
+		"Engine/include/lua",
 		"Engine/src",
 	}
 
@@ -261,13 +270,12 @@ project "Game"
 		defines 
 		{
 			"CB_PLATFORM_WINDOWS",
-			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM=<SDL_opengl.h>",
-			"GL_GLEXT_PROTOTYPES=1",
-			"GLEW_STATIC",
-			"__OPENGLES3__",
-			"NK_IMPLEMENTATION",
 			'SOLUTION_DIR=R"($(SolutionDir))"',
-			"__EMSCRIPTEN__"
+			"NK_IMPLEMENTATION",
+			--"GL_GLEXT_PROTOTYPES=1",
+			--"GLEW_STATIC",
+			--"__OPENGL__",
+			--"__OPENGLES3__",
 		}
 
 	filter "configurations:Debug"

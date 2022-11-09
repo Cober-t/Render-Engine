@@ -76,7 +76,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGLES3__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";__EMSCRIPTEN__;CB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;SOLUTION_DIR=R"($(SolutionDir))";CB_BUILD_DLL;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;NK_IMPLEMENTATION;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGLES3__;CB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>include;include\SDL;include\glm;include\box2D;include\nuklear;include\sol;include\lua;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -92,7 +92,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;libEGL.lib;libGLESv2.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;libGLESv2.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>lib\GL;lib\GLES3;lib\box2D;lib\lua;lib\SDL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
@@ -101,7 +101,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGLES3__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";__EMSCRIPTEN__;CB_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;SOLUTION_DIR=R"($(SolutionDir))";CB_BUILD_DLL;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;NK_IMPLEMENTATION;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGLES3__;CB_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>include;include\SDL;include\glm;include\box2D;include\nuklear;include\sol;include\lua;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -120,7 +120,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;libEGL.lib;libGLESv2.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;libGLESv2.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>lib\GL;lib\GLES3;lib\box2D;lib\lua;lib\SDL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
@@ -129,7 +129,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;CB_BUILD_DLL;GLEW_STATIC;__OPENGLES3__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";__EMSCRIPTEN__;CB_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;SOLUTION_DIR=R"($(SolutionDir))";CB_BUILD_DLL;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;NK_IMPLEMENTATION;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGLES3__;CB_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>include;include\SDL;include\glm;include\box2D;include\nuklear;include\sol;include\lua;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -148,7 +148,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;libEGL.lib;libGLESv2.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;libGLESv2.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>lib\GL;lib\GLES3;lib\box2D;lib\lua;lib\SDL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>

@@ -78,8 +78,8 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGL__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";CB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Engine\include;..\Engine\include\glm;..\Engine\include\imgui;..\Engine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CB_PLATFORM_WINDOWS;SOLUTION_DIR=R"($(SolutionDir))";NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGL__;CB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Engine\include;..\Engine\include\SDL;..\Engine\include\glm;..\Engine\include\box2D;..\Engine\include\nuklear;..\Engine\include\sol;..\Engine\include\lua;..\Engine\include\imgui;..\Engine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -99,8 +99,8 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGL__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";CB_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Engine\include;..\Engine\include\glm;..\Engine\include\imgui;..\Engine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CB_PLATFORM_WINDOWS;SOLUTION_DIR=R"($(SolutionDir))";NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGL__;CB_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Engine\include;..\Engine\include\SDL;..\Engine\include\glm;..\Engine\include\box2D;..\Engine\include\nuklear;..\Engine\include\sol;..\Engine\include\lua;..\Engine\include\imgui;..\Engine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -123,8 +123,8 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>CB_PLATFORM_WINDOWS;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGL__;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;SOLUTION_DIR=R"($(SolutionDir))";CB_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Engine\include;..\Engine\include\glm;..\Engine\include\imgui;..\Engine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CB_PLATFORM_WINDOWS;SOLUTION_DIR=R"($(SolutionDir))";NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGL__;CB_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Engine\include;..\Engine\include\SDL;..\Engine\include\glm;..\Engine\include\box2D;..\Engine\include\nuklear;..\Engine\include\sol;..\Engine\include\lua;..\Engine\include\imgui;..\Engine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>

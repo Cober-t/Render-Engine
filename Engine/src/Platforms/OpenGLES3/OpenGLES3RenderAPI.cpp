@@ -5,6 +5,7 @@ namespace Cober {
 
 	void OpenGLES3RenderAPI::Init() {
 
+		//GLCallV(glEnable(GL_TEXTURE_2D));
 		GLCallV(glEnable(GL_BLEND));
 		GLCallV(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 		GLCallV(glEnable(GL_DEPTH_TEST));

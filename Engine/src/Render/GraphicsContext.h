@@ -1,7 +1,8 @@
 #pragma once
 
-#include "core/Core.h"
 #include <SDL/SDL.h>
+
+#include "core/Core.h"
 
 namespace Cober {
 

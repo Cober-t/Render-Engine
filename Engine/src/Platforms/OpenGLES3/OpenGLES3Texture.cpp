@@ -8,37 +8,59 @@ namespace Cober {
 	OpenGLES3Texture::OpenGLES3Texture(uint32_t width, uint32_t height)
 		: _width(width), _height(height)
 	{
-		/*_internalFormat = GL_RGBA8;
+		_internalFormat = GL_RGBA8;
 		_dataFormat = GL_RGBA;
 
-		GLCallV(glCreateTextures(GL_TEXTURE_2D, 1, &_rendererID));
-		GLCallV(glTextureStorage2D(_rendererID, 1, _internalFormat, _width, _height));
+		GLCallV(glGenTextures(1, &_rendererID));
+		GLCallV(glBindTexture(GL_TEXTURE_2D, (GLuint)&_rendererID));
+		GLCallV(glTexStorage2D(_rendererID, 1, _internalFormat, _width, _height));
 
-		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
 
-		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_S, GL_REPEAT));
-		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_T, GL_REPEAT));
-		*/
+		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
+		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
+	}
+
+	void FlipSurface(SDL_Surface* surface)
+	{
+		SDL_LockSurface(surface);
+
+		int pitch = surface->pitch; // row size
+		char* temp = new char[pitch]; // intermediate buffer
+		char* pixels = (char*)surface->pixels;
+
+		for (int i = 0; i < surface->h / 2; ++i) {
+			// get pointers to the two rows to swap
+			char* row1 = pixels + i * pitch;
+			char* row2 = pixels + (surface->h - i - 1) * pitch;
+
+			// swap rows
+			memcpy(temp, row1, pitch);
+			memcpy(row1, row2, pitch);
+			memcpy(row2, temp, pitch);
+		}
+
+		delete[] temp;
+
+		SDL_UnlockSurface(surface);
 	}
 
 	OpenGLES3Texture::OpenGLES3Texture(const std::string& path)
 		: _path(path)
 	{
-		/*
-		int width, height, channels;
 		// LOAD IMAGE
-		{
-			//stbi_set_flip_vertically_on_load(1);
-			//stbi_uc* data = nullptr;
-			//data = stbi_load(path.c_str(), &width, &height, &channels, 0);
-		}
+		SDL_Surface* texSurface = IMG_Load(path.c_str());
 
-		LOG_WARNING("Failed to load image!");
+		FlipSurface(texSurface);
 
-		_width = width;
-		_height = height;
+		if (!texSurface)
+			LOG_ERROR("Failed to load image!");
 
+		_width = texSurface->w;
+		_height = texSurface->h;
+
+		int channels = texSurface->format->BytesPerPixel;
 		GLenum internalFormat = 0, dataFormat = 0;
 		if (channels == 4)
 		{
@@ -54,40 +76,37 @@ namespace Cober {
 		_internalFormat = internalFormat;
 		_dataFormat = dataFormat;
 
-		LOG_WARNING("Format not supported!");
-		LOG_WARNING(internalFormat & dataFormat, "Format not supported!");
+		GLCallV(glGenTextures(GL_TEXTURE_2D, &_rendererID));
+		GLCallV(glBindTexture(GL_TEXTURE_2D, (GLuint)&_rendererID));
+		GLCallV(glTexStorage2D(_rendererID, 1, internalFormat, _width, _height));
 
-		GLCallV(glCreateTextures(GL_TEXTURE_2D, 1, &_rendererID));
-		GLCallV(glTextureStorage2D(_rendererID, 1, internalFormat, _width, _height));
+		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 
-		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
+		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
 
-		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_S, GL_REPEAT));
-		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_T, GL_REPEAT));
+		GLCallV(glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, _width, _height, dataFormat, GL_UNSIGNED_BYTE, texSurface->pixels));
 
-		GLCallV(glTextureSubImage2D(_rendererID, 0, 0, 0, _width, _height, dataFormat, GL_UNSIGNED_BYTE, data));
-		*/
-		//stbi_image_free(data);
+		SDL_FreeSurface(texSurface);
 	}
 
 	OpenGLES3Texture::~OpenGLES3Texture()
 	{
-		//GLCallV(glDeleteTextures(1, &_rendererID));
+		GLCallV(glDeleteTextures(1, &_rendererID));
 	}
 
-	void OpenGLES3Texture::SetData(void* data, uint32_t size)
+	void OpenGLES3Texture::SetData(const void* data, uint32_t size)
 	{
-		/*
 		uint32_t bpp = _dataFormat == GL_RGBA ? 4 : 3;
-		LOG_WARNING("Data must be entire texture!");
-		//LOG_WARNING(size == m_Width * m_Height * bpp, "Data must be entire texture!");
-		GLCallV(glTextureSubImage2D(_rendererID, 0, 0, 0, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, data));
-		*/
+		if (size != _width * _height * bpp)
+			LOG_WARNING("Data must be entire texture!");
+
+		GLCallV(glTexImage2D(GL_TEXTURE_2D, 0, _internalFormat, _width, _height, 0, _dataFormat, GL_UNSIGNED_BYTE, data));
 	}
 
 	void OpenGLES3Texture::Bind(uint32_t slot) const
 	{
-		//GLCallV(glBindTextureUnit(slot, _rendererID));
+		GLCallV(glBindTexture(GL_TEXTURE_2D, (GLuint)&_rendererID));
 	}
 }

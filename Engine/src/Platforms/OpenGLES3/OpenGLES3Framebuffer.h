@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SDL/SDL_opengles2.h>
+
 #include "core/Window.h"
 #include "Render/Framebuffer.h"
 

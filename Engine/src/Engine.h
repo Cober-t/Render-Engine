@@ -47,24 +47,23 @@
 //[++++++++++++++++++++++++++]
 //[+++++++++ Platform +++++++++]
 //[++++++++++++++++++++++++++]
-#ifndef __EMSCRIPTEN__
-	#include <Platforms/OpenGL/OpenGLContext.h>
-	#include <Platforms/OpenGL/OpenGLFramebuffer.h>
-	#include <Platforms/OpenGL/OpenGLRenderAPI.h>
-	#include <Platforms/OpenGL/OpenGLShader.h>
-#else
-	//#include <Platforms/OpenGL/OpenGLES3Context.h>
-	//#include <Platforms/OpenGL/OpenGLES3Framebuffer.h>
-	//#include <Platforms/OpenGL/OpenGLES3RenderAPI.h>
-	//#include <Platforms/OpenGL/OpenGLES3Shader.h>
+#if !defined __EMSCRIPTEN__ || __OPENGLES3__
+	//#include <Platforms/OpenGL/OpenGLContext.h>
+	//#include <Platforms/OpenGL/OpenGLFramebuffer.h>
+	//#include <Platforms/OpenGL/OpenGLRenderAPI.h>
+	//#include <Platforms/OpenGL/OpenGLShader.h>
+#elif defined __OPENGLES3__
+	#include <Platforms/OpenGL/OpenGLES3Context.h>
+	#include <Platforms/OpenGL/OpenGLES3Framebuffer.h>
+	#include <Platforms/OpenGL/OpenGLES3RenderAPI.h>
+	#include <Platforms/OpenGL/OpenGLES3Shader.h>
 #endif
 
 
 //[++++++++++++++++++++++++++]
 //[+++++++++ IMGUI ++++++++++]
 //[++++++++++++++++++++++++++]
-
-#ifndef __EMSCRIPTEN__
+#if defined __OPENGL__
 	#include <imgui/imgui.h>
 	#include <imgui/imconfig.h>
 	#include <imgui/imgui_impl_opengl3.h>

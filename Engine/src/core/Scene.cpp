@@ -27,7 +27,7 @@ namespace Cober {
 		LOG("Scene finished, removing systems from registry...");
 		//_registry->RemoveSystem<MovementSystem>();
 		//_registry->RemoveSystem<PhysicsSystem>();
-		_registry->RemoveSystem<RenderSystem>();
+		//_registry->RemoveSystem<RenderSystem>();
 		//_registry->RemoveSystem<UISystem>();
 	}
 
@@ -42,22 +42,15 @@ namespace Cober {
 		//scene->_registry->AddSystem<UISystem>();
 		//scene->_registry->GetSystem<UISystem>().Start(Engine::Get().GetWindow().GetNativeWindow());
 
-		LOG("Scene Created!");
 		return scene;
 	}
-	Entity entity;
+
 	void Scene::OnRuntimeStart(const Ref<Scene>& scene) {
 
 		//_registry->GetSystem<PhysicsSystem>().Start();
 
 		//_registry->AddSystem<MovementSystem>();
 		//_registry->GetSystem<MovementSystem>().Start(scene);
-
-		// Emscripten Test
-		/*entity = _registry->CreateEntity();
-		entity.AddComponent<Sprite>();
-		entity.GetComponent<Sprite>().color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);*/
-		LOG("On Runtime Start!");
 	}
 
 	void Scene::OnRuntimeStop() {
@@ -68,7 +61,7 @@ namespace Cober {
 	void Scene::OnUpdateRuntime(Ref<Timestep> ts, Ref<EditorCamera> camera) {
 		
 		//_registry->GetSystem<PhysicsSystem>().Update(ts->deltaTime);
-
+		_registry->Update();
 		_registry->GetSystem<RenderSystem>().Update(camera);	// Get Camera components from entities
 		//_registry->GetSystem<UISystem>().Update();
 	}

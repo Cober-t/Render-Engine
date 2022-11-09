@@ -1,7 +1,8 @@
 #include "pch.h"
 
 #include "Window.h"
-#include <SDL/SDL_opengles2.h>
+#include "Render/RenderGlobals.h"
+//#include <SDL/SDL_opengles2.h>
 
 namespace Cober {
 
@@ -62,8 +63,8 @@ namespace Cober {
 
 		_data.width = width;
 		_data.height = height;
-		GLCallV(glViewport(0, 0, width, height));
-		//RenderGlobals::SetViewport(0, 0, width, height);
+		//GLCallV(glViewport(0, 0, width, height));
+		RenderGlobals::SetViewport(0, 0, width, height);
 	}
 
 	void Window::CloseWindow() {

@@ -9,9 +9,12 @@
 setlocal enabledelayedexpansion enableextensions
 
 :: Customize here ===========================================
+:: Macros
+set MACROS=__EMSCRIPTEN__
 
 :: Location of Emscripten SDK
 set EMSDK="C:\Users\jorge\OneDrive\Escritorio\Render_Engine\emsdk\"
+
 
 :: Location of Engine header files
 set ENGINE="%~dp0Engine\src"
@@ -75,12 +78,12 @@ goto :error
 :embuild	
 
 echo %CPP%
-	if not exist ".\assetss" (
+	if exist ".\assets" (
 		echo Starting Build without assets...
-		call em++ -std=c++17 -Os -sUSE_SDL=2 -sUSE_WEBGL2=1 -sFULL_ES3=1 -sWASM=1 %CPP% -o .\bin\WebGL2-build\index.html -I%ENGINE% -I%GAME% -I%core% -I%Render% -I%Camera% -I%Entities% -I%Platforms% -I%Systems% -I%SDL% -I%glm% -I%box2D%
+		call em++ -std=c++17 -Os -sUSE_SDL=2 -sUSE_WEBGL2=1 -sFULL_ES3=1 -sWASM=1 -D%MACROS% %CPP% -o .\bin\WebGL2-build\index.html -I%ENGINE% -I%GAME% -I%core% -I%Render% -I%Camera% -I%Entities% -I%Platforms% -I%Systems% -I%SDL% -I%glm% -I%box2D% --preload-file .\assets
 	) else (
 		echo Starting Build with assets...
-		call em++ -std=c++17 -O2 -sUSE_SDL=2 -sUSE_WEBGL2=1 -sFULL_ES3=1 -sWASM=1 %CPP% -o .\bin\WebGL2-build\index.html -I%ENGINE% -I%GAME% -I%core% -I%Render% -I%Camera% -I%Entities% -I%Platforms% -I%Systems% -I%SDL% -I%glm% -I%box2D%
+		call em++ -std=c++17 -Os -sUSE_SDL=2 -sUSE_WEBGL2=1 -sFULL_ES3=1 -sWASM=1 -D%MACROS% %CPP% -o .\bin\WebGL2-build\index.html -I%ENGINE% -I%GAME% -I%core% -I%Render% -I%Camera% -I%Entities% -I%Platforms% -I%Systems% -I%SDL% -I%glm% -I%box2D%
 	)
 	
 	echo Build Completed

@@ -1,9 +1,1 @@
-﻿cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  Game2D.cpp
-  GameApp.cpp
-C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\GameApp.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\core\Timestep.h(17,38): warning C4018: '<=': no coinciden signed/unsigned (compilando archivo de origen src\Game2D.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\GameApp.cpp)
-C:\Users\jorge\OneDrive\Escritorio\Render_Engine\Engine\src\Entities\Components.h(8,11): fatal  error C1083: No se puede abrir el archivo incluir: 'b2_polygon_shape.h': No such file or directory (compilando archivo de origen src\Game2D.cpp)
+﻿  Game.vcxproj -> C:\Users\jorge\OneDrive\Escritorio\Render_Engine\bin\Debug-windows-x86_64\Game\Game.exe

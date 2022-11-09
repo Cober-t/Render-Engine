@@ -12,6 +12,7 @@ namespace Cober {
 
 		virtual const glm::mat4& GetProjection() const { return _projection; }
 		virtual const glm::mat4& GetView() const { return _viewMatrix; }
+		virtual const glm::mat4 GetPV() const { return _projection * _viewMatrix; }
 	protected:
 		glm::mat4 _viewMatrix;
 		glm::mat4 _projection = glm::mat4(1.0f);

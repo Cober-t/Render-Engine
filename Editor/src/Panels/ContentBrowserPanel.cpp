@@ -10,8 +10,8 @@ namespace Cober {
 	extern const std::filesystem::path _assetPath = SOLUTION_DIR + (std::string)"assets";
 
 	ContentBrowserPanel::ContentBrowserPanel()
-		: _currentDirectory(_assetPath)
 	{
+		_currentDirectory = _assetPath;
 		//m_DirectoryIcon = Texture2D::Create("Assets/Icons/DirectoryIcon.png");
 		//m_FileIcon = Texture2D::Create("Assets/Icons/FileIcon.png");
 	}
@@ -39,7 +39,6 @@ namespace Cober {
 		ImGui::SliderFloat("Padding", &padding, 0, 32);
 
 		ImGui::Columns(columnCount, 0, false);
-
 		for (auto& directoryEntry : std::filesystem::directory_iterator(_currentDirectory)) {
 			const auto& path = directoryEntry.path();
 			auto relativePath = std::filesystem::relative(path, _assetPath);

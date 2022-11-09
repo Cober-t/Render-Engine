@@ -4,10 +4,11 @@
 #include "Systems/RenderSystem.h"
 #include "Render/RenderAPI.h"
 
-#ifndef __EMSCRIPTEN__
-#include "Platforms/OpenGL/OpenGLBuffer.h"
+#if !defined __EMSCRIPTEN__ && !defined __OPENGLES3__
+	#include "Platforms/OpenGL/OpenGLBuffer.h"
+#elif defined __EMSCRIPTEN__ || __OPENGLES3__
+	#include "Platforms/OpenGLES3/OpenGLES3Buffer.h"
 #endif
-#include "Platforms/OpenGLES3/OpenGLES3Buffer.h"
 
 namespace Cober {
 
@@ -15,10 +16,10 @@ namespace Cober {
 	{
 		switch (RenderAPI::GetAPI())
 		{
-#ifndef __EMSCRIPTEN__
+#if !defined __EMSCRIPTEN__ && !defined __OPENGLES3__
 			case RenderAPI::API::None:    LOG_ERROR("RendererAPI::None is currently not supported!"); return nullptr;
 			case RenderAPI::API::OpenGL:  return CreateRef<OpenGLVertexBuffer>(size);
-#else
+#elif defined __EMSCRIPTEN__ || __OPENGLES3__
 			case RenderAPI::API::None:		LOG_ERROR("Wrong API"); break;
 			case RenderAPI::API::OpenGL:	LOG_ERROR("Wrong API"); break;
 			case RenderAPI::API::OpenGLES:	LOG_ERROR("Wrong API");	break;
@@ -34,10 +35,10 @@ namespace Cober {
 	{
 		switch (RenderAPI::GetAPI())
 		{
-#ifndef __EMSCRIPTEN__
+#if !defined __EMSCRIPTEN__ && !defined __OPENGLES3__
 			case RenderAPI::API::None:    LOG_ERROR("RendererAPI::None is currently not supported!"); return nullptr;
 			case RenderAPI::API::OpenGL:  return CreateRef<OpenGLVertexBuffer>(vertices, size);
-#else
+#elif defined __EMSCRIPTEN__ || __OPENGLES3__
 			case RenderAPI::API::None:		LOG_ERROR("Wrong API"); break;
 			case RenderAPI::API::OpenGL:	LOG_ERROR("Wrong API"); break;
 			case RenderAPI::API::OpenGLES:	LOG_ERROR("Wrong API");	break;
@@ -54,10 +55,10 @@ namespace Cober {
 	{
 		switch (RenderAPI::GetAPI())
 		{
-#ifndef __EMSCRIPTEN__
+#if !defined __EMSCRIPTEN__ && !defined __OPENGLES3__
 			case RenderAPI::API::None:    LOG_ERROR("RendererAPI::None is currently not supported!"); return nullptr;
 			case RenderAPI::API::OpenGL:  return CreateRef<OpenGLIndexBuffer>(indices, size);
-#else
+#elif defined __EMSCRIPTEN__ || __OPENGLES3__
 			case RenderAPI::API::None:		LOG_ERROR("Wrong API"); break;
 			case RenderAPI::API::OpenGL:	LOG_ERROR("Wrong API"); break;
 			case RenderAPI::API::OpenGLES:	LOG_ERROR("Wrong API");	break;
@@ -70,16 +71,17 @@ namespace Cober {
 		return nullptr;
 	}
 
+#ifdef __OPENGL__
 	Ref<UniformBuffer> UniformBuffer::Create(uint32_t size, uint32_t binding)
 	{
-#ifndef __EMSCRIPTEN__
-		switch (RenderAPI::GetAPI()) 
+		switch (RenderAPI::GetAPI())
 		{
-		case RenderAPI::API::None:    LOG_ERROR("RendererAPI::None is currently not supported!"); return nullptr;
-		case RenderAPI::API::OpenGL:  return CreateRef<OpenGLUniformBuffer>(size, binding);
-		default:	LOG_ERROR("Unknown RendererAPI!"); break;
+			case RenderAPI::API::None:    Logger::Error("RendererAPI::None is currently not supported!"); return nullptr;
+			case RenderAPI::API::OpenGL:  return CreateRef<OpenGLUniformBuffer>(size, binding);
 		}
-#endif
+
+		Logger::Error("Unknown RendererAPI!");
 		return nullptr;
 	}
+#endif
 }

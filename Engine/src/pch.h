@@ -3,7 +3,9 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdarg.h>
-//#include <crtdbg.h>
+#ifndef __EMSCRIPTEN__
+	#include <crtdbg.h>
+#endif
 #include <cstddef>
 
 #include <stdio.h>
@@ -34,9 +36,6 @@
 #include <unordered_set>
 
 #include <SDL/SDL.h>
-#ifdef __EMSCRIPTEN__
-#include <SDL/SDL_opengles2.h>
-#endif
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
 #include <SDL/SDL_ttf.h>

@@ -2,6 +2,9 @@
 
 #include "Render/VertexArray.h"
 
+//#include <SDL/SDL_opengles2.h>
+#include <GLES3/gl3.h>
+
 namespace Cober {
 
 	class OpenGLES3VertexArray : public VertexArray

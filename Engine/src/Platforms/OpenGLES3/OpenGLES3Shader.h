@@ -2,8 +2,10 @@
 
 #include "Render/Shader.h"
 
-//#include <GLES3/gl3.h> 
-//#include <GLES3/gl3platform.h> 
+//#include <SDL/SDL_opengles2.h>
+#include <GLES3/gl3.h>
+#include <GLES3/gl3platform.h>
+//#include <GL/glew.h>
 
 namespace Cober {
 
@@ -37,8 +39,8 @@ namespace Cober {
 		void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
 	private:
 		std::string ReadFile(const std::string& filepath);
-		//std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
-		//void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
+		std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
+		void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
 	private:
 		uint32_t _renderID;
 		std::string _name;

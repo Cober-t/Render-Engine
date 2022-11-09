@@ -21,46 +21,47 @@ namespace Cober {
 		LOG("Render System removed from Registry");
 	}
 
+	//Entity entity;
 	void RenderSystem::Start(const Ref<Scene>& scene)
 	{
 		_registry = scene->GetRegistry();
 
-#ifndef __EMSCRIPTEN__
+		RenderGlobals::Create();
 		RenderGlobals::Init();
 		Render2D::Start();
-#else
-		GLCallV(glEnable(GL_BLEND));
-		GLCallV(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-		GLCallV(glEnable(GL_DEPTH_TEST));
-#endif
+
+		// Test
+		Entity entity = _registry->CreateEntity();
+		entity.AddComponent<Sprite>();
+		entity.GetComponent<Sprite>().color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+
 		LOG("Render System Started!!");
 	}
 
 	void RenderSystem::Update(const Ref<EditorCamera>& camera)
 	{
 		//RenderGlobals::SetClearColor(10, 0, 10, 255);
-		int random = 0 + (std::rand() % 3);
-		switch (random) {
-			case 0:  RenderGlobals::SetClearColor(225, 225, 255, 255);	break;
-			case 1:  RenderGlobals::SetClearColor(10, 0, 10, 255);		break;
-			case 2:  RenderGlobals::SetClearColor(20, 225, 80, 255);	break;
-			default: RenderGlobals::SetClearColor(220, 80, 10, 255);	break;
-		}
+		//RenderGlobals::SetClearColor(225, 225, 255, 255);
+		RenderGlobals::SetClearColor(235, 97, 35, 255);
 		RenderGlobals::Clear();
 		// RenderGlobals::SetClearColor(camera->GetSkyboxColor());
 		//	or just
 		// camera->RenderSkybox();
-#ifndef __EMSCRIPTEN__
+
 		Render2D::ResetStats();
 		Render2D::BeginScene(camera);
 		
 		// DEBUG PHYSICS
+#ifndef __EMSCRIPTNE__ 
+#ifndef __OPENGLES3__
 		if (Engine::Get().GetDebugMode()) {
 			for (auto& entity : GetSystemEntities()) {
 				Render2D::DrawSolidPolygon(entity);
 				// ...
 			}
 		}
+#endif
+#endif
 		
 		for (auto& entity : GetSystemEntities()) {
 			Sprite sprite = entity.GetComponent<Sprite>();
@@ -68,8 +69,7 @@ namespace Cober {
 		
 			Render2D::DrawSprite(&transform, &sprite);
 		}
-		
+	
 		Render2D::EndScene();
-#endif
 	}
 }

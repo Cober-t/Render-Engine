@@ -7,8 +7,7 @@
 #elif __EMSCRIPTEN__
 	#include <SDL/SDL_opengles2.h>
 #elif  __OPENGLES3__
-		#include <GLES3/gl32.h>
-		#include <GLES3/gl3platform.h>
+	#include <GLES3/gl3.h>
 #endif
 
 #include "Logger.h"
@@ -23,7 +22,7 @@ namespace Cober {
 		logEntry.type = LOG_INFO;
 		logEntry.message = message;
 		std::string fileName = (std::string)file;
-		fileName = fileName.substr(fileName.find_last_of("/\\") + 1);
+		fileName = fileName.substr(fileName.find_last_of("\\") + 1);
 
 #ifdef __EMSCRIPTEN__
 		std::cout << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "]" << "---" << logEntry.message << std::endl;
@@ -39,14 +38,14 @@ namespace Cober {
 		logEntry.type = LOG_INFO;
 		logEntry.message = message;
 		std::string fileName = (std::string)file;
-		fileName = fileName.substr(fileName.find_last_of("/\\") + 1);
+		fileName = fileName.substr(fileName.find_last_of("\\") + 1);
 
 #ifdef __EMSCRIPTEN__
 		std::cout << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "]" << "---" << logEntry.message << std::endl;
 #else
-		std::cout << "\033[93m" << "LOG: [" << fileName << " " << "Line: " << __LINE__ << "] --- " << logEntry.message << "\033[0m" << std::endl;
+		std::cout << "\033[93m" << "LOG: [" << fileName << " " << "Line: " << __LINE__ << "] --- " <<  logEntry.message << "\033[0m" << std::endl;
 #endif
-		//messages.push_back(logEntry);
+		messages.push_back(logEntry);
 	}
 
 
@@ -56,32 +55,31 @@ namespace Cober {
 		logEntry.type = LOG_ERROR;
 		logEntry.message = message;
 		std::string fileName = (std::string)file;
-		fileName = fileName.substr(fileName.find_last_of("/\\") + 1);
+		fileName = fileName.substr(fileName.find_last_of("\\") + 1);
 #ifdef __EMSCRIPTEN__
 		std::cout << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "]" << "---" << logEntry.message << std::endl;
 #else
-		std::cout << "\033[91m" << "LOG: [" << fileName << " " << "Line: " << __LINE__ << "] --- " << logEntry.message << "\033[0m" << std::endl;
+		std::cout << "\033[91m" << "LOG: [" << fileName << " " << "Line: " << line << "] --- " << "\n\t" << logEntry.message << "\033[0m" << std::endl;
 #endif
-		//messages.push_back(logEntry);
+		messages.push_back(logEntry);
 	}
 
 	void Logger::GLClearErrors() {
 
-//#ifndef __EMSCRIPTEN__
 		while (glGetError());
-//#endif
 	}
 
 	bool Logger::GLCheckErrors(const char* function, const char* file, int line) {	
 
-//#ifndef __EMSCRIPTEN__
 		while (GLenum error = glGetError()) {
 			std::string fileName = (std::string)file;
-			fileName = fileName.substr(fileName.find_last_of("/\\") + 1);
-			Logger::Error("[OpenGL Error] (" + std::to_string(error) + (std::string)") " + function + "\n\t\t" + fileName + ":" + std::to_string(line));
-			return false;
+			//std::string solutionDir = SOLUTION_DIR;
+			//fileName = fileName.substr(solutionDir.length());
+
+			fileName = fileName.substr(fileName.find_last_of("\\") + 1);
+			std::string errMessage = (const char*)glGetString(error);
+			Logger::Error("[OpenGL Error] (" + errMessage + ") " + function, file, line);
 		}
-//#endif
 		return true;
 	}
 }

@@ -1,11 +1,8 @@
 #include "pch.h"
 #include "Platforms/OpenGLES3/OpenGLES3VertexArray.h"
 
-//#include <GLES3/...>
-
 namespace Cober {
 	
-	/*
 	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
 	{
 		switch (type)
@@ -25,26 +22,26 @@ namespace Cober {
 
 		LOG_WARNING("Unknown ShaderDataType!");
 		return 0;
-	}*/
+	}
 
 	OpenGLES3VertexArray::OpenGLES3VertexArray()
 	{
-		//GLCallV(glCreateVertexArrays(1, &_rendererID));
+		GLCallV(glGenVertexArrays(1, &_rendererID));
 	}
 
 	OpenGLES3VertexArray::~OpenGLES3VertexArray()
 	{
-		//GLCallV(glDeleteVertexArrays(1, &_rendererID));
+		GLCallV(glDeleteVertexArrays(1, &_rendererID));
 	}
 
 	void OpenGLES3VertexArray::Bind() const
 	{
-		//GLCallV(glBindVertexArray(_rendererID));
+		GLCallV(glBindVertexArray(_rendererID));
 	}
 
 	void OpenGLES3VertexArray::Unbind() const
 	{
-		//GLCallV(glBindVertexArray(0));
+		GLCallV(glBindVertexArray(0));
 	}
 
 	void OpenGLES3VertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
@@ -52,7 +49,7 @@ namespace Cober {
 		//if(vertexBuffer->GetLayout().GetElements().size())
 			//LOG_WARNING("Vertex Buffer has no layout!");
 
-		/*GLCallV(glBindVertexArray(_rendererID));
+		GLCallV(glBindVertexArray(_rendererID));
 		vertexBuffer->Bind();
 
 		const auto& layout = vertexBuffer->GetLayout();
@@ -68,14 +65,14 @@ namespace Cober {
 			_vertexBufferIndex++;
 		}
 
-		_vertexBuffers.push_back(vertexBuffer);*/
+		_vertexBuffers.push_back(vertexBuffer);
 	}
 
 	void OpenGLES3VertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
 	{
-		/*GLCallV(glBindVertexArray(_rendererID));
+		GLCallV(glBindVertexArray(_rendererID));
 		indexBuffer->Bind();
 
-		_indexBuffer = indexBuffer;*/
+		_indexBuffer = indexBuffer;
 	}
 }

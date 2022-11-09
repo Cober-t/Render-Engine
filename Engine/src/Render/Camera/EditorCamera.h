@@ -31,7 +31,7 @@ namespace Cober {
 
 		const glm::mat4& GetProjection() const override { return _projection; }
 		const glm::mat4& GetView() const override { return _viewMatrix; }
-		glm::mat4 GetViewProjection() const { return _projection * _viewMatrix; }
+		const glm::mat4 GetPV() const override { return _projection * _viewMatrix; }
 
 		glm::vec3 GetUpDirection() const;
 		glm::vec3 GetRightDirection() const;

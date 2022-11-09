@@ -75,6 +75,7 @@ namespace Cober {
 		GLCallV(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 	}
 
+#ifdef __OPENGL__
 	OpenGLUniformBuffer::OpenGLUniformBuffer(uint32_t size, uint32_t binding)
 	{
 		GLCallV(glCreateBuffers(1, &m_RendererID));
@@ -92,5 +93,5 @@ namespace Cober {
 	{
 		GLCallV(glNamedBufferSubData(m_RendererID, offset, size, data));
 	}
-
+#endif
 }

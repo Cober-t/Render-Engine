@@ -38,6 +38,7 @@ namespace Cober {
 		uint32_t _count;
 	};
 
+#ifdef __OPENGL__
 	class OpenGLUniformBuffer : public UniformBuffer
 	{
 	public:
@@ -48,4 +49,5 @@ namespace Cober {
 	private:
 		uint32_t m_RendererID = 0;
 	};
+#endif
 }

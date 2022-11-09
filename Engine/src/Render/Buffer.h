@@ -137,6 +137,7 @@ namespace Cober {
 		static Ref<IndexBuffer> Create(uint32_t* indices, uint32_t count);
 	};
 
+#ifdef __OPENGL__
 	class UniformBuffer
 	{
 	public:
@@ -145,4 +146,5 @@ namespace Cober {
 
 		static Ref<UniformBuffer> Create(uint32_t size, uint32_t binding);
 	};
+#endif
 }

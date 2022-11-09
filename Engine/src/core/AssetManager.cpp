@@ -10,15 +10,15 @@ namespace Cober {
 	}
 
 	AssetManager::~AssetManager() {
-		ClearAssets();
+		//ClearAssets();
 		LOG("AssetManager destructor called!");
 	}
 
-	void AssetManager::ClearAssets() {
+	/*void AssetManager::ClearAssets() {
 		for (auto texture : textures)
 			glDeleteTextures(1, (const GLuint*)texture.second);
 		textures.clear();
-	}
+	}*/
 
 	void AssetManager::AddTexture(const std::string& assetID, const std::string& filePath) {
 

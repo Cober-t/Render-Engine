@@ -80,6 +80,9 @@ namespace Cober {
 	void EditorCamera::OnEvent(SDL_Event& event) {
 	
 		const Uint8* keyStateArray   = SDL_GetKeyboardState(NULL);
+#ifdef __EMSCRIPTEN__	// Provisional till make a Camera System
+		_viewportFocused = true;
+#endif
 
 		if (event.type == SDL_MOUSEBUTTONUP)
 			mouseButtonHeld = false;

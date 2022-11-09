@@ -4,7 +4,6 @@
 
 #include "Render/GraphicsContext.h"
 #include "core/Logger.h"
-//#include "Render/RenderGlobals.h"
 	
 namespace Cober {
 
