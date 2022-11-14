@@ -39,7 +39,9 @@
 #endif
 
 #ifndef __EMSCRIPTEN__
+#ifndef __OPENGLES3__
 	#define SHADERS_PATH SOLUTION_DIR + (std::string)"assets\\shaders\\"
+#endif
 #endif
 #define BIT(x)          (1 << x)
 

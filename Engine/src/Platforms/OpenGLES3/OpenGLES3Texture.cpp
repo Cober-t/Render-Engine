@@ -13,7 +13,7 @@ namespace Cober {
 
 		GLCallV(glGenTextures(1, &_rendererID));
 		GLCallV(glBindTexture(GL_TEXTURE_2D, (GLuint)&_rendererID));
-		GLCallV(glTexStorage2D(_rendererID, 1, _internalFormat, _width, _height));
+		glTexStorage2D(_rendererID, 1, _internalFormat, _width, _height);
 
 		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));

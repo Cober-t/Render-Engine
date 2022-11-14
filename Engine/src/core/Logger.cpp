@@ -22,12 +22,16 @@ namespace Cober {
 		logEntry.type = LOG_INFO;
 		logEntry.message = message;
 		std::string fileName = (std::string)file;
+	#ifdef __linux__
+		fileName = fileName.substr(fileName.find_last_of("/") + 1);
+	#else
 		fileName = fileName.substr(fileName.find_last_of("\\") + 1);
+	#endif
 
 #ifdef __EMSCRIPTEN__
 		std::cout << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "]" << "---" << logEntry.message << std::endl;
 #else
-		std::cout << "\033[94m" << "LOG: [" << fileName << " " << "Line: " << __LINE__ << "] --- " << logEntry.message << "\033[0m" << std::endl;
+		std::cout << "\033[94m" << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "] --- " << logEntry.message << "\033[0m" << std::endl;
 #endif
 		//messages.push_back(logEntry);
 	}
@@ -43,7 +47,7 @@ namespace Cober {
 #ifdef __EMSCRIPTEN__
 		std::cout << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "]" << "---" << logEntry.message << std::endl;
 #else
-		std::cout << "\033[93m" << "LOG: [" << fileName << " " << "Line: " << __LINE__ << "] --- " <<  logEntry.message << "\033[0m" << std::endl;
+		std::cout << "\033[93m" << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "] --- " <<  logEntry.message << "\033[0m" << std::endl;
 #endif
 		messages.push_back(logEntry);
 	}
@@ -59,7 +63,7 @@ namespace Cober {
 #ifdef __EMSCRIPTEN__
 		std::cout << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "]" << "---" << logEntry.message << std::endl;
 #else
-		std::cout << "\033[91m" << "LOG: [" << fileName << " " << "Line: " << line << "] --- " << "\n\t" << logEntry.message << "\033[0m" << std::endl;
+		std::cout << "\033[91m" << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "] --- " << "\n\t" << logEntry.message << "\033[0m" << std::endl;
 #endif
 		messages.push_back(logEntry);
 	}

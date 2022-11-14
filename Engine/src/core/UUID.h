@@ -18,6 +18,7 @@ namespace Cober {
 }
 
 #ifndef __EMSCRIPTEN__
+#ifndef __OPENGLES3__
 	#include <xhash>
 namespace std {
 
@@ -30,4 +31,5 @@ namespace std {
 		}
 	};
 }
+#endif
 #endif

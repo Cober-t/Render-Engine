@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #ifndef __EMSCRIPTEN__
+#ifndef __OPENGLES3__
 
 #define NK_INCLUDE_FIXED_TYPES
 #define NK_INCLUDE_STANDARD_IO
@@ -119,4 +120,5 @@ namespace Cober {
 	}
 }
 
+#endif
 #endif

@@ -38,6 +38,10 @@ namespace Cober {
 		}
 	}
 
+	void ViewportPanel::DrawGrid() {
+		
+	}
+
 	void ViewportPanel::OnGuiRender(Ref<EditorCamera> editorCamera) {
 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });

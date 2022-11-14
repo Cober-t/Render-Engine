@@ -24,6 +24,7 @@ namespace Cober {
 	//Entity entity;
 	void RenderSystem::Start(const Ref<Scene>& scene)
 	{
+
 		_registry = scene->GetRegistry();
 
 		RenderGlobals::Create();

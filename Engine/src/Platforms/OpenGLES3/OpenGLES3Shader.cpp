@@ -51,6 +51,8 @@ namespace Cober {
 		std::string result;
 #ifdef __EMSCRIPTEN__
 		std::ifstream in("assets\\shaders\\" + filePath, std::ios::in | std::ios::binary);
+#elif __linux__
+		std::ifstream in("assets/shaders/" + filePath, std::ios::in | std::ios::binary);
 #else
 		std::ifstream in(SHADERS_PATH + filePath, std::ios::in | std::ios::binary);
 #endif

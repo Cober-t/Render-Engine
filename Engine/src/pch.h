@@ -4,7 +4,9 @@
 #include <stdint.h>
 #include <stdarg.h>
 #ifndef __EMSCRIPTEN__
+#ifndef __OPENGLES3__
 	#include <crtdbg.h>
+#endif
 #endif
 #include <cstddef>
 
@@ -17,6 +19,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include <string.h>	// For memset and memcpy Linux
 #include <utility>
 #include <algorithm>
 #include <functional>

@@ -1,7 +1,9 @@
 #pragma once
 
 #ifndef __EMSCRIPTEN__
+#ifndef __OPENGLES3__
 	#include <xhash> // For generating Universal Unique Identifiers
+#endif
 #endif
 #include <random>
 #include <box2D/b2_polygon_shape.h>

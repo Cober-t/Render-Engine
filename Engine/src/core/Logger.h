@@ -4,7 +4,11 @@
 #include <string>
 
 #define GET_SDL_ERROR()     Cober::Logger::Error(SDL_GetError());
+#ifndef __EMSCRIPTEN__
+#ifndef __OPENGLES3__
 #define ASSERT(x) if (!(x)) __debugbreak();
+#endif
+#endif
 //#define GLCall(x) Cober::Logger::GLCheckError();\
 //				  x;\
 //				  ASSERT(Cober::Logger::GLCheckError())
@@ -12,7 +16,7 @@
 //#define GLCall(x, y)  Cober::Logger::GLCheckError(y);\
 //					  x;\
 //				      ASSERT(Cober::Logger::GLCheckError(y))
-#ifdef __EMSCRIPTEN__
+#if defined __EMSCRIPTEN__ || __OPENGLES3__
 	#define GLCallV( x ) \
 			Cober::Logger::GLClearErrors(); \
 			x;\

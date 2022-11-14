@@ -3,6 +3,8 @@
 
 #include "Render/RenderGlobals.h"
 
+#include <memory>
+
 namespace Cober {
 
 	// [+++++++++++++++++++++++++++]
@@ -106,7 +108,6 @@ namespace Cober {
 			{ ShaderDataType::Int,    "a_EntityID"     }
 			});
 		data.QuadVertexArray->AddVertexBuffer(data.QuadVertexBuffer);
-
 		data.QuadVertexBufferBase = new QuadVertex[data.MaxVertices];
 
 		uint32_t* quadIndices = new uint32_t[data.MaxIndices];
@@ -144,7 +145,6 @@ namespace Cober {
 		data.CircleVertexArray->AddVertexBuffer(data.CircleVertexBuffer);
 		data.CircleVertexArray->SetIndexBuffer(quadIB); // Use quad IB
 		data.CircleVertexBufferBase = new CircleVertex[data.MaxVertices];
-
 		// Lines
 		data.LineVertexArray = VertexArray::Create();
 
@@ -156,12 +156,11 @@ namespace Cober {
 			});
 		data.LineVertexArray->AddVertexBuffer(data.LineVertexBuffer);
 		data.LineVertexBufferBase = new LineVertex[data.MaxVertices];
-
 		data.WhiteTexture = Texture::Create(1, 1);
+
 		uint32_t whiteTextureData = 0xffffffff;
 		data.WhiteTexture->Bind();
 		data.WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
-
 		int32_t samplers[data.MaxTextureSlots];
 		for (uint32_t i = 0; i < data.MaxTextureSlots; i++)
 			samplers[i] = i;
