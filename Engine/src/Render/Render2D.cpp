@@ -162,7 +162,9 @@ namespace Cober {
 		data.LineVertexBufferBase = new LineVertex[data.MaxVertices];
 
 		data.WhiteTexture = Texture::Create(1, 1);
+
 		uint32_t whiteTextureData = 0xffffffff;
+		data.WhiteTexture->Bind(data.WhiteTexture->GetID());
 		data.WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
 		int32_t samplers[data.MaxTextureSlots];
@@ -170,8 +172,8 @@ namespace Cober {
 			samplers[i] = i;
 
 		data.QuadShader = Shader::Create("Render_Quad.glsl");
-		data.QuadShader->Bind();
-		data.QuadShader->SetIntArray("u_Textures", samplers, data.MaxTextureSlots);
+		//data.QuadShader->Bind();
+		//data.QuadShader->SetIntArray("u_Textures", samplers, data.MaxTextureSlots);
 		//data.CircleShader = Shader::Create("Render_Circle.glsl");
 		//data.LineShader = Shader::Create("Render_Line.glsl");
 
@@ -211,7 +213,7 @@ namespace Cober {
 
 			// Bind textures
 			for (uint32_t i = 0; i < data.TextureSlotIndex; i++)
-				data.TextureSlots[i]->Bind(i);
+				data.TextureSlots[i]->Bind(data.TextureSlots[i]->GetID());
 
 			RenderGlobals::DrawIndexed(data.QuadVertexArray, data.QuadIndexCount);
 			// ... CircleShader .. LineShader ...

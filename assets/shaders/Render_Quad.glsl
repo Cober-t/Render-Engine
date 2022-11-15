@@ -94,6 +94,6 @@ void main()
 	if (texColor.a == 0.0)
 		discard;
 
-	o_Color = texture(u_Textures[0], TexCoord * TilingFactor) * Color;
+	o_Color = texColor;
 	//o_EntityID = v_EntityID;
 }

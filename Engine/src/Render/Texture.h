@@ -19,6 +19,7 @@ namespace Cober {
 		virtual void SetHeight(uint32_t height) = 0;
 
 		//virtual SDL_Surface* GetSurface() const = 0;
+		virtual uint32_t GetID() const = 0;
 
 		virtual void SetData(const void* data, uint32_t size) = 0;
 

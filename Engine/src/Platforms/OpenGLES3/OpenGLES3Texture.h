@@ -20,6 +20,8 @@ namespace Cober {
 		virtual void SetWidth(uint32_t width)   override { _width = width; }
 		virtual void SetHeight(uint32_t height) override { _height = height; }
 
+		virtual uint32_t GetID() const override { return _rendererID; }
+
 		virtual void SetData(const void* data, uint32_t size) override;
 
 		virtual void Bind(uint32_t slot = 0) const override;
