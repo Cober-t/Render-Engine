@@ -103,8 +103,7 @@ project "Engine"
 	links
 	{
 		"opengl32",
-		"glew32s",	
-		--"libEGL",
+		"glew32s",
 		"libGLESv2",
 		"Box2D",
 		"SDL2",

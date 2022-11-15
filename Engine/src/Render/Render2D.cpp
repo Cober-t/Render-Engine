@@ -47,7 +47,11 @@ namespace Cober {
 		static const uint32_t MaxQuads = 20000;
 		static const uint32_t MaxVertices = MaxQuads * 4;
 		static const uint32_t MaxIndices = MaxQuads * 6;
+#ifdef __EMSCRIPTEN__
+		static const uint32_t MaxTextureSlots = 16; // TODO: RenderCaps
+#else
 		static const uint32_t MaxTextureSlots = 32; // TODO: RenderCaps
+#endif
 
 		Ref<VertexArray> QuadVertexArray;
 		Ref<VertexBuffer> QuadVertexBuffer;
@@ -105,7 +109,7 @@ namespace Cober {
 			{ ShaderDataType::Float2, "a_TexCoord"     },
 			{ ShaderDataType::Float,  "a_TexIndex"     },
 			{ ShaderDataType::Float,  "a_TilingFactor" },
-			{ ShaderDataType::Int,    "a_EntityID"     }
+			{ ShaderDataType::Float,  "a_EntityID"   }
 			});
 		data.QuadVertexArray->AddVertexBuffer(data.QuadVertexBuffer);
 		data.QuadVertexBufferBase = new QuadVertex[data.MaxVertices];
@@ -159,8 +163,8 @@ namespace Cober {
 		data.WhiteTexture = Texture::Create(1, 1);
 
 		uint32_t whiteTextureData = 0xffffffff;
-		data.WhiteTexture->Bind();
 		data.WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
+
 		int32_t samplers[data.MaxTextureSlots];
 		for (uint32_t i = 0; i < data.MaxTextureSlots; i++)
 			samplers[i] = i;
@@ -313,7 +317,7 @@ namespace Cober {
 			data.QuadVertexBufferPtr->TexCoord = textureCoords[i];
 			data.QuadVertexBufferPtr->TexIndex = textureIndex;
 			data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
-			data.QuadVertexBufferPtr->EntityID = 1;//entityID;
+			data.QuadVertexBufferPtr->EntityID = 1;// entityID;
 			data.QuadVertexBufferPtr++;
 		}
 

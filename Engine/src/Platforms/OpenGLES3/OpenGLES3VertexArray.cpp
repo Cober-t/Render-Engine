@@ -18,9 +18,9 @@ namespace Cober {
 		case ShaderDataType::Int3:     return GL_INT;
 		case ShaderDataType::Int4:     return GL_INT;
 		case ShaderDataType::Bool:     return GL_BOOL;
+		default: LOG_WARNING("Unknown ShaderDataType!"); break;
 		}
 
-		LOG_WARNING("Unknown ShaderDataType!");
 		return 0;
 	}
 
@@ -57,11 +57,11 @@ namespace Cober {
 		{
 			GLCallV(glEnableVertexAttribArray(_vertexBufferIndex));
 			GLCallV(glVertexAttribPointer(_vertexBufferIndex,
-				element.GetComponentCount(),
-				ShaderDataTypeToOpenGLBaseType(element.type),
-				element.normalized ? GL_TRUE : GL_FALSE,
-				layout.GetStride(),
-				(const void*)element.offset));
+								element.GetComponentCount(),
+								ShaderDataTypeToOpenGLBaseType(element.type),
+								element.normalized ? GL_TRUE : GL_FALSE,
+								layout.GetStride(),
+								(const void*)element.offset));
 			_vertexBufferIndex++;
 		}
 

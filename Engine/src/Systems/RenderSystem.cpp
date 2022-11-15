@@ -21,7 +21,6 @@ namespace Cober {
 		LOG("Render System removed from Registry");
 	}
 
-	//Entity entity;
 	void RenderSystem::Start(const Ref<Scene>& scene)
 	{
 
@@ -34,7 +33,8 @@ namespace Cober {
 		// Test
 		Entity entity = _registry->CreateEntity();
 		entity.AddComponent<Sprite>();
-		entity.GetComponent<Sprite>().color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+		entity.GetComponent<Sprite>().color = glm::vec4(0.92f, 0.38f, 0.13f, 1.0f);
+		entity.GetComponent<Sprite>().texture = Texture::Create("assets/textures/blendTest.png");
 
 		LOG("Render System Started!!");
 	}
@@ -42,8 +42,8 @@ namespace Cober {
 	void RenderSystem::Update(const Ref<EditorCamera>& camera)
 	{
 		//RenderGlobals::SetClearColor(10, 0, 10, 255);
-		//RenderGlobals::SetClearColor(225, 225, 255, 255);
-		RenderGlobals::SetClearColor(235, 97, 35, 255);
+		RenderGlobals::SetClearColor(225, 225, 255, 255);
+		//RenderGlobals::SetClearColor(235, 97, 35, 255);
 		RenderGlobals::Clear();
 		// RenderGlobals::SetClearColor(camera->GetSkyboxColor());
 		//	or just
@@ -51,7 +51,7 @@ namespace Cober {
 
 		Render2D::ResetStats();
 		Render2D::BeginScene(camera);
-		
+
 		// DEBUG PHYSICS
 #ifndef __EMSCRIPTNE__ 
 #ifndef __OPENGLES3__

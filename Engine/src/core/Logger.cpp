@@ -1,13 +1,13 @@
 #include "pch.h"
 
 #ifdef __OPENGL__
-	#include <GL/glew.h>
+#include <GL/glew.h>
 #elif  __OPENGLES__
-	#include <GLES3/gl2.h>
+#include <GLES3/gl2.h>
 #elif __EMSCRIPTEN__
-	#include <SDL/SDL_opengles2.h>
+#include <SDL/SDL_opengles2.h>
 #elif  __OPENGLES3__
-	#include <GLES3/gl3.h>
+#include <GLES3/gl3.h>
 #endif
 
 #include "Logger.h"
@@ -22,11 +22,11 @@ namespace Cober {
 		logEntry.type = LOG_INFO;
 		logEntry.message = message;
 		std::string fileName = (std::string)file;
-	#ifdef __linux__
+#ifdef __linux__
 		fileName = fileName.substr(fileName.find_last_of("/") + 1);
-	#else
+#else
 		fileName = fileName.substr(fileName.find_last_of("\\") + 1);
-	#endif
+#endif
 
 #ifdef __EMSCRIPTEN__
 		std::cout << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "]" << "---" << logEntry.message << std::endl;
@@ -47,7 +47,7 @@ namespace Cober {
 #ifdef __EMSCRIPTEN__
 		std::cout << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "]" << "---" << logEntry.message << std::endl;
 #else
-		std::cout << "\033[93m" << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "] --- " <<  logEntry.message << "\033[0m" << std::endl;
+		std::cout << "\033[93m" << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "] --- " << logEntry.message << "\033[0m" << std::endl;
 #endif
 		messages.push_back(logEntry);
 	}
@@ -73,7 +73,7 @@ namespace Cober {
 		while (glGetError());
 	}
 
-	bool Logger::GLCheckErrors(const char* function, const char* file, int line) {	
+	bool Logger::GLCheckErrors(const char* function, const char* file, int line) {
 
 		while (GLenum error = glGetError()) {
 			std::string fileName = (std::string)file;
@@ -82,6 +82,7 @@ namespace Cober {
 
 			fileName = fileName.substr(fileName.find_last_of("\\") + 1);
 			std::string errMessage = (const char*)glGetString(error);
+			printf("%s", errMessage.c_str());
 			Logger::Error("[OpenGL Error] (" + errMessage + ") " + function, file, line);
 		}
 		return true;

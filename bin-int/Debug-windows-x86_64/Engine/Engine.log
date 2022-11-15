@@ -1,5 +1,40 @@
 ﻿cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  OpenGLES3Context.cpp
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  OpenGLES3Buffer.cpp
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  OpenGLES3RenderAPI.cpp
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  OpenGLES3Shader.cpp
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  OpenGLES3Texture.cpp
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  OpenGLES3VertexArray.cpp
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
+  OpenGLBuffer.cpp
+  OpenGLRenderAPI.cpp
+  OpenGLVertexArray.cpp
+  Buffer.cpp
+  DebugRenderer.cpp
+  Framebuffer.cpp
+  GraphicsContext.cpp
+  Render2D.cpp
+  RenderAPI.cpp
+  RenderGlobals.cpp
+  Shader.cpp
+  Texture.cpp
+  VertexArray.cpp
+  RenderSystem.cpp
+  Application.cpp
+  Events.cpp
+  Logger.cpp
+  Scene.cpp
+  Window.cpp
 libGLESv2.lib(libGLESv2.dll) : warning LNK4006: __imp_glViewport ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
 libGLESv2.lib(libGLESv2.dll) : warning LNK4006: glViewport ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
 libGLESv2.lib(libGLESv2.dll) : warning LNK4006: __imp_glTexSubImage2D ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida

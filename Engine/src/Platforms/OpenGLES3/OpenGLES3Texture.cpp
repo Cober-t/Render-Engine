@@ -12,14 +12,15 @@ namespace Cober {
 		_dataFormat = GL_RGBA;
 
 		GLCallV(glGenTextures(1, &_rendererID));
-		GLCallV(glBindTexture(GL_TEXTURE_2D, (GLuint)&_rendererID));
-		glTexStorage2D(_rendererID, 1, _internalFormat, _width, _height);
+		GLCallV(glBindTexture(GL_TEXTURE_2D, _rendererID));
 
-		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+		//glTexStorage2D(GL_TEXTURE_2D, 1, _internalFormat, _width, _height);
 
-		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
-		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	}
 
 	void FlipSurface(SDL_Surface* surface)
@@ -76,9 +77,9 @@ namespace Cober {
 		_internalFormat = internalFormat;
 		_dataFormat = dataFormat;
 
-		GLCallV(glGenTextures(GL_TEXTURE_2D, &_rendererID));
-		GLCallV(glBindTexture(GL_TEXTURE_2D, (GLuint)&_rendererID));
-		GLCallV(glTexStorage2D(_rendererID, 1, internalFormat, _width, _height));
+		GLCallV(glGenTextures(1, &_rendererID));
+		GLCallV(glBindTexture(GL_TEXTURE_2D, _rendererID));
+		//GLCallV(glTexStorage2D(GL_TEXTURE_2D, 1, internalFormat, _width, _height));
 
 		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
@@ -86,7 +87,9 @@ namespace Cober {
 		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
 		GLCallV(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
 
-		GLCallV(glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, _width, _height, dataFormat, GL_UNSIGNED_BYTE, texSurface->pixels));
+		//GLCallV(glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, (const void*)texSurface->pixels)));
+		GLCallV(glTexImage2D(GL_TEXTURE_2D, 0, _internalFormat, _width, _height, 0, _dataFormat, GL_UNSIGNED_BYTE, (const void*)texSurface->pixels));
+		glGenerateMipmap(GL_TEXTURE_2D);
 
 		SDL_FreeSurface(texSurface);
 	}
@@ -102,11 +105,13 @@ namespace Cober {
 		if (size != _width * _height * bpp)
 			LOG_WARNING("Data must be entire texture!");
 
+		//GLCallV(glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, data));
 		GLCallV(glTexImage2D(GL_TEXTURE_2D, 0, _internalFormat, _width, _height, 0, _dataFormat, GL_UNSIGNED_BYTE, data));
+		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 
 	void OpenGLES3Texture::Bind(uint32_t slot) const
 	{
-		GLCallV(glBindTexture(GL_TEXTURE_2D, (GLuint)&_rendererID));
+		GLCallV(glBindTexture(GL_TEXTURE_2D, slot));
 	}
 }

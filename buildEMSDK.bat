@@ -79,10 +79,10 @@ goto :error
 
 echo %CPP%
 	if exist ".\assets" (
-		echo Starting Build without assets...
-		call em++ -std=c++17 -Os -sUSE_SDL=2 -sUSE_WEBGL2=1 -sFULL_ES3=1 -sWASM=1 -D%MACROS% %CPP% -o .\bin\WebGL2-build\index.html -I%ENGINE% -I%GAME% -I%core% -I%Render% -I%Camera% -I%Entities% -I%Platforms% -I%Systems% -I%SDL% -I%glm% -I%box2D% --preload-file .\assets
-	) else (
 		echo Starting Build with assets...
+		call em++ -std=c++17 -Os -sASSERTIONS=2 -sALLOW_MEMORY_GROWTH=1 -sUSE_SDL_IMAGE=2 -sSDL2_IMAGE_FORMATS="[""png""]" -sUSE_SDL=2 -sUSE_WEBGL2=1 -sFULL_ES3=1 -sWASM=1 -D%MACROS% %CPP% -o .\bin\WebGL2-build\index.html -I%ENGINE% -I%GAME% -I%core% -I%Render% -I%Camera% -I%Entities% -I%Platforms% -I%Systems% -I%SDL% -I%glm% -I%box2D% --preload-file .\assets
+	) else (
+		echo Starting Build without assets...
 		call em++ -std=c++17 -Os -sUSE_SDL=2 -sUSE_WEBGL2=1 -sFULL_ES3=1 -sWASM=1 -D%MACROS% %CPP% -o .\bin\WebGL2-build\index.html -I%ENGINE% -I%GAME% -I%core% -I%Render% -I%Camera% -I%Entities% -I%Platforms% -I%Systems% -I%SDL% -I%glm% -I%box2D%
 	)
 	

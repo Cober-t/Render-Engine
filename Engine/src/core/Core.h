@@ -39,7 +39,7 @@
 #endif
 
 #ifndef __EMSCRIPTEN__
-#ifndef __OPENGLES3__
+#ifndef __linux__
 	#define SHADERS_PATH SOLUTION_DIR + (std::string)"assets\\shaders\\"
 #endif
 #endif

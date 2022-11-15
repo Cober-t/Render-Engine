@@ -50,7 +50,7 @@ namespace Cober {
 	{
 		std::string result;
 #ifdef __EMSCRIPTEN__
-		std::ifstream in("assets\\shaders\\" + filePath, std::ios::in | std::ios::binary);
+		std::ifstream in("assets/shaders/" + filePath, std::ios::in | std::ios::binary);
 #elif __linux__
 		std::ifstream in("assets/shaders/" + filePath, std::ios::in | std::ios::binary);
 #else
@@ -103,9 +103,6 @@ namespace Cober {
 
 	void OpenGLES3Shader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
-		SDL_Window* window = SDL_GL_GetCurrentWindow();
-		SDL_GLContext contx = SDL_GL_GetCurrentContext();
-		SDL_GL_MakeCurrent(window, contx);
 		GLuint program = GLCall(glCreateProgram());
 
 		if (shaderSources.size() > 2)
@@ -166,7 +163,7 @@ namespace Cober {
 					char* errLog = (char*)malloc(maxLength);
 					if (errLog) {
 						GLCallV(glGetProgramInfoLog(program, maxLength, NULL, errLog));
-						printf("Could not link program:n%sn", errLog);
+						printf("Could not link program: %s", errLog);
 						free(errLog);
 					}
 				}
