@@ -8,7 +8,7 @@ namespace Cober {
 	// [+++++++++++++++++++++++ VERTEX BUFFER ++++++++++++++++++++++++++++]
 	// [++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++]
 	OpenGLES3VertexBuffer::OpenGLES3VertexBuffer(uint32_t size) {
-
+		
 		GLCallV(glGenBuffers(1, &_rendererID));	// Only on OpenGLES 3
 		GLCallV(glBindBuffer(GL_ARRAY_BUFFER, _rendererID));
 		GLCallV(glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW));

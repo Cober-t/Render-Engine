@@ -18,7 +18,7 @@ namespace Cober {
 		float TilingFactor;
 
 		// Editor-only
-		int EntityID;
+		float EntityID;
 	};
 
 	struct CircleVertex
@@ -160,8 +160,8 @@ namespace Cober {
 			});
 		data.LineVertexArray->AddVertexBuffer(data.LineVertexBuffer);
 		data.LineVertexBufferBase = new LineVertex[data.MaxVertices];
-		data.WhiteTexture = Texture::Create(1, 1);
 
+		data.WhiteTexture = Texture::Create(1, 1);
 		uint32_t whiteTextureData = 0xffffffff;
 		data.WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
@@ -170,6 +170,8 @@ namespace Cober {
 			samplers[i] = i;
 
 		data.QuadShader = Shader::Create("Render_Quad.glsl");
+		data.QuadShader->Bind();
+		data.QuadShader->SetIntArray("u_Textures", samplers, data.MaxTextureSlots);
 		//data.CircleShader = Shader::Create("Render_Circle.glsl");
 		//data.LineShader = Shader::Create("Render_Line.glsl");
 
@@ -211,7 +213,6 @@ namespace Cober {
 			for (uint32_t i = 0; i < data.TextureSlotIndex; i++)
 				data.TextureSlots[i]->Bind(i);
 
-			data.QuadShader->Bind();
 			RenderGlobals::DrawIndexed(data.QuadVertexArray, data.QuadIndexCount);
 			// ... CircleShader .. LineShader ...
 			data.Stats.DrawCalls++;

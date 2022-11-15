@@ -14,13 +14,13 @@ namespace Cober {
 		GLCallV(glGenTextures(1, &_rendererID));
 		GLCallV(glBindTexture(GL_TEXTURE_2D, _rendererID));
 
-		//glTexStorage2D(GL_TEXTURE_2D, 1, _internalFormat, _width, _height);
+		glTexStorage2D(GL_TEXTURE_2D, 1, _internalFormat, _width, _height);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	}
 
 	void FlipSurface(SDL_Surface* surface)
@@ -89,7 +89,7 @@ namespace Cober {
 
 		//GLCallV(glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, (const void*)texSurface->pixels)));
 		GLCallV(glTexImage2D(GL_TEXTURE_2D, 0, _internalFormat, _width, _height, 0, _dataFormat, GL_UNSIGNED_BYTE, (const void*)texSurface->pixels));
-		glGenerateMipmap(GL_TEXTURE_2D);
+		//glGenerateMipmap(GL_TEXTURE_2D);
 
 		SDL_FreeSurface(texSurface);
 	}
@@ -105,13 +105,34 @@ namespace Cober {
 		if (size != _width * _height * bpp)
 			LOG_WARNING("Data must be entire texture!");
 
-		//GLCallV(glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, data));
-		GLCallV(glTexImage2D(GL_TEXTURE_2D, 0, _internalFormat, _width, _height, 0, _dataFormat, GL_UNSIGNED_BYTE, data));
-		glGenerateMipmap(GL_TEXTURE_2D);
+		GLCallV(glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, data));
+		//GLCallV(glTexImage2D(GL_TEXTURE_2D, 0, _internalFormat, _width, _height, 0, _dataFormat, GL_UNSIGNED_BYTE, data));
+		//glGenerateMipmap(GL_TEXTURE_2D);	// Must quit glTexStorage2D because create immutable texture
 	}
 
 	void OpenGLES3Texture::Bind(uint32_t slot) const
 	{
+#ifdef __EMSCRIPTEN__		
+		switch (slot) {
+			case 0:  GLCallV(glActiveTexture(GL_TEXTURE0));  break;
+			case 1:  GLCallV(glActiveTexture(GL_TEXTURE1));  break;
+			case 2:  GLCallV(glActiveTexture(GL_TEXTURE2));  break;
+			case 3:  GLCallV(glActiveTexture(GL_TEXTURE3));  break;
+			case 4:  GLCallV(glActiveTexture(GL_TEXTURE4));  break;
+			case 5:  GLCallV(glActiveTexture(GL_TEXTURE5));  break;
+			case 6:  GLCallV(glActiveTexture(GL_TEXTURE6));  break;
+			case 7:  GLCallV(glActiveTexture(GL_TEXTURE7));  break;
+			case 8:  GLCallV(glActiveTexture(GL_TEXTURE8));  break;
+			case 9:  GLCallV(glActiveTexture(GL_TEXTURE9));  break;
+			case 10: GLCallV(glActiveTexture(GL_TEXTURE10));  break;
+			case 11: GLCallV(glActiveTexture(GL_TEXTURE11));  break;
+			case 12: GLCallV(glActiveTexture(GL_TEXTURE12));  break;
+			case 13: GLCallV(glActiveTexture(GL_TEXTURE13));  break;
+			case 14: GLCallV(glActiveTexture(GL_TEXTURE14));  break;
+			case 15: GLCallV(glActiveTexture(GL_TEXTURE15));  break;
+			default: GLCallV(glActiveTexture(GL_TEXTURE0));  break;
+		}
+#endif
 		GLCallV(glBindTexture(GL_TEXTURE_2D, slot));
 	}
 }

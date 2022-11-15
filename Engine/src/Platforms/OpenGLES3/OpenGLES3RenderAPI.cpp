@@ -36,8 +36,8 @@ namespace Cober {
 	{
 		vertexArray->Bind();
 		uint32_t count = indexCount ? indexCount : vertexArray->GetIndexBuffer()->GetCount();
-
 		GLCallV(glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr));
+		//GLCallV(glBindTexture(GL_TEXTURE_2D, 0));
 	}
 
 	void OpenGLES3RenderAPI::DrawLines(const Ref<VertexArray>& vertexArray, uint32_t vertexCount)

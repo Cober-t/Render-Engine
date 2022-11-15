@@ -34,7 +34,7 @@ namespace Cober {
 		Entity entity = _registry->CreateEntity();
 		entity.AddComponent<Sprite>();
 		entity.GetComponent<Sprite>().color = glm::vec4(0.92f, 0.38f, 0.13f, 1.0f);
-		entity.GetComponent<Sprite>().texture = Texture::Create("assets/textures/blendTest.png");
+		//entity.GetComponent<Sprite>().texture = Texture::Create("assets/textures/blendTest.png");
 
 		LOG("Render System Started!!");
 	}

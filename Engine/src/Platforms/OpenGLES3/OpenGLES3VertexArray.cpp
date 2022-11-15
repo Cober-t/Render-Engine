@@ -55,14 +55,58 @@ namespace Cober {
 		const auto& layout = vertexBuffer->GetLayout();
 		for (const auto& element : layout)
 		{
-			GLCallV(glEnableVertexAttribArray(_vertexBufferIndex));
-			GLCallV(glVertexAttribPointer(_vertexBufferIndex,
-								element.GetComponentCount(),
-								ShaderDataTypeToOpenGLBaseType(element.type),
-								element.normalized ? GL_TRUE : GL_FALSE,
-								layout.GetStride(),
-								(const void*)element.offset));
-			_vertexBufferIndex++;
+			switch (element.type)
+			{
+				case ShaderDataType::Float:
+				case ShaderDataType::Float2:
+				case ShaderDataType::Float3:
+				case ShaderDataType::Float4:
+				{
+					GLCallV(glEnableVertexAttribArray(_vertexBufferIndex));
+					GLCallV(glVertexAttribPointer(_vertexBufferIndex,
+						element.GetComponentCount(),
+						ShaderDataTypeToOpenGLBaseType(element.type),
+						element.normalized ? GL_TRUE : GL_FALSE,
+						layout.GetStride(),
+						(const void*)element.offset));
+					_vertexBufferIndex++;
+					break;
+				}
+				case ShaderDataType::Int:
+				case ShaderDataType::Int2:
+				case ShaderDataType::Int3:
+				case ShaderDataType::Int4:
+				case ShaderDataType::Bool:
+				{
+					GLCallV(glEnableVertexAttribArray(_vertexBufferIndex));
+					GLCallV(glVertexAttribIPointer(_vertexBufferIndex,
+						element.GetComponentCount(),
+						ShaderDataTypeToOpenGLBaseType(element.type),
+						layout.GetStride(),
+						(const void*)element.offset));
+					_vertexBufferIndex++;
+					break;
+				}
+				case ShaderDataType::Mat3:
+				case ShaderDataType::Mat4:
+				{
+					uint8_t count = element.GetComponentCount();
+					for (uint8_t i = 0; i < count; i++)
+					{
+						GLCallV(glEnableVertexAttribArray(_vertexBufferIndex));
+						GLCallV(glVertexAttribPointer(_vertexBufferIndex,
+							count,
+							ShaderDataTypeToOpenGLBaseType(element.type),
+							element.normalized ? GL_TRUE : GL_FALSE,
+							layout.GetStride(),
+							(const void*)(element.offset + sizeof(float) * count * i)));
+						GLCallV(glVertexAttribDivisor(_vertexBufferIndex, 1));
+						_vertexBufferIndex++;
+					}
+					break;
+				}
+				default: LOG_WARNING("Unknown ShaderDataType!");
+			}
 		}
 
 		_vertexBuffers.push_back(vertexBuffer);
