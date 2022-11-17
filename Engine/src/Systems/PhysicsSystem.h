@@ -5,12 +5,12 @@
 #include "core/Core.h"
 #include "core/Scene.h"
 
-#include <box2D/b2_world.h>
-#include <box2D/b2_body.h>
-#include <box2D/b2_fixture.h>
-#include <box2D/b2_polygon_shape.h>
-#include <box2D/b2_draw.h>
-class b2World;
+#include <box2d/b2_world.h>
+#include <box2d/b2_body.h>
+#include <box2d/b2_fixture.h>
+#include <box2d/b2_polygon_shape.h>
+#include <box2d/b2_draw.h>
+//class b2World;
 
 namespace Cober {
 

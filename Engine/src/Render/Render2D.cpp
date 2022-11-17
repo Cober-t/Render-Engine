@@ -171,7 +171,11 @@ namespace Cober {
 		for (uint32_t i = 0; i < data.MaxTextureSlots; i++)
 			samplers[i] = i;
 
+#ifdef __EMSCRIPTEN__
 		data.QuadShader = Shader::Create("Render_Quad.glsl");
+#else
+		data.QuadShader = Shader::Create("Render_Quad_4.6.glsl");
+#endif
 		//data.QuadShader->Bind();
 		//data.QuadShader->SetIntArray("u_Textures", samplers, data.MaxTextureSlots);
 		//data.CircleShader = Shader::Create("Render_Circle.glsl");

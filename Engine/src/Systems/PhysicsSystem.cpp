@@ -2,17 +2,13 @@
 
 #include "PhysicsSystem.h"
 
-#ifndef __EMSCRIPTEN__
-
 namespace Cober {
 
 	PhysicsSystem::PhysicsSystem()
 	{
 		RequireComponent<Transform>();
 		RequireComponent<Rigidbody2D>();
-		//RequireComponent<BoxCollider2D>();
-		
-		LOG("Physics SYSTEM Added!!");
+		RequireComponent<BoxCollider2D>();
 	}
 
 	PhysicsSystem::~PhysicsSystem()
@@ -69,6 +65,7 @@ namespace Cober {
 			// ...
 			// TRIGGERS ...
 		}
+		LOG("Physic System Started!!");
 	}
 
 	void PhysicsSystem::Update(double ts)
@@ -97,5 +94,3 @@ namespace Cober {
 		}
 	}
 }
-
-#endif

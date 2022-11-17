@@ -6,8 +6,8 @@
 #endif
 #endif
 #include <random>
-#include <box2D/b2_polygon_shape.h>
 #include <glm/glm.hpp>
+#include <box2d/b2_polygon_shape.h>
 
 #include "core/Core.h"
 #include "core/UUID.h"

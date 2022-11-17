@@ -16,11 +16,14 @@
     <Filter Include="include\SDL\SDL">
       <UniqueIdentifier>{6D315FD5-D9BC-CC99-E2CD-4F8E4ED8289A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\box2D">
-      <UniqueIdentifier>{772CF7A4-E3EC-72DB-AC27-BC5818A7B7B7}</UniqueIdentifier>
+    <Filter Include="include\box2d">
+      <UniqueIdentifier>{972CF7A4-03ED-72DB-CC27-BC5838A7B7B7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\box2D\box2D">
-      <UniqueIdentifier>{E523C981-5185-A68F-DAF2-EC414653DD4E}</UniqueIdentifier>
+    <Filter Include="include\box2d\include">
+      <UniqueIdentifier>{0AFB56BF-7667-12BA-3F5B-AA17AB863422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\box2d\include\box2d">
+      <UniqueIdentifier>{D854FC37-4462-2A1E-CD48-26093955F6D4}</UniqueIdentifier>
     </Filter>
     <Filter Include="include\entt">
       <UniqueIdentifier>{7392DA69-5FF5-690E-087B-A2C4F4BC3591}</UniqueIdentifier>
@@ -144,6 +147,9 @@
     </Filter>
     <Filter Include="src\GUISystem">
       <UniqueIdentifier>{2611FCAF-92D1-77E6-5B0C-C163C78BBCC2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Physics">
+      <UniqueIdentifier>{9F8B9316-0B41-0C0C-9435-06E300EA0210}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Platforms">
       <UniqueIdentifier>{B40E5C85-20CF-D7BB-E909-213955891C98}</UniqueIdentifier>
@@ -468,125 +474,125 @@
     <ClInclude Include="include\SDL\SDL\close_code.h">
       <Filter>include\SDL\SDL</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_api.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_api.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_block_allocator.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_block_allocator.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_body.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_body.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_broad_phase.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_broad_phase.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_chain_shape.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_chain_shape.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_circle_shape.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_circle_shape.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_collision.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_collision.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_common.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_common.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_contact.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_contact.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_contact_manager.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_contact_manager.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_distance.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_distance.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_distance_joint.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_distance_joint.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_draw.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_draw.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_dynamic_tree.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_dynamic_tree.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_edge_shape.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_edge_shape.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_fixture.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_fixture.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_friction_joint.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_friction_joint.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_gear_joint.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_gear_joint.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_growable_stack.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_growable_stack.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_joint.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_joint.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_math.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_math.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_motor_joint.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_motor_joint.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_mouse_joint.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_mouse_joint.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_polygon_shape.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_polygon_shape.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_prismatic_joint.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_prismatic_joint.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_pulley_joint.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_pulley_joint.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_revolute_joint.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_revolute_joint.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_rope.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_rope.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_settings.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_settings.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_shape.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_shape.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_stack_allocator.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_stack_allocator.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_time_of_impact.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_time_of_impact.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_time_step.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_time_step.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_timer.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_timer.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_types.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_types.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_weld_joint.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_weld_joint.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_wheel_joint.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_wheel_joint.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_world.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_world.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\b2_world_callbacks.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\b2_world_callbacks.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
-    <ClInclude Include="include\box2D\box2D\box2d.h">
-      <Filter>include\box2D\box2D</Filter>
+    <ClInclude Include="include\box2d\include\box2d\box2d.h">
+      <Filter>include\box2d\include\box2d</Filter>
     </ClInclude>
     <ClInclude Include="include\entt\entt.hpp">
       <Filter>include\entt</Filter>
@@ -2155,6 +2161,12 @@
     </ClCompile>
     <ClCompile Include="src\GUISystem\GuiLayer.cpp">
       <Filter>src\GUISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Physics\glue.cpp">
+      <Filter>src\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Physics\wrapperBox2D.cpp">
+      <Filter>src\Physics</Filter>
     </ClCompile>
     <ClCompile Include="src\Platforms\OpenGL\OpenGLBuffer.cpp">
       <Filter>src\Platforms\OpenGL</Filter>

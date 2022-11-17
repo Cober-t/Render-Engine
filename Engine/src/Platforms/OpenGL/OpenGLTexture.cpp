@@ -49,7 +49,7 @@ namespace Cober {
 	{
 		// LOAD IMAGE
 		SDL_Surface* texSurface = IMG_Load(path.c_str());
-
+		std::cout << path.c_str() << std::endl;
 		FlipSurface(texSurface);
 
 		if (!texSurface)

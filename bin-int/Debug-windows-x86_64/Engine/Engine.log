@@ -1,40 +1,8 @@
 ﻿cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
 cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
 cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  OpenGLES3Buffer.cpp
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  OpenGLES3RenderAPI.cpp
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  OpenGLES3Shader.cpp
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  OpenGLES3Texture.cpp
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  OpenGLES3VertexArray.cpp
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  OpenGLBuffer.cpp
-  OpenGLRenderAPI.cpp
-  OpenGLVertexArray.cpp
-  Buffer.cpp
-  DebugRenderer.cpp
-  Framebuffer.cpp
-  GraphicsContext.cpp
-  Render2D.cpp
-  RenderAPI.cpp
-  RenderGlobals.cpp
-  Shader.cpp
-  Texture.cpp
-  VertexArray.cpp
-  RenderSystem.cpp
-  Application.cpp
-  Events.cpp
-  Logger.cpp
+  PhysicsSystem.cpp
   Scene.cpp
-  Window.cpp
 libGLESv2.lib(libGLESv2.dll) : warning LNK4006: __imp_glViewport ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
 libGLESv2.lib(libGLESv2.dll) : warning LNK4006: glViewport ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
 libGLESv2.lib(libGLESv2.dll) : warning LNK4006: __imp_glTexSubImage2D ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
@@ -137,4 +105,4 @@ SDL2_image.lib(SDL2_image.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se
 SDL2_mixer.lib(SDL2_mixer.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
 SDL2_ttf.lib(SDL2_ttf.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
 OpenGLTexture.obj : warning LNK4006: "void __cdecl Cober::FlipSurface(struct SDL_Surface *)" (?FlipSurface@Cober@@YAXPEAUSDL_Surface@@@Z) ya se definió en OpenGLES3Texture.obj; segunda definición omitida
-  Engine.vcxproj -> C:\Users\jorge\OneDrive\Escritorio\Render_Engine\bin\Debug-windows-x86_64\Engine\Engine.lib
+  Engine.vcxproj -> C:\Users\jorge\Engine\bin\Debug-windows-x86_64\Engine\Engine.lib

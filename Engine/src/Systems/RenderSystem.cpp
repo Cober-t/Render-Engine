@@ -4,6 +4,8 @@
 #include "PhysicsSystem.h"
 #include "Render/RenderGlobals.h"
 #include "Entities/ECS.h"
+// Test
+#include "Entities/Components.h"
 
 namespace Cober {
 
@@ -34,7 +36,14 @@ namespace Cober {
 		Entity entity = _registry->CreateEntity();
 		entity.AddComponent<Sprite>();
 		entity.GetComponent<Sprite>().color = glm::vec4(0.92f, 0.38f, 0.13f, 1.0f);
+		//std::string texturePath = SOLUTION_DIR + (std::string)"assets\\textures\\";
+		//entity.GetComponent<Sprite>().texture = Texture::Create(texturePath + "blendTest.png");
+#ifdef __EMSCRIPTEN__
 		entity.GetComponent<Sprite>().texture = Texture::Create("assets/textures/blendTest.png");
+#endif
+		entity.AddComponent<BoxCollider2D>();
+		entity.AddComponent<Rigidbody2D>();
+		entity.GetComponent<Rigidbody2D>().type = BodyType::Dynamic;
 
 		LOG("Render System Started!!");
 	}

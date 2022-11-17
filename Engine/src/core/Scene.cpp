@@ -2,9 +2,9 @@
 
 #include "Scene.h"
 #include "Systems/RenderSystem.h"
-//#include "Systems/UISystem.h"
 #include "Systems/MovementSystem.h"
-//#include "Systems/PhysicsSystem.h"
+#include "Systems/PhysicsSystem.h"
+#include "Systems/UISystem.h"
 
 namespace Cober {
 
@@ -36,18 +36,20 @@ namespace Cober {
 		Ref<Scene> scene = CreateRef<Scene>();
 		scene->_registry = CreateRef<Registry>();
 		// PHYSICS FIRST!
-		//scene->_registry->AddSystem<PhysicsSystem>();
+		scene->_registry->AddSystem<PhysicsSystem>();
 		scene->_registry->AddSystem<RenderSystem>();
 		scene->_registry->GetSystem<RenderSystem>().Start(scene);
 		//scene->_registry->AddSystem<UISystem>();
 		//scene->_registry->GetSystem<UISystem>().Start(Engine::Get().GetWindow().GetNativeWindow());
+		
+		scene->_registry->Update();
 
 		return scene;
 	}
 
 	void Scene::OnRuntimeStart(const Ref<Scene>& scene) {
 
-		//_registry->GetSystem<PhysicsSystem>().Start();
+		_registry->GetSystem<PhysicsSystem>().Start();
 
 		//_registry->AddSystem<MovementSystem>();
 		//_registry->GetSystem<MovementSystem>().Start(scene);
@@ -60,8 +62,9 @@ namespace Cober {
 
 	void Scene::OnUpdateRuntime(Ref<Timestep> ts, Ref<EditorCamera> camera) {
 		
-		//_registry->GetSystem<PhysicsSystem>().Update(ts->deltaTime);
 		_registry->Update();
+
+		_registry->GetSystem<PhysicsSystem>().Update(ts->deltaTime);
 		_registry->GetSystem<RenderSystem>().Update(camera);	// Get Camera components from entities
 		//_registry->GetSystem<UISystem>().Update();
 	}
