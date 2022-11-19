@@ -132,9 +132,9 @@ project "Engine"
 
 		defines
 		{
-			"CB_PLATFORM_WINDOWS",
+			--"CB_PLATFORM_WINDOWS",
 			'SOLUTION_DIR=R"($(SolutionDir))"',
-			"CB_BUILD_DLL",
+			--"CB_BUILD_DLL",
 			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM=<SDL_opengl.h>",
 			"NK_IMPLEMENTATION",
 			"NK_SDL_GL3_IMPLEMENTATION",

@@ -4,10 +4,10 @@
 
 #include "RenderAPI.h"
 
-#if !defined __EMSCRIPTEN__ && !defined __OPENGLES3__
-	#include "Platforms/OpenGL/OpenGLRenderAPI.h"
-#elif defined __EMSCRIPTEN__ || __OPENGLES3__
+#if defined __EMSCRIPTEN__ || __OPENGLES3__
 	#include "Platforms/OpenGLES3/OpenGLES3RenderAPI.h"
+#else
+	#include "Platforms/OpenGL/OpenGLRenderAPI.h"
 #endif
 
 namespace Cober {

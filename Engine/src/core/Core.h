@@ -5,6 +5,7 @@
 // [++++++++++++++++++++++++++++++++++++++++]
 // [++++++++++ PLATFORM DETECTION ++++++++++]
 // [++++++++++++++++++++++++++++++++++++++++]
+
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
 //define something for Windows (32-bit and 64-bit, this part is common)
 #ifdef _WIN64
@@ -29,7 +30,7 @@
 // Below __linux__ check should be enough to handle Android,
 // but something may be unique to Android.
 #elif __linux__
-// linux
+	#define __OPENGLES3__
 #elif __unix__ // all unices not caught above
 // Unix
 #elif defined(_POSIX_VERSION)

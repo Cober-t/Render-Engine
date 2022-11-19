@@ -109,7 +109,7 @@ namespace Cober {
 			{ ShaderDataType::Float2, "a_TexCoord"     },
 			{ ShaderDataType::Float,  "a_TexIndex"     },
 			{ ShaderDataType::Float,  "a_TilingFactor" },
-			{ ShaderDataType::Float,  "a_EntityID"   }
+			{ ShaderDataType::Float,  "a_EntityID"	   }
 			});
 		data.QuadVertexArray->AddVertexBuffer(data.QuadVertexBuffer);
 		data.QuadVertexBufferBase = new QuadVertex[data.MaxVertices];
@@ -144,7 +144,7 @@ namespace Cober {
 			{ ShaderDataType::Float4, "a_Color"         },
 			{ ShaderDataType::Float,  "a_Thickness"     },
 			{ ShaderDataType::Float,  "a_Fade"          },
-			{ ShaderDataType::Int,    "a_EntityID"      }
+			{ ShaderDataType::Int,  "a_EntityID"		}
 			});
 		data.CircleVertexArray->AddVertexBuffer(data.CircleVertexBuffer);
 		data.CircleVertexArray->SetIndexBuffer(quadIB); // Use quad IB
@@ -162,9 +162,10 @@ namespace Cober {
 		data.LineVertexBufferBase = new LineVertex[data.MaxVertices];
 
 		data.WhiteTexture = Texture::Create(1, 1);
-
 		uint32_t whiteTextureData = 0xffffffff;
+#ifdef __EMSCRIPTEN__
 		data.WhiteTexture->Bind(data.WhiteTexture->GetID());
+#endif
 		data.WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
 		int32_t samplers[data.MaxTextureSlots];
@@ -173,13 +174,13 @@ namespace Cober {
 
 #ifdef __EMSCRIPTEN__
 		data.QuadShader = Shader::Create("Render_Quad.glsl");
-#else
-		data.QuadShader = Shader::Create("Render_Quad_4.6.glsl");
-#endif
 		//data.QuadShader->Bind();
 		//data.QuadShader->SetIntArray("u_Textures", samplers, data.MaxTextureSlots);
-		//data.CircleShader = Shader::Create("Render_Circle.glsl");
-		//data.LineShader = Shader::Create("Render_Line.glsl");
+#else
+		data.QuadShader = Shader::Create("Render_Quad_4.6.glsl");
+		data.CircleShader = Shader::Create("Render_Circle.glsl");
+		data.LineShader = Shader::Create("Render_Line.glsl");
+#endif
 
 		// Set first texture slot to 0
 		data.TextureSlots[0] = data.WhiteTexture;
@@ -197,8 +198,9 @@ namespace Cober {
 	void Render2D::BeginScene(const Ref<EditorCamera>& camera) {
 
 #ifdef __OPENGL__
-		data.CameraBuffer.ViewProjection = camera->GetPV();
+		data.CameraBuffer.ViewProjection = camera->GetProjection() * camera->GetView();
 		data.CameraUniformBuffer->SetData(&data.CameraBuffer, sizeof(RenderData::CameraData));
+		// ... CircleShader .. LineShader ...
 #else
 		data.QuadShader->Bind();
 		data.QuadShader->SetMat4("u_ViewProjection", camera->GetPV());
@@ -216,9 +218,14 @@ namespace Cober {
 			data.QuadVertexBuffer->SetData(data.QuadVertexBufferBase, dataSize);
 
 			// Bind textures
+#ifdef __EMSCRIPTEN__
 			for (uint32_t i = 0; i < data.TextureSlotIndex; i++)
 				data.TextureSlots[i]->Bind(data.TextureSlots[i]->GetID());
-
+#else
+			for (uint32_t i = 0; i < data.TextureSlotIndex; i++)
+				data.TextureSlots[i]->Bind(i);
+#endif
+			data.QuadShader->Bind();
 			RenderGlobals::DrawIndexed(data.QuadVertexArray, data.QuadIndexCount);
 			// ... CircleShader .. LineShader ...
 			data.Stats.DrawCalls++;
@@ -290,10 +297,10 @@ namespace Cober {
 			glm::toMat4(glm::quat(transformComponent->rotation)) *
 			glm::scale(glm::mat4(1.0f), { transformComponent->scale.x, transformComponent->scale.y, 1.0f });
 
-		size_t quadVertexCount = 4;
-		glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
+		constexpr size_t quadVertexCount = 4;
+		constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 		float textureIndex = 0.0f;
-		float tilingFactor = 1.0f;
+		constexpr float tilingFactor = 1.0f;
 
 		if (data.QuadIndexCount >= RenderData::MaxIndices)
 			Render2D::NextBatch();

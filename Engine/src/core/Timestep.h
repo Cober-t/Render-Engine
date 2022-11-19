@@ -25,6 +25,10 @@ namespace Cober {
 
 			if (lastFrameTime / 1000 - auxTime >= 1) {
 				auxTime = lastFrameTime / 1000;
+#ifdef __EMSCRIPTEN__
+				std::cout << frames << std::endl;
+				std::cout << deltaTime << std::endl;
+#endif
 				frames = _countedFrames;
 				_countedFrames = 0;
 			}

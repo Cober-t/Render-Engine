@@ -49,11 +49,11 @@ namespace Cober {
 	{
 		// LOAD IMAGE
 		SDL_Surface* texSurface = IMG_Load(path.c_str());
-		std::cout << path.c_str() << std::endl;
-		FlipSurface(texSurface);
 
 		if (!texSurface)
 			LOG_ERROR("Failed to load image!");
+
+		FlipSurface(texSurface);
 		
 		_width  = texSurface->w;
 		_height = texSurface->h;
@@ -93,7 +93,7 @@ namespace Cober {
 		GLCallV(glDeleteTextures(1, &_rendererID));
 	}
 
-	void OpenGLTexture::SetData(const void* data, uint32_t size)
+	void OpenGLTexture::SetData(void* data, uint32_t size)
 	{
 		uint32_t bpp = _dataFormat == GL_RGBA ? 4 : 3;
 		if (size != _width * _height * bpp)

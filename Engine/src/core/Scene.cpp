@@ -26,8 +26,8 @@ namespace Cober {
 	{
 		LOG("Scene finished, removing systems from registry...");
 		//_registry->RemoveSystem<MovementSystem>();
-		//_registry->RemoveSystem<PhysicsSystem>();
-		//_registry->RemoveSystem<RenderSystem>();
+		_registry->RemoveSystem<PhysicsSystem>();
+		_registry->RemoveSystem<RenderSystem>();
 		//_registry->RemoveSystem<UISystem>();
 	}
 
@@ -42,7 +42,9 @@ namespace Cober {
 		//scene->_registry->AddSystem<UISystem>();
 		//scene->_registry->GetSystem<UISystem>().Start(Engine::Get().GetWindow().GetNativeWindow());
 		
-		scene->_registry->Update();
+		{	// TEST
+			scene->_registry->Update();
+		}
 
 		return scene;
 	}
@@ -62,7 +64,7 @@ namespace Cober {
 
 	void Scene::OnUpdateRuntime(Ref<Timestep> ts, Ref<EditorCamera> camera) {
 		
-		_registry->Update();
+		//_registry->Update();
 
 		_registry->GetSystem<PhysicsSystem>().Update(ts->deltaTime);
 		_registry->GetSystem<RenderSystem>().Update(camera);	// Get Camera components from entities

@@ -8,7 +8,7 @@ namespace Cober {
 	{
 		RequireComponent<Transform>();
 		RequireComponent<Rigidbody2D>();
-		RequireComponent<BoxCollider2D>();
+		//RequireComponent<BoxCollider2D>();
 	}
 
 	PhysicsSystem::~PhysicsSystem()
@@ -21,7 +21,7 @@ namespace Cober {
 
 	void PhysicsSystem::Start()
 	{
-		_physicsWorld = new b2World({ 0.0f, -9.8f });
+		_physicsWorld = new b2World({ 0.0f, -0.5f });
 
 		for (auto& entity : GetSystemEntities()) {
 
@@ -70,9 +70,15 @@ namespace Cober {
 
 	void PhysicsSystem::Update(double ts)
 	{
+#ifdef __EMSCRIPTEN__
+		const int32_t velocityIterations = 3;
+		const int32_t positionIterations = 2;
+		_physicsWorld->Step(0.016f, velocityIterations, positionIterations);
+#else
 		const int32_t velocityIterations = 6;
 		const int32_t positionIterations = 2;
 		_physicsWorld->Step(ts, velocityIterations, positionIterations);
+#endif
 
 		for (auto& entity : GetSystemEntities()) {
 			auto& transform = entity.GetComponent<Transform>();

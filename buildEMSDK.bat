@@ -111,7 +111,7 @@ echo %CPP%
 		call em++ %C++% %Optimization% %CoreFlags% %SideFlags% %MACROS% %CPP% %Physics%\wrapperBox2D.cpp -o %DESTINATION% %INCLUDE_FOLDERS% --preload-file .\assets
 	) else (
 		echo Starting Build without assets...
-		call em++ -std=c++17 -Os -sUSE_SDL=2 -sUSE_WEBGL2=1 -sFULL_ES3=1 -sWASM=1 -D%MACROS% %CPP% -o .\bin\WebGL2-build\game.js -I%ENGINE% -I%GAME% -I%core% -I%Render% -I%Camera% -I%Entities% -I%Platforms% -I%SDL% -I%GLM% -I%BOX2D% -I%NUKLEAR%
+		call em++ %C++% %Optimization% %CoreFlags% %SideFlags% %MACROS% %CPP% %Physics%\wrapperBox2D.cpp -o %DESTINATION% %INCLUDE_FOLDERS%
 	)
 	
 	echo Build Completed
@@ -122,7 +122,7 @@ echo %CPP%
 	cd %EMSDK%
 	call emsdk_env.bat
 	cd %WORKINGDIR%
-	emrun %~dp0\bin\WebGL2-build\game.html
+	emrun %~dp0\bin\WebGL2-build\index.html
 	goto :success
 
 :clean

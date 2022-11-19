@@ -26,7 +26,7 @@ namespace Cober {
 		ImGui::Text("Renderer Stats:");
 		ImGui::Text("Frames: %d", Engine::Get().GetFrames());
 		ImGui::Text("Draw Calls: %d", Render2D::GetStats().DrawCalls);
-		ImGui::Text("Frames: %d", Render2D::GetStats().QuadCount);
+		ImGui::Text("Quads: %d", Render2D::GetStats().QuadCount);
 		ImGui::End();
 	}
 

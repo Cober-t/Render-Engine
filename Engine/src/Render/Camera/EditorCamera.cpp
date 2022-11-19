@@ -86,6 +86,7 @@ namespace Cober {
 #ifdef __OPENGLES3__ 	// Provisional till make a Camera System
 		_viewportFocused = true;
 #endif
+		_viewportFocused = true;
 
 		if (event.type == SDL_MOUSEBUTTONUP)
 			mouseButtonHeld = false;
