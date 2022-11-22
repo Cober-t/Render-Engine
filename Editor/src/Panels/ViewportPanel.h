@@ -8,8 +8,10 @@ namespace Cober {
 
 	class ViewportPanel {
 	public:
-		ViewportPanel();
+		ViewportPanel(Ref<Framebuffer>& fbo);
 		~ViewportPanel();
+
+		static Unique<ViewportPanel> Create(Ref<Framebuffer>& fbo) { return CreateUnique<ViewportPanel>(fbo); }
 
 		void BindFramebuffer();
 		void UnbindFramebuffer();
@@ -21,13 +23,12 @@ namespace Cober {
 		void DrawGrid();
 
 		void OnGuiRender(Ref<EditorCamera> editorCamera);
-		void PlayButtonBar(GameState gameState, Ref<Scene>& activeScene, Ref<Scene>& editorScene, Ref<Scene>& runtimeScene);
+		void PlayButtonBar(GameState gameState, Ref<Scene>& activeScene, Ref<Scene>& editorScene);
 
 	private:
 		std::string _filePath;
 		glm::vec2 _viewportSize = { 0.0f, 0.0f };
 		Ref<Framebuffer> _framebuffer;
 		// Unique<Shader> _gridShader
-	private:
 	};
 }

@@ -29,12 +29,16 @@ namespace Cober {
 		//bool OnKeyPressed(KeyPressedEvent& event)
 	private:
 		Ref<EditorCamera> _editorCamera;
-		Ref<Scene> _activeScene, _editorScene, _runtimeScene;
+		Ref<Scene> _activeScene, _editorScene;
 	private:
 		Unique<ContentBrowserPanel> _contentBrowserPanel;
 		Unique<SceneHierarchyPanel> _sceneHierarchyPanel;
 		Unique<ViewportPanel>		_viewportPanel;
 		Unique<MenuPanel>			_menuPanel;
 		Unique<DataPanel>			_dataPanel;
+
+		Ref<Framebuffer> _fbo;
+
+		Entity hoveredEntity;
 	};
 }

@@ -16,6 +16,8 @@ namespace Cober {
 		SceneHierarchyPanel(const Ref<Scene> sceneContext);
 		~SceneHierarchyPanel();
 
+		static Unique<SceneHierarchyPanel> Create() { return CreateUnique<SceneHierarchyPanel>(); }
+
 		void OnGuiRender();
 
 		void SetContext(const Ref<Scene>& selectionContext);

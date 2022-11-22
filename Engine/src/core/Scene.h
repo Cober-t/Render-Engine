@@ -17,16 +17,19 @@ namespace Cober {
 		void OnUpdateRuntime(Ref<Timestep> ts, Ref<EditorCamera> camera);
 		void OnUpdateEditor(Ref<Timestep> ts, Ref<EditorCamera> camera);
 
-		Ref<Registry> GetRegistry() { return _registry; }
+		void GetEntity(int index, Entity& hoveredEntity);
+		std::unordered_map<UUID, Entity>& GetSceneEntities() { return _registry.GetAllEntities(); }
 
-		static Ref<Scene> Copy(Ref<Scene>& scene);
+		void SetDefaultEntity(Entity& entity) { entity.SetTag("None"); entity.SetIndex(-1); }
+		void CreateEntity(std::string name = "Empty Entity", UUID uuid = UUID()) { _registry.CreateEntity(name, uuid); }
+
+		Registry& GetRegistry() { return _registry; }
+
+		static Ref<Scene> Copy(Ref<Scene> scene);
 
 		static Ref<Scene> Create();
-
-		// TEST
-		bool physicsStarted;
 	private:
-		bool _world2D = true;
-		Ref<Registry> _registry;
+		bool _world2D;
+		Registry _registry;
 	};
 }

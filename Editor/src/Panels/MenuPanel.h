@@ -8,6 +8,8 @@ namespace Cober {
 		MenuPanel();
 		~MenuPanel();
 
+		static Unique<MenuPanel> Create() { return CreateUnique<MenuPanel>(); }
+
 		void OpenGridOptions(bool& grid2D);
 
 		void OnGuiRender(bool& game2D, bool& debugMode);

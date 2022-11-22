@@ -7,9 +7,9 @@
 
 namespace Cober {
 
-	ViewportPanel::ViewportPanel() {
+	ViewportPanel::ViewportPanel(Ref<Framebuffer>& fbo) {
 
-		_framebuffer = Framebuffer::Create(1280, 720);
+		_framebuffer = fbo;
 	}
 
 	ViewportPanel::~ViewportPanel() {
@@ -68,7 +68,7 @@ namespace Cober {
 		ImGui::End();
 	}
 
-	void ViewportPanel::PlayButtonBar(GameState gameState, Ref<Scene>& activeScene, Ref<Scene>& editorScene, Ref<Scene>& runtimeScene) {
+	void ViewportPanel::PlayButtonBar(GameState gameState, Ref<Scene>& activeScene, Ref<Scene>& editorScene) {
 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 2));
 		ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, ImVec2(0, 0));
@@ -89,15 +89,13 @@ namespace Cober {
 			activeScene = editorScene;	////// TEST
 			if (gameState == GameState::EDITOR) {
 				Engine::Get().SetGameState(GameState::RUNTIME_EDITOR);
-				//runtimeScene = Scene::Copy(editorScene);
-				activeScene = editorScene;
+				activeScene = Scene::Copy(editorScene);
 				activeScene->OnRuntimeStart(activeScene);
 			}
 			else if (gameState == GameState::RUNTIME_EDITOR) {
 				Engine::Get().SetGameState(GameState::EDITOR);
-				activeScene = editorScene;
-				runtimeScene = nullptr;
 				activeScene->OnRuntimeStop();
+				activeScene = editorScene;
 			}
 		}
 		ImGui::PopStyleVar(2);

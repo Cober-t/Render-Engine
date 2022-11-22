@@ -3,7 +3,6 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-
 namespace Cober {
 
 	//extern const std::filesystem::path _AssetPath;
@@ -11,27 +10,30 @@ namespace Cober {
 	{
 		_editorCamera = CreateUnique<EditorCamera>(45.0f, 1.778f, 1.0f, 1000.0f);
 
+		_fbo = Framebuffer::Create(1280, 720);
+
 		_editorScene = Scene::Create();
 		_activeScene = _editorScene;
 
-		_contentBrowserPanel = CreateUnique<ContentBrowserPanel>();
-		_sceneHierarchyPanel = CreateUnique<SceneHierarchyPanel>();
-		_viewportPanel = CreateUnique<ViewportPanel>();
-		_menuPanel = CreateUnique<MenuPanel>();
-		_dataPanel = CreateUnique<DataPanel>();
+		_contentBrowserPanel = ContentBrowserPanel::Create();
+		_sceneHierarchyPanel = SceneHierarchyPanel::Create();
+		_viewportPanel = ViewportPanel::Create(_fbo);
+		_menuPanel = MenuPanel::Create();
+		_dataPanel = DataPanel::Create();
 	}
 
 	void EditorLayer::OnAttach() {
 
 		_sceneHierarchyPanel->SetContext(_activeScene);
+		_activeScene->OnRuntimeStart(_activeScene);
 	}
 
 	void EditorLayer::OnDetach() {
 
 		_viewportPanel->UnbindFramebuffer();
 
-		_editorScene = nullptr;
-		_activeScene = nullptr;
+		_editorScene  = nullptr;
+		_activeScene  = nullptr;
 		_editorCamera = nullptr;
 	}
 
@@ -111,7 +113,7 @@ namespace Cober {
 		_menuPanel->OnGuiRender(Engine::Get().GetGameMode(), Engine::Get().GetDebugMode());
 		_dataPanel->OnGuiRender(Engine::Get().GetGameMode());
 
-		_viewportPanel->PlayButtonBar(Engine::Get().GetGameState(), _activeScene, _editorScene, _runtimeScene);
+		_viewportPanel->PlayButtonBar(Engine::Get().GetGameState(), _activeScene, _editorScene);
 
 		EndDockspace();
 	}

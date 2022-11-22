@@ -32,10 +32,9 @@ namespace Cober {
 
 		ImGui::Begin("Scene Hierarchy");
 
-		std::set<Entity> entities = _sceneContext->GetRegistry()->GetAllEntities();
-		for (auto entity : entities) {
-			if (entity.GetID() != -1)
-				DrawEntityNode(entity);
+		for (auto& entity : _sceneContext->GetRegistry().GetAllEntities()) {
+			if (entity.second.GetIndex() != -1)
+				DrawEntityNode(entity.second);
 		}
 
 		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
@@ -43,7 +42,7 @@ namespace Cober {
 
 		if (ImGui::BeginPopupContextWindow(0, 1)) {
 			if (_selectionContext == _nullEntityContext && ImGui::Selectable("Empty Entity"))
-				_selectionContext = _sceneContext->GetRegistry()->CreateEntity();
+				_selectionContext = _sceneContext->GetRegistry().CreateEntity();
 				
 			ImGui::EndPopup();
 		}
@@ -78,7 +77,7 @@ namespace Cober {
 			ImGui::TreePop();
 
 		if (entityDeleted) {
-			_sceneContext->GetRegistry()->DeleteEntity(entity);
+			_sceneContext->GetRegistry().DeleteEntity(entity);
 			if (_selectionContext == entity)
 				_selectionContext = _nullEntityContext;
 		}
@@ -184,7 +183,7 @@ namespace Cober {
 
 			if (removeComponent) {
 				entity.RemoveComponent<T>();
-				_sceneContext->GetRegistry()->RemoveEntityFromSystems(entity);
+				_sceneContext->GetRegistry().RemoveEntityFromSystems(entity);
 			}
 		}
 	}
@@ -195,7 +194,7 @@ namespace Cober {
 			if (ImGui::MenuItem(name.c_str())) {
 				_selectionContext.AddComponent<T>();
 				ImGui::CloseCurrentPopup();
-				_sceneContext->GetRegistry()->AddEntityToSystems(_selectionContext);
+				_sceneContext->GetRegistry().AddEntityToSystems(_selectionContext);
 			}
 		}
 	}

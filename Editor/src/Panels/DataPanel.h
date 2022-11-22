@@ -10,6 +10,10 @@ namespace Cober {
 		DataPanel();
 		~DataPanel();
 
+		static Unique<DataPanel> Create() { return CreateUnique<DataPanel>(); }
+
+		void OnGuiRender(bool& game2D, Entity& hoveredEntity);
+
 		void OnGuiRender(bool& game2D);
 		//void OnGuiRender(Unique<DataManager> dataManager);
 	private:

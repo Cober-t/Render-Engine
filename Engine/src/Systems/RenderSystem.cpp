@@ -23,30 +23,30 @@ namespace Cober {
 		LOG("Render System removed from Registry");
 	}
 
-	void RenderSystem::Start(const Ref<Scene>& scene)
+	void RenderSystem::Start()
 	{
-		_registry = scene->GetRegistry();
+		//_registry = scene->GetRegistry();
 
 		RenderGlobals::Create();
 		RenderGlobals::Init();
 		Render2D::Start();
 
-		// Test
-		{
-			Entity entity = _registry->CreateEntity();
-			entity.AddComponent<Sprite>();
-			entity.GetComponent<Sprite>().color = glm::vec4(0.92f, 0.38f, 0.13f, 1.0f);
-			//entity.GetComponent<Sprite>().color = glm::vec4(0.13f, 0.38f, 0.92f, 1.0f);
-#ifdef __EMSCRIPTEN__
-			entity.GetComponent<Sprite>().texture = Texture::Create("assets/textures/orangeMykoeski.png");
-#else
-			std::string texturePath = SOLUTION_DIR + (std::string)"assets\\textures\\";
-			entity.GetComponent<Sprite>().texture = Texture::Create(texturePath + "blendTest.png");
-#endif
-			entity.AddComponent<BoxCollider2D>();
-			entity.AddComponent<Rigidbody2D>();
-			entity.GetComponent<Rigidbody2D>().type = BodyType::Dynamic;
-		}
+//		// Test
+//		{
+//			Entity entity = _registry->CreateEntity();
+//			entity.AddComponent<Sprite>();
+//			entity.GetComponent<Sprite>().color = glm::vec4(0.92f, 0.38f, 0.13f, 1.0f);
+//			//entity.GetComponent<Sprite>().color = glm::vec4(0.13f, 0.38f, 0.92f, 1.0f);
+//#ifdef __EMSCRIPTEN__
+//			entity.GetComponent<Sprite>().texture = Texture::Create("assets/textures/orangeMykoeski.png");
+//#else
+//			std::string texturePath = SOLUTION_DIR + (std::string)"assets\\textures\\";
+//			entity.GetComponent<Sprite>().texture = Texture::Create(texturePath + "blendTest.png");
+//#endif
+//			entity.AddComponent<BoxCollider2D>();
+//			entity.AddComponent<Rigidbody2D>();
+//			entity.GetComponent<Rigidbody2D>().type = BodyType::Dynamic;
+//		}
 
 		LOG("Render System Started!!");
 	}

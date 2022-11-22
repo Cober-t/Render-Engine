@@ -8,7 +8,10 @@
 
 namespace Cober {
 
-	Scene::Scene() {
+	Scene::Scene() : _world2D(false){
+
+		_registry.AddSystem<PhysicsSystem>();
+		_registry.AddSystem<RenderSystem>();
 
 		// [+++++ TODO
 		//_registry->AddSystem<CameraSystem>();				// CAMERA SYSTEM		*(something like Cinemachine in Unity)
@@ -25,57 +28,105 @@ namespace Cober {
 	Scene::~Scene()
 	{
 		LOG("Scene finished, removing systems from registry...");
-		//_registry->RemoveSystem<MovementSystem>();
-		_registry->RemoveSystem<PhysicsSystem>();
-		_registry->RemoveSystem<RenderSystem>();
+		_registry.RemoveSystem<PhysicsSystem>();
+		_registry.RemoveSystem<RenderSystem>();
 		//_registry->RemoveSystem<UISystem>();
 	}
 
 	Ref<Scene> Scene::Create() {
 
-		Ref<Scene> scene = CreateRef<Scene>();
-		scene->_registry = CreateRef<Registry>();
-		// PHYSICS FIRST!
-		scene->_registry->AddSystem<PhysicsSystem>();
-		scene->_registry->AddSystem<RenderSystem>();
-		scene->_registry->GetSystem<RenderSystem>().Start(scene);
-		//scene->_registry->AddSystem<UISystem>();
-		//scene->_registry->GetSystem<UISystem>().Start(Engine::Get().GetWindow().GetNativeWindow());
-		
-		{	// TEST
-			scene->_registry->Update();
+		return CreateRef<Scene>();
+	}
+
+	void Scene::GetEntity(int index, Entity& hoveredEntity) {
+
+		if (GetSceneEntities().find(index) != GetSceneEntities().end()) {
+			for (auto& entity : GetSceneEntities()) {
+				if (entity.second.GetIndex() == index)
+					hoveredEntity = entity.second;
+			}
+		}
+		else {
+			Logger::Warning("There is no Entity with ID: " + std::to_string(index));
+			SetDefaultEntity(hoveredEntity);
+		}
+	}
+
+	template<typename TComponent>
+	static void CopyComponent(std::unordered_map<UUID, Entity>& dst, std::unordered_map<UUID, Entity>& src)
+	{
+		for (auto& e : dst)
+		{
+			UUID uuid = e.second.GetComponent<IDComponent>().ID;
+			if (!dst.at(uuid).HasComponent<TComponent>() && src.at(uuid).HasComponent<TComponent>())
+			{
+				TComponent& componentData = src.at(uuid).GetComponent<TComponent>();
+				dst.at(uuid).AddComponent<TComponent>(componentData);
+			}
+		}
+	}
+
+	Ref<Scene> Scene::Copy(Ref<Scene> baseScene) {
+
+		Ref<Scene> newScene = CreateRef<Scene>();
+
+		if (baseScene->GetSceneEntities().size() > 0) {
+			// Create entities in new scene
+			for (auto& e : baseScene->GetSceneEntities()) {
+				UUID uuid = e.first;
+				const auto& name = e.second.GetComponent<Tag>().tag;
+				newScene->CreateEntity(name, uuid);
+
+				// Copy Transform Component Data
+				auto& srcTransform = baseScene->GetSceneEntities().at(uuid).GetComponent<Transform>();
+				auto& dstTransform = newScene->GetSceneEntities().at(uuid).GetComponent<Transform>();
+				dstTransform.position = srcTransform.position;
+				dstTransform.rotation = srcTransform.rotation;
+				dstTransform.scale = srcTransform.scale;
+			}
+
+			auto& srcEntities = baseScene->GetSceneEntities();
+			auto& dstEntities = newScene->GetSceneEntities();
+
+			// Copy components (except IDComponent and TagComponent)
+			CopyComponent<Sprite>(dstEntities, srcEntities);
+			CopyComponent<Rigidbody2D>(dstEntities, srcEntities);
+			CopyComponent<BoxCollider2D>(dstEntities, srcEntities);
+			// Script Component, Camera component, Movement script component ...
 		}
 
-		return scene;
+		return newScene;
 	}
 
 	void Scene::OnRuntimeStart(const Ref<Scene>& scene) {
 
-		_registry->GetSystem<PhysicsSystem>().Start();
+		_registry.Update();
 
-		//_registry->AddSystem<MovementSystem>();
+		_registry.GetSystem<PhysicsSystem>().Start();
+		_registry.GetSystem<RenderSystem>().Start();
+		//_registry->GetSystem<UISystem>().Start(Engine::Get().GetWindow().GetNativeWindow());
 		//_registry->GetSystem<MovementSystem>().Start(scene);
 	}
 
-	void Scene::OnRuntimeStop() {
+	void Scene::OnRuntimeStop() 
+	{
 
-		//_registry->RemoveSystem<PhysicsSystem>();
 	}
 
 	void Scene::OnUpdateRuntime(Ref<Timestep> ts, Ref<EditorCamera> camera) {
 		
-		//_registry->Update();
+		_registry.Update();
 
-		_registry->GetSystem<PhysicsSystem>().Update(ts->deltaTime);
-		_registry->GetSystem<RenderSystem>().Update(camera);	// Get Camera components from entities
+		_registry.GetSystem<PhysicsSystem>().Update(ts->deltaTime);
+		_registry.GetSystem<RenderSystem>().Update(camera);	// Get Camera components from entities
 		//_registry->GetSystem<UISystem>().Update();
 	}
 
 	void Scene::OnUpdateEditor(Ref<Timestep> ts, Ref<EditorCamera> editorCamera) {
 
-		_registry->Update();
+		_registry.Update();
 
-		_registry->GetSystem<RenderSystem>().Update(editorCamera);
+		_registry.GetSystem<RenderSystem>().Update(editorCamera);
 		//_registry->GetSystem<UISystem>().Update();
 	}
 }

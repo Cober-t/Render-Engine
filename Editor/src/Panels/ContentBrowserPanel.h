@@ -1,15 +1,18 @@
 #pragma once
 
+#include "core/Core.h"
+
 #include <filesystem>
-//#include "Cober/Renderer/Texture.h"
 
 namespace Cober {
 
 	class ContentBrowserPanel
 	{
 	public:
-
 		ContentBrowserPanel();
+
+		static Unique<ContentBrowserPanel> Create() { return CreateUnique<ContentBrowserPanel>(); }
+
 		void OnGuiRender();
 	private:
 		std::filesystem::path _currentDirectory;

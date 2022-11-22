@@ -14,7 +14,7 @@ namespace Cober {
 		RenderSystem();
 		~RenderSystem();
 
-		void Start(const Ref<Scene>& scene);
+		void Start();
 		void Update(const Ref<EditorCamera>& camera);
 		//void Update(const Ref<CameraComponent>& camera)
 	private:
