@@ -9,22 +9,22 @@ namespace Cober {
 	EditorLayer::EditorLayer() : Layer("Editor") 
 	{
 		_editorCamera = CreateUnique<EditorCamera>(45.0f, 1.778f, 1.0f, 1000.0f);
+	}
 
-		_fbo = Framebuffer::Create(1280, 720);
+	void EditorLayer::OnAttach() {
 
 		_editorScene = Scene::Create();
 		_activeScene = _editorScene;
 
 		_contentBrowserPanel = ContentBrowserPanel::Create();
 		_sceneHierarchyPanel = SceneHierarchyPanel::Create();
-		_viewportPanel = ViewportPanel::Create(_fbo);
+		_viewportPanel = ViewportPanel::Create();
 		_menuPanel = MenuPanel::Create();
 		_dataPanel = DataPanel::Create();
-	}
 
-	void EditorLayer::OnAttach() {
-
+		_activeScene->SetDefaultEntity(hoveredEntity);
 		_sceneHierarchyPanel->SetContext(_activeScene);
+
 		_activeScene->OnRuntimeStart(_activeScene);
 	}
 
@@ -39,9 +39,15 @@ namespace Cober {
 
 	void EditorLayer::OnUpdate(Ref<Timestep> ts) {
 
-		_viewportPanel->ResizeViewport(_editorCamera, Engine::Get().GetGameMode());
-
+		_viewportPanel->ResizeViewport(_editorCamera, _activeScene, Engine::Get().GetGameMode());
 		_viewportPanel->BindFramebuffer();
+		RenderGlobals::SetClearColor(100, 150, 220, 255);
+		RenderGlobals::Clear();
+		// or camera->RenderSkybox();
+
+		_viewportPanel->FBOClearAttachments(1, -1);
+
+		_viewportPanel->DrawGrid();
 
 		switch (Engine::Get().GetGameState()) {
 			case GameState::EDITOR: {
@@ -61,6 +67,10 @@ namespace Cober {
 				break;
 			}
 		}
+
+		_viewportPanel->SetCursorEntity(_activeScene, hoveredEntity);
+		if (ImGui::IsMouseClicked(0) && hoveredEntity.GetIndex() != -1)
+			_sceneHierarchyPanel->SetSelectedEntity(hoveredEntity);
 
 		_viewportPanel->UnbindFramebuffer();
 	}
@@ -111,9 +121,9 @@ namespace Cober {
 		_contentBrowserPanel->OnGuiRender();
 		_viewportPanel->OnGuiRender(_editorCamera);
 		_menuPanel->OnGuiRender(Engine::Get().GetGameMode(), Engine::Get().GetDebugMode());
-		_dataPanel->OnGuiRender(Engine::Get().GetGameMode());
+		_dataPanel->OnGuiRender(Engine::Get().GetGameMode(), hoveredEntity);
 
-		_viewportPanel->PlayButtonBar(Engine::Get().GetGameState(), _activeScene, _editorScene);
+		_viewportPanel->PlayButtonBar(Engine::Get().GetGameState(), _sceneHierarchyPanel, _activeScene, _editorScene);
 
 		EndDockspace();
 	}
@@ -161,15 +171,15 @@ namespace Cober {
 		ImGuiIO& io = ImGui::GetIO();
 		ImGuiStyle& style = ImGui::GetStyle();
 		float minWinSizeX = style.WindowMinSize.x;
-		float minWinSizeY = style.WindowMinSize.y;
+		//float minWinSizeY = style.WindowMinSize.y;
 		style.WindowMinSize.x = 200.0f;
-		style.WindowMinSize.y = 200.0f;
+		//style.WindowMinSize.y = 25.0f;
 		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable) {
 			ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
 			ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 		}
 		style.WindowMinSize.x = minWinSizeX;
-		style.WindowMinSize.y = minWinSizeY;
+		//style.WindowMinSize.y = minWinSizeY;
 	}
 
 	void EditorLayer::EndDockspace() {

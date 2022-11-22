@@ -21,6 +21,9 @@ void Game2D::OnUpdate(Ref<Timestep> ts) {
 
 	bool ortho = false;
 	_camera->SetViewportSize(1280, 720, ortho);
+	RenderGlobals::SetClearColor(100, 150, 220, 255);
+	RenderGlobals::Clear();
+
 	_camera->OnUpdate(ts);
 	_activeScene->OnUpdateRuntime(ts, _camera);
 

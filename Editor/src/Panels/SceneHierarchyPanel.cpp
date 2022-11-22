@@ -41,8 +41,10 @@ namespace Cober {
 			_selectionContext = _nullEntityContext;
 
 		if (ImGui::BeginPopupContextWindow(0, 1)) {
-			if (_selectionContext == _nullEntityContext && ImGui::Selectable("Empty Entity"))
+			if (_selectionContext == _nullEntityContext && ImGui::Selectable("Empty Entity")) {
 				_selectionContext = _sceneContext->GetRegistry().CreateEntity();
+				std::cout << "SelectionContext: " << _selectionContext.GetIndex() << std::endl;
+			}
 				
 			ImGui::EndPopup();
 		}
@@ -150,7 +152,7 @@ namespace Cober {
 
 
 	template<typename T, typename UIFunction>
-	void SceneHierarchyPanel::DrawComponent(const std::string& name, Entity entity, UIFunction uiFunction) {
+	void SceneHierarchyPanel::DrawComponent(const std::string& name, Entity& entity, UIFunction uiFunction) {
 
 		const ImGuiTreeNodeFlags treeNodeFlags = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_AllowItemOverlap | ImGuiTreeNodeFlags_FramePadding;
 
@@ -199,7 +201,7 @@ namespace Cober {
 		}
 	}
 
-	void SceneHierarchyPanel::DrawComponents(Entity entity)
+	void SceneHierarchyPanel::DrawComponents(Entity& entity)
 	{
 		if (entity.HasComponent<Tag>()) {
 

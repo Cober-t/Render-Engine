@@ -30,7 +30,7 @@ namespace Cober {
 		static void StartBatch();
 		static void NextBatch();
 
-		static void DrawSprite(Transform* transformComponent, Sprite* spriteComponent);
+		static void DrawSprite(Transform* transformComponent, Sprite* spriteComponent, int entityIndex);
 
 		// EXPORT TO DEBUG RENDERER
 		static void DrawSolidPolygon(Entity& entity);

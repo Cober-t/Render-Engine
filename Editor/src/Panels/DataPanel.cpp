@@ -14,19 +14,22 @@ namespace Cober {
 
 	}
 
-	void DataPanel::OnGuiRender(bool& game2D) {
+	void DataPanel::OnGuiRender(bool& game2D, Entity hoveredEntity) {
 
 		ImGui::Begin("Data");
-
-		//std::string name = "None";
-		//if (m_HoveredEntity)
-		//	name = m_HoveredEntity.GetComponent<TagComponent>().Tag;
-		//ImGui::Text("Hovered Entity: %s", name.c_str());
 
 		ImGui::Text("Renderer Stats:");
 		ImGui::Text("Frames: %d", Engine::Get().GetFrames());
 		ImGui::Text("Draw Calls: %d", Render2D::GetStats().DrawCalls);
 		ImGui::Text("Quads: %d", Render2D::GetStats().QuadCount);
+
+		if (hoveredEntity.GetIndex() == -1)
+			ImGui::Text("Hovered Entity: %s", hoveredEntity.GetTag().c_str());
+		else
+			ImGui::Text("Hovered Entity: %s", hoveredEntity.GetComponent<Tag>().tag.c_str());
+
+		ImGui::Text("Entity Index: %i", hoveredEntity.GetIndex());
+
 		ImGui::End();
 	}
 

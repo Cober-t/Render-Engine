@@ -12,10 +12,7 @@ namespace Cober {
 
 		static Unique<DataPanel> Create() { return CreateUnique<DataPanel>(); }
 
-		void OnGuiRender(bool& game2D, Entity& hoveredEntity);
-
-		void OnGuiRender(bool& game2D);
+		void OnGuiRender(bool& game2D, Entity hoveredEntity);
 		//void OnGuiRender(Unique<DataManager> dataManager);
-	private:
 	};
 }

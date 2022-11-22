@@ -1,5 +1,6 @@
 #pragma once
 
+#ifdef __EMSCRIPTEN__
 #include <SDL/SDL_opengles2.h>
 
 #include "core/Window.h"
@@ -19,13 +20,15 @@ namespace Cober {
 
 		void Resize(uint32_t width, uint32_t height) override;
 
-		uint32_t GetColorAttachmentRendererID() override { return _ColorAttachment; }
+		uint32_t GetColorAttachmentRenderID(uint32_t index = 0) const override { return _ColorAttachments; }
 		const FramebufferSpecification& GetSpecification() override { return _Specification; }
 		void SetSpecificationWidth(const uint32_t width) override { _Specification.Width = width; }
 		void SetSpecificationHeight(const uint32_t height) override { _Specification.Height = height; }
 	private:
 		uint32_t _RendererID = 0;
-		uint32_t _ColorAttachment = 0, _DepthAttachment = 0;
+		uint32_t _ColorAttachments = 0, _DepthAttachment = 0;
 		FramebufferSpecification _Specification;
 	};
 }
+
+#endif

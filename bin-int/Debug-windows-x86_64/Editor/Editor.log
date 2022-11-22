@@ -1,6 +1,44 @@
 ﻿cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  EditorLayer.cpp
+  SceneHierarchyPanel.cpp
 C:\Users\jorge\Engine\Engine\src\core\Timestep.h(19,38): warning C4018: '<=': no coinciden signed/unsigned
-C:\Users\jorge\Engine\Engine\src\Entities\ECS.h(39,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t'
-C:\Users\jorge\Engine\Engine\src\Entities\ECS.h(39,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t'
+C:\Users\jorge\Engine\Engine\src\Entities\ECS.h(41,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t'
+C:\Users\jorge\Engine\Engine\src\Entities\ECS.h(41,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t'
+C:\Users\jorge\Engine\Engine\src\Entities\ECS.h(92,1): warning C4267: 'return': conversión de 'size_t' a 'int'; posible pérdida de datos
+C:\Users\jorge\Engine\Engine\src\Entities\ECS.h(92,1): message : al compilar la función del miembro clase plantilla "int Cober::Pool<TComponent>::GetSize(void) const"
+          with
+          [
+              TComponent=Cober::BoxCollider2D
+          ]
+C:\Users\jorge\Engine\Engine\src\Entities\ECS.h(196,3): message : Vea la referencia a la creación de una instancia de la función plantilla "int Cober::Pool<TComponent>::GetSize(void) const" que se está compilando
+          with
+          [
+              TComponent=Cober::BoxCollider2D
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\type_traits(334): message : Vea la referencia a la creación de una instancia de clase plantilla "Cober::Pool<TComponent>" que se está compilando
+          with
+          [
+              TComponent=Cober::BoxCollider2D
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\memory(1444,67): message : Vea la referencia a la creación de una instancia de clase plantilla "std::is_convertible<_Yty *,_Ty *>" que se está compilando
+          with
+          [
+              _Yty=Cober::Pool<Cober::BoxCollider2D>,
+              _Ty=Cober::IPool
+          ]
+C:\Users\jorge\Engine\Engine\src\Entities\ECS.h(182,62): message : Vea la referencia a la creación de una instancia de clase plantilla "std::_SP_pointer_compatible<Cober::Pool<TComponent>,Cober::IPool>" que se está compilando
+          with
+          [
+              TComponent=Cober::BoxCollider2D
+          ]
+C:\Users\jorge\Engine\Engine\src\Entities\ECS.h(234,45): message : Vea la referencia a la creación de una instancia de la función plantilla "void Cober::Registry::AddComponent<TComponent,>(Cober::Entity)" que se está compilando
+          with
+          [
+              TComponent=Cober::BoxCollider2D
+          ]
+C:\Users\jorge\Engine\Editor\src\Panels\SceneHierarchyPanel.cpp(197,1): message : Vea la referencia a la creación de una instancia de la función plantilla "void Cober::Entity::AddComponent<T,>(void)" que se está compilando
+          with
+          [
+              T=Cober::BoxCollider2D
+          ]
+C:\Users\jorge\Engine\Editor\src\Panels\SceneHierarchyPanel.cpp(227,63): message : Vea la referencia a la creación de una instancia de la función plantilla "void Cober::SceneHierarchyPanel::AddIfHasComponent<Cober::BoxCollider2D>(std::string)" que se está compilando
   Editor.vcxproj -> C:\Users\jorge\Engine\bin\Debug-windows-x86_64\Editor\Editor.exe

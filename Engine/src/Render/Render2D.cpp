@@ -18,7 +18,7 @@ namespace Cober {
 		float TilingFactor;
 
 		// Editor-only
-		float EntityID;
+		int EntityID;
 	};
 
 	struct CircleVertex
@@ -109,7 +109,7 @@ namespace Cober {
 			{ ShaderDataType::Float2, "a_TexCoord"     },
 			{ ShaderDataType::Float,  "a_TexIndex"     },
 			{ ShaderDataType::Float,  "a_TilingFactor" },
-			{ ShaderDataType::Float,  "a_EntityID"	   }
+			{ ShaderDataType::Int,    "a_EntityID"	   }
 			});
 		data.QuadVertexArray->AddVertexBuffer(data.QuadVertexBuffer);
 		data.QuadVertexBufferBase = new QuadVertex[data.MaxVertices];
@@ -291,7 +291,7 @@ namespace Cober {
 		delete[] data.QuadVertexBufferBase;
 	}
 
-	void Render2D::DrawSprite(Transform* transformComponent, Sprite* spriteComponent)
+	void Render2D::DrawSprite(Transform* transformComponent, Sprite* spriteComponent, int entityIndex)
 	{
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), transformComponent->position) *
 			glm::toMat4(glm::quat(transformComponent->rotation)) *
@@ -331,10 +331,10 @@ namespace Cober {
 			data.QuadVertexBufferPtr->TexCoord = textureCoords[i];
 			data.QuadVertexBufferPtr->TexIndex = textureIndex;
 			data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
-			data.QuadVertexBufferPtr->EntityID = 1;// entityID;
+			data.QuadVertexBufferPtr->EntityID = entityIndex;
 			data.QuadVertexBufferPtr++;
 		}
-
+		
 		data.QuadIndexCount += 6;
 		data.Stats.QuadCount++;
 	}
@@ -369,7 +369,7 @@ namespace Cober {
 				data.QuadVertexBufferPtr->TexCoord = glm::vec2((float)bc2d.shape.m_vertices->x, (float)bc2d.shape.m_vertices->y);
 				data.QuadVertexBufferPtr->TexIndex = textureIndex;
 				data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
-				data.QuadVertexBufferPtr->EntityID = 1;// entityID;
+				data.QuadVertexBufferPtr->EntityID = entity.GetIndex();
 				data.QuadVertexBufferPtr++;
 			}
 

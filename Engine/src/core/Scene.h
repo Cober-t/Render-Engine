@@ -17,6 +17,8 @@ namespace Cober {
 		void OnUpdateRuntime(Ref<Timestep> ts, Ref<EditorCamera> camera);
 		void OnUpdateEditor(Ref<Timestep> ts, Ref<EditorCamera> camera);
 
+		void OnViewportResize(uint32_t width, uint32_t height);
+
 		void GetEntity(int index, Entity& hoveredEntity);
 		std::unordered_map<UUID, Entity>& GetSceneEntities() { return _registry.GetAllEntities(); }
 

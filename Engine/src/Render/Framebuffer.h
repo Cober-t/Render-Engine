@@ -2,12 +2,46 @@
 
 #include "core/Core.h"
 
-namespace Cober { 
+namespace Cober {
+
+	enum class FramebufferTextureFormat
+	{
+		None = 0,
+
+		// Color
+		RGBA8,
+		RED_INTEGER,
+
+		// Depth/stencil
+		DEPTH24STENCIL8,
+
+		// Defaults
+		Depth = DEPTH24STENCIL8
+	};
+
+	struct FramebufferTextureSpecification
+	{
+		FramebufferTextureSpecification() = default;
+		FramebufferTextureSpecification(FramebufferTextureFormat format)
+			: TextureFormat(format) {}
+
+		FramebufferTextureFormat TextureFormat = FramebufferTextureFormat::None;
+		// TODO: filtering/wrap
+	};
+
+	struct FramebufferAttachmentSpecification
+	{
+		FramebufferAttachmentSpecification() = default;
+		FramebufferAttachmentSpecification(std::initializer_list<FramebufferTextureSpecification> attachments)
+			: Attachments(attachments) {}
+
+		std::vector<FramebufferTextureSpecification> Attachments;
+	};
 
 	struct FramebufferSpecification
 	{
-		uint32_t Width, Height;
-		// FramebufferFormat Format = 
+		uint32_t Width = 0, Height = 0;
+		FramebufferAttachmentSpecification Attachments;
 		uint32_t Samples = 1;
 
 		bool SwapChainTarget = false;
@@ -25,14 +59,11 @@ namespace Cober {
 		virtual void Invalidate() = 0;
 
 		virtual void Resize(uint32_t width, uint32_t height) = 0;
+		virtual int ReadPixel(uint32_t attachmentIndex, int x, int y) = 0;
 
-		virtual uint32_t GetColorAttachmentRendererID() = 0;
+		virtual void ClearAttachment(uint32_t attachmentIndex, int value) = 0;
+
+		virtual uint32_t GetColorAttachmentRenderID(uint32_t index = 0) const = 0;
 		virtual const FramebufferSpecification& GetSpecification() = 0;
-		virtual void SetSpecificationWidth(const uint32_t width) = 0;
-		virtual void SetSpecificationHeight(const uint32_t height) = 0;
-	//private:
-	//	uint32_t _RendererID = 0;
-	//	uint32_t _ColorAttachment = 0, _DepthAttachment = 0;
-	//	FramebufferSpecification _Specification;
 	};
 }

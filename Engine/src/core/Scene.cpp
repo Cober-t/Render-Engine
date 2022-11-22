@@ -6,6 +6,8 @@
 #include "Systems/PhysicsSystem.h"
 #include "Systems/UISystem.h"
 
+#include "Render/RenderGlobals.h"
+
 namespace Cober {
 
 	Scene::Scene() : _world2D(false){
@@ -40,16 +42,14 @@ namespace Cober {
 
 	void Scene::GetEntity(int index, Entity& hoveredEntity) {
 
-		if (GetSceneEntities().find(index) != GetSceneEntities().end()) {
-			for (auto& entity : GetSceneEntities()) {
-				if (entity.second.GetIndex() == index)
-					hoveredEntity = entity.second;
+		for (auto& entity : GetSceneEntities()) {
+			if (entity.second.GetIndex()  == index) {
+				hoveredEntity = entity.second;
+				return;
 			}
 		}
-		else {
-			Logger::Warning("There is no Entity with ID: " + std::to_string(index));
-			SetDefaultEntity(hoveredEntity);
-		}
+		Logger::Warning("There is no Entity with ID: " + std::to_string(index));
+		SetDefaultEntity(hoveredEntity);
 	}
 
 	template<typename TComponent>
@@ -112,6 +112,21 @@ namespace Cober {
 	{
 
 	}
+	void Scene::OnViewportResize(uint32_t width, uint32_t height)
+	{
+		//m_ViewportWidth = width;
+		//m_ViewportHeight = height;
+
+		//// Resize our non-FixedAspectRatio cameras
+		//auto view = m_Registry.view<CameraComponent>();
+		//for (auto entity : view) {
+		//	auto& cameraComponent = view.get<CameraComponent>(entity);
+		//	if (!cameraComponent.FixedAspectRatio)
+		//		cameraComponent.Camera.SetViewportSize(width, height);
+		//}
+		RenderGlobals::SetViewport(0, 0, width, height);
+	}
+
 
 	void Scene::OnUpdateRuntime(Ref<Timestep> ts, Ref<EditorCamera> camera) {
 		

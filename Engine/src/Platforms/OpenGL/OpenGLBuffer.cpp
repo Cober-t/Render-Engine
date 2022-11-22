@@ -78,20 +78,20 @@ namespace Cober {
 #ifdef __OPENGL__
 	OpenGLUniformBuffer::OpenGLUniformBuffer(uint32_t size, uint32_t binding)
 	{
-		GLCallV(glCreateBuffers(1, &m_RendererID));
-		GLCallV(glNamedBufferData(m_RendererID, size, nullptr, GL_DYNAMIC_DRAW)); // TODO: investigate usage hint
-		GLCallV(glBindBufferBase(GL_UNIFORM_BUFFER, binding, m_RendererID));
+		GLCallV(glCreateBuffers(1, &_renderID));
+		GLCallV(glNamedBufferData(_renderID, size, nullptr, GL_DYNAMIC_DRAW)); // TODO: investigate usage hint
+		GLCallV(glBindBufferBase(GL_UNIFORM_BUFFER, binding, _renderID));
 	}
 
 	OpenGLUniformBuffer::~OpenGLUniformBuffer()
 	{
-		GLCallV(glDeleteBuffers(1, &m_RendererID));
+		GLCallV(glDeleteBuffers(1, &_renderID));
 	}
 
 
 	void OpenGLUniformBuffer::SetData(const void* data, uint32_t size, uint32_t offset)
 	{
-		GLCallV(glNamedBufferSubData(m_RendererID, offset, size, data));
+		GLCallV(glNamedBufferSubData(_renderID, offset, size, data));
 	}
 #endif
 }

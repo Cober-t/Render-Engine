@@ -21,7 +21,9 @@ namespace Cober {
 	// +++++ ENTITY +++++++++++++++++++++++++++++++++++++++++++++ //
 	class Entity {
 	public:
-		Entity() = default;
+		Entity() {
+			std::cout << "Entity Default Constructor: " << index << std::endl;
+		};
 		Entity(std::string name, int entityIndex, UUID uuid = UUID()) : tag(name), index(entityIndex), id(uuid), registry(nullptr) {};
 		Entity(const Entity& entity) = default;
 
@@ -109,7 +111,7 @@ namespace Cober {
 
 		void Update();
 
-		Entity CreateEntity(std::string name = "Empty Entity", UUID uuid = UUID());
+		Entity& CreateEntity(std::string name = "Empty Entity", UUID uuid = UUID());
 		Entity GetEntity(Entity requestedEntity);
 		std::unordered_map<UUID, Entity>& GetAllEntities() { return entities; };
 		void DeleteEntity(Entity entity);

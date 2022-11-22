@@ -6,7 +6,7 @@ namespace Cober {
 
 	int IComponent::nextIndex = 0;
 
-	Entity Registry::CreateEntity(std::string name, UUID uuid) {
+	Entity& Registry::CreateEntity(std::string name, UUID uuid) {
 
 		int entityIndex = numEntities++;
 		Entity entity(name, entityIndex, uuid);
@@ -22,7 +22,7 @@ namespace Cober {
 		entity.AddComponent<Tag>(name);
 		entity.AddComponent<Transform>();
 
-		//Logger::Log("Created entity with ID = " + std::to_string(entity.GetIndex()));
+		Logger::Log("Created entity with ID = " + std::to_string(entity.GetIndex()));
 		return entity;
 	}
 
