@@ -76,7 +76,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;SOLUTION_DIR=R"($(SolutionDir))";IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGLES3__;CB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;SOLUTION_DIR=R"($(SolutionDir))";CB_BUILD_DLL;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGL__;CB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>include;include\SDL;include\glm;include\box2d;include\box2d\include;include\nuklear;include\sol;include\lua;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -101,7 +101,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;SOLUTION_DIR=R"($(SolutionDir))";IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGLES3__;CB_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;SOLUTION_DIR=R"($(SolutionDir))";CB_BUILD_DLL;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGL__;CB_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>include;include\SDL;include\glm;include\box2d;include\box2d\include;include\nuklear;include\sol;include\lua;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -129,7 +129,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;SOLUTION_DIR=R"($(SolutionDir))";IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGLES3__;CB_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;SOLUTION_DIR=R"($(SolutionDir))";CB_BUILD_DLL;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGL__;CB_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>include;include\SDL;include\glm;include\box2d;include\box2d\include;include\nuklear;include\sol;include\lua;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
