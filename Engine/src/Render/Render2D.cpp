@@ -42,6 +42,12 @@ namespace Cober {
 		int EntityID;
 	};
 
+	struct GridVertex {
+
+		glm::vec3 Position;
+		glm::vec4 Color;
+	};
+
 	struct RenderData
 	{
 		static const uint32_t MaxQuads = 20000;
@@ -66,6 +72,10 @@ namespace Cober {
 		Ref<VertexBuffer> LineVertexBuffer;
 		Ref<Shader> LineShader;
 
+		Ref<VertexArray> GridVertexArray;
+		Ref<VertexBuffer> GridVertexBuffer;
+		Ref<Shader> GridShader;
+
 		uint32_t QuadIndexCount = 0;
 		QuadVertex* QuadVertexBufferBase = nullptr;
 		QuadVertex* QuadVertexBufferPtr = nullptr;
@@ -77,18 +87,22 @@ namespace Cober {
 		uint32_t LineVertexCount = 0;
 		LineVertex* LineVertexBufferBase = nullptr;
 		LineVertex* LineVertexBufferPtr = nullptr;
-
 		float LineWidth = 2.0f;
+
+		GridVertex* GridVertexBufferBase = nullptr;
+		GridVertex* GridVertexBufferPtr = nullptr;
 
 		std::array<Ref<Texture>, MaxTextureSlots> TextureSlots;
 		uint32_t TextureSlotIndex = 1; // 0 = white texture
 
 		glm::vec4 QuadVertexPositions[4];
+		glm::vec4 GridVertexPositions[4];
 
 		Render2D::Statistics Stats;
 		struct CameraData
 		{
-			glm::mat4 ViewProjection;
+			glm::mat4 Projection;
+			glm::mat4 View;
 		};
 		CameraData CameraBuffer;
 #ifdef __OPENGL__
@@ -132,6 +146,19 @@ namespace Cober {
 
 		Ref<IndexBuffer> quadIB = IndexBuffer::Create(quadIndices, data.MaxIndices);
 		data.QuadVertexArray->SetIndexBuffer(quadIB);
+
+		// Grid
+		data.GridVertexArray = VertexArray::Create();
+		data.GridVertexBuffer = VertexBuffer::Create(data.MaxVertices * sizeof(GridVertex));
+		data.GridVertexBuffer->SetLayout({
+			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float4, "a_Color"    }
+			});
+		data.GridVertexArray->AddVertexBuffer(data.GridVertexBuffer);
+		data.GridVertexBufferBase = new GridVertex[data.MaxVertices];
+
+		Ref<IndexBuffer> gridIB = IndexBuffer::Create(quadIndices, data.MaxIndices);
+		data.GridVertexArray->SetIndexBuffer(gridIB);
 		delete[] quadIndices;
 
 		// Circles
@@ -144,11 +171,12 @@ namespace Cober {
 			{ ShaderDataType::Float4, "a_Color"         },
 			{ ShaderDataType::Float,  "a_Thickness"     },
 			{ ShaderDataType::Float,  "a_Fade"          },
-			{ ShaderDataType::Int,  "a_EntityID"		}
+			{ ShaderDataType::Int,    "a_EntityID"		}
 			});
 		data.CircleVertexArray->AddVertexBuffer(data.CircleVertexBuffer);
 		data.CircleVertexArray->SetIndexBuffer(quadIB); // Use quad IB
 		data.CircleVertexBufferBase = new CircleVertex[data.MaxVertices];
+
 		// Lines
 		data.LineVertexArray = VertexArray::Create();
 
@@ -177,9 +205,10 @@ namespace Cober {
 		//data.QuadShader->Bind();
 		//data.QuadShader->SetIntArray("u_Textures", samplers, data.MaxTextureSlots);
 #else
-		data.QuadShader = Shader::Create("Render_Quad_4.6.glsl");
+		data.QuadShader   = Shader::Create("Render_Quad_4.6.glsl");
 		data.CircleShader = Shader::Create("Render_Circle.glsl");
-		data.LineShader = Shader::Create("Render_Line.glsl");
+		data.LineShader   = Shader::Create("Render_Line.glsl");
+		data.GridShader   = Shader::Create("Editor_Infinite_Grid.glsl");
 #endif
 
 		// Set first texture slot to 0
@@ -190,6 +219,11 @@ namespace Cober {
 		data.QuadVertexPositions[2] = {  0.5f,  0.5f, 0.0f, 1.0f };
 		data.QuadVertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
 
+		data.GridVertexPositions[0] = { -1.0f, -1.0f, 0.0f, 1.0f };
+		data.GridVertexPositions[1] = {  1.0f, -1.0f, 0.0f, 1.0f };
+		data.GridVertexPositions[2] = {  1.0f,  1.0f, 0.0f, 1.0f };
+		data.GridVertexPositions[3] = { -1.0f,  1.0f, 0.0f, 1.0f };
+
 #ifdef __OPENGL__
 		data.CameraUniformBuffer = UniformBuffer::Create(sizeof(RenderData::CameraData), 0);
 #endif
@@ -198,7 +232,8 @@ namespace Cober {
 	void Render2D::BeginScene(const Ref<EditorCamera>& camera) {
 
 #ifdef __OPENGL__
-		data.CameraBuffer.ViewProjection = camera->GetProjection() * camera->GetView();
+		data.CameraBuffer.View = camera->GetView();
+		data.CameraBuffer.Projection = camera->GetProjection();
 		data.CameraUniformBuffer->SetData(&data.CameraBuffer, sizeof(RenderData::CameraData));
 		// ... CircleShader .. LineShader ...
 #else
@@ -230,6 +265,14 @@ namespace Cober {
 			// ... CircleShader .. LineShader ...
 			data.Stats.DrawCalls++;
 		}
+
+#ifdef __OPENGL__
+		// GRID
+		uint32_t dataSize = (uint32_t)((uint8_t*)data.GridVertexBufferPtr - (uint8_t*)data.GridVertexBufferBase);
+		data.GridVertexBuffer->SetData(data.GridVertexBufferBase, dataSize);
+		data.GridShader->Bind();
+		RenderGlobals::DrawIndexed(data.GridVertexArray, (uint32_t)6);
+#endif
 
 		/*if (data.CircleIndexCount)
 		{
@@ -264,6 +307,8 @@ namespace Cober {
 		data.LineVertexCount = 0;
 		data.LineVertexBufferPtr = data.LineVertexBufferBase;
 
+		data.GridVertexBufferPtr = data.GridVertexBufferBase;
+
 		data.TextureSlotIndex = 1;
 	}
 
@@ -289,6 +334,25 @@ namespace Cober {
 	void Render2D::Shutdown() {
 
 		delete[] data.QuadVertexBufferBase;
+		//delete[] data.CircleVertexBufferBase;
+		//delete[] data.LineVertexBufferBase;
+		delete[] data.GridVertexBufferBase;
+	}
+
+	void Render2D::DrawGrid() {
+
+		glm::vec3 rotation{ 90.0f, 0.0f, 0.0f };
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f)) *	// Futuro XZ camera position
+			glm::toMat4(glm::quat(glm::radians(rotation))) *
+			glm::scale(glm::mat4(1.0f), { 20.0f, 20.0f, 1.0f });
+
+		glm::vec4 color = { 1.0f, 0.0f, 0.0f, 1.0f };
+		constexpr size_t quadVertexCount = 4;
+		for (size_t i = 0; i < quadVertexCount; i++) {
+			data.GridVertexBufferPtr->Position = transform * data.GridVertexPositions[i];
+			data.GridVertexBufferPtr->Color = color;
+			data.GridVertexBufferPtr++;
+		}
 	}
 
 	void Render2D::DrawSprite(Transform* transformComponent, Sprite* spriteComponent, int entityIndex)

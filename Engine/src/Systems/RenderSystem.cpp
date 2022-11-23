@@ -35,6 +35,8 @@ namespace Cober {
 		Render2D::ResetStats();
 		Render2D::BeginScene(camera);
 
+		Render2D::DrawGrid();
+
 		// DEBUG PHYSICS
 #ifndef __EMSCRIPTEN__ 
 #ifndef __OPENGLES3__
@@ -53,7 +55,7 @@ namespace Cober {
 		
 			Render2D::DrawSprite(&transform, &sprite, entity.GetIndex());
 		}
-	
+
 		Render2D::EndScene();
 	}
 }

@@ -8,7 +8,7 @@ namespace Cober {
 	//extern const std::filesystem::path _AssetPath;
 	EditorLayer::EditorLayer() : Layer("Editor") 
 	{
-		_editorCamera = CreateUnique<EditorCamera>(45.0f, 1.778f, 1.0f, 1000.0f);
+		_editorCamera = CreateUnique<EditorCamera>(45.0f, 1.778f, 0.01f, 100.0f);
 	}
 
 	void EditorLayer::OnAttach() {
@@ -41,7 +41,10 @@ namespace Cober {
 
 		_viewportPanel->ResizeViewport(_editorCamera, _activeScene, Engine::Get().GetGameMode());
 		_viewportPanel->BindFramebuffer();
-		RenderGlobals::SetClearColor(100, 150, 220, 255);
+		RenderGlobals::SetClearColor(10, 0, 10, 255);
+		//RenderGlobals::SetClearColor(225, 225, 255, 255);
+		//RenderGlobals::SetClearColor(235, 97, 35, 255);
+		//RenderGlobals::SetClearColor(100, 150, 220, 255);
 		RenderGlobals::Clear();
 		// or camera->RenderSkybox();
 
@@ -120,8 +123,8 @@ namespace Cober {
 		_sceneHierarchyPanel->OnGuiRender();
 		_contentBrowserPanel->OnGuiRender();
 		_viewportPanel->OnGuiRender(_editorCamera);
-		_menuPanel->OnGuiRender(Engine::Get().GetGameMode(), Engine::Get().GetDebugMode());
 		_dataPanel->OnGuiRender(Engine::Get().GetGameMode(), hoveredEntity);
+		_menuPanel->OnGuiRender(_editorCamera, Engine::Get().GetGameMode(), Engine::Get().GetDebugMode());
 
 		_viewportPanel->PlayButtonBar(Engine::Get().GetGameState(), _sceneHierarchyPanel, _activeScene, _editorScene);
 

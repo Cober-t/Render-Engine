@@ -1,6 +1,1 @@
-﻿cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
-  Game2D.cpp
-C:\Users\jorge\Engine\Engine\src\core\Timestep.h(19,38): warning C4018: '<=': no coinciden signed/unsigned
-C:\Users\jorge\Engine\Engine\src\Entities\ECS.h(39,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t'
-C:\Users\jorge\Engine\Engine\src\Entities\ECS.h(39,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t'
-  Game.vcxproj -> C:\Users\jorge\Engine\bin\Debug-windows-x86_64\Game\Game.exe
+﻿  Game.vcxproj -> C:\Users\jorge\Engine\bin\Debug-windows-x86_64\Game\Game.exe

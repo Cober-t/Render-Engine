@@ -41,10 +41,8 @@ namespace Cober {
 			_selectionContext = _nullEntityContext;
 
 		if (ImGui::BeginPopupContextWindow(0, 1)) {
-			if (_selectionContext == _nullEntityContext && ImGui::Selectable("Empty Entity")) {
+			if (_selectionContext == _nullEntityContext && ImGui::Selectable("Empty Entity"))
 				_selectionContext = _sceneContext->GetRegistry().CreateEntity();
-				std::cout << "SelectionContext: " << _selectionContext.GetIndex() << std::endl;
-			}
 				
 			ImGui::EndPopup();
 		}

@@ -128,7 +128,7 @@ namespace Cober {
 
 				GLCallV(glDeleteShader(shader));
 
-				LOG_ERROR(infoLog.data());
+				SDL_Log(infoLog.data());
 				LOG_ERROR("Shader link failure!");
 				break;
 			}
@@ -160,7 +160,7 @@ namespace Cober {
 			for (auto id : glShaderIDs)
 				glDeleteShader(id);
 
-			LOG_ERROR(infoLog.data());
+			SDL_Log(infoLog.data());
 			LOG_ERROR("Shader link failure!");
 			return;
 		}

@@ -48,7 +48,7 @@ namespace Cober {
 				return;
 			}
 		}
-		Logger::Warning("There is no Entity with ID: " + std::to_string(index));
+		//Logger::Warning("There is no Entity with ID: " + std::to_string(index));
 		SetDefaultEntity(hoveredEntity);
 	}
 

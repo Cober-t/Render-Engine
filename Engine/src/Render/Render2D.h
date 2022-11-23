@@ -30,6 +30,7 @@ namespace Cober {
 		static void StartBatch();
 		static void NextBatch();
 
+		static void DrawGrid();
 		static void DrawSprite(Transform* transformComponent, Sprite* spriteComponent, int entityIndex);
 
 		// EXPORT TO DEBUG RENDERER
@@ -42,7 +43,7 @@ namespace Cober {
 			uint32_t QuadCount = 0;
 
 			uint32_t GetTotalVertexCount() { return QuadCount * 4; }
-			uint32_t GetTotalIndexCount() { return QuadCount * 6; }
+			uint32_t GetTotalIndexCount()  { return QuadCount * 6; }
 		};
 		static void ResetStats();
 		static Statistics GetStats();

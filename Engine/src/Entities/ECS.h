@@ -21,9 +21,7 @@ namespace Cober {
 	// +++++ ENTITY +++++++++++++++++++++++++++++++++++++++++++++ //
 	class Entity {
 	public:
-		Entity() {
-			std::cout << "Entity Default Constructor: " << index << std::endl;
-		};
+		Entity() = default;
 		Entity(std::string name, int entityIndex, UUID uuid = UUID()) : tag(name), index(entityIndex), id(uuid), registry(nullptr) {};
 		Entity(const Entity& entity) = default;
 

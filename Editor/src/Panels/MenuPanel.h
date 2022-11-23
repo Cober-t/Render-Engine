@@ -12,7 +12,7 @@ namespace Cober {
 
 		void OpenGridOptions(bool& grid2D);
 
-		void OnGuiRender(bool& game2D, bool& debugMode);
+		void OnGuiRender(Ref<EditorCamera>& editorCamera, bool& game2D, bool& debugMode);
 	private:
 		bool _fullscreen = false;
 		bool _snap = false;

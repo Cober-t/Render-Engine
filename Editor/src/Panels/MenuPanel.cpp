@@ -1,8 +1,8 @@
 #include "pch.h"
 
-#include "MenuPanel.h"
-
 #include <imgui/imgui.h>
+
+#include "MenuPanel.h"
 
 namespace Cober {
 
@@ -37,14 +37,15 @@ namespace Cober {
 		ImGui::End();
 	}
 
-	void MenuPanel::OnGuiRender(bool& game2D, bool& debugMode) {
+	void MenuPanel::OnGuiRender(Ref<EditorCamera>& editorCamera, bool& game2D, bool& debugMode) {
 
 		if (ImGui::BeginMenuBar()) {
 			if (ImGui::BeginMenu("File")) {
 				if (ImGui::MenuItem("Exit"))
 					Engine::Get().Close();
 
-				ImGui::Checkbox("2D", &game2D);
+				if(ImGui::Checkbox("2D", &game2D))
+					editorCamera->UpdateProjection(game2D);
 
 				if (ImGui::Checkbox("Fullscreen", &_fullscreen))
 					Engine::Get().GetWindow().ChangeFullScreen();

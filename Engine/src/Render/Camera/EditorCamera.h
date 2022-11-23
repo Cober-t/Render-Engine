@@ -29,6 +29,7 @@ namespace Cober {
 			UpdateProjection(ortho);
 		}
 
+		void UpdateProjection(bool& ortho);
 		const glm::mat4& GetProjection() const override { return _projection; }
 		const glm::mat4& GetView() const override { return _viewMatrix; }
 		const glm::mat4 GetPV() const override { return _projection * _viewMatrix; }
@@ -42,7 +43,6 @@ namespace Cober {
 		float GetPitch() const { return _pitch; }
 		float GetYaw() const { return _yaw; }
 	private:
-		void UpdateProjection(bool& ortho);
 		void UpdateView();
 
 		//bool OnMouseScroll(MouseScrolledEvent& e);
@@ -56,7 +56,7 @@ namespace Cober {
 		float RotationSpeed() const;
 		float ZoomSpeed() const;
 	private:
-		float _fov = 45.0f, _aspectRatio = 1.778f, _nearClip = 0.1f, _farClip = 1000.0f;
+		float _fov = 45.0f, _aspectRatio = 1.778f, _nearClip = 0.01f, _farClip = 100.0f;
 		//glm::mat4 _viewMatrix;
 		glm::vec3 _position   = { 0.0f, 0.0f,  0.0f };
 		glm::vec3 _focalPoint = { 0.0f, 0.0f, -1.0f };
