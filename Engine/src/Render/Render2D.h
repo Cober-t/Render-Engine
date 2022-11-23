@@ -30,7 +30,7 @@ namespace Cober {
 		static void StartBatch();
 		static void NextBatch();
 
-		static void DrawGrid();
+		static void DrawGrid(glm::vec3 cameraPosition);
 		static void DrawSprite(Transform* transformComponent, Sprite* spriteComponent, int entityIndex);
 
 		// EXPORT TO DEBUG RENDERER

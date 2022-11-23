@@ -4,7 +4,10 @@
 #version 460 core
 
 layout(location = 0) in vec3 a_Position;
-layout(location = 1) in vec4 a_Color;
+layout(location = 1) in vec3 a_CameraPosition;
+layout(location = 2) in int  a_Game2D;
+layout(location = 3) in float a_Opacity;
+layout(location = 4) in int  a_Patron;
 
 layout(std140, binding = 0) uniform Camera
 {
@@ -12,40 +15,79 @@ layout(std140, binding = 0) uniform Camera
 	mat4 u_View;
 };
 
-layout(location = 0) out vec4 worldPoint;
+layout(location = 0) out vec3 cameraPosition;
+layout(location = 1) out vec4 worldPoint;
+layout(location = 2) out vec4 worldCamera;
+layout(location = 3) out flat int game2D;
+layout(location = 4) out flat float opacity;
+layout(location = 5) out flat int patron;
 
 void main() {
-
+    
     vec4 point = u_Projection * u_View * vec4(a_Position, 1.0);
-
-    worldPoint = vec4(a_Position, 1.0);
-
     gl_Position = point;
+
+    cameraPosition = a_CameraPosition;
+    worldPoint = vec4(a_Position, 1.0);
+    worldCamera = point;
+    game2D = a_Game2D;
+    opacity = a_Opacity;
+    patron = a_Patron;
 }
 
 #type fragment
 #version 460 core
 
-layout(location = 0) in vec4 worldPoint;
+layout(location = 0) in vec3 cameraPosition;
+layout(location = 1) in vec4 worldPoint;
+layout(location = 2) in vec4 worldCamera;
+layout(location = 3) in flat int game2D;
+layout(location = 4) in flat float opacity;
+layout(location = 5) in flat int patron;
 
 layout(location = 0) out vec4 outColor;
 
 vec4 grid(vec3 fragPos3D, float scale, bool drawAxis) {
-    vec2 coord = fragPos3D.xz * scale; 
+
+    vec2 coord;
+    if (game2D != 1)
+        coord = fragPos3D.xz * scale;
+    else
+        coord = fragPos3D.xy * scale;
     vec2 derivative = fwidth(coord);
     vec2 grid = abs(fract(coord - 0.5) - 0.5) / derivative;
     float line = min(grid.x, grid.y);
     float minimumz = min(derivative.y, 1);
     float minimumx = min(derivative.x, 1);
-    vec4 color = vec4(0.0, 0.0, 0.0, 0.6 - min(line, 0.8));
-    // Z axis
-    if(fragPos3D.x > -0.1 * minimumx && fragPos3D.x < 0.1 * minimumx)
-        color.z = 1.0;
-    // Y axis
-    if(fragPos3D.z > -0.1 * minimumz && fragPos3D.z < 0.1 * minimumz)
-        color.x = 1.0;
 
-    return color;
+    vec4 color;
+    if (game2D != 1)
+        color = vec4(0.2, 0.2, 0.2, 0.8 - min(line, 1.0));
+    else
+        color = vec4(0.2, 0.2, 0.2, 0.8 - min(line, 1.0));
+    float alpha = color.w;
+    
+    //float d = length(gl_FragCoord.xyz - worldCamera.xyz);
+    //float w = 0.5;
+    //if (d > 10)
+    //    color.w *= 0.1;
+    //else
+    //    color.w *= pow(float((w-d)/w), 1.5);
+    
+    if (game2D != 1){
+        if(fragPos3D.x > -0.1 * minimumx && fragPos3D.x < 0.1 * minimumx)
+            color.z = 1.0;
+        if(fragPos3D.z > -0.1 * minimumz && fragPos3D.z < 0.1 * minimumz)
+            color.x = 1.0;
+    }
+    else {
+        if(fragPos3D.x > -0.1 * minimumx && fragPos3D.x < 0.1 * minimumx)
+            color.y = 1.0;
+        if(fragPos3D.y > -0.1 * minimumz && fragPos3D.y < 0.1 * minimumz)
+            color.x = 1.0;
+    }
+    
+    return vec4(color.xyz, alpha);
 }
 
 float calculateAttenuation(float range) {
@@ -68,12 +110,12 @@ float calculateAttenuation(float range) {
         default:    constant = 1.0;  linear = 1.0;    quadratic = 1.0;      break;
     }
 
-    vec3 origin = vec3(0.0);
-    float distance = length(origin - worldPoint.xyz);
+    vec3 origin = cameraPosition;
+    float distance = length(origin.xz - worldPoint.xz);
     float attenuation = 1.0 / (constant + linear * distance + quadratic * (distance * distance));
 
-    float fadeLimit    = 5;   // Make layout
-    float outFadeLimit = 10;   // Make layout
+    float fadeLimit    = 15;
+    float outFadeLimit = 18;
 
     float epsilon = fadeLimit - outFadeLimit; // CutOff and OuterCutOff angles
     float intensity = clamp((distance - outFadeLimit) / epsilon, 0.0, 1.0);
@@ -83,7 +125,11 @@ float calculateAttenuation(float range) {
 
 void main() {
     
-    float attenuation = calculateAttenuation(65);
-
-    outColor = (grid(worldPoint.xyz, 10, true) + grid(worldPoint.xyz, 2, true)) * attenuation;
+    vec4 result;
+    float attenuation = calculateAttenuation(50);
+    if (game2D != 1)
+        result = (grid(worldPoint.xyz, 10, true) + grid(worldPoint.xyz, 1, true)) * attenuation;
+    else
+        result = grid(worldPoint.xyz, 10, false);
+    outColor = result;
 }

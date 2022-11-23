@@ -2,6 +2,7 @@
 #include "Render2D.h"
 
 #include "Render/RenderGlobals.h"
+#include "core/Application.h"
 
 #include <memory>
 
@@ -45,7 +46,10 @@ namespace Cober {
 	struct GridVertex {
 
 		glm::vec3 Position;
-		glm::vec4 Color;
+		glm::vec3 CameraPosition;
+		int Game2D;
+		float Opacity;
+		int Patron;
 	};
 
 	struct RenderData
@@ -151,8 +155,11 @@ namespace Cober {
 		data.GridVertexArray = VertexArray::Create();
 		data.GridVertexBuffer = VertexBuffer::Create(data.MaxVertices * sizeof(GridVertex));
 		data.GridVertexBuffer->SetLayout({
-			{ ShaderDataType::Float3, "a_Position" },
-			{ ShaderDataType::Float4, "a_Color"    }
+			{ ShaderDataType::Float3, "a_Position"		},
+			{ ShaderDataType::Float3, "a_CameraPosition"},
+			{ ShaderDataType::Int,    "a_Game2D"		},
+			{ ShaderDataType::Float,  "a_Opacity"       },
+			{ ShaderDataType::Int,    "a_Patron"		}
 			});
 		data.GridVertexArray->AddVertexBuffer(data.GridVertexBuffer);
 		data.GridVertexBufferBase = new GridVertex[data.MaxVertices];
@@ -339,18 +346,22 @@ namespace Cober {
 		delete[] data.GridVertexBufferBase;
 	}
 
-	void Render2D::DrawGrid() {
-
-		glm::vec3 rotation{ 90.0f, 0.0f, 0.0f };
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f)) *	// Futuro XZ camera position
+	void Render2D::DrawGrid(glm::vec3 cameraPosition) {
+		
+		float rot = Engine::Get().GetGameMode() ? 0.0f : 90.0f;
+		glm::vec3 rotation{ rot, 0.0f, 0.0f };
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f)) *
 			glm::toMat4(glm::quat(glm::radians(rotation))) *
-			glm::scale(glm::mat4(1.0f), { 20.0f, 20.0f, 1.0f });
+			glm::scale(glm::mat4(1.0f), { 100.0f, 100.0f, 1.0f });
 
-		glm::vec4 color = { 1.0f, 0.0f, 0.0f, 1.0f };
 		constexpr size_t quadVertexCount = 4;
 		for (size_t i = 0; i < quadVertexCount; i++) {
 			data.GridVertexBufferPtr->Position = transform * data.GridVertexPositions[i];
-			data.GridVertexBufferPtr->Color = color;
+			data.GridVertexBufferPtr->CameraPosition = cameraPosition;
+			data.GridVertexBufferPtr->Game2D = Engine::Get().GetGameMode();
+			//data.GridVertexBufferPtr->Opacity = 0.2f;
+			//data.GridVertexBufferPtr->Patron = 5;
+
 			data.GridVertexBufferPtr++;
 		}
 	}

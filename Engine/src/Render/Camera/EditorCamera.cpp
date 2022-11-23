@@ -48,11 +48,22 @@ namespace Cober {
 	
 	std::pair<float, float> EditorCamera::PanSpeed() const {
 
-		float x = std::min(_viewportWidth / 1000.0f, 2.4f); // max = 2.4f
-		float xFactor = 0.05f * (x * x) - 0.1778f * x + 0.3021f;
+		float x, y, xFactor, yFactor;
 
-		float y = std::min(_viewportHeight / 1000.0f, 2.4f); // max = 2.4f
-		float yFactor = 0.05f * (y * y) - 0.1778f * y + 0.3021f;
+		if (orthoProjection) {
+			x = std::min(_viewportWidth / 100.0f, 2.0f); // max = 2.4f
+			xFactor = 0.05f * (x * x) - 0.1778f * x + 0.3021f;
+
+			y = std::min(_viewportHeight / 100.0f, 2.0f); // max = 2.4f
+			yFactor = 0.05f * (y * y) - 0.1778f * y + 0.3021f;
+		}
+		else {
+			x = std::min(_viewportWidth / 1000.0f, 2.4f); // max = 2.4f
+			xFactor = 0.05f * (x * x) - 0.1778f * x + 0.3021f;
+
+			y = std::min(_viewportHeight / 1000.0f, 2.4f); // max = 2.4f
+			yFactor = 0.05f * (y * y) - 0.1778f * y + 0.3021f;
+		}
 
 		return { xFactor, yFactor };
 	}
@@ -86,7 +97,8 @@ namespace Cober {
 #ifdef __OPENGLES3__ 	// Provisional till make a Camera System
 		_viewportFocused = true;
 #endif
-		_viewportFocused = true;
+		if(Engine::Get().GetGameState() == GameState::PLAY)
+			_viewportFocused = true;
 
 		if (event.type == SDL_MOUSEBUTTONUP)
 			mouseButtonHeld = false;
@@ -100,13 +112,12 @@ namespace Cober {
 			SDL_MouseButtonEvent* m = (SDL_MouseButtonEvent*)&event;
 			if (event.button.button == SDL_BUTTON(SDL_BUTTON_MIDDLE))
 				MousePan(delta);
-			else if (orthoProjection == false && m->button == SDL_BUTTON(SDL_BUTTON_LEFT))
+			else if (!orthoProjection && m->button == SDL_BUTTON(SDL_BUTTON_LEFT))
 				MouseRotate(delta);
-			else if (orthoProjection == false && m->button == SDL_BUTTON(SDL_BUTTON_RIGHT))
+			else if (!orthoProjection && m->button == SDL_BUTTON(SDL_BUTTON_RIGHT))
 				MouseZoom(delta.y);
 		}
-
-		if (_viewportFocused && event.type == SDL_MOUSEWHEEL)
+		if (!orthoProjection && _viewportFocused && event.type == SDL_MOUSEWHEEL)
 			OnMouseScroll(event.wheel);
 	}
 

@@ -35,7 +35,8 @@ namespace Cober {
 		Render2D::ResetStats();
 		Render2D::BeginScene(camera);
 
-		Render2D::DrawGrid();
+		glm::vec3 cameraFocus = camera->GetPosition() + camera->GetForwardDirection();
+		Render2D::DrawGrid(cameraFocus);
 
 		// DEBUG PHYSICS
 #ifndef __EMSCRIPTEN__ 
