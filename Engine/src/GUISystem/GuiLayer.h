@@ -18,6 +18,7 @@ namespace Cober {
 
 		void Begin();
 		void End();
+
 	private:
 		SDL_Window* _window;
 		SDL_GLContext _context;

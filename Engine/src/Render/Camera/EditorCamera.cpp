@@ -85,20 +85,23 @@ namespace Cober {
 
 	void EditorCamera::OnUpdate(Ref<Timestep> ts) {
 
+		//std::cout << "FocalPoint: " << _focalPoint.x << " " << _focalPoint.y << " " << _focalPoint.z << std::endl;
+		//std::cout << "Position: " << _position.x << " " << _position.y << " " << _position.z << std::endl;
+		//std::cout << "Pitch : " << _pitch << std::endl;
+		//std::cout << "Yaw : " << _yaw << std::endl;
 		UpdateView();
 	}
 	
 	void EditorCamera::OnEvent(SDL_Event& event) {
 	
 		const Uint8* keyStateArray   = SDL_GetKeyboardState(NULL);
+
 #ifdef __EMSCRIPTEN__ 	// Provisional till make a Camera System
 		_viewportFocused = true;
 #endif
 #ifdef __OPENGLES3__ 	// Provisional till make a Camera System
 		_viewportFocused = true;
 #endif
-		if(Engine::Get().GetGameState() == GameState::PLAY)
-			_viewportFocused = true;
 
 		if (event.type == SDL_MOUSEBUTTONUP)
 			mouseButtonHeld = false;

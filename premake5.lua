@@ -36,8 +36,8 @@ project "Engine"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
-        "%{prj.name}/include/GL/**.h",
-        "%{prj.name}/include/GLES3/**.h",
+	        "%{prj.name}/include/GL/**.h",
+        	"%{prj.name}/include/GLES3/**.h",
 		"%{prj.name}/include/SDL/**.h",
 		"%{prj.name}/include/glm/**.h",
 		"%{prj.name}/include/glm/**.hpp",
@@ -47,21 +47,7 @@ project "Engine"
 		"%{prj.name}/include/lua/**.hpp",
 		"%{prj.name}/include/box2d/include/box2d/**.h",
 		"%{prj.name}/include/entt/**.hpp",
-		"%{prj.name}/include/nuklear/**.h",
-		--"%{prj.name}/include/imgui/**.cpp",
-		--"%{prj.name}/include/imgui/**.h",
-		--"%{prj.name}/include/core/**.cpp",
-		--"%{prj.name}/include/core/**.h",
-		--"%{prj.name}/include/Entities/**.cpp",
-		--"%{prj.name}/include/Entities/**.h",
-		--"%{prj.name}/include/GUISystem/**.cpp",
-		--"%{prj.name}/include/GUISystem/**.h",
-		--"%{prj.name}/include/Systems/**.cpp",
-		--"%{prj.name}/include/Systems/**.h",
-		--"%{prj.name}/include/Render/**.cpp",
-		--"%{prj.name}/include/Render/**.h",
-		--"%{prj.name}/include/Render/Camera/**.h",
-		--"%{prj.name}/include/Render/Camera/**.cpp",
+		"%{prj.name}/include/nuklear/**.h"
 	}
 
 	defines
@@ -147,7 +133,7 @@ project "Engine"
 	filter "configurations:Debug"
 		defines "CB_DEBUG"
 		--buildoptions "/MTd"
-		buildoptions "/MDd"
+		buildoptions "/MDd -mwindows"
 		symbols "on"
 
 	filter "configurations:Release"
@@ -189,8 +175,10 @@ project "Editor"
 		"Engine/include/nuklear",
 		"Engine/include/sol",
 		"Engine/include/lua",
-		"Engine/include/imgui",
 		"Engine/src",
+		"Engine/src/imgui",
+		"Editor/src",
+		"Editor/src/ImGuizmo",
 	}
 
 	links 
@@ -217,7 +205,7 @@ project "Editor"
 	filter "configurations:Debug"
 		defines "CB_DEBUG"
 		--buildoptions "/MTd"
-		buildoptions "/MDd"
+		buildoptions "/MDd -mwindows"
 		symbols "on"
 
 	filter "configurations:Release"

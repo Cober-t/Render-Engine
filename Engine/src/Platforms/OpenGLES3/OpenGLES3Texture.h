@@ -21,6 +21,8 @@ namespace Cober {
 		virtual void SetHeight(uint32_t height) override { _height = height; }
 
 		virtual uint32_t GetID() const override { return _rendererID; }
+		virtual std::string GetName() const override;
+		virtual std::string GetFormat() const override;
 
 		virtual void SetData(void* data, uint32_t size) override;
 

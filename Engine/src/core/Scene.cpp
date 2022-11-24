@@ -10,7 +10,7 @@
 
 namespace Cober {
 
-	Scene::Scene() : _world2D(false){
+	Scene::Scene() : _world2D(false), _width(1280), _height(720){
 
 		_registry.AddSystem<PhysicsSystem>();
 		_registry.AddSystem<RenderSystem>();
@@ -114,8 +114,8 @@ namespace Cober {
 	}
 	void Scene::OnViewportResize(uint32_t width, uint32_t height)
 	{
-		//m_ViewportWidth = width;
-		//m_ViewportHeight = height;
+		_width = width;
+		_height = height;
 
 		//// Resize our non-FixedAspectRatio cameras
 		//auto view = m_Registry.view<CameraComponent>();

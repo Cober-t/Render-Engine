@@ -6,8 +6,13 @@
 #endif
 #endif
 #include <random>
-#include <glm/glm.hpp>
 #include <box2d/b2_polygon_shape.h>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/quaternion.hpp>
 
 #include "core/Core.h"
 #include "core/UUID.h"
@@ -49,6 +54,15 @@ namespace Cober {
 		glm::vec3 position	= { 0.0f, 0.0f, 0.0f };
 		glm::vec3 rotation	= { 0.0f, 0.0f, 0.0f };
 		glm::vec3 scale		= { 1.0f, 1.0f, 1.0f };
+
+		glm::mat4 GetTransform() const
+		{
+			glm::mat4 rot = glm::toMat4(glm::quat(rotation));
+
+			return glm::translate(glm::mat4(1.0f), position)
+				* rot
+				* glm::scale(glm::mat4(1.0f), scale);
+		}
 
 		Transform() = default;
 		Transform(const Transform&) = default;

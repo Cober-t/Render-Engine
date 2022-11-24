@@ -19,6 +19,8 @@ namespace Cober {
 
 		void OnViewportResize(uint32_t width, uint32_t height);
 
+		uint32_t GetWidth()  { return _width; }
+		uint32_t GetHeight() { return _height; }
 		void GetEntity(int index, Entity& hoveredEntity);
 		std::unordered_map<UUID, Entity>& GetSceneEntities() { return _registry.GetAllEntities(); }
 
@@ -33,5 +35,7 @@ namespace Cober {
 	private:
 		bool _world2D;
 		Registry _registry;
+		uint32_t _width; 
+		uint32_t _height;
 	};
 }

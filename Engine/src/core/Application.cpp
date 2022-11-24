@@ -69,12 +69,12 @@ namespace Cober {
     void Engine::main_loop() {
         _timestep->Update();  // Allow limit FPS
 
-        //UISystem::StartProcessInputs();
+        // if(!_minimized) { UISystem::StartProcessInputs(); }
         ProcessInputs();
-        //UISystem::EndProcessInputs();
+        // if(!_minimized) { UISystem::EndProcessInputs(); }
 
-        //if(!_minimized) { ...
-        {
+        if(!_minimized) {
+
             for (Layer* layer : _LayerStack)
                 layer->OnUpdate(_timestep);
 
@@ -87,7 +87,6 @@ namespace Cober {
             }
 #endif
         }
-        // ... }
 
         _window->SwapBuffers();
     }

@@ -2154,6 +2154,8 @@
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\GUISystem\ImFileBrowser.h" />
+    <ClInclude Include="src\core\Math.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entities\ECS.cpp">
@@ -2303,5 +2305,6 @@
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\Math.cpp" />
   </ItemGroup>
 </Project>

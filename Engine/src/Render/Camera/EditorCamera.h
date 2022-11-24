@@ -18,8 +18,8 @@ namespace Cober {
 		void OnEvent(SDL_Event& event);
 
 		float OnMouseScroll(SDL_MouseWheelEvent& event);
-		void SetViewportFocused(bool focus) { _viewportFocused = focus; }
-		bool GetViewportFocused() { return _viewportFocused; }
+		void BlockEvents(bool focus) { _viewportFocused = focus; }
+		//bool GetViewportFocused() { return _viewportFocused; }
 
 		inline float GetDistance() const { return _distance; }
 		inline void SetDistance(float distance) { _distance = distance; }
@@ -56,15 +56,15 @@ namespace Cober {
 		float RotationSpeed() const;
 		float ZoomSpeed() const;
 	private:
-		float _fov = 45.0f, _aspectRatio = 1.778f, _nearClip = 0.01f, _farClip = 100.0f;
+		float _fov = 45.0f, _aspectRatio = 1.778f, _nearClip = 0.01f, _farClip = 1000.0f;
 		//glm::mat4 _viewMatrix;
-		glm::vec3 _position   = { 0.0f, 0.0f,  0.0f };
-		glm::vec3 _focalPoint = { 0.0f, 0.0f, -1.0f };
+		glm::vec3 _position   = { 2.5f, 2.5f, 3.2f };
+		glm::vec3 _focalPoint = { 0.625f, 0.57f, 0.5f };
 
 		glm::vec2 _initialMousePos = { 0.0f, 0.0f };
 
 		float _distance = 5.0f;
-		float _pitch = 0.0f, _yaw = 0.0f;
+		float _pitch = 6.8f, _yaw = -6.8f;
 		bool _viewportFocused = false;
 		bool mouseButtonHeld = false;
 		bool altKeyPressed = false;

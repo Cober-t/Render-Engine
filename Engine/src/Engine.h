@@ -1,3 +1,17 @@
+//[++++++++++++++++++++++++++]
+//[+++++++++ IMGUI ++++++++++]
+//[++++++++++++++++++++++++++]
+#if defined __OPENGL__
+	#include <imgui/imgui.h>
+	#include <imgui/imconfig.h>
+	#include <imgui/imgui_impl_opengl3.h>
+	#include <imgui/imgui_impl_sdl.h>
+	#include <imgui/imgui_internal.h>
+	#include <imgui/imstb_rectpack.h>
+	#include <imgui/imstb_textedit.h>
+	#include <imgui/imstb_truetype.h>
+#endif 
+
 #pragma once
 //[++++++++++++++++++++++++++]
 //[++++++++++ CORE ++++++++++]
@@ -11,12 +25,14 @@
 #include <core/Events.h>
 #include <core/Scene.h>
 #include <core/UUID.h>
+#include <core/Math.h>
 
 
 //[++++++++++++++++++++++++++]
 //[++++++++ SYSTEMS +++++++++]
 //[++++++++++++++++++++++++++]
 #include <GUISystem/GuiLayer.h>
+#include <GUISystem/ImFileBrowser.h>
 #include <Systems/MovementSystem.h>
 #include <Systems/RenderSystem.h>
 #include <Systems/PhysicsSystem.h>
@@ -59,26 +75,8 @@
 	//#include <Platforms/OpenGL/OpenGLES3Shader.h>
 #endif
 
-
 //[++++++++++++++++++++++++++]
-//[+++++++++ IMGUI ++++++++++]
-//[++++++++++++++++++++++++++]
-#if defined __OPENGL__
-	#include <imgui/imgui.h>
-	#include <imgui/imconfig.h>
-	#include <imgui/imgui_impl_opengl3.h>
-	#include <imgui/imgui_impl_sdl.h>
-	#include <imgui/imgui_internal.h>
-	#include <imgui/imstb_rectpack.h>
-	#include <imgui/imstb_textedit.h>
-	#include <imgui/imstb_truetype.h>
-#endif 
-
-
-
-
-//[++++++++++++++++++++++++++]
-//[+++++++++5 BOX 2D +++++++++]
+//[+++++++++ BOX 2D +++++++++]
 //[++++++++++++++++++++++++++]
 // 
 //#include <box2D/b2_world.h>

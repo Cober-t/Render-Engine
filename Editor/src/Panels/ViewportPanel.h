@@ -1,41 +1,46 @@
 #pragma once
 #include <Engine.h>
 
-//#include <glm/gtc/type_ptr.hpp>
-//#include <glm/gtc/matrix_transform.hpp>
+#include "core/Core.h"
 
-#include "SceneHierarchyPanel.h"
+#include <SDL/SDL.h>
 
 namespace Cober {
 
 	class ViewportPanel {
 	public:
-		ViewportPanel(uint32_t width, uint32_t height);
+		ViewportPanel();
 		~ViewportPanel();
 
-		static Unique<ViewportPanel> Create(uint32_t width = 1280, uint32_t height = 720) { return CreateUnique<ViewportPanel>(width, height); }
+		static ViewportPanel& Get() { return *instance; }
+
+		void CreateFramebuffer(uint32_t width = 1280, uint32_t height = 720);
 
 		void BindFramebuffer();
 		void UnbindFramebuffer();
-
-		void DrawGrid();
-
-		void ResizeViewport(Ref<EditorCamera> editorCamera, Ref<Scene>& activeScene, bool& game2D);
-		void OnGuiRender(Ref<EditorCamera> editorCamera);
-
-		void SetCursorEntity(Ref<Scene>& activeScene, Entity& hoveredEntity);
 		void FBOClearAttachments(uint32_t attachmentIndex, int value) { _fbo->ClearAttachment(attachmentIndex, value); }
 
+		void OnEvent(SDL_Event& event, Entity& hoveredEntity);	// Abstract to EVENT API
+		void ResizeViewport(Ref<EditorCamera> editorCamera, Ref<Scene>& activeScene, bool& game2D);
 
-		void PlayButtonBar(GameState gameState, Unique<SceneHierarchyPanel>& sceneHierarchyPanel, Ref<Scene>& activeScene, Ref<Scene>& editorScene);
+		void OnGuiRender(Ref<EditorCamera> editorCamera, Ref<Scene>& scene, Entity& hoveredEntity);
+
+		void SetCursorEntity(Ref<Scene>& activeScene, Entity& hoveredEntity);
+		void PlayButtonBar(Ref<Scene>& editorScene, Ref<Scene>& activeScene, GameState gameState);
 
 	private:
-		glm::vec2 _viewportSize = { 0.0f, 0.0f };
-		glm::vec2 _minViewportBound;
-		glm::vec2 _maxViewportBound;
-		bool _viewportFocused = false, _viewportHovered = false;
 		Ref<Framebuffer> _fbo;
-		
+		Ref<EditorCamera> _cameraAux;
+		static ViewportPanel* instance;
+
+		glm::vec2 _viewportSize = { 0.0f, 0.0f };
+		glm::vec2 _minViewportBound, _maxViewportBound;
+		bool _viewportFocused = false, _viewportHovered = false;
+
+		bool mouseButtonHeld = false;
+		glm::vec2 mouse{0.0f, 0.0f}, lastMousePos{ 0.0f, 0.0f };
+
 		std::string _filePath;
+		int _gizmoType = -1;
 	};
 }

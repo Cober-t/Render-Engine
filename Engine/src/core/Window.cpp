@@ -41,23 +41,17 @@ namespace Cober {
 		_window = SDL_CreateWindow(_data.title.c_str(),
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			_data.width, _data.height,
-			SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+			SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
 		if (_window == nullptr)
 			GET_SDL_ERROR();
 
-#ifndef __EMSCRIPTEN__
-		SDL_SetWindowBordered(_window, SDL_FALSE);
-#endif
+//#ifndef __EMSCRIPTEN__
+//		SDL_SetWindowBordered(_window, SDL_FALSE);
+//#endif
 		
 		return _window;
 	}
-
-	//void Window::ClearWindow(float red, float green, float blue, float black) {
-
-	//	RenderGlobals::SetClearColor(red, green, blue, black);
-	//	RenderGlobals::Clear();
-	//}
 
 	void Window::UpdateViewport(const uint32_t width, const uint32_t height) {
 

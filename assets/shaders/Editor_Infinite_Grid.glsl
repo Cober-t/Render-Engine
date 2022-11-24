@@ -114,8 +114,8 @@ float calculateAttenuation(float range) {
     float distance = length(origin.xz - worldPoint.xz);
     float attenuation = 1.0 / (constant + linear * distance + quadratic * (distance * distance));
 
-    float fadeLimit    = 15;
-    float outFadeLimit = 18;
+    float fadeLimit    = 25;
+    float outFadeLimit = 28;
 
     float epsilon = fadeLimit - outFadeLimit; // CutOff and OuterCutOff angles
     float intensity = clamp((distance - outFadeLimit) / epsilon, 0.0, 1.0);
@@ -126,7 +126,7 @@ float calculateAttenuation(float range) {
 void main() {
     
     vec4 result;
-    float attenuation = calculateAttenuation(50);
+    float attenuation = calculateAttenuation(65);
     if (game2D != 1)
         result = (grid(worldPoint.xyz, 10, true) + grid(worldPoint.xyz, 1, true)) * attenuation;
     else

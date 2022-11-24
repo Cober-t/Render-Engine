@@ -31,21 +31,14 @@ namespace Cober {
 		Ref<EditorCamera> _editorCamera;
 		Ref<Scene> _activeScene, _editorScene;
 	private:
-		Unique<ContentBrowserPanel> _contentBrowserPanel;
-		Unique<SceneHierarchyPanel> _sceneHierarchyPanel;
-		Unique<ViewportPanel>		_viewportPanel;
-		Unique<MenuPanel>			_menuPanel;
-		Unique<DataPanel>			_dataPanel;
-
 		Ref<Framebuffer> _fbo;
 
 		Entity hoveredEntity;
-
-
 
 		glm::vec2 _viewportSize = { 0.0f, 0.0f };
 		glm::vec2 _minViewportBound;
 		glm::vec2 _maxViewportBound;
 		bool _viewportFocused = false, _viewportHovered = false;
+		int _guizmoType = -1;
 	};
 }

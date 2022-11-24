@@ -9,6 +9,12 @@ namespace Cober {
 	EditorLayer::EditorLayer() : Layer("Editor") 
 	{
 		_editorCamera = CreateUnique<EditorCamera>(45.0f, 1.778f, 0.01f, 100.0f);
+
+		new ViewportPanel();
+		new SceneHierarchyPanel();
+		new ContentBrowserPanel();
+		new DataPanel();
+		new MenuPanel();
 	}
 
 	void EditorLayer::OnAttach() {
@@ -16,21 +22,16 @@ namespace Cober {
 		_editorScene = Scene::Create();
 		_activeScene = _editorScene;
 
-		_contentBrowserPanel = ContentBrowserPanel::Create();
-		_sceneHierarchyPanel = SceneHierarchyPanel::Create();
-		_viewportPanel = ViewportPanel::Create();
-		_menuPanel = MenuPanel::Create();
-		_dataPanel = DataPanel::Create();
+		ViewportPanel::Get().CreateFramebuffer(1280, 720);
+		SceneHierarchyPanel::Get().SetContext(_activeScene);
 
 		_activeScene->SetDefaultEntity(hoveredEntity);
-		_sceneHierarchyPanel->SetContext(_activeScene);
-
 		_activeScene->OnRuntimeStart(_activeScene);
 	}
 
 	void EditorLayer::OnDetach() {
 
-		_viewportPanel->UnbindFramebuffer();
+		ViewportPanel::Get().UnbindFramebuffer();
 
 		_editorScene  = nullptr;
 		_activeScene  = nullptr;
@@ -39,8 +40,8 @@ namespace Cober {
 
 	void EditorLayer::OnUpdate(Ref<Timestep> ts) {
 
-		_viewportPanel->ResizeViewport(_editorCamera, _activeScene, Engine::Get().GetGameMode());
-		_viewportPanel->BindFramebuffer();
+		ViewportPanel::Get().ResizeViewport(_editorCamera, _activeScene, Engine::Get().GetGameMode());
+		ViewportPanel::Get().BindFramebuffer();
 		RenderGlobals::SetClearColor(10, 0, 10, 255);
 		//RenderGlobals::SetClearColor(225, 225, 255, 255);
 		//RenderGlobals::SetClearColor(235, 97, 35, 255);
@@ -48,9 +49,7 @@ namespace Cober {
 		RenderGlobals::Clear();
 		// or camera->RenderSkybox();
 
-		_viewportPanel->FBOClearAttachments(1, -1);
-
-		_viewportPanel->DrawGrid();
+		ViewportPanel::Get().FBOClearAttachments(1, -1);
 
 		switch (Engine::Get().GetGameState()) {
 			case GameState::EDITOR: {
@@ -71,17 +70,18 @@ namespace Cober {
 			}
 		}
 
-		_viewportPanel->SetCursorEntity(_activeScene, hoveredEntity);
+		ViewportPanel::Get().SetCursorEntity(_activeScene, hoveredEntity);
 		if (ImGui::IsMouseClicked(0) && hoveredEntity.GetIndex() != -1)
-			_sceneHierarchyPanel->SetSelectedEntity(hoveredEntity);
+			SceneHierarchyPanel::Get().SetSelectedEntity(hoveredEntity);
 
-		_viewportPanel->UnbindFramebuffer();
+		ViewportPanel::Get().UnbindFramebuffer();
 	}
 
 	
 	void EditorLayer::OnEvent(SDL_Event& event)
 	{
 		_editorCamera->OnEvent(event);
+		ViewportPanel::Get().OnEvent(event, hoveredEntity);
 	}
 
 	/*
@@ -120,13 +120,13 @@ namespace Cober {
 
 		InitDockspace();
 
-		_sceneHierarchyPanel->OnGuiRender();
-		_contentBrowserPanel->OnGuiRender();
-		_viewportPanel->OnGuiRender(_editorCamera);
-		_dataPanel->OnGuiRender(Engine::Get().GetGameMode(), hoveredEntity);
-		_menuPanel->OnGuiRender(_editorCamera, Engine::Get().GetGameMode(), Engine::Get().GetDebugMode());
+		SceneHierarchyPanel::Get().OnGuiRender();
+		ContentBrowserPanel::Get().OnGuiRender();
+		ViewportPanel::Get().OnGuiRender(_editorCamera, _activeScene, hoveredEntity);
+		DataPanel::Get().OnGuiRender(Engine::Get().GetGameMode(), hoveredEntity);
+		MenuPanel::Get().OnGuiRender(_editorCamera, _activeScene, Engine::Get().GetGameMode(), Engine::Get().GetDebugMode());
 
-		_viewportPanel->PlayButtonBar(Engine::Get().GetGameState(), _sceneHierarchyPanel, _activeScene, _editorScene);
+		ViewportPanel::Get().PlayButtonBar(_editorScene, _activeScene, Engine::Get().GetGameState());
 
 		EndDockspace();
 	}
@@ -150,7 +150,7 @@ namespace Cober {
 			ImGui::SetNextWindowViewport(viewport->ID);
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-			window_flags |= /*ImGuiWindowFlags_NoTitleBar |*/  ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize;/* | ImGuiWindowFlags_NoMove */
+			//window_flags |= ImGuiWindowFlags_NoTitleBar |  ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
 			window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus | ImGuiDragDropFlags_SourceAllowNullID;
 		}
 

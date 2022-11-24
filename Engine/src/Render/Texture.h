@@ -20,6 +20,8 @@ namespace Cober {
 
 		//virtual SDL_Surface* GetSurface() const = 0;
 		virtual uint32_t GetID() const = 0;
+		virtual std::string GetName() const = 0;
+		virtual std::string GetFormat() const = 0;
 
 		virtual void SetData(void* data, uint32_t size) = 0;
 

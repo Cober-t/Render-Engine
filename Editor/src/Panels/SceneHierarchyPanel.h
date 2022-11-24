@@ -7,16 +7,17 @@ namespace Cober {
 	class SceneHierarchyPanel
 	{
 	public:
-		SceneHierarchyPanel() = default;
+		SceneHierarchyPanel();
 		~SceneHierarchyPanel();
 
-		static Unique<SceneHierarchyPanel> Create() { return CreateUnique<SceneHierarchyPanel>(); }
+		static SceneHierarchyPanel& Get() { return *instance; }
 
 		void OnGuiRender();
 
 		void SetContext(const Ref<Scene>& selectionContext);
 		Entity GetSelectedEntity() const { return _selectionContext; }
 		void SetSelectedEntity(Entity entity);
+		void SetNullEntityContext();
 
 		template<typename T, typename UIFunction>
 		void DrawComponent(const std::string& name, Entity& entity, UIFunction uiFunction);
@@ -30,5 +31,7 @@ namespace Cober {
 		Ref<Scene> _sceneContext;
 		Entity _selectionContext;
 		Entity _nullEntityContext;
+	private:
+		static SceneHierarchyPanel* instance;
 	};
 }

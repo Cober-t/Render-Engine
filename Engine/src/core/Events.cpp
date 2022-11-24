@@ -35,15 +35,17 @@ namespace Cober {
             }
             case SDL_QUIT:
             {
-                std::terminate();
+                Engine::Get().Close();
                 break;
             }
             case SDL_WINDOWEVENT:
             {
 #ifndef __EMSCRIPTEN__
+                int width = event.window.data1, height = event.window.data2;
                 if (event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
-                {
-                    int width = event.window.data1, height = event.window.data2;
+                    WindowResizeEvent(width, height);
+                else if(event.window.event == SDL_WINDOWEVENT_MINIMIZED) {
+                    Engine::Get().SetMinimized(true);
                     WindowResizeEvent(width, height);
                 }
 #endif

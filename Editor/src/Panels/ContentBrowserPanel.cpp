@@ -6,14 +6,22 @@
 
 namespace Cober {
 
+	ContentBrowserPanel* ContentBrowserPanel::instance = nullptr;
 	// Once we have projects, change this
 	extern const std::filesystem::path _assetPath = SOLUTION_DIR + (std::string)"assets";
 
 	ContentBrowserPanel::ContentBrowserPanel()
 	{
+		instance = this;
 		_currentDirectory = _assetPath;
 		//m_DirectoryIcon = Texture2D::Create("Assets/Icons/DirectoryIcon.png");
 		//m_FileIcon = Texture2D::Create("Assets/Icons/FileIcon.png");
+	}
+
+	ContentBrowserPanel::~ContentBrowserPanel() 
+	{
+		delete instance;
+		instance = nullptr;
 	}
 
 	void ContentBrowserPanel::OnGuiRender()

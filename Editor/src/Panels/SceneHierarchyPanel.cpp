@@ -12,9 +12,17 @@
 
 namespace Cober {
 
+	SceneHierarchyPanel* SceneHierarchyPanel::instance = nullptr;
 	
+	SceneHierarchyPanel::SceneHierarchyPanel()
+	{
+		instance = this;
+	}
+
 	SceneHierarchyPanel::~SceneHierarchyPanel() {
 
+		delete instance;
+		instance = nullptr;
 	}
 
 	void SceneHierarchyPanel::SetContext(const Ref<Scene>& sceneContext)
@@ -26,6 +34,10 @@ namespace Cober {
 
 	void SceneHierarchyPanel::SetSelectedEntity(Entity entity) {
 		_selectionContext = entity;
+	}
+
+	void SceneHierarchyPanel::SetNullEntityContext() {
+		_selectionContext = _nullEntityContext;
 	}
 
 	void SceneHierarchyPanel::OnGuiRender() {
@@ -242,13 +254,20 @@ namespace Cober {
 		DrawComponent<Sprite>("Sprite Renderer", entity, [](auto& component)
 			{
 				ImGui::ColorEdit4("Color", glm::value_ptr(component.color));
-
-				ImGui::Button("Texture", ImVec2(100.0f, 0.0f));
+				
+				std::string nameTexture = component.texture == nullptr ? "Texture" : component.texture->GetName();
+				ImGui::Button(nameTexture.c_str(), ImVec2(100.0f, 0.0f));
 				if (ImGui::BeginDragDropTarget()) {
 					if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM")) {
 						const wchar_t* path = (const wchar_t*)payload->Data;
 						std::filesystem::path texturePath = std::filesystem::path(SOLUTION_DIR + (std::string)"assets") / path;
-						component.texture = Texture::Create(texturePath.string());
+
+						std::string format = texturePath.string();
+						auto lastDot = format.find_last_of('.');
+						format = lastDot != std::string::npos ? format.substr(lastDot) : "null";
+
+						if (lastDot != std::string::npos && (format == ".png" || format == ".jpg" || format == ".jpeg"))
+							component.texture = Texture::Create(texturePath.string());
 					}
 					ImGui::EndDragDropTarget();
 				}

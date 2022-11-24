@@ -33,7 +33,7 @@ namespace Cober {
 #else
 		std::cout << "\033[94m" << "LOG: [" << fileName << " " << "Line: " << std::to_string(line) << "] --- " << logEntry.message << "\033[0m" << std::endl;
 #endif
-		//messages.push_back(logEntry);
+		messages.push_back(logEntry);
 	}
 
 	void Logger::Warning(const std::string& message, const char* file, int line) {
@@ -75,16 +75,16 @@ namespace Cober {
 
 	bool Logger::GLCheckErrors(const char* function, const char* file, int line) {
 
-		//while (GLenum error = glGetError()) {
-		//	std::string fileName = (std::string)file;
-		//	//std::string solutionDir = SOLUTION_DIR;
-		//	//fileName = fileName.substr(solutionDir.length());
+		while (GLenum error = glGetError()) {
+			std::string fileName = (std::string)file;
+			//std::string solutionDir = SOLUTION_DIR;
+			//fileName = fileName.substr(solutionDir.length());
 
-		//	fileName = fileName.substr(fileName.find_last_of("\\") + 1);
-		//	std::string errMessage = (const char*)glGetString(error);
-		//	printf("%s", errMessage.c_str());
-		//	Logger::Error("[OpenGL Error] (" + errMessage + ") " + function, file, line);
-		//}
+			fileName = fileName.substr(fileName.find_last_of("\\") + 1);
+			std::string errMessage = (const char*)glGetString(error);
+			printf("%s", errMessage.c_str());
+			Logger::Error("[OpenGL Error] (" + errMessage + ") " + function, file, line);
+		}
 		return true;
 	}
 }

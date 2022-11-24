@@ -23,6 +23,11 @@ namespace Cober {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	}
 
+	OpenGLES3Texture::~OpenGLES3Texture()
+	{
+		GLCallV(glDeleteTextures(1, &_rendererID));
+	}
+
 	void FlipSurface(SDL_Surface* surface)
 	{
 		SDL_LockSurface(surface);
@@ -94,10 +99,36 @@ namespace Cober {
 		SDL_FreeSurface(texSurface);
 	}
 
-	OpenGLES3Texture::~OpenGLES3Texture()
-	{
-		GLCallV(glDeleteTextures(1, &_rendererID));
+	std::string OpenGLES3Texture::GetName() const {
+
+		auto lastSlash = _path.find_last_of("/\\");
+
+		if (lastSlash == std::string::npos)
+			Logger::Error("Texture Path is invalid or does not exist!");
+
+		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+		auto lastDot = _path.rfind('.');
+
+		if (lastDot == std::string::npos)
+			Logger::Error("Texture Name is invalid or does not exist!");
+
+		auto count = lastDot == std::string::npos ? _path.size() - lastSlash : lastDot - lastSlash;
+		std::string name = _path.substr(lastSlash, count);
+		return name;
 	}
+
+	std::string OpenGLES3Texture::GetFormat() const {
+
+		auto lastDot = _path.rfind('.');
+
+		if (lastDot == std::string::npos)
+			Logger::Error("Texture data format is invalid or does not exist!");
+		return "null";
+
+		std::string format = _path.substr(lastDot);
+		return format;
+	}
+
 
 	void OpenGLES3Texture::SetData(void* data, uint32_t size)
 	{

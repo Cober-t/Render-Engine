@@ -1,7 +1,5 @@
 #pragma once
 
-#include "core/Core.h"
-
 #include <filesystem>
 
 namespace Cober {
@@ -10,11 +8,13 @@ namespace Cober {
 	{
 	public:
 		ContentBrowserPanel();
+		~ContentBrowserPanel();
 
-		static Unique<ContentBrowserPanel> Create() { return CreateUnique<ContentBrowserPanel>(); }
+		static ContentBrowserPanel& Get() { return *instance; }
 
 		void OnGuiRender();
 	private:
+		static ContentBrowserPanel* instance;
 		std::filesystem::path _currentDirectory;
 		//Ref<Texture2D> _directoryIcon;
 		//Ref<Texture2D> _fileIcon;

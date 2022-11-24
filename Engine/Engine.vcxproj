@@ -83,7 +83,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/MDd -mwindows %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -755,11 +755,13 @@
     <ClInclude Include="include\nuklear\src\stb_rect_pack.h" />
     <ClInclude Include="include\nuklear\src\stb_truetype.h" />
     <ClInclude Include="include\sol\sol.hpp" />
+    <ClInclude Include="src\core\Math.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Entities\Components.h" />
     <ClInclude Include="src\Entities\ECS.h" />
     <ClInclude Include="src\EntryPoint.h" />
     <ClInclude Include="src\GUISystem\GuiLayer.h" />
+    <ClInclude Include="src\GUISystem\ImFileBrowser.h" />
     <ClInclude Include="src\GUISystem\ImGui.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platforms\OpenGL\OpenGLContext.h" />
@@ -814,6 +816,7 @@
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\Math.cpp" />
     <ClCompile Include="src\Entities\ECS.cpp" />
     <ClCompile Include="src\GUISystem\GuiLayer.cpp" />
     <ClCompile Include="src\Physics\glue.cpp" />

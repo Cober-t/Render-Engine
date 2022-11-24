@@ -40,12 +40,14 @@ namespace Cober {
 		void Destroy();
 		void Close() { _gameState = GameState::EXIT; }
 
+		void  SetMinimized(bool min) { _minimized = min; }
 		void  SetGameState(GameState state)  { _gameState = state; }
 		void  SetDebugMode(bool debugMode)  { DEBUG = debugMode; }
 		bool& GetDebugMode() { return DEBUG; }
 		bool& GetGameMode() { return GAME_2D; }
 
 		Ref<AssetManager> GetAssetManager() { return _assetManager; }
+		GuiLayer* GetImGuiLayer() { return _GuiLayer; }
 		Window&   GetWindow()			{ return *_window; }
 		GameState GetGameState()		{ return _gameState; }
 		uint32_t  GetFrames()			{ return _timestep->frames; }
@@ -57,6 +59,7 @@ namespace Cober {
 		Unique<Window> _window;
 		Unique<Events> _events;
 		Ref<AssetManager> _assetManager;
+		bool _minimized = false;
 	private:
 		bool DEBUG;
 		bool GAME_2D;
