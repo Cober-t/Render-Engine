@@ -4,5 +4,7 @@ cl : línea de comandos  warning D9002: se omite la opción desconocida '-mwindo
 C:\Users\jorge\Engine\Engine\src\core\Timestep.h(19,38): warning C4018: '<=': no coinciden signed/unsigned
 C:\Users\jorge\Engine\Engine\src\Entities\ECS.h(39,29): warning C4311: 'conversión de tipo': truncamiento de puntero de 'const Cober::Entity *' a 'uint32_t'
 C:\Users\jorge\Engine\Engine\src\Entities\ECS.h(39,29): warning C4302: 'conversión de tipo': truncamiento de 'const Cober::Entity *' a 'uint32_t'
-C:\Users\jorge\Engine\Editor\src\Panels\ViewportPanel.cpp(138,49): warning C4312: 'reinterpret_cast': conversión de 'uint32_t' a 'void *' de mayor tamaño
+C:\Users\jorge\Engine\Editor\src\Panels\ViewportPanel.cpp(139,22): warning C4244: 'inicializando': conversión de 'uint32_t' a 'float'; posible pérdida de datos
+C:\Users\jorge\Engine\Editor\src\Panels\ViewportPanel.cpp(140,22): warning C4244: 'inicializando': conversión de 'uint32_t' a 'float'; posible pérdida de datos
+C:\Users\jorge\Engine\Editor\src\Panels\ViewportPanel.cpp(165,49): warning C4312: 'reinterpret_cast': conversión de 'uint32_t' a 'void *' de mayor tamaño
   Editor.vcxproj -> C:\Users\jorge\Engine\bin\Debug-windows-x86_64\Editor\Editor.exe

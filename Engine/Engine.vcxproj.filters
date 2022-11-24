@@ -2156,6 +2156,8 @@
     </ClInclude>
     <ClInclude Include="src\GUISystem\ImFileBrowser.h" />
     <ClInclude Include="src\core\Math.h" />
+    <ClInclude Include="src\Render\CubeMap.h" />
+    <ClInclude Include="src\Platforms\OpenGL\OpenGLCubeMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entities\ECS.cpp">
@@ -2306,5 +2308,7 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\core\Math.cpp" />
+    <ClCompile Include="src\Render\CubeMap.cpp" />
+    <ClCompile Include="src\Platforms\OpenGL\OpenGLCubeMap.cpp" />
   </ItemGroup>
 </Project>

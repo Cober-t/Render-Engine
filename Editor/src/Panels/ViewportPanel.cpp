@@ -54,8 +54,12 @@ namespace Cober {
 
 		if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)_viewportSize.x && mouseY < (int)_viewportSize.y) {
 			int pixelData = _fbo->ReadPixel(1, mouseX, mouseY);
-			pixelData == -1 ? activeScene->SetDefaultEntity(hoveredEntity) : activeScene->GetEntity(pixelData, hoveredEntity);
-			//std::cout << "PixelData: " << pixelData << "\tHoveredEntity: " << hoveredEntity.GetIndex() << std::endl;
+			if (pixelData == 1) {
+				activeScene->SetDefaultEntity(hoveredEntity);
+				SceneHierarchyPanel::Get().SetNullEntityContext();
+			}
+			else
+				activeScene->GetEntity(pixelData, hoveredEntity);
 		}
 	}
 
@@ -102,7 +106,7 @@ namespace Cober {
 		{
 			_fbo->Resize((uint32_t)_viewportSize.x, (uint32_t)_viewportSize.y);
 			editorCamera->SetViewportSize(_viewportSize.x, _viewportSize.y, game2D);
-			activeScene->OnViewportResize((uint32_t)_viewportSize.x, (uint32_t)_viewportSize.y);
+			//activeScene->OnViewportResize((uint32_t)_viewportSize.x, (uint32_t)_viewportSize.y);
 			// Resize ViewportScene ...
 		}
 	}
@@ -128,14 +132,40 @@ namespace Cober {
 		_viewportHovered = ImGui::IsWindowHovered();
 		editorCamera->BlockEvents(_viewportHovered);
 
+		// START CONSTRAIN VIEWPORT SCENE
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 
 		_viewportSize = { viewportPanelSize.x, viewportPanelSize.y };
-		float width  = (viewportPanelSize.x / scene->GetWidth())  * scene->GetWidth();
-		float height = (viewportPanelSize.y / scene->GetHeight()) * scene->GetHeight();
+
+		float screenWidth  = scene->GetWidth();
+		float screenHeight = scene->GetHeight();
+		float ratio = _viewportSize.x / _viewportSize.y;
+		if (viewportPanelSize.x > viewportPanelSize.y)
+			_viewportSize = { _viewportSize.y * screenWidth / screenHeight  , _viewportSize.y };
+		else if (viewportPanelSize.x < viewportPanelSize.y)
+			_viewportSize = { _viewportSize.x, _viewportSize.x * screenHeight / screenWidth };
+		else
+			_viewportSize = { _viewportSize.x, _viewportSize.x * screenHeight / screenWidth };
+
+		if (_viewportSize.x >= ImGui::GetContentRegionAvail().x) {
+			_viewportSize.x = ImGui::GetContentRegionAvail().x;
+			_viewportSize.y = _viewportSize.x * screenHeight / screenWidth;
+		}
+		else if (_viewportSize.y > ImGui::GetContentRegionAvail().y) {
+			_viewportSize.y = ImGui::GetContentRegionAvail().y;
+			_viewportSize.x = _viewportSize.y * screenWidth / screenHeight;
+		}
+		_viewportSize.x = _viewportSize.x > ImGui::GetContentRegionAvail().x ? ImGui::GetContentRegionAvail().x : _viewportSize.x;
+		_viewportSize.y = _viewportSize.y > ImGui::GetContentRegionAvail().y ? ImGui::GetContentRegionAvail().y : _viewportSize.y;
+		// END CONSTRAIN VIEWPORT SCENE
+
+		// Center Viewport Image
+		ImVec2 contentRegionSize{ (ImGui::GetContentRegionAvail().x - _viewportSize.x) * 0.5f,
+								  (ImGui::GetContentRegionAvail().y - _viewportSize.y) * 0.5f };
+		ImGui::SetCursorPos(contentRegionSize);
 
 		uint32_t textureID = _fbo->GetColorAttachmentRenderID();
-		ImGui::Image(reinterpret_cast<void*>(textureID), ImVec2{ width, height }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+		ImGui::Image(reinterpret_cast<void*>(textureID), ImVec2{ _viewportSize.x, _viewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 
 		///////////////////////////////////
 		// Export to DragDropViewportTarget
