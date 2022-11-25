@@ -8,7 +8,7 @@ namespace Cober {
 	//extern const std::filesystem::path _AssetPath;
 	EditorLayer::EditorLayer() : Layer("Editor") 
 	{
-		_editorCamera = CreateUnique<EditorCamera>(45.0f, 1.778f, 0.01f, 100.0f);
+		_editorCamera = CreateUnique<EditorCamera>(45.0f, 1.778f, 0.01f, 1000.0f);
 
 		new ViewportPanel();
 		new SceneHierarchyPanel();

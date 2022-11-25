@@ -134,36 +134,30 @@ namespace Cober {
 
 		// START CONSTRAIN VIEWPORT SCENE
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-
 		_viewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
 		float screenWidth  = scene->GetWidth();
 		float screenHeight = scene->GetHeight();
-		float ratio = _viewportSize.x / _viewportSize.y;
-		if (viewportPanelSize.x > viewportPanelSize.y)
+		if (viewportPanelSize.x >= viewportPanelSize.y)
 			_viewportSize = { _viewportSize.y * screenWidth / screenHeight  , _viewportSize.y };
 		else if (viewportPanelSize.x < viewportPanelSize.y)
 			_viewportSize = { _viewportSize.x, _viewportSize.x * screenHeight / screenWidth };
-		else
-			_viewportSize = { _viewportSize.x, _viewportSize.x * screenHeight / screenWidth };
 
-		if (_viewportSize.x >= ImGui::GetContentRegionAvail().x) {
-			_viewportSize.x = ImGui::GetContentRegionAvail().x;
+		if (_viewportSize.x >= viewportPanelSize.x) {
+			_viewportSize.x = viewportPanelSize.x;
 			_viewportSize.y = _viewportSize.x * screenHeight / screenWidth;
 		}
-		else if (_viewportSize.y > ImGui::GetContentRegionAvail().y) {
-			_viewportSize.y = ImGui::GetContentRegionAvail().y;
+		else if (_viewportSize.y > viewportPanelSize.y) {
+			_viewportSize.y = viewportPanelSize.y;
 			_viewportSize.x = _viewportSize.y * screenWidth / screenHeight;
 		}
-		_viewportSize.x = _viewportSize.x > ImGui::GetContentRegionAvail().x ? ImGui::GetContentRegionAvail().x : _viewportSize.x;
-		_viewportSize.y = _viewportSize.y > ImGui::GetContentRegionAvail().y ? ImGui::GetContentRegionAvail().y : _viewportSize.y;
 		// END CONSTRAIN VIEWPORT SCENE
 
 		// Center Viewport Image
-		ImVec2 contentRegionSize{ (ImGui::GetContentRegionAvail().x - _viewportSize.x) * 0.5f,
-								  (ImGui::GetContentRegionAvail().y - _viewportSize.y) * 0.5f };
+		ImVec2 contentRegionSize{ (viewportPanelSize.x - _viewportSize.x) * 0.5f,
+								  (viewportPanelSize.y - _viewportSize.y) * 0.5f };
 		ImGui::SetCursorPos(contentRegionSize);
-
+		
 		uint32_t textureID = _fbo->GetColorAttachmentRenderID();
 		ImGui::Image(reinterpret_cast<void*>(textureID), ImVec2{ _viewportSize.x, _viewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 

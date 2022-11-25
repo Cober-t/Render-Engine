@@ -115,6 +115,7 @@ namespace Cober {
 	};
 
 	static RenderData data;
+	float orthoFarClip;
 
 	void Render2D::Start() {
 
@@ -238,6 +239,7 @@ namespace Cober {
 
 	void Render2D::BeginScene(const Ref<EditorCamera>& camera) {
 
+		orthoFarClip = camera->GetOrthoCamera().GetFarClip();
 #ifdef __OPENGL__
 		data.CameraBuffer.View = camera->GetView();
 		data.CameraBuffer.Projection = camera->GetProjection();
@@ -350,9 +352,10 @@ namespace Cober {
 		
 		float rot = Engine::Get().GetGameMode() ? 0.0f : 90.0f;
 		glm::vec3 rotation{ rot, 0.0f, 0.0f };
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f)) *
-			glm::toMat4(glm::quat(glm::radians(rotation))) *
-			glm::scale(glm::mat4(1.0f), { 100.0f, 100.0f, 1.0f });
+		glm::vec3 position = Engine::Get().GetGameMode() == true ? glm::vec3(0.0f, 0.0f, -orthoFarClip + 5.0f) : glm::vec3(0.0f);
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
+							  glm::toMat4(glm::quat(glm::radians(rotation))) *
+							  glm::scale(glm::mat4(1.0f), { 100.0f, 100.0f, 1.0f });
 
 		constexpr size_t quadVertexCount = 4;
 		for (size_t i = 0; i < quadVertexCount; i++) {

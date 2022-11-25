@@ -9,8 +9,9 @@
 namespace Cober {
 
 	EditorCamera::EditorCamera(float fov, float aspectRatio, float nearClip, float farClip)
-		: _fov(fov), _aspectRatio(aspectRatio), _nearClip(nearClip), _farClip(farClip) 
 	{
+		_orthoCamera.SetValues(fov, aspectRatio, nearClip, farClip);
+		_perspCamera.SetValues(fov, aspectRatio, nearClip, farClip);
 		UpdateView();
 	}
 
@@ -22,48 +23,47 @@ namespace Cober {
 	void EditorCamera::UpdateProjection(bool& ortho) {
 
 		orthoProjection = ortho;
-		_aspectRatio = _viewportWidth / _viewportHeight;
 
-		if (ortho)
-			_projection = glm::ortho(-_aspectRatio * _distance, _aspectRatio * _distance, -_distance, _distance, 0.1f, 1000.0f);
-		else
-			_projection = glm::perspective(glm::radians(_fov), _aspectRatio, _nearClip, _farClip);
+		if (ortho) {
+			_orthoCamera.aspectRatio = _viewportWidth / _viewportHeight;
+			_projection = glm::ortho(-_orthoCamera.aspectRatio * _orthoCamera.distance, // Left
+									  _orthoCamera.aspectRatio * _orthoCamera.distance,	// Right
+									 -_orthoCamera.distance, _orthoCamera.distance, 	// Bottom & Top
+									  _orthoCamera.nearClip, _orthoCamera.farClip);		// Near & Far
+		}
+		else {
+			_perspCamera.aspectRatio = _viewportWidth / _viewportHeight;
+			_projection = glm::perspective(glm::radians(_perspCamera.fov),
+										   _perspCamera.aspectRatio, 
+										   _perspCamera.nearClip, 
+										   _perspCamera.farClip);
+		}
 	}
 
 	void EditorCamera::UpdateView() {
 
-		// _yaw = _pitch = 0.0f;	// Lock the camera's rotation
-		_position = CalculatePosition();
 
 		if (orthoProjection) {
-			glm::mat4 transform = glm::translate(glm::mat4(1.0f), _position) * glm::rotate(glm::mat4(1.0f), 0.0f, glm::vec3(0, 0, 1));
+			_orthoCamera.position = CalculatePosition();
+			glm::mat4 transform = glm::translate(glm::mat4(1.0f), _orthoCamera.position) * glm::rotate(glm::mat4(1.0f), 0.0f, glm::vec3(0, 0, 1));
 			_viewMatrix = glm::inverse(transform);
 		}
 		else {
+			// _yaw = _pitch = 0.0f;	// Lock the camera's rotation
+			_perspCamera.position = CalculatePosition();
 			glm::quat orientation = GetOrientation();
-			_viewMatrix = glm::translate(glm::mat4(1.0f), _position) * glm::toMat4(orientation);
+			_viewMatrix = glm::translate(glm::mat4(1.0f), _perspCamera.position) * glm::toMat4(orientation);
 			_viewMatrix = glm::inverse(_viewMatrix);
 		}
 	}
 	
 	std::pair<float, float> EditorCamera::PanSpeed() const {
 
-		float x, y, xFactor, yFactor;
+		float x = std::min(_viewportWidth  / 1000.0f, 2.4f); // max = 2.4f
+		float y = std::min(_viewportHeight / 1000.0f, 2.4f); // max = 2.4f
 
-		if (orthoProjection) {
-			x = std::min(_viewportWidth / 100.0f, 2.0f); // max = 2.4f
-			xFactor = 0.05f * (x * x) - 0.1778f * x + 0.3021f;
-
-			y = std::min(_viewportHeight / 100.0f, 2.0f); // max = 2.4f
-			yFactor = 0.05f * (y * y) - 0.1778f * y + 0.3021f;
-		}
-		else {
-			x = std::min(_viewportWidth / 1000.0f, 2.4f); // max = 2.4f
-			xFactor = 0.05f * (x * x) - 0.1778f * x + 0.3021f;
-
-			y = std::min(_viewportHeight / 1000.0f, 2.4f); // max = 2.4f
-			yFactor = 0.05f * (y * y) - 0.1778f * y + 0.3021f;
-		}
+		float xFactor = 0.05f * (x * x) - 0.1778f * x + 0.3021f;
+		float yFactor = 0.05f * (y * y) - 0.1778f * y + 0.3021f;
 
 		return { xFactor, yFactor };
 	}
@@ -75,7 +75,8 @@ namespace Cober {
 
 	float EditorCamera::ZoomSpeed() const 
 	{
-		float distance = _distance * 0.2f;
+		float currentDistance = orthoProjection == true ? _orthoCamera.distance : _perspCamera.distance;
+		float distance = currentDistance * 0.2f;
 		distance = std::max(distance, 0.0f);
 		float speed = distance * distance;
 		speed = std::min(speed, 100.0f);	// max speed = 100
@@ -117,26 +118,32 @@ namespace Cober {
 				MousePan(delta);
 			else if (!orthoProjection && m->button == SDL_BUTTON(SDL_BUTTON_LEFT))
 				MouseRotate(delta);
-			else if (!orthoProjection && m->button == SDL_BUTTON(SDL_BUTTON_RIGHT))
+			else if (m->button == SDL_BUTTON(SDL_BUTTON_RIGHT))
 				MouseZoom(delta.y);
 		}
 		if (!orthoProjection && _viewportFocused && event.type == SDL_MOUSEWHEEL)
 			OnMouseScroll(event.wheel);
 	}
 
-	float EditorCamera::OnMouseScroll(SDL_MouseWheelEvent& event)
+	void EditorCamera::OnMouseScroll(SDL_MouseWheelEvent& event)
 	{
 		float delta = event.preciseY * 0.1f;
 		MouseZoom(delta);
 		UpdateView();
-		return false;
 	}
 
 	void EditorCamera::MousePan(const glm::vec2& delta)
 	{
 		auto [xSpeed, ySpeed] = PanSpeed();
-		_focalPoint += -GetRightDirection() * delta.x * xSpeed * _distance;
-		_focalPoint += GetUpDirection() * delta.y * ySpeed * _distance;
+
+		if (orthoProjection) {
+			_orthoCamera.focalPoint += -GetRightDirection() * delta.x * xSpeed * 3.0f * _orthoCamera.distance;
+			_orthoCamera.focalPoint += GetUpDirection() * delta.y * ySpeed * 3.0f * _orthoCamera.distance;
+		}
+		else {
+			_perspCamera.focalPoint += -GetRightDirection() * delta.x * xSpeed * _perspCamera.distance;
+			_perspCamera.focalPoint += GetUpDirection() * delta.y * ySpeed * _perspCamera.distance;
+		}
 #ifdef __EMSCRITEN__	// Emscripten Test
 		int mouseX, mouseY;
 		SDL_GetMouseState(&mouseX, &mouseY);
@@ -147,16 +154,31 @@ namespace Cober {
 	void EditorCamera::MouseRotate(const glm::vec2& delta)
 	{
 		float yawSign = GetUpDirection().y < 0 ? -1.0f : 1.0f;
-		_yaw += yawSign * delta.x * RotationSpeed();
-		_pitch += delta.y * RotationSpeed();
+
+		if (orthoProjection) {
+			_orthoCamera.yaw += yawSign * delta.x * RotationSpeed();
+			_orthoCamera.pitch += delta.y * RotationSpeed();
+		}
+		else {
+			_perspCamera.yaw += yawSign * delta.x * RotationSpeed();
+			_perspCamera.pitch += delta.y * RotationSpeed();
+		}
 	}
 
 	void EditorCamera::MouseZoom(float delta)
 	{
-		_distance -= delta * ZoomSpeed();
-		if (_distance < 1.0f) {
-			_focalPoint += GetForwardDirection();
-			_distance = 1.0f;
+		if (orthoProjection) {
+			_orthoCamera.distance -= delta * ZoomSpeed();
+			if (_orthoCamera.distance < 1.0f) {
+				_orthoCamera.focalPoint += GetForwardDirection();
+				_orthoCamera.distance = 1.0f;
+			}
+		} else {
+			_perspCamera.distance -= delta * ZoomSpeed();
+			if (_perspCamera.distance < 1.0f) {
+				_perspCamera.focalPoint += GetForwardDirection();
+				_perspCamera.distance = 1.0f;
+			}
 		}
 	}
 
@@ -177,11 +199,49 @@ namespace Cober {
 
 	glm::vec3 EditorCamera::CalculatePosition() const {
 
-		return _focalPoint - GetForwardDirection() * _distance;
+		return orthoProjection == true ? _orthoCamera.focalPoint - GetForwardDirection() * _orthoCamera.distance
+									   : _perspCamera.focalPoint - GetForwardDirection() * _perspCamera.distance;
 	}
 
 	glm::quat EditorCamera::GetOrientation() const {
 
-		return glm::quat(glm::vec3(-_pitch, -_yaw, 0.0f));
+		float newPitch = orthoProjection == true ? _orthoCamera.pitch : _perspCamera.pitch;
+		float newYaw   = orthoProjection == true ? _orthoCamera.yaw   : _perspCamera.yaw;
+		float newRoll  = orthoProjection == true ? _orthoCamera.roll  : _perspCamera.roll;
+
+		return glm::quat(glm::vec3(-newPitch, -newYaw, newRoll));
+	}
+
+	const glm::vec3& EditorCamera::GetPosition() const {
+
+		return orthoProjection == true ? _orthoCamera.position : _perspCamera.position;
+	}
+
+	float EditorCamera::GetDistance() const {
+
+		return orthoProjection == true ? _orthoCamera.distance : _perspCamera.distance;
+	}
+
+	void EditorCamera::SetDistance(float distance) { 
+
+		if (orthoProjection)
+			_orthoCamera.distance = distance; 
+		else
+			_perspCamera.distance = distance;
+	}
+
+	float EditorCamera::GetPitch() const {
+
+		return orthoProjection == true ? _orthoCamera.pitch : _perspCamera.pitch;
+	}
+
+	float EditorCamera::GetYaw() const { 
+
+		return orthoProjection == true ? _orthoCamera.yaw : _perspCamera.yaw;
+	}
+
+	float EditorCamera::GetRoll() const {
+
+		return orthoProjection == true ? _orthoCamera.roll : _perspCamera.roll;
 	}
 }
