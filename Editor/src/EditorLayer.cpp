@@ -42,12 +42,8 @@ namespace Cober {
 
 		ViewportPanel::Get().ResizeViewport(_editorCamera, _activeScene, Engine::Get().GetGameMode());
 		ViewportPanel::Get().BindFramebuffer();
-		RenderGlobals::SetClearColor(10, 0, 10, 255);
-		//RenderGlobals::SetClearColor(225, 225, 255, 255);
-		//RenderGlobals::SetClearColor(235, 97, 35, 255);
-		//RenderGlobals::SetClearColor(100, 150, 220, 255);
-		RenderGlobals::Clear();
-		// or camera->RenderSkybox();
+
+		ViewportPanel::Get().RenderSkybox();
 
 		ViewportPanel::Get().FBOClearAttachments(1, -1);
 

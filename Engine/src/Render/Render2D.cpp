@@ -48,8 +48,9 @@ namespace Cober {
 		glm::vec3 Position;
 		glm::vec3 CameraPosition;
 		int Game2D;
+		glm::vec4 PatternSizes;
+		float PatternNumber;
 		float Opacity;
-		int Patron;
 	};
 
 	struct RenderData
@@ -156,11 +157,12 @@ namespace Cober {
 		data.GridVertexArray = VertexArray::Create();
 		data.GridVertexBuffer = VertexBuffer::Create(data.MaxVertices * sizeof(GridVertex));
 		data.GridVertexBuffer->SetLayout({
-			{ ShaderDataType::Float3, "a_Position"		},
-			{ ShaderDataType::Float3, "a_CameraPosition"},
-			{ ShaderDataType::Int,    "a_Game2D"		},
-			{ ShaderDataType::Float,  "a_Opacity"       },
-			{ ShaderDataType::Int,    "a_Patron"		}
+			{ ShaderDataType::Float3, "a_Position"		 },
+			{ ShaderDataType::Float3, "a_CameraPosition" },
+			{ ShaderDataType::Int,    "a_Game2D"		 },
+			{ ShaderDataType::Float4, "a_PatternSizes"	 },
+			{ ShaderDataType::Float,  "a_PatternNumber"	 },
+			{ ShaderDataType::Float,  "a_Opacity"        },
 			});
 		data.GridVertexArray->AddVertexBuffer(data.GridVertexBuffer);
 		data.GridVertexBufferBase = new GridVertex[data.MaxVertices];
@@ -348,11 +350,21 @@ namespace Cober {
 		delete[] data.GridVertexBufferBase;
 	}
 
+	glm::vec4 _gridPatternSizes;
+	int _gridPatternNumber;
+	float _gridOpacity;
+	void Render2D::SetGridData(int gridSizes[], int gridNumber, float opacity) {
+
+		_gridPatternSizes = glm::vec4(gridSizes[0], gridSizes[1], gridSizes[2], gridSizes[3]);
+		_gridPatternNumber = gridNumber;
+		_gridOpacity = opacity;
+	}
+
 	void Render2D::DrawGrid(glm::vec3 cameraPosition) {
 		
 		float rot = Engine::Get().GetGameMode() ? 0.0f : 90.0f;
 		glm::vec3 rotation{ rot, 0.0f, 0.0f };
-		glm::vec3 position = Engine::Get().GetGameMode() == true ? glm::vec3(0.0f, 0.0f, -orthoFarClip + 5.0f) : glm::vec3(0.0f);
+		glm::vec3 position = Engine::Get().GetGameMode() == true ? glm::vec3(0.0f, 0.0f, -orthoFarClip + 50.0f) : glm::vec3(0.0f);
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
 							  glm::toMat4(glm::quat(glm::radians(rotation))) *
 							  glm::scale(glm::mat4(1.0f), { 100.0f, 100.0f, 1.0f });
@@ -362,8 +374,9 @@ namespace Cober {
 			data.GridVertexBufferPtr->Position = transform * data.GridVertexPositions[i];
 			data.GridVertexBufferPtr->CameraPosition = cameraPosition;
 			data.GridVertexBufferPtr->Game2D = Engine::Get().GetGameMode();
-			//data.GridVertexBufferPtr->Opacity = 0.2f;
-			//data.GridVertexBufferPtr->Patron = 5;
+			data.GridVertexBufferPtr->PatternSizes = _gridPatternSizes;
+			data.GridVertexBufferPtr->PatternNumber = _gridPatternNumber;
+			data.GridVertexBufferPtr->Opacity = _gridOpacity;
 
 			data.GridVertexBufferPtr++;
 		}

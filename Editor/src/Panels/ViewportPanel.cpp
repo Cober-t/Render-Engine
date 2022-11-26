@@ -2,6 +2,8 @@
 
 #include "ViewportPanel.h"
 #include "SceneHierarchyPanel.h"
+#include "MenuPanel.h"
+
 #include "core/Application.h"
 #include "ImGuizmo/ImGuizmo.h"
 //#include "core/Math.h"
@@ -25,6 +27,11 @@ namespace Cober {
 	{
 		delete instance;
 		instance = nullptr;
+	}
+
+	void ViewportPanel::RenderSkybox() {
+
+		EditorCamera::RenderSkybox(MenuPanel::Get().ColorSelected());
 	}
 
 	void ViewportPanel::CreateFramebuffer(uint32_t width, uint32_t height) {
@@ -69,6 +76,9 @@ namespace Cober {
 		//bool control = keyStateArray[SDL_SCANCODE_LCTRL];
 		//bool shift = keyStateArray[SDL_SCANCODE_LSHIFT];
 
+		/////////////////////////////////////////////////////
+		//					FIX INPUTS					   //
+		/////////////////////////////////////////////////////
 		// Gizmos
 		switch (event.key.keysym.sym) {
 			case SDLK_q:
@@ -206,10 +216,9 @@ namespace Cober {
 			auto& tc = selectedEntity.GetComponent<Transform>();
 			glm::mat4 transform = tc.GetTransform();
 
-			// Snapping
-			//bool snap = /* Some Event Condition*/
-			bool snap = true;	// TEST
-			float snapValue = 0.5f; // Snap to 0.5m for translation/scale
+			bool snap = MenuPanel::Get().MustSnap();
+			//float value = MenuPanel::Get().SnapValue();
+			float snapValue = MenuPanel::Get().SnapValue() / 10; // Snap to 0.5m for translation/scale
 			// Snap to 45 degrees for rotation
 			if (_gizmoType == ImGuizmo::OPERATION::ROTATE)
 				snapValue = 45.0f;

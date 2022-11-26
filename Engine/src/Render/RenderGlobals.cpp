@@ -17,7 +17,7 @@ namespace Cober {
 		_api->SetViewport(x, y, width, height);
 	}
 
-	void RenderGlobals::SetClearColor(const glm::vec4& color) {
+	void RenderGlobals::SetClearColor(glm::vec4 color) {
 		_api->SetClearColor(color);
 	}
 

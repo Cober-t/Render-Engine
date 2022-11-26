@@ -16,7 +16,7 @@ namespace Cober {
 		virtual ~RenderAPI() = default;
 		virtual void Init() = 0;
 		virtual void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t heigth) = 0;
-		virtual void SetClearColor(const glm::vec4& color) = 0;
+		virtual void SetClearColor(glm::vec4 color) = 0;
 		virtual void SetClearColor(float red, float green, float blue, float black) = 0;
 		virtual void Clear() = 0;
 

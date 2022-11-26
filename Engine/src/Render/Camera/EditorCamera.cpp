@@ -2,6 +2,7 @@
 #include "EditorCamera.h"
 
 #include "core/Application.h"
+#include "Render/RenderGlobals.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
@@ -55,6 +56,12 @@ namespace Cober {
 			_viewMatrix = glm::translate(glm::mat4(1.0f), _perspCamera.position) * glm::toMat4(orientation);
 			_viewMatrix = glm::inverse(_viewMatrix);
 		}
+	}
+
+	void EditorCamera::RenderSkybox(glm::vec4 color) {
+
+		RenderGlobals::SetClearColor(color.x, color.y, color.z, color.w);
+		RenderGlobals::Clear();
 	}
 	
 	std::pair<float, float> EditorCamera::PanSpeed() const {

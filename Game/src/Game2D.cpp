@@ -21,13 +21,9 @@ void Game2D::OnUpdate(Ref<Timestep> ts) {
 
 	bool ortho = false;
 	_camera->SetViewportSize(1280, 720, ortho);
-	//RenderGlobals::SetClearColor(10, 0, 10, 255);
-	//RenderGlobals::SetClearColor(225, 225, 255, 255);
-	//RenderGlobals::SetClearColor(235, 97, 35, 255);
-	RenderGlobals::SetClearColor(100, 150, 220, 255);
-	RenderGlobals::Clear();
 
-	_camera->OnUpdate(ts);
+	EditorCamera::RenderSkybox();
+
 	_activeScene->OnUpdateRuntime(ts, _camera);
 
 	// Render Scene (Game), when it has a cam

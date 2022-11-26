@@ -228,8 +228,25 @@ namespace Cober {
 		ImGui::SameLine();
 		ImGui::PushItemWidth(-1);
 
-		if (ImGui::Button("Add Component"))
-			ImGui::OpenPopup("AddComponent");
+
+		if (ImGui::Button("Add Component")) {
+			if (ImGui::IsMouseDown(ImGuiMouseButton_Right)) {
+				if (!_selectionContext.HasComponent<Sprite>()) {
+					_selectionContext.AddComponent<Sprite>();
+					_sceneContext->GetRegistry().AddEntityToSystems(_selectionContext);
+				}
+				else if (!_selectionContext.HasComponent<Rigidbody2D>()) {
+					_selectionContext.AddComponent<Rigidbody2D>();
+					_sceneContext->GetRegistry().AddEntityToSystems(_selectionContext);
+				}
+				else if (!_selectionContext.HasComponent<BoxCollider2D>()) {
+					_selectionContext.AddComponent<BoxCollider2D>();
+					_sceneContext->GetRegistry().AddEntityToSystems(_selectionContext);
+				}
+			}
+			else
+				ImGui::OpenPopup("AddComponent");
+		}
 
 		if (ImGui::BeginPopup("AddComponent")) {
 			AddIfHasComponent<Sprite>("Sprite Renderer Component");

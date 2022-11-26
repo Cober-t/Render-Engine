@@ -6,8 +6,9 @@
 layout(location = 0) in vec3 a_Position;
 layout(location = 1) in vec3 a_CameraPosition;
 layout(location = 2) in int  a_Game2D;
-layout(location = 3) in float a_Opacity;
-layout(location = 4) in int  a_Patron;
+layout(location = 3) in vec4 a_PatternSizes;
+layout(location = 4) in float a_PatternNumber;
+layout(location = 5) in float a_Opacity;
 
 layout(std140, binding = 0) uniform Camera
 {
@@ -19,8 +20,9 @@ layout(location = 0) out vec3 cameraPosition;
 layout(location = 1) out vec4 worldPoint;
 layout(location = 2) out vec4 worldCamera;
 layout(location = 3) out flat int game2D;
-layout(location = 4) out flat float opacity;
-layout(location = 5) out flat int patron;
+layout(location = 4) out flat vec4 patternSizes;
+layout(location = 5) out flat float patternNumber;
+layout(location = 6) out flat float opacity;
 
 void main() {
     
@@ -31,8 +33,10 @@ void main() {
     worldPoint = vec4(a_Position, 1.0);
     worldCamera = point;
     game2D = a_Game2D;
+	
+	patternSizes = a_PatternSizes;	
+	patternNumber = a_PatternNumber;
     opacity = a_Opacity;
-    patron = a_Patron;
 }
 
 #type fragment
@@ -42,8 +46,9 @@ layout(location = 0) in vec3 cameraPosition;
 layout(location = 1) in vec4 worldPoint;
 layout(location = 2) in vec4 worldCamera;
 layout(location = 3) in flat int game2D;
-layout(location = 4) in flat float opacity;
-layout(location = 5) in flat int patron;
+layout(location = 4) in flat vec4 patternSizes;
+layout(location = 5) in flat float patternNumber;
+layout(location = 6) in flat float opacity;
 
 layout(location = 0) out vec4 outColor;
 
@@ -125,11 +130,13 @@ float calculateAttenuation(float range) {
 
 void main() {
     
-    vec4 result;
+    vec4 result = vec4(0.0f);
     float attenuation = calculateAttenuation(65);
-    if (game2D != 1)
-        result = (grid(worldPoint.xyz, 10, true) + grid(worldPoint.xyz, 1, true)) * attenuation;
-    else
-        result = grid(worldPoint.xyz, 10, false);
-    outColor = result;
+	
+	for (int i = 0; i < int(patternNumber); i++) {
+		if(patternSizes[i] != 0.0f)
+			result += grid(worldPoint.xyz, patternSizes[i], true) * attenuation;
+	}
+		
+    outColor = vec4(result.xyz, result.w * opacity);
 }

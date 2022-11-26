@@ -30,6 +30,7 @@ namespace Cober {
 		static void StartBatch();
 		static void NextBatch();
 
+		static void SetGridData(int gridSizes[], int gridNumber, float opacity);
 		static void DrawGrid(glm::vec3 cameraPosition);
 		static void DrawSprite(Transform* transformComponent, Sprite* spriteComponent, int entityIndex);
 
@@ -47,5 +48,8 @@ namespace Cober {
 		};
 		static void ResetStats();
 		static Statistics GetStats();
+
+		// Grid data. Must be always float because WebGL dont work with ints
+		// Later in the shader we can convert to ints
 	};
 }

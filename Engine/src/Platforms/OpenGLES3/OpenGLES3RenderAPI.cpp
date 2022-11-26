@@ -16,7 +16,7 @@ namespace Cober {
 		GLCallV(glViewport(0, 0, width, height));
 	}
 
-	void OpenGLES3RenderAPI::SetClearColor(const glm::vec4& color) {
+	void OpenGLES3RenderAPI::SetClearColor(glm::vec4 color) {
 
 		GLCallV(glClearColor(color.r, color.g, color.b, color.a));
 	}
