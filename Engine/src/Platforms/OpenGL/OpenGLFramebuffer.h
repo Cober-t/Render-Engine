@@ -22,14 +22,6 @@ namespace Cober {
 		virtual const FramebufferSpecification& GetSpecification() override { return _specification; }
 		virtual uint32_t GetColorAttachmentRenderID(uint32_t index = 0) const override { if (index < _colorAttachments.size()) { return _colorAttachments[index]; } }
 	private:
-		//uint32_t _RendererID = 0;
-		//FramebufferSpecification _Specification;
-		//std::vector<FramebufferTextureSpecification> _ColorAttachmentSpecifications;
-		//FramebufferTextureSpecification _DepthAttachmentSpecification = FramebufferTextureFormat::None;
-		//
-		//std::vector<uint32_t> _ColorAttachments;
-		//uint32_t _DepthAttachment = 0;
-
 		uint32_t _renderID = 0;
 		FramebufferSpecification _specification;
 

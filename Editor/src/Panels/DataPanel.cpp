@@ -36,6 +36,7 @@ namespace Cober {
 		ImGui::Text("Draw Calls: %d", Render2D::GetStats().DrawCalls);
 		ImGui::Text("Quads: %d", Render2D::GetStats().QuadCount);
 
+		ImGui::Text("Mouse Coords: \nX: %i\nY: %i", mouseX, mouseY);
 		if (hoveredEntity.GetIndex() == -1)
 			ImGui::Text("Hovered Entity: %s", hoveredEntity.GetTag().c_str());
 		else

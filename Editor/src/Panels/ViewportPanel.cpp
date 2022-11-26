@@ -3,6 +3,7 @@
 #include "ViewportPanel.h"
 #include "SceneHierarchyPanel.h"
 #include "MenuPanel.h"
+#include "DataPanel.h"
 
 #include "core/Application.h"
 #include "ImGuizmo/ImGuizmo.h"
@@ -56,10 +57,14 @@ namespace Cober {
 		my -= _minViewportBound.y;
 		glm::vec2 viewportSize = _maxViewportBound - _minViewportBound;
 		my = viewportSize.y - my;
-		int mouseX = (int)mx;
-		int mouseY = (int)my;
+		int mouseX = (int)mx - _viewportMargin.x;
+		int mouseY = (int)my - _viewportMargin.y;
 
-		if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)_viewportSize.x && mouseY < (int)_viewportSize.y) {
+		DataPanel::Get().SetMouseX(mouseX);
+		DataPanel::Get().SetMouseY(mouseY);
+
+		if (mouseX >= 0 && mouseY >= 0 &&
+			mouseX < ((int)_viewportSize.x) && mouseY < ((int)_viewportSize.y)) {
 			int pixelData = _fbo->ReadPixel(1, mouseX, mouseY);
 			if (pixelData == 1) {
 				activeScene->SetDefaultEntity(hoveredEntity);
@@ -80,44 +85,44 @@ namespace Cober {
 		//					FIX INPUTS					   //
 		/////////////////////////////////////////////////////
 		// Gizmos
-		switch (event.key.keysym.sym) {
-			case SDLK_q:
-			{
-				if (!ImGuizmo::IsUsing())
-					_gizmoType = -1;
-				break;
-			}
-			case SDLK_w:
-			{
-				if (!ImGuizmo::IsUsing())
-					_gizmoType = ImGuizmo::OPERATION::TRANSLATE;
-				break;
-			}
-			case SDLK_e:
-			{
-				if (!ImGuizmo::IsUsing())
-					_gizmoType = ImGuizmo::OPERATION::ROTATE;
-				break;
-			}
-			case SDLK_r:
-			{
-				if (!ImGuizmo::IsUsing())
-					_gizmoType = ImGuizmo::OPERATION::SCALE;
-				break;
+		if (event.type == SDL_KEYDOWN) {
+			switch (event.key.keysym.sym) {
+				case SDLK_q:
+				{
+					if (!ImGuizmo::IsUsing())
+						_gizmoType = -1;
+					break;
+				}
+				case SDLK_w:
+				{
+					if (!ImGuizmo::IsUsing())
+						_gizmoType = ImGuizmo::OPERATION::TRANSLATE;
+					break;
+				}
+				case SDLK_e:
+				{
+					if (!ImGuizmo::IsUsing())
+						_gizmoType = ImGuizmo::OPERATION::ROTATE;
+					break;
+				}
+				case SDLK_r:
+				{
+					if (!ImGuizmo::IsUsing())
+						_gizmoType = ImGuizmo::OPERATION::SCALE;
+					break;
+				}
 			}
 		}
 	}
 
 	void ViewportPanel::ResizeViewport(Ref<EditorCamera> editorCamera, Ref<Scene>& activeScene, bool& game2D) {
 		
-		if (FramebufferSpecification spec = _fbo->GetSpecification();
-			_viewportSize.x > 0.0f && _viewportSize.y > 0.0f && // zero sized framebuffer is invalid
+		FramebufferSpecification spec = _fbo->GetSpecification();
+		if (_viewportSize.x > 0.0f && _viewportSize.y > 0.0f && // zero sized framebuffer is invalid
 			(spec.Width != _viewportSize.x || spec.Height != _viewportSize.y))
 		{
 			_fbo->Resize((uint32_t)_viewportSize.x, (uint32_t)_viewportSize.y);
 			editorCamera->SetViewportSize(_viewportSize.x, _viewportSize.y, game2D);
-			//activeScene->OnViewportResize((uint32_t)_viewportSize.x, (uint32_t)_viewportSize.y);
-			// Resize ViewportScene ...
 		}
 	}
 
@@ -126,40 +131,48 @@ namespace Cober {
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Viewport");
 
-		//if (hoveredEntity.GetIndex() != -1 && ImGui::IsMouseClicked(0)) {
-		//	scene->SetDefaultEntity(hoveredEntity);
-		//	SceneHierarchyPanel::Get().SetNullEntityContext();
-		//}
+
+		if (ImGui::IsMouseClicked(0) && ImGui::IsWindowHovered() &&	!ImGuizmo::IsOver() && !SDL_GetKeyboardState(NULL)[SDL_SCANCODE_LALT])
+		{
+			scene->SetDefaultEntity(hoveredEntity);
+			SceneHierarchyPanel::Get().SetNullEntityContext();
+		}
+
+		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+		_viewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
 		// Hovered Entity
 		auto viewportMinRegion = ImGui::GetWindowContentRegionMin();
 		auto viewportMaxRegion = ImGui::GetWindowContentRegionMax();
 		auto viewportOffset = ImGui::GetWindowPos();
-		_minViewportBound = { viewportMinRegion.x + viewportOffset.x, viewportMinRegion.y + viewportOffset.y };
-		_maxViewportBound = { viewportMaxRegion.x + viewportOffset.x, viewportMaxRegion.y + viewportOffset.y };
+		_minViewportBound = { viewportMinRegion.x + viewportOffset.x,
+							  viewportMinRegion.y + viewportOffset.y };
+		_maxViewportBound = { viewportMaxRegion.x + viewportOffset.x, 
+							  viewportMaxRegion.y + viewportOffset.y };
 
 		_viewportFocused = ImGui::IsWindowFocused();
 		_viewportHovered = ImGui::IsWindowHovered();
 		editorCamera->BlockEvents(_viewportHovered);
 
 		// START CONSTRAIN VIEWPORT SCENE
-		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-		_viewportSize = { viewportPanelSize.x, viewportPanelSize.y };
-
 		float screenWidth  = scene->GetWidth();
 		float screenHeight = scene->GetHeight();
 		if (viewportPanelSize.x >= viewportPanelSize.y)
 			_viewportSize = { _viewportSize.y * screenWidth / screenHeight  , _viewportSize.y };
 		else if (viewportPanelSize.x < viewportPanelSize.y)
 			_viewportSize = { _viewportSize.x, _viewportSize.x * screenHeight / screenWidth };
-
+		
 		if (_viewportSize.x >= viewportPanelSize.x) {
 			_viewportSize.x = viewportPanelSize.x;
 			_viewportSize.y = _viewportSize.x * screenHeight / screenWidth;
+			_viewportMargin.y = (viewportPanelSize.y - _viewportSize.y) / 2;
+			_viewportMargin.x = 0.0f;
 		}
-		else if (_viewportSize.y > viewportPanelSize.y) {
+		if (_viewportSize.y >= viewportPanelSize.y) {
 			_viewportSize.y = viewportPanelSize.y;
 			_viewportSize.x = _viewportSize.y * screenWidth / screenHeight;
+			_viewportMargin.x = (viewportPanelSize.x - _viewportSize.x) / 2;
+			_viewportMargin.y = 0.0f;
 		}
 		// END CONSTRAIN VIEWPORT SCENE
 
@@ -167,7 +180,8 @@ namespace Cober {
 		ImVec2 contentRegionSize{ (viewportPanelSize.x - _viewportSize.x) * 0.5f,
 								  (viewportPanelSize.y - _viewportSize.y) * 0.5f };
 		ImGui::SetCursorPos(contentRegionSize);
-		
+
+
 		uint32_t textureID = _fbo->GetColorAttachmentRenderID();
 		ImGui::Image(reinterpret_cast<void*>(textureID), ImVec2{ _viewportSize.x, _viewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 
@@ -229,7 +243,7 @@ namespace Cober {
 				(ImGuizmo::OPERATION)_gizmoType, ImGuizmo::LOCAL, glm::value_ptr(transform),
 				nullptr, snap ? snapValues : nullptr);
 
-			if (ImGuizmo::IsUsing())
+			if (ImGuizmo::IsUsing() && !SDL_GetKeyboardState(NULL)[SDL_SCANCODE_LALT])
 			{
 				glm::vec3 translation, rotation, scale;
 				Math::DecomposeTransform(transform, translation, rotation, scale);

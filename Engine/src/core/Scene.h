@@ -21,6 +21,9 @@ namespace Cober {
 
 		uint32_t GetWidth()  { return _width; }
 		uint32_t GetHeight() { return _height; }
+		void SetWidth(uint32_t w)  { _width = w; }
+		void SetHeight(uint32_t h) { _height = h; }
+
 		void GetEntity(int index, Entity& hoveredEntity);
 		std::unordered_map<UUID, Entity>& GetSceneEntities() { return _registry.GetAllEntities(); }
 

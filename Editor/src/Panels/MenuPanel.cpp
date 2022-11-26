@@ -217,18 +217,18 @@ namespace Cober {
 
 		// Snap Values
 		if (_world2D) {
-			ImGui::SliderFloat("Opacity", &_gridOpacity, 0, 1, "Opacity");
+			ImGui::SliderFloat("Opacity 2D", &_gridOpacity, 0, 1, "Opacity");
 			ImGui::Text("Snap Entities to Grid");
-			ImGui::Checkbox("Snap Square Area", &_snap2D);
+			ImGui::Checkbox("Snap Square 2DArea", &_snap2D);
 			if (_snap2D)
-				ImGui::SliderInt("Snap Value", &_snap2DValue, 0, 50, "Snap 2D", ImGuiSliderFlags_AlwaysClamp);
+				ImGui::SliderInt("Snap Value 3D", &_snap2DValue, 0, 50, "Snap 2D", ImGuiSliderFlags_AlwaysClamp);
 		}
 		else {
-			ImGui::SliderFloat("Opacity", &_gridOpacity, 0, 1, "Opacity");
+			ImGui::SliderFloat("Opacity 3D", &_gridOpacity, 0, 1, "Opacity");
 			ImGui::Text("Snap Entities to Grid");
-			ImGui::Checkbox("Snap Square Area", &_snap3D);
+			ImGui::Checkbox("Snap Square 3DArea", &_snap3D);
 			if (_snap3D)
-				ImGui::SliderInt("Snap Value", &_snap3DValue, 0, 50, "Snap 3D", ImGuiSliderFlags_AlwaysClamp);
+				ImGui::SliderInt("Snap Value 3D", &_snap3DValue, 0, 50, "Snap 3D", ImGuiSliderFlags_AlwaysClamp);
 		}
 
 		ImGui::End();

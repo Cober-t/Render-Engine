@@ -69,6 +69,8 @@ namespace Cober {
 	Ref<Scene> Scene::Copy(Ref<Scene> baseScene) {
 
 		Ref<Scene> newScene = CreateRef<Scene>();
+		newScene->SetWidth(baseScene->GetWidth());
+		newScene->SetHeight(baseScene->GetHeight());
 
 		if (baseScene->GetSceneEntities().size() > 0) {
 			// Create entities in new scene

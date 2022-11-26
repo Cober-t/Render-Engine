@@ -72,13 +72,6 @@ vec4 grid(vec3 fragPos3D, float scale, bool drawAxis) {
         color = vec4(0.2, 0.2, 0.2, 0.8 - min(line, 1.0));
     float alpha = color.w;
     
-    //float d = length(gl_FragCoord.xyz - worldCamera.xyz);
-    //float w = 0.5;
-    //if (d > 10)
-    //    color.w *= 0.1;
-    //else
-    //    color.w *= pow(float((w-d)/w), 1.5);
-    
     if (game2D != 1){
         if(fragPos3D.x > -0.1 * minimumx && fragPos3D.x < 0.1 * minimumx)
             color.z = 1.0;
@@ -134,8 +127,10 @@ void main() {
     float attenuation = calculateAttenuation(65);
 	
 	for (int i = 0; i < int(patternNumber); i++) {
-		if(patternSizes[i] != 0.0f)
-			result += grid(worldPoint.xyz, patternSizes[i], true) * attenuation;
+		if (game2D != 1)
+        	result += grid(worldPoint.xyz, patternSizes[i], true) * attenuation;
+		else
+        	result += grid(worldPoint.xyz, patternSizes[i], true);
 	}
 		
     outColor = vec4(result.xyz, result.w * opacity);

@@ -34,6 +34,7 @@ namespace Cober {
 		Ref<EditorCamera> _cameraAux;
 		static ViewportPanel* instance;
 
+		glm::vec2 _viewportMargin = { 0.0f, 0.0f };
 		glm::vec2 _viewportSize = { 0.0f, 0.0f };
 		glm::vec2 _minViewportBound, _maxViewportBound;
 		bool _viewportFocused = false, _viewportHovered = false;
