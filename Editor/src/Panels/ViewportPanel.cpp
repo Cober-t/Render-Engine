@@ -7,7 +7,7 @@
 
 #include "core/Application.h"
 #include "ImGuizmo/ImGuizmo.h"
-//#include "core/Math.h"
+#include "core/Utils.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -66,11 +66,7 @@ namespace Cober {
 		if (mouseX >= 0 && mouseY >= 0 &&
 			mouseX < ((int)_viewportSize.x) && mouseY < ((int)_viewportSize.y)) {
 			int pixelData = _fbo->ReadPixel(1, mouseX, mouseY);
-			if (pixelData == 1) {
-				activeScene->SetDefaultEntity(hoveredEntity);
-				SceneHierarchyPanel::Get().SetNullEntityContext();
-			}
-			else
+			if (pixelData != -1)
 				activeScene->GetEntity(pixelData, hoveredEntity);
 		}
 	}
@@ -246,7 +242,7 @@ namespace Cober {
 			if (ImGuizmo::IsUsing() && !SDL_GetKeyboardState(NULL)[SDL_SCANCODE_LALT])
 			{
 				glm::vec3 translation, rotation, scale;
-				Math::DecomposeTransform(transform, translation, rotation, scale);
+				Utils::DecomposeTransform(transform, translation, rotation, scale);
 
 				if (Engine::Get().GetGameMode())
 					translation.z = tc.position.z;

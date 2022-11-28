@@ -8,7 +8,7 @@ layout(location = 1) in vec4 a_Color;
 layout(location = 2) in vec2 a_TexCoord;
 layout(location = 3) in float a_TexIndex;
 layout(location = 4) in float a_TilingFactor;
-layout(location = 5) in int a_EntityID;
+layout(location = 5) in float a_EntityID;
 
 layout(std140, binding = 0) uniform Camera
 {
@@ -33,7 +33,7 @@ void main()
 	Output.TexCoord = a_TexCoord;
 	Output.TilingFactor = a_TilingFactor;
 	v_TexIndex = a_TexIndex;
-	v_EntityID = a_EntityID;
+	v_EntityID = int(a_EntityID);
 
 	gl_Position = u_Projection * u_View * vec4(a_Position, 1.0);
 }

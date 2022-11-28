@@ -1,11 +1,11 @@
 #include "pch.h"
 
-#include "Math.h"
+#include "Utils.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/matrix_decompose.hpp>
 
-namespace Cober::Math {
+namespace Cober::Utils {
 
 	bool DecomposeTransform(const glm::mat4& transform, glm::vec3& translation, glm::vec3& rotation, glm::vec3& scale)
 	{

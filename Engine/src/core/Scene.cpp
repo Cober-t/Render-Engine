@@ -53,15 +53,15 @@ namespace Cober {
 	}
 
 	template<typename TComponent>
-	static void CopyComponent(std::unordered_map<UUID, Entity>& dst, std::unordered_map<UUID, Entity>& src)
+	static void CopyComponent(std::map<int, Entity>& dst, std::map<int, Entity>& src)
 	{
 		for (auto& e : dst)
 		{
-			UUID uuid = e.second.GetComponent<IDComponent>().ID;
-			if (!dst.at(uuid).HasComponent<TComponent>() && src.at(uuid).HasComponent<TComponent>())
+			int id = e.second.GetIndex();
+			if (!dst.at(id).HasComponent<TComponent>() && src.at(id).HasComponent<TComponent>())
 			{
-				TComponent& componentData = src.at(uuid).GetComponent<TComponent>();
-				dst.at(uuid).AddComponent<TComponent>(componentData);
+				TComponent& componentData = src.at(id).GetComponent<TComponent>();
+				dst.at(id).AddComponent<TComponent>(componentData);
 			}
 		}
 	}
@@ -75,13 +75,13 @@ namespace Cober {
 		if (baseScene->GetSceneEntities().size() > 0) {
 			// Create entities in new scene
 			for (auto& e : baseScene->GetSceneEntities()) {
-				UUID uuid = e.first;
+				int id = e.first;
 				const auto& name = e.second.GetComponent<Tag>().tag;
-				newScene->CreateEntity(name, uuid);
+				newScene->CreateEntity(name);
 
 				// Copy Transform Component Data
-				auto& srcTransform = baseScene->GetSceneEntities().at(uuid).GetComponent<Transform>();
-				auto& dstTransform = newScene->GetSceneEntities().at(uuid).GetComponent<Transform>();
+				auto& srcTransform = baseScene->GetSceneEntities().at(id).GetComponent<Transform>();
+				auto& dstTransform = newScene->GetSceneEntities().at(id).GetComponent<Transform>();
 				dstTransform.position = srcTransform.position;
 				dstTransform.rotation = srcTransform.rotation;
 				dstTransform.scale = srcTransform.scale;
@@ -102,12 +102,15 @@ namespace Cober {
 
 	void Scene::OnRuntimeStart(const Ref<Scene>& scene) {
 
-		_registry.Update();
+		Entity entity = scene->CreateEntity();
+		entity.AddComponent<Sprite>();
 
 		_registry.GetSystem<PhysicsSystem>().Start();
 		_registry.GetSystem<RenderSystem>().Start();
 		//_registry->GetSystem<UISystem>().Start(Engine::Get().GetWindow().GetNativeWindow());
 		//_registry->GetSystem<MovementSystem>().Start(scene);
+
+		_registry.Update();
 	}
 
 	void Scene::OnRuntimeStop() 

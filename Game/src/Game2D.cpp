@@ -2,7 +2,7 @@
 
 Game2D::Game2D() : Layer("First 2D Game!") {
 
-	_camera = CreateUnique<EditorCamera>(45.0f, 1.778f, 0.01f, 100.0f);
+	_camera = CreateUnique<EditorCamera>(45.0f, 1.778f, 0.01f, 1000.0f);
 }
 
 void Game2D::OnAttach() {
@@ -22,7 +22,9 @@ void Game2D::OnUpdate(Ref<Timestep> ts) {
 	bool ortho = false;
 	_camera->SetViewportSize(1280, 720, ortho);
 
-	EditorCamera::RenderSkybox();
+	_camera->OnUpdate(ts);
+	RenderGlobals::SetClearColor(10, 0, 10, 255);
+	RenderGlobals::Clear();
 
 	_activeScene->OnUpdateRuntime(ts, _camera);
 
