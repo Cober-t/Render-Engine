@@ -1,6 +1,5 @@
 #pragma once
 #include "Components.h"
-#include "core/UUID.h"
 #include "core/Core.h"
 
 #include <vector>

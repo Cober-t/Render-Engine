@@ -15,7 +15,6 @@
 #include <glm/gtx/quaternion.hpp>
 
 #include "core/Core.h"
-#include "core/UUID.h"
 #include "Render/Texture.h"
 
 namespace Cober {
@@ -36,17 +35,6 @@ namespace Cober {
 			return index;
 		}
 	};
-
-	// ++++++++++++++++++++
-	// Universal Unique Identifier for entities
-	//struct IDComponent {
-	//	UUID ID;
-
-	//	IDComponent() = default;
-	//	IDComponent(const IDComponent&) = default;
-	//	IDComponent(const UUID& id) : ID(id) {}
-	//};
-
 
 	// ++++++++++++++++++++
 	// Components for entities
