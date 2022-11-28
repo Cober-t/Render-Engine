@@ -6,7 +6,7 @@
 #if !defined __EMSCRIPTEN__ && !defined __OPENGLES3__
 #include "Platforms/OpenGL/OpenGLCubeMap.h"
 #elif defined __EMSCRIPTEN__ || __OPENGLES3__
-#include "Platforms/OpenGLES3/OpenGLES3CubeMap.h"
+//#include "Platforms/OpenGLES3/OpenGLES3CubeMap.h"
 #endif
 
 namespace Cober {

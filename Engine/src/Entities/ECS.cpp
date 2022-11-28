@@ -6,19 +6,18 @@ namespace Cober {
 
 	int IComponent::nextIndex = 0;
 
-	Entity& Registry::CreateEntity(std::string name, UUID uuid) {
+	Entity Registry::CreateEntity(std::string name) {
 
-		int entityIndex = numEntities++;
-		Entity entity(name, entityIndex, uuid);
+		int entityID = numEntities++;
+		Entity entity(name, entityID);
 		entity.registry = this;
 
 		entitiesToBeAdded.insert(entity);
-		entities[uuid] = entity;
+		entities[entityID] = entity;
 
-		if (entityIndex >= entityComponentSignatures.size())
-			entityComponentSignatures.resize(entityIndex + 1);
+		if (entityID >= entityComponentSignatures.size())
+			entityComponentSignatures.resize(entityID + 1);
 
-		entity.AddComponent<IDComponent>(entity.GetID());
 		entity.AddComponent<Tag>(name);
 		entity.AddComponent<Transform>();
 
@@ -29,12 +28,13 @@ namespace Cober {
 
 	Entity Registry::GetEntity(Entity requestedEntity) {
 
-		return entities[requestedEntity.GetComponent<IDComponent>().ID];
+		return entities[requestedEntity.GetIndex()];
 	}
 	
 	void Registry::DeleteEntity(Entity entity) {
 
 		entitiesToBeKilled.insert(entity);
+		Logger::Log("Deleted entity with ID = " + std::to_string(entity.GetIndex()));
 	}
 
 	void Registry::Update() {
@@ -48,7 +48,7 @@ namespace Cober {
 		for (auto& entity : entitiesToBeKilled) {
 			for (auto& system : systems)
 				system.second->RemoveEntityFromSystem(entity);
-			entities.erase(entity.GetComponent<IDComponent>().ID);
+			entities.erase(entity.GetIndex());
 		}
 
 		entitiesToBeKilled.clear();

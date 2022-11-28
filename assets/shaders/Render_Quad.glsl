@@ -18,7 +18,7 @@ out vec4 Color;
 out vec2 TexCoord;
 out float TilingFactor;
 out float v_TexIndex;
-out float v_EntityID;
+out int v_EntityID;
 
 void main()
 {
@@ -26,7 +26,7 @@ void main()
 	TexCoord = a_TexCoord;
 	TilingFactor = a_TilingFactor;
 	v_TexIndex = a_TexIndex;
-	v_EntityID = a_EntityID;
+	v_EntityID = int(a_EntityID);
 
 	gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
 }
@@ -37,7 +37,7 @@ void main()
 precision mediump float;
 
 layout(location = 0) out vec4 o_Color;
-//layout(location = 1) out float o_EntityID;
+//layout(location = 1) out int o_EntityID;
 
 in vec4 Color;
 in vec2 TexCoord;

@@ -62,7 +62,7 @@ namespace Cober {
 		void OnUpdate(Ref<Timestep> ts);
 		void OnEvent(SDL_Event& event);
 
-		static void RenderSkybox(glm::vec4 color);
+		static void RenderSkybox(glm::vec4 color = glm::vec4(0.039f, 0.0f, 0.039f, 1.0f));
 
 		void BlockEvents(bool focus) { _viewportFocused = focus; }
 

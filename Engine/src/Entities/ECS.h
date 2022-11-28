@@ -5,7 +5,7 @@
 
 #include <vector>
 #include <bitset>
-#include <unordered_map>
+#include <map>
 #include <typeindex>
 #include <memory>
 #include <set>
@@ -22,16 +22,15 @@ namespace Cober {
 	class Entity {
 	public:
 		Entity() = default;
-		Entity(std::string name, int entityIndex, UUID uuid = UUID()) : tag(name), index(entityIndex), id(uuid), registry(nullptr) {};
+		Entity(std::string name, int entityIndex) : tag(name), index(entityIndex), registry(nullptr) {};
 		Entity(const Entity& entity) = default;
 
-		UUID GetID() const { return id; }
-		std::string GetTag() const { return tag; }
-		void SetTag(std::string name) { tag = name; }
-		int GetIndex() const { return index; }
-		void SetIndex(int entityID) { index = entityID; }
+		std::string GetTag() const  { return tag; }
+		int GetIndex() const		{ return index; }
 
-		Entity& operator =(const Entity& other) = default;
+		void SetTag(std::string name) { tag = name; }
+		void SetIndex(int entityID)	  { index = entityID; }
+
 		bool operator ==(const Entity& other) const { return index == other.index; };
 		bool operator !=(const Entity& other) const { return index != other.index; };
 		bool operator < (const Entity& other) const { return index < other.index; };
@@ -49,7 +48,6 @@ namespace Cober {
 	private:
 		int index;
 		std::string tag;
-		UUID id;
 	};
 
 	////////////////////////////////////////////////////////////////
@@ -109,9 +107,9 @@ namespace Cober {
 
 		void Update();
 
-		Entity& CreateEntity(std::string name = "Empty Entity", UUID uuid = UUID());
+		Entity CreateEntity(std::string name = "Empty Entity");
 		Entity GetEntity(Entity requestedEntity);
-		std::unordered_map<UUID, Entity>& GetAllEntities() { return entities; };
+		std::map<int, Entity>& GetAllEntities() { return entities; };
 		void DeleteEntity(Entity entity);
 
 		// Component management
@@ -137,8 +135,8 @@ namespace Cober {
 
 		std::vector<Signature> entityComponentSignatures;
 
-		std::unordered_map<std::type_index, Ref<System>> systems;
-		std::unordered_map<UUID, Entity> entities;
+		std::map<std::type_index, Ref<System>> systems;
+		std::map<int, Entity> entities;
 
 		std::set<Entity> entitiesToBeAdded;
 		std::set<Entity> entitiesToBeKilled;
