@@ -35,8 +35,8 @@
 #include <sstream>
 #include <array>
 #include <vector>
-#include <map>
-#include <set>
+#include <unordered_map>
+#include <unordered_set>
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>

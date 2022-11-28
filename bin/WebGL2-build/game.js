@@ -200,7 +200,7 @@ Module['FS_createPath']("/assets", "textures", true, true);
     }
 
     }
-    loadPackage({"files": [{"filename": "/assets/fonts/Cousine-Regular.ttf", "start": 0, "end": 43912}, {"filename": "/assets/fonts/DroidSans.ttf", "start": 43912, "end": 233956}, {"filename": "/assets/fonts/Karla-Regular.ttf", "start": 233956, "end": 250804}, {"filename": "/assets/fonts/ProggyClean.ttf", "start": 250804, "end": 292012}, {"filename": "/assets/fonts/ProggyTiny.ttf", "start": 292012, "end": 327668}, {"filename": "/assets/fonts/Roboto-Medium.ttf", "start": 327668, "end": 490256}, {"filename": "/assets/scripts/firstScript.lua", "start": 490256, "end": 490276}, {"filename": "/assets/shaders/CubeMap.glsl", "start": 490276, "end": 490748}, {"filename": "/assets/shaders/Editor_Infinite_Grid.glsl", "start": 490748, "end": 495363}, {"filename": "/assets/shaders/Render_Circle.glsl", "start": 495363, "end": 497010}, {"filename": "/assets/shaders/Render_Line.glsl", "start": 497010, "end": 497961}, {"filename": "/assets/shaders/Render_Quad.glsl", "start": 497961, "end": 502099}, {"filename": "/assets/shaders/Render_Quad_4.6.glsl", "start": 502099, "end": 506480}, {"filename": "/assets/shaders/fragmentShader.glsl", "start": 506480, "end": 506711}, {"filename": "/assets/shaders/gridFragment.glsl", "start": 506711, "end": 506812}, {"filename": "/assets/shaders/gridVertex.glsl", "start": 506812, "end": 507155}, {"filename": "/assets/shaders/texture.glsl", "start": 507155, "end": 507707}, {"filename": "/assets/shaders/vertexShader.glsl", "start": 507707, "end": 508024}, {"filename": "/assets/textures/blendTest.png", "start": 508024, "end": 1405167}, {"filename": "/assets/textures/orangeMykoeski.png", "start": 1405167, "end": 1422560}, {"filename": "/assets/textures/woodenContainer.png", "start": 1422560, "end": 2284677}], "remote_package_size": 2284677});
+    loadPackage({"files": [{"filename": "/assets/fonts/Cousine-Regular.ttf", "start": 0, "end": 43912}, {"filename": "/assets/fonts/DroidSans.ttf", "start": 43912, "end": 233956}, {"filename": "/assets/fonts/Karla-Regular.ttf", "start": 233956, "end": 250804}, {"filename": "/assets/fonts/ProggyClean.ttf", "start": 250804, "end": 292012}, {"filename": "/assets/fonts/ProggyTiny.ttf", "start": 292012, "end": 327668}, {"filename": "/assets/fonts/Roboto-Medium.ttf", "start": 327668, "end": 490256}, {"filename": "/assets/scripts/firstScript.lua", "start": 490256, "end": 490276}, {"filename": "/assets/shaders/Render_Circle.glsl", "start": 490276, "end": 491923}, {"filename": "/assets/shaders/Render_Line.glsl", "start": 491923, "end": 492874}, {"filename": "/assets/shaders/Render_Quad.glsl", "start": 492874, "end": 497012}, {"filename": "/assets/shaders/Render_Quad_4.6.glsl", "start": 497012, "end": 501436}, {"filename": "/assets/shaders/fragmentShader.glsl", "start": 501436, "end": 501667}, {"filename": "/assets/shaders/gridFragment.glsl", "start": 501667, "end": 501768}, {"filename": "/assets/shaders/gridVertex.glsl", "start": 501768, "end": 502111}, {"filename": "/assets/shaders/texture.glsl", "start": 502111, "end": 502663}, {"filename": "/assets/shaders/vertexShader.glsl", "start": 502663, "end": 502980}, {"filename": "/assets/textures/blendTest.png", "start": 502980, "end": 1400123}, {"filename": "/assets/textures/orangeMykoeski.png", "start": 1400123, "end": 1417516}, {"filename": "/assets/textures/woodenContainer.png", "start": 1417516, "end": 2279633}], "remote_package_size": 2279633});
 
   })();
 
@@ -1363,38 +1363,38 @@ var tempI64;
 // === Body ===
 
 var ASM_CONSTS = {
-  83602: ($0, $1) => { var self = Module['getCache'](Module['JSContactListener'])[$0]; if (!self.hasOwnProperty('BeginContact')) throw 'a JSImplementation must implement all functions, you forgot JSContactListener::BeginContact.'; self['BeginContact']($1); },  
- 83840: ($0, $1) => { var self = Module['getCache'](Module['JSContactListener'])[$0]; if (!self.hasOwnProperty('EndContact')) throw 'a JSImplementation must implement all functions, you forgot JSContactListener::EndContact.'; self['EndContact']($1); },  
- 84072: ($0, $1, $2) => { var self = Module['getCache'](Module['JSContactListener'])[$0]; if (!self.hasOwnProperty('PreSolve')) throw 'a JSImplementation must implement all functions, you forgot JSContactListener::PreSolve.'; self['PreSolve']($1,$2); },  
- 84301: ($0, $1, $2) => { var self = Module['getCache'](Module['JSContactListener'])[$0]; if (!self.hasOwnProperty('PostSolve')) throw 'a JSImplementation must implement all functions, you forgot JSContactListener::PostSolve.'; self['PostSolve']($1,$2); },  
- 84533: ($0, $1, $2, $3, $4) => { var self = Module['getCache'](Module['JSRayCastCallback'])[$0]; if (!self.hasOwnProperty('ReportFixture')) throw 'a JSImplementation must implement all functions, you forgot JSRayCastCallback::ReportFixture.'; return self['ReportFixture']($1,$2,$3,$4); },  
- 84790: ($0, $1) => { var self = Module['getCache'](Module['JSQueryCallback'])[$0]; if (!self.hasOwnProperty('ReportFixture')) throw 'a JSImplementation must implement all functions, you forgot JSQueryCallback::ReportFixture.'; return self['ReportFixture']($1); },  
- 85034: ($0, $1, $2) => { var self = Module['getCache'](Module['JSContactFilter'])[$0]; if (!self.hasOwnProperty('ShouldCollide')) throw 'a JSImplementation must implement all functions, you forgot JSContactFilter::ShouldCollide.'; return self['ShouldCollide']($1,$2); },  
- 85281: ($0, $1) => { var self = Module['getCache'](Module['JSDestructionListener'])[$0]; if (!self.hasOwnProperty('SayGoodbyeJoint')) throw 'a JSImplementation must implement all functions, you forgot JSDestructionListener::SayGoodbyeJoint.'; self['SayGoodbyeJoint']($1); },  
- 85536: ($0, $1) => { var self = Module['getCache'](Module['JSDestructionListener'])[$0]; if (!self.hasOwnProperty('SayGoodbyeFixture')) throw 'a JSImplementation must implement all functions, you forgot JSDestructionListener::SayGoodbyeFixture.'; self['SayGoodbyeFixture']($1); },  
- 85797: ($0, $1, $2, $3) => { var self = Module['getCache'](Module['JSDraw'])[$0]; if (!self.hasOwnProperty('DrawPolygon')) throw 'a JSImplementation must implement all functions, you forgot JSDraw::DrawPolygon.'; self['DrawPolygon']($1,$2,$3); },  
- 86016: ($0, $1, $2, $3) => { var self = Module['getCache'](Module['JSDraw'])[$0]; if (!self.hasOwnProperty('DrawSolidPolygon')) throw 'a JSImplementation must implement all functions, you forgot JSDraw::DrawSolidPolygon.'; self['DrawSolidPolygon']($1,$2,$3); },  
- 86250: ($0, $1, $2, $3) => { var self = Module['getCache'](Module['JSDraw'])[$0]; if (!self.hasOwnProperty('DrawCircle')) throw 'a JSImplementation must implement all functions, you forgot JSDraw::DrawCircle.'; self['DrawCircle']($1,$2,$3); },  
- 86466: ($0, $1, $2, $3, $4) => { var self = Module['getCache'](Module['JSDraw'])[$0]; if (!self.hasOwnProperty('DrawSolidCircle')) throw 'a JSImplementation must implement all functions, you forgot JSDraw::DrawSolidCircle.'; self['DrawSolidCircle']($1,$2,$3,$4); },  
- 86700: ($0, $1, $2, $3) => { var self = Module['getCache'](Module['JSDraw'])[$0]; if (!self.hasOwnProperty('DrawSegment')) throw 'a JSImplementation must implement all functions, you forgot JSDraw::DrawSegment.'; self['DrawSegment']($1,$2,$3); },  
- 86919: ($0, $1) => { var self = Module['getCache'](Module['JSDraw'])[$0]; if (!self.hasOwnProperty('DrawTransform')) throw 'a JSImplementation must implement all functions, you forgot JSDraw::DrawTransform.'; self['DrawTransform']($1); },  
- 87138: ($0, $1, $2, $3) => { var self = Module['getCache'](Module['JSDraw'])[$0]; if (!self.hasOwnProperty('DrawPoint')) throw 'a JSImplementation must implement all functions, you forgot JSDraw::DrawPoint.'; self['DrawPoint']($1,$2,$3); },  
- 87351: ($0) => { var str = UTF8ToString($0) + '\n\n' + 'Abort/Retry/Ignore/AlwaysIgnore? [ariA] :'; var reply = window.prompt(str, "i"); if (reply === null) { reply = "i"; } return allocate(intArrayFromString(reply), 'i8', ALLOC_NORMAL); },  
- 87576: () => { if (typeof(AudioContext) !== 'undefined') { return true; } else if (typeof(webkitAudioContext) !== 'undefined') { return true; } return false; },  
- 87723: () => { if ((typeof(navigator.mediaDevices) !== 'undefined') && (typeof(navigator.mediaDevices.getUserMedia) !== 'undefined')) { return true; } else if (typeof(navigator.webkitGetUserMedia) !== 'undefined') { return true; } return false; },  
- 87957: ($0) => { if(typeof(Module['SDL2']) === 'undefined') { Module['SDL2'] = {}; } var SDL2 = Module['SDL2']; if (!$0) { SDL2.audio = {}; } else { SDL2.capture = {}; } if (!SDL2.audioContext) { if (typeof(AudioContext) !== 'undefined') { SDL2.audioContext = new AudioContext(); } else if (typeof(webkitAudioContext) !== 'undefined') { SDL2.audioContext = new webkitAudioContext(); } if (SDL2.audioContext) { autoResumeAudioContext(SDL2.audioContext); } } return SDL2.audioContext === undefined ? -1 : 0; },  
- 88450: () => { var SDL2 = Module['SDL2']; return SDL2.audioContext.sampleRate; },  
- 88518: ($0, $1, $2, $3) => { var SDL2 = Module['SDL2']; var have_microphone = function(stream) { if (SDL2.capture.silenceTimer !== undefined) { clearTimeout(SDL2.capture.silenceTimer); SDL2.capture.silenceTimer = undefined; } SDL2.capture.mediaStreamNode = SDL2.audioContext.createMediaStreamSource(stream); SDL2.capture.scriptProcessorNode = SDL2.audioContext.createScriptProcessor($1, $0, 1); SDL2.capture.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) { if ((SDL2 === undefined) || (SDL2.capture === undefined)) { return; } audioProcessingEvent.outputBuffer.getChannelData(0).fill(0.0); SDL2.capture.currentCaptureBuffer = audioProcessingEvent.inputBuffer; dynCall('vi', $2, [$3]); }; SDL2.capture.mediaStreamNode.connect(SDL2.capture.scriptProcessorNode); SDL2.capture.scriptProcessorNode.connect(SDL2.audioContext.destination); SDL2.capture.stream = stream; }; var no_microphone = function(error) { }; SDL2.capture.silenceBuffer = SDL2.audioContext.createBuffer($0, $1, SDL2.audioContext.sampleRate); SDL2.capture.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { SDL2.capture.currentCaptureBuffer = SDL2.capture.silenceBuffer; dynCall('vi', $2, [$3]); }; SDL2.capture.silenceTimer = setTimeout(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1000); if ((navigator.mediaDevices !== undefined) && (navigator.mediaDevices.getUserMedia !== undefined)) { navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(have_microphone).catch(no_microphone); } else if (navigator.webkitGetUserMedia !== undefined) { navigator.webkitGetUserMedia({ audio: true, video: false }, have_microphone, no_microphone); } },  
- 90170: ($0, $1, $2, $3) => { var SDL2 = Module['SDL2']; SDL2.audio.scriptProcessorNode = SDL2.audioContext['createScriptProcessor']($1, 0, $0); SDL2.audio.scriptProcessorNode['onaudioprocess'] = function (e) { if ((SDL2 === undefined) || (SDL2.audio === undefined)) { return; } SDL2.audio.currentOutputBuffer = e['outputBuffer']; dynCall('vi', $2, [$3]); }; SDL2.audio.scriptProcessorNode['connect'](SDL2.audioContext['destination']); },  
- 90580: ($0, $1) => { var SDL2 = Module['SDL2']; var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels; for (var c = 0; c < numChannels; ++c) { var channelData = SDL2.capture.currentCaptureBuffer.getChannelData(c); if (channelData.length != $1) { throw 'Web Audio capture buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } if (numChannels == 1) { for (var j = 0; j < $1; ++j) { setValue($0 + (j * 4), channelData[j], 'float'); } } else { for (var j = 0; j < $1; ++j) { setValue($0 + (((j * numChannels) + c) * 4), channelData[j], 'float'); } } } },  
- 91185: ($0, $1) => { var SDL2 = Module['SDL2']; var numChannels = SDL2.audio.currentOutputBuffer['numberOfChannels']; for (var c = 0; c < numChannels; ++c) { var channelData = SDL2.audio.currentOutputBuffer['getChannelData'](c); if (channelData.length != $1) { throw 'Web Audio output buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } for (var j = 0; j < $1; ++j) { channelData[j] = HEAPF32[$0 + ((j*numChannels + c) << 2) >> 2]; } } },  
- 91665: ($0) => { var SDL2 = Module['SDL2']; if ($0) { if (SDL2.capture.silenceTimer !== undefined) { clearTimeout(SDL2.capture.silenceTimer); } if (SDL2.capture.stream !== undefined) { var tracks = SDL2.capture.stream.getAudioTracks(); for (var i = 0; i < tracks.length; i++) { SDL2.capture.stream.removeTrack(tracks[i]); } SDL2.capture.stream = undefined; } if (SDL2.capture.scriptProcessorNode !== undefined) { SDL2.capture.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) {}; SDL2.capture.scriptProcessorNode.disconnect(); SDL2.capture.scriptProcessorNode = undefined; } if (SDL2.capture.mediaStreamNode !== undefined) { SDL2.capture.mediaStreamNode.disconnect(); SDL2.capture.mediaStreamNode = undefined; } if (SDL2.capture.silenceBuffer !== undefined) { SDL2.capture.silenceBuffer = undefined } SDL2.capture = undefined; } else { if (SDL2.audio.scriptProcessorNode != undefined) { SDL2.audio.scriptProcessorNode.disconnect(); SDL2.audio.scriptProcessorNode = undefined; } SDL2.audio = undefined; } if ((SDL2.audioContext !== undefined) && (SDL2.audio === undefined) && (SDL2.capture === undefined)) { SDL2.audioContext.close(); SDL2.audioContext = undefined; } },  
- 92837: ($0, $1, $2) => { var w = $0; var h = $1; var pixels = $2; if (!Module['SDL2']) Module['SDL2'] = {}; var SDL2 = Module['SDL2']; if (SDL2.ctxCanvas !== Module['canvas']) { SDL2.ctx = Module['createContext'](Module['canvas'], false, true); SDL2.ctxCanvas = Module['canvas']; } if (SDL2.w !== w || SDL2.h !== h || SDL2.imageCtx !== SDL2.ctx) { SDL2.image = SDL2.ctx.createImageData(w, h); SDL2.w = w; SDL2.h = h; SDL2.imageCtx = SDL2.ctx; } var data = SDL2.image.data; var src = pixels >> 2; var dst = 0; var num; if (typeof CanvasPixelArray !== 'undefined' && data instanceof CanvasPixelArray) { num = data.length; while (dst < num) { var val = HEAP32[src]; data[dst ] = val & 0xff; data[dst+1] = (val >> 8) & 0xff; data[dst+2] = (val >> 16) & 0xff; data[dst+3] = 0xff; src++; dst += 4; } } else { if (SDL2.data32Data !== data) { SDL2.data32 = new Int32Array(data.buffer); SDL2.data8 = new Uint8Array(data.buffer); SDL2.data32Data = data; } var data32 = SDL2.data32; num = data32.length; data32.set(HEAP32.subarray(src, src + num)); var data8 = SDL2.data8; var i = 3; var j = i + 4*num; if (num % 8 == 0) { while (i < j) { data8[i] = 0xff; i = i + 4 | 0; data8[i] = 0xff; i = i + 4 | 0; data8[i] = 0xff; i = i + 4 | 0; data8[i] = 0xff; i = i + 4 | 0; data8[i] = 0xff; i = i + 4 | 0; data8[i] = 0xff; i = i + 4 | 0; data8[i] = 0xff; i = i + 4 | 0; data8[i] = 0xff; i = i + 4 | 0; } } else { while (i < j) { data8[i] = 0xff; i = i + 4 | 0; } } } SDL2.ctx.putImageData(SDL2.image, 0, 0); },  
- 94306: ($0, $1, $2, $3, $4) => { var w = $0; var h = $1; var hot_x = $2; var hot_y = $3; var pixels = $4; var canvas = document.createElement("canvas"); canvas.width = w; canvas.height = h; var ctx = canvas.getContext("2d"); var image = ctx.createImageData(w, h); var data = image.data; var src = pixels >> 2; var dst = 0; var num; if (typeof CanvasPixelArray !== 'undefined' && data instanceof CanvasPixelArray) { num = data.length; while (dst < num) { var val = HEAP32[src]; data[dst ] = val & 0xff; data[dst+1] = (val >> 8) & 0xff; data[dst+2] = (val >> 16) & 0xff; data[dst+3] = (val >> 24) & 0xff; src++; dst += 4; } } else { var data32 = new Int32Array(data.buffer); num = data32.length; data32.set(HEAP32.subarray(src, src + num)); } ctx.putImageData(image, 0, 0); var url = hot_x === 0 && hot_y === 0 ? "url(" + canvas.toDataURL() + "), auto" : "url(" + canvas.toDataURL() + ") " + hot_x + " " + hot_y + ", auto"; var urlBuf = _malloc(url.length + 1); stringToUTF8(url, urlBuf, url.length + 1); return urlBuf; },  
- 95295: ($0) => { if (Module['canvas']) { Module['canvas'].style['cursor'] = UTF8ToString($0); } },  
- 95378: () => { if (Module['canvas']) { Module['canvas'].style['cursor'] = 'none'; } },  
- 95447: () => { return window.innerWidth; },  
- 95477: () => { return window.innerHeight; }
+  104326: ($0, $1) => { var self = Module['getCache'](Module['JSContactListener'])[$0]; if (!self.hasOwnProperty('BeginContact')) throw 'a JSImplementation must implement all functions, you forgot JSContactListener::BeginContact.'; self['BeginContact']($1); },  
+ 104564: ($0, $1) => { var self = Module['getCache'](Module['JSContactListener'])[$0]; if (!self.hasOwnProperty('EndContact')) throw 'a JSImplementation must implement all functions, you forgot JSContactListener::EndContact.'; self['EndContact']($1); },  
+ 104796: ($0, $1, $2) => { var self = Module['getCache'](Module['JSContactListener'])[$0]; if (!self.hasOwnProperty('PreSolve')) throw 'a JSImplementation must implement all functions, you forgot JSContactListener::PreSolve.'; self['PreSolve']($1,$2); },  
+ 105025: ($0, $1, $2) => { var self = Module['getCache'](Module['JSContactListener'])[$0]; if (!self.hasOwnProperty('PostSolve')) throw 'a JSImplementation must implement all functions, you forgot JSContactListener::PostSolve.'; self['PostSolve']($1,$2); },  
+ 105257: ($0, $1, $2, $3, $4) => { var self = Module['getCache'](Module['JSRayCastCallback'])[$0]; if (!self.hasOwnProperty('ReportFixture')) throw 'a JSImplementation must implement all functions, you forgot JSRayCastCallback::ReportFixture.'; return self['ReportFixture']($1,$2,$3,$4); },  
+ 105514: ($0, $1) => { var self = Module['getCache'](Module['JSQueryCallback'])[$0]; if (!self.hasOwnProperty('ReportFixture')) throw 'a JSImplementation must implement all functions, you forgot JSQueryCallback::ReportFixture.'; return self['ReportFixture']($1); },  
+ 105758: ($0, $1, $2) => { var self = Module['getCache'](Module['JSContactFilter'])[$0]; if (!self.hasOwnProperty('ShouldCollide')) throw 'a JSImplementation must implement all functions, you forgot JSContactFilter::ShouldCollide.'; return self['ShouldCollide']($1,$2); },  
+ 106005: ($0, $1) => { var self = Module['getCache'](Module['JSDestructionListener'])[$0]; if (!self.hasOwnProperty('SayGoodbyeJoint')) throw 'a JSImplementation must implement all functions, you forgot JSDestructionListener::SayGoodbyeJoint.'; self['SayGoodbyeJoint']($1); },  
+ 106260: ($0, $1) => { var self = Module['getCache'](Module['JSDestructionListener'])[$0]; if (!self.hasOwnProperty('SayGoodbyeFixture')) throw 'a JSImplementation must implement all functions, you forgot JSDestructionListener::SayGoodbyeFixture.'; self['SayGoodbyeFixture']($1); },  
+ 106521: ($0, $1, $2, $3) => { var self = Module['getCache'](Module['JSDraw'])[$0]; if (!self.hasOwnProperty('DrawPolygon')) throw 'a JSImplementation must implement all functions, you forgot JSDraw::DrawPolygon.'; self['DrawPolygon']($1,$2,$3); },  
+ 106740: ($0, $1, $2, $3) => { var self = Module['getCache'](Module['JSDraw'])[$0]; if (!self.hasOwnProperty('DrawSolidPolygon')) throw 'a JSImplementation must implement all functions, you forgot JSDraw::DrawSolidPolygon.'; self['DrawSolidPolygon']($1,$2,$3); },  
+ 106974: ($0, $1, $2, $3) => { var self = Module['getCache'](Module['JSDraw'])[$0]; if (!self.hasOwnProperty('DrawCircle')) throw 'a JSImplementation must implement all functions, you forgot JSDraw::DrawCircle.'; self['DrawCircle']($1,$2,$3); },  
+ 107190: ($0, $1, $2, $3, $4) => { var self = Module['getCache'](Module['JSDraw'])[$0]; if (!self.hasOwnProperty('DrawSolidCircle')) throw 'a JSImplementation must implement all functions, you forgot JSDraw::DrawSolidCircle.'; self['DrawSolidCircle']($1,$2,$3,$4); },  
+ 107424: ($0, $1, $2, $3) => { var self = Module['getCache'](Module['JSDraw'])[$0]; if (!self.hasOwnProperty('DrawSegment')) throw 'a JSImplementation must implement all functions, you forgot JSDraw::DrawSegment.'; self['DrawSegment']($1,$2,$3); },  
+ 107643: ($0, $1) => { var self = Module['getCache'](Module['JSDraw'])[$0]; if (!self.hasOwnProperty('DrawTransform')) throw 'a JSImplementation must implement all functions, you forgot JSDraw::DrawTransform.'; self['DrawTransform']($1); },  
+ 107862: ($0, $1, $2, $3) => { var self = Module['getCache'](Module['JSDraw'])[$0]; if (!self.hasOwnProperty('DrawPoint')) throw 'a JSImplementation must implement all functions, you forgot JSDraw::DrawPoint.'; self['DrawPoint']($1,$2,$3); },  
+ 108075: ($0) => { var str = UTF8ToString($0) + '\n\n' + 'Abort/Retry/Ignore/AlwaysIgnore? [ariA] :'; var reply = window.prompt(str, "i"); if (reply === null) { reply = "i"; } return allocate(intArrayFromString(reply), 'i8', ALLOC_NORMAL); },  
+ 108300: () => { if (typeof(AudioContext) !== 'undefined') { return true; } else if (typeof(webkitAudioContext) !== 'undefined') { return true; } return false; },  
+ 108447: () => { if ((typeof(navigator.mediaDevices) !== 'undefined') && (typeof(navigator.mediaDevices.getUserMedia) !== 'undefined')) { return true; } else if (typeof(navigator.webkitGetUserMedia) !== 'undefined') { return true; } return false; },  
+ 108681: ($0) => { if(typeof(Module['SDL2']) === 'undefined') { Module['SDL2'] = {}; } var SDL2 = Module['SDL2']; if (!$0) { SDL2.audio = {}; } else { SDL2.capture = {}; } if (!SDL2.audioContext) { if (typeof(AudioContext) !== 'undefined') { SDL2.audioContext = new AudioContext(); } else if (typeof(webkitAudioContext) !== 'undefined') { SDL2.audioContext = new webkitAudioContext(); } if (SDL2.audioContext) { autoResumeAudioContext(SDL2.audioContext); } } return SDL2.audioContext === undefined ? -1 : 0; },  
+ 109174: () => { var SDL2 = Module['SDL2']; return SDL2.audioContext.sampleRate; },  
+ 109242: ($0, $1, $2, $3) => { var SDL2 = Module['SDL2']; var have_microphone = function(stream) { if (SDL2.capture.silenceTimer !== undefined) { clearTimeout(SDL2.capture.silenceTimer); SDL2.capture.silenceTimer = undefined; } SDL2.capture.mediaStreamNode = SDL2.audioContext.createMediaStreamSource(stream); SDL2.capture.scriptProcessorNode = SDL2.audioContext.createScriptProcessor($1, $0, 1); SDL2.capture.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) { if ((SDL2 === undefined) || (SDL2.capture === undefined)) { return; } audioProcessingEvent.outputBuffer.getChannelData(0).fill(0.0); SDL2.capture.currentCaptureBuffer = audioProcessingEvent.inputBuffer; dynCall('vi', $2, [$3]); }; SDL2.capture.mediaStreamNode.connect(SDL2.capture.scriptProcessorNode); SDL2.capture.scriptProcessorNode.connect(SDL2.audioContext.destination); SDL2.capture.stream = stream; }; var no_microphone = function(error) { }; SDL2.capture.silenceBuffer = SDL2.audioContext.createBuffer($0, $1, SDL2.audioContext.sampleRate); SDL2.capture.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { SDL2.capture.currentCaptureBuffer = SDL2.capture.silenceBuffer; dynCall('vi', $2, [$3]); }; SDL2.capture.silenceTimer = setTimeout(silence_callback, ($1 / SDL2.audioContext.sampleRate) * 1000); if ((navigator.mediaDevices !== undefined) && (navigator.mediaDevices.getUserMedia !== undefined)) { navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(have_microphone).catch(no_microphone); } else if (navigator.webkitGetUserMedia !== undefined) { navigator.webkitGetUserMedia({ audio: true, video: false }, have_microphone, no_microphone); } },  
+ 110894: ($0, $1, $2, $3) => { var SDL2 = Module['SDL2']; SDL2.audio.scriptProcessorNode = SDL2.audioContext['createScriptProcessor']($1, 0, $0); SDL2.audio.scriptProcessorNode['onaudioprocess'] = function (e) { if ((SDL2 === undefined) || (SDL2.audio === undefined)) { return; } SDL2.audio.currentOutputBuffer = e['outputBuffer']; dynCall('vi', $2, [$3]); }; SDL2.audio.scriptProcessorNode['connect'](SDL2.audioContext['destination']); },  
+ 111304: ($0, $1) => { var SDL2 = Module['SDL2']; var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels; for (var c = 0; c < numChannels; ++c) { var channelData = SDL2.capture.currentCaptureBuffer.getChannelData(c); if (channelData.length != $1) { throw 'Web Audio capture buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } if (numChannels == 1) { for (var j = 0; j < $1; ++j) { setValue($0 + (j * 4), channelData[j], 'float'); } } else { for (var j = 0; j < $1; ++j) { setValue($0 + (((j * numChannels) + c) * 4), channelData[j], 'float'); } } } },  
+ 111909: ($0, $1) => { var SDL2 = Module['SDL2']; var numChannels = SDL2.audio.currentOutputBuffer['numberOfChannels']; for (var c = 0; c < numChannels; ++c) { var channelData = SDL2.audio.currentOutputBuffer['getChannelData'](c); if (channelData.length != $1) { throw 'Web Audio output buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } for (var j = 0; j < $1; ++j) { channelData[j] = HEAPF32[$0 + ((j*numChannels + c) << 2) >> 2]; } } },  
+ 112389: ($0) => { var SDL2 = Module['SDL2']; if ($0) { if (SDL2.capture.silenceTimer !== undefined) { clearTimeout(SDL2.capture.silenceTimer); } if (SDL2.capture.stream !== undefined) { var tracks = SDL2.capture.stream.getAudioTracks(); for (var i = 0; i < tracks.length; i++) { SDL2.capture.stream.removeTrack(tracks[i]); } SDL2.capture.stream = undefined; } if (SDL2.capture.scriptProcessorNode !== undefined) { SDL2.capture.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) {}; SDL2.capture.scriptProcessorNode.disconnect(); SDL2.capture.scriptProcessorNode = undefined; } if (SDL2.capture.mediaStreamNode !== undefined) { SDL2.capture.mediaStreamNode.disconnect(); SDL2.capture.mediaStreamNode = undefined; } if (SDL2.capture.silenceBuffer !== undefined) { SDL2.capture.silenceBuffer = undefined } SDL2.capture = undefined; } else { if (SDL2.audio.scriptProcessorNode != undefined) { SDL2.audio.scriptProcessorNode.disconnect(); SDL2.audio.scriptProcessorNode = undefined; } SDL2.audio = undefined; } if ((SDL2.audioContext !== undefined) && (SDL2.audio === undefined) && (SDL2.capture === undefined)) { SDL2.audioContext.close(); SDL2.audioContext = undefined; } },  
+ 113561: ($0, $1, $2) => { var w = $0; var h = $1; var pixels = $2; if (!Module['SDL2']) Module['SDL2'] = {}; var SDL2 = Module['SDL2']; if (SDL2.ctxCanvas !== Module['canvas']) { SDL2.ctx = Module['createContext'](Module['canvas'], false, true); SDL2.ctxCanvas = Module['canvas']; } if (SDL2.w !== w || SDL2.h !== h || SDL2.imageCtx !== SDL2.ctx) { SDL2.image = SDL2.ctx.createImageData(w, h); SDL2.w = w; SDL2.h = h; SDL2.imageCtx = SDL2.ctx; } var data = SDL2.image.data; var src = pixels >> 2; var dst = 0; var num; if (typeof CanvasPixelArray !== 'undefined' && data instanceof CanvasPixelArray) { num = data.length; while (dst < num) { var val = HEAP32[src]; data[dst ] = val & 0xff; data[dst+1] = (val >> 8) & 0xff; data[dst+2] = (val >> 16) & 0xff; data[dst+3] = 0xff; src++; dst += 4; } } else { if (SDL2.data32Data !== data) { SDL2.data32 = new Int32Array(data.buffer); SDL2.data8 = new Uint8Array(data.buffer); SDL2.data32Data = data; } var data32 = SDL2.data32; num = data32.length; data32.set(HEAP32.subarray(src, src + num)); var data8 = SDL2.data8; var i = 3; var j = i + 4*num; if (num % 8 == 0) { while (i < j) { data8[i] = 0xff; i = i + 4 | 0; data8[i] = 0xff; i = i + 4 | 0; data8[i] = 0xff; i = i + 4 | 0; data8[i] = 0xff; i = i + 4 | 0; data8[i] = 0xff; i = i + 4 | 0; data8[i] = 0xff; i = i + 4 | 0; data8[i] = 0xff; i = i + 4 | 0; data8[i] = 0xff; i = i + 4 | 0; } } else { while (i < j) { data8[i] = 0xff; i = i + 4 | 0; } } } SDL2.ctx.putImageData(SDL2.image, 0, 0); },  
+ 115030: ($0, $1, $2, $3, $4) => { var w = $0; var h = $1; var hot_x = $2; var hot_y = $3; var pixels = $4; var canvas = document.createElement("canvas"); canvas.width = w; canvas.height = h; var ctx = canvas.getContext("2d"); var image = ctx.createImageData(w, h); var data = image.data; var src = pixels >> 2; var dst = 0; var num; if (typeof CanvasPixelArray !== 'undefined' && data instanceof CanvasPixelArray) { num = data.length; while (dst < num) { var val = HEAP32[src]; data[dst ] = val & 0xff; data[dst+1] = (val >> 8) & 0xff; data[dst+2] = (val >> 16) & 0xff; data[dst+3] = (val >> 24) & 0xff; src++; dst += 4; } } else { var data32 = new Int32Array(data.buffer); num = data32.length; data32.set(HEAP32.subarray(src, src + num)); } ctx.putImageData(image, 0, 0); var url = hot_x === 0 && hot_y === 0 ? "url(" + canvas.toDataURL() + "), auto" : "url(" + canvas.toDataURL() + ") " + hot_x + " " + hot_y + ", auto"; var urlBuf = _malloc(url.length + 1); stringToUTF8(url, urlBuf, url.length + 1); return urlBuf; },  
+ 116019: ($0) => { if (Module['canvas']) { Module['canvas'].style['cursor'] = UTF8ToString($0); } },  
+ 116102: () => { if (Module['canvas']) { Module['canvas'].style['cursor'] = 'none'; } },  
+ 116171: () => { return window.innerWidth; },  
+ 116201: () => { return window.innerHeight; }
 };
 function array_bounds_check_error(idx,size) { throw 'Array index ' + idx + ' out of bounds: [0,' + size + ')'; }
 
@@ -4099,6 +4099,8 @@ function array_bounds_check_error(idx,size) { throw 'Array index ' + idx + ' out
       return nowIsMonotonic;
     }
 
+  function __emscripten_throw_longjmp() { throw Infinity; }
+
   function _abort() {
       abort('native code called abort()');
     }
@@ -6111,6 +6113,37 @@ function array_bounds_check_error(idx,size) { throw 'Array index ' + idx + ' out
       // N.B. Do not call emscripten_get_num_gamepads() unless having first called emscripten_sample_gamepad_data(), and that has returned EMSCRIPTEN_RESULT_SUCCESS.
       // Otherwise the following line will throw an exception.
       return JSEvents.lastGamepadState.length;
+    }
+
+  function _emscripten_get_preloaded_image_data(path, w, h) {
+      if ((path | 0) === path) path = UTF8ToString(path);
+  
+      path = PATH_FS.resolve(path);
+  
+      var canvas = /** @type {HTMLCanvasElement} */(preloadedImages[path]);
+      if (canvas) {
+        var ctx = canvas.getContext("2d");
+        var image = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        var buf = _malloc(canvas.width * canvas.height * 4);
+  
+        HEAPU8.set(image.data, buf);
+  
+        HEAP32[((w)>>2)] = canvas.width;
+        HEAP32[((h)>>2)] = canvas.height;
+        return buf;
+      }
+  
+      return 0;
+    }
+
+  function _emscripten_get_preloaded_image_data_from_FILE(file, w, h) {
+      var fd = Module['_fileno'](file);
+      var stream = FS.getStream(fd);
+      if (stream) {
+        return _emscripten_get_preloaded_image_data(stream.path, w, h);
+      }
+  
+      return 0;
     }
 
   function _emscripten_get_screen_size(width, height) {
@@ -9642,6 +9675,16 @@ function array_bounds_check_error(idx,size) { throw 'Array index ' + idx + ' out
   }
   }
 
+  function _getentropy(buffer, size) {
+      if (!_getentropy.randomDevice) {
+        _getentropy.randomDevice = getRandomDevice();
+      }
+      for (var i = 0; i < size; i++) {
+        HEAP8[(((buffer)+(i))>>0)] = _getentropy.randomDevice();
+      }
+      return 0;
+    }
+
   function _glAttachShader(program, shader) {
       GLctx.attachShader(GL.programs[program], GL.shaders[shader]);
     }
@@ -10517,6 +10560,7 @@ function array_bounds_check_error(idx,size) { throw 'Array index ' + idx + ' out
     }
 
 
+
   var FSNode = /** @constructor */ function(parent, name, mode, rdev) {
     if (!parent) {
       parent = this;  // root node sets parent to itself
@@ -10796,6 +10840,7 @@ var asmLibraryArg = {
   "__syscall_ioctl": ___syscall_ioctl,
   "__syscall_openat": ___syscall_openat,
   "_emscripten_get_now_is_monotonic": __emscripten_get_now_is_monotonic,
+  "_emscripten_throw_longjmp": __emscripten_throw_longjmp,
   "abort": _abort,
   "array_bounds_check_error": array_bounds_check_error,
   "eglBindAPI": _eglBindAPI,
@@ -10826,6 +10871,8 @@ var asmLibraryArg = {
   "emscripten_get_gamepad_status": _emscripten_get_gamepad_status,
   "emscripten_get_now": _emscripten_get_now,
   "emscripten_get_num_gamepads": _emscripten_get_num_gamepads,
+  "emscripten_get_preloaded_image_data": _emscripten_get_preloaded_image_data,
+  "emscripten_get_preloaded_image_data_from_FILE": _emscripten_get_preloaded_image_data_from_FILE,
   "emscripten_get_screen_size": _emscripten_get_screen_size,
   "emscripten_glActiveTexture": _emscripten_glActiveTexture,
   "emscripten_glAttachShader": _emscripten_glAttachShader,
@@ -11141,6 +11188,7 @@ var asmLibraryArg = {
   "fd_read": _fd_read,
   "fd_seek": _fd_seek,
   "fd_write": _fd_write,
+  "getentropy": _getentropy,
   "glAttachShader": _glAttachShader,
   "glBindBuffer": _glBindBuffer,
   "glBindTexture": _glBindTexture,
@@ -11189,6 +11237,20 @@ var asmLibraryArg = {
   "glVertexAttribIPointer": _glVertexAttribIPointer,
   "glVertexAttribPointer": _glVertexAttribPointer,
   "glViewport": _glViewport,
+  "invoke_i": invoke_i,
+  "invoke_ii": invoke_ii,
+  "invoke_iii": invoke_iii,
+  "invoke_iiii": invoke_iiii,
+  "invoke_iiiii": invoke_iiiii,
+  "invoke_iiiiii": invoke_iiiiii,
+  "invoke_iiiiiiiii": invoke_iiiiiiiii,
+  "invoke_iiiiiiiiii": invoke_iiiiiiiiii,
+  "invoke_ji": invoke_ji,
+  "invoke_jiji": invoke_jiji,
+  "invoke_vi": invoke_vi,
+  "invoke_vii": invoke_vii,
+  "invoke_viii": invoke_viii,
+  "invoke_viiii": invoke_viiii,
   "strftime_l": _strftime_l
 };
 var asm = createWasm();
@@ -14711,10 +14773,10 @@ var ___cxa_is_pointer_type = Module["___cxa_is_pointer_type"] = createExportWrap
 var ___set_stack_limits = Module["___set_stack_limits"] = createExportWrapper("__set_stack_limits");
 
 /** @type {function(...*):?} */
-var dynCall_jiji = Module["dynCall_jiji"] = createExportWrapper("dynCall_jiji");
+var dynCall_ji = Module["dynCall_ji"] = createExportWrapper("dynCall_ji");
 
 /** @type {function(...*):?} */
-var dynCall_ji = Module["dynCall_ji"] = createExportWrapper("dynCall_ji");
+var dynCall_jiji = Module["dynCall_jiji"] = createExportWrapper("dynCall_jiji");
 
 /** @type {function(...*):?} */
 var dynCall_viijii = Module["dynCall_viijii"] = createExportWrapper("dynCall_viijii");
@@ -14728,8 +14790,162 @@ var dynCall_iiiiijj = Module["dynCall_iiiiijj"] = createExportWrapper("dynCall_i
 /** @type {function(...*):?} */
 var dynCall_iiiiiijj = Module["dynCall_iiiiiijj"] = createExportWrapper("dynCall_iiiiiijj");
 
-var ___start_em_js = Module['___start_em_js'] = 83504;
-var ___stop_em_js = Module['___stop_em_js'] = 83602;
+var ___start_em_js = Module['___start_em_js'] = 104228;
+var ___stop_em_js = Module['___stop_em_js'] = 104326;
+function invoke_ii(index,a1) {
+  var sp = stackSave();
+  try {
+    return getWasmTableEntry(index)(a1);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iiiii(index,a1,a2,a3,a4) {
+  var sp = stackSave();
+  try {
+    return getWasmTableEntry(index)(a1,a2,a3,a4);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iiii(index,a1,a2,a3) {
+  var sp = stackSave();
+  try {
+    return getWasmTableEntry(index)(a1,a2,a3);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_vi(index,a1) {
+  var sp = stackSave();
+  try {
+    getWasmTableEntry(index)(a1);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iii(index,a1,a2) {
+  var sp = stackSave();
+  try {
+    return getWasmTableEntry(index)(a1,a2);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viii(index,a1,a2,a3) {
+  var sp = stackSave();
+  try {
+    getWasmTableEntry(index)(a1,a2,a3);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_vii(index,a1,a2) {
+  var sp = stackSave();
+  try {
+    getWasmTableEntry(index)(a1,a2);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9) {
+  var sp = stackSave();
+  try {
+    return getWasmTableEntry(index)(a1,a2,a3,a4,a5,a6,a7,a8,a9);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iiiiii(index,a1,a2,a3,a4,a5) {
+  var sp = stackSave();
+  try {
+    return getWasmTableEntry(index)(a1,a2,a3,a4,a5);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
+  var sp = stackSave();
+  try {
+    return getWasmTableEntry(index)(a1,a2,a3,a4,a5,a6,a7,a8);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_i(index) {
+  var sp = stackSave();
+  try {
+    return getWasmTableEntry(index)();
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viiii(index,a1,a2,a3,a4) {
+  var sp = stackSave();
+  try {
+    getWasmTableEntry(index)(a1,a2,a3,a4);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_ji(index,a1) {
+  var sp = stackSave();
+  try {
+    return dynCall_ji(index,a1);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_jiji(index,a1,a2,a3,a4) {
+  var sp = stackSave();
+  try {
+    return dynCall_jiji(index,a1,a2,a3,a4);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
 
 
 

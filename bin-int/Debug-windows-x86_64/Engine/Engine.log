@@ -1,6 +1,6 @@
 ﻿cl : línea de comandos  warning D9025: invalidando '/MTd' con '/MDd'
 cl : línea de comandos  warning D9002: se omite la opción desconocida '-mwindows'
-  Render2D.cpp
+  EditorCamera.cpp
 libGLESv2.lib(libGLESv2.dll) : warning LNK4006: __imp_glViewport ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
 libGLESv2.lib(libGLESv2.dll) : warning LNK4006: glViewport ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida
 libGLESv2.lib(libGLESv2.dll) : warning LNK4006: __imp_glTexSubImage2D ya se definió en opengl32.lib(OPENGL32.dll); segunda definición omitida

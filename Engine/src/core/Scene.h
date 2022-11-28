@@ -25,11 +25,10 @@ namespace Cober {
 		void SetHeight(uint32_t h) { _height = h; }
 
 		void GetEntity(int index, Entity& hoveredEntity);
-		Entity GetEntity(int index) { return GetSceneEntities().at(index); };
-		std::map<int, Entity>& GetSceneEntities() { return _registry.GetAllEntities(); }
+		std::unordered_map<UUID, Entity>& GetSceneEntities() { return _registry.GetAllEntities(); }
 
 		void SetDefaultEntity(Entity& entity) { entity.SetTag("None"); entity.SetIndex(-1); }
-		Entity CreateEntity(std::string name = "Empty Entity") { return _registry.CreateEntity(name); }
+		void CreateEntity(std::string name = "Empty Entity", UUID uuid = UUID()) { _registry.CreateEntity(name, uuid); }
 
 		Registry& GetRegistry() { return _registry; }
 

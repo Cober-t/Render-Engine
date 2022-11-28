@@ -292,6 +292,7 @@
     <ClInclude Include="include\box2d\include\box2d\b2_world.h" />
     <ClInclude Include="include\box2d\include\box2d\b2_world_callbacks.h" />
     <ClInclude Include="include\box2d\include\box2d\box2d.h" />
+    <ClInclude Include="include\entt\entt.hpp" />
     <ClInclude Include="include\glm\glm\common.hpp" />
     <ClInclude Include="include\glm\glm\detail\_features.hpp" />
     <ClInclude Include="include\glm\glm\detail\_fixes.hpp" />
@@ -754,6 +755,7 @@
     <ClInclude Include="include\nuklear\src\stb_rect_pack.h" />
     <ClInclude Include="include\nuklear\src\stb_truetype.h" />
     <ClInclude Include="include\sol\sol.hpp" />
+    <ClInclude Include="src\core\Math.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Entities\Components.h" />
     <ClInclude Include="src\Entities\ECS.h" />
@@ -802,7 +804,6 @@
     <ClInclude Include="src\core\Scene.h" />
     <ClInclude Include="src\core\Timestep.h" />
     <ClInclude Include="src\core\UUID.h" />
-    <ClInclude Include="src\core\Utils.h" />
     <ClInclude Include="src\core\Window.h" />
     <ClInclude Include="src\imgui\imconfig.h" />
     <ClInclude Include="src\imgui\imgui.h" />
@@ -817,6 +818,7 @@
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\Math.cpp" />
     <ClCompile Include="src\Entities\ECS.cpp" />
     <ClCompile Include="src\GUISystem\GuiLayer.cpp" />
     <ClCompile Include="src\Physics\glue.cpp" />
@@ -859,7 +861,6 @@
     <ClCompile Include="src\core\Logger.cpp" />
     <ClCompile Include="src\core\Scene.cpp" />
     <ClCompile Include="src\core\UUID.cpp" />
-    <ClCompile Include="src\core\Utils.cpp" />
     <ClCompile Include="src\core\Window.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />
     <ClCompile Include="src\imgui\imgui_demo.cpp" />

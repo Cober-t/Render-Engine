@@ -19,7 +19,7 @@ namespace Cober {
 		float TilingFactor;
 
 		// Editor-only
-		float EntityID;
+		int EntityID;
 	};
 
 	struct CircleVertex
@@ -129,7 +129,7 @@ namespace Cober {
 			{ ShaderDataType::Float2, "a_TexCoord"     },
 			{ ShaderDataType::Float,  "a_TexIndex"     },
 			{ ShaderDataType::Float,  "a_TilingFactor" },
-			{ ShaderDataType::Float,  "a_EntityID"	   }
+			{ ShaderDataType::Int,    "a_EntityID"	   }
 			});
 		data.QuadVertexArray->AddVertexBuffer(data.QuadVertexBuffer);
 		data.QuadVertexBufferBase = new QuadVertex[data.MaxVertices];
@@ -212,8 +212,8 @@ namespace Cober {
 
 #ifdef __EMSCRIPTEN__
 		data.QuadShader = Shader::Create("Render_Quad.glsl");
-		data.QuadShader->Bind();
-		data.QuadShader->SetIntArray("u_Textures", samplers, data.MaxTextureSlots);
+		//data.QuadShader->Bind();
+		//data.QuadShader->SetIntArray("u_Textures", samplers, data.MaxTextureSlots);
 #else
 		data.QuadShader   = Shader::Create("Render_Quad_4.6.glsl");
 		data.CircleShader = Shader::Create("Render_Circle.glsl");
@@ -364,7 +364,7 @@ namespace Cober {
 		
 		float rot = Engine::Get().GetGameMode() ? 0.0f : 90.0f;
 		glm::vec3 rotation{ rot, 0.0f, 0.0f };
-		glm::vec3 position = Engine::Get().GetGameMode() == true ? glm::vec3(0.0f, 0.0f, -995.0f) : glm::vec3(0.0f);
+		glm::vec3 position = Engine::Get().GetGameMode() == true ? glm::vec3(0.0f, 0.0f,- 995.0f) : glm::vec3(0.0f);
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
 							  glm::toMat4(glm::quat(glm::radians(rotation))) *
 							  glm::scale(glm::mat4(1.0f), { 100.0f, 100.0f, 1.0f });

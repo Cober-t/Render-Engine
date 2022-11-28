@@ -39,13 +39,13 @@ namespace Cober {
 
 	// ++++++++++++++++++++
 	// Universal Unique Identifier for entities
-	//struct IDComponent {
-	//	UUID ID;
+	struct IDComponent {
+		UUID ID;
 
-	//	IDComponent() = default;
-	//	IDComponent(const IDComponent&) = default;
-	//	IDComponent(const UUID& id) : ID(id) {}
-	//};
+		IDComponent() = default;
+		IDComponent(const IDComponent&) = default;
+		IDComponent(const UUID& id) : ID(id) {}
+	};
 
 
 	// ++++++++++++++++++++
