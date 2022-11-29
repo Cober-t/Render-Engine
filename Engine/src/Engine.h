@@ -23,7 +23,6 @@
 #include <core/Window.h>
 #include <core/Layer.h>
 #include <core/Events.h>
-#include <core/Scene.h>
 #include <core/Utils.h>
 
 
@@ -44,7 +43,7 @@
 //[++++++++++++++++++++++++++]
 #include <Entities/Components.h>
 #include <Entities/ECS.h>
-
+#include <Entities/Scene.h>
 
 //[++++++++++++++++++++++++++]
 //[+++++++++ RENDER +++++++++]

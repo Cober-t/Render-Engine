@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Application.h"
+#include "core/Utils.h"
+#include "core/Application.h"
 #include "Render/Camera/EditorCamera.h"
 
 namespace Cober {
@@ -33,9 +34,10 @@ namespace Cober {
 
 		Registry& GetRegistry() { return _registry; }
 
-		static Ref<Scene> Copy(Ref<Scene> scene);
-
 		static Ref<Scene> Create();
+		static Ref<Scene> Copy(Ref<Scene> scene);
+		static void Save(const Ref<Scene>& scene, std::string sceneName = "Scene1");
+		static Ref<Scene> Load(std::string scenePath);
 	private:
 		bool _world2D;
 		Registry _registry;

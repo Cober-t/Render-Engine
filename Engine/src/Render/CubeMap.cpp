@@ -11,13 +11,13 @@
 
 namespace Cober {
 
-	Ref<CubeMap> CubeMap::Create()
+	Ref<CubeMap> CubeMap::Create(std::vector<std::string> faces)
 	{
 		switch (RenderAPI::GetAPI())
 		{
 #if !defined __EMSCRIPTEN__ && !defined __OPENGLES3__
 		case RenderAPI::API::None:    LOG_WARNING("RendererAPI::None is currently not supported!"); return nullptr;
-		case RenderAPI::API::OpenGL:  return CreateRef<OpenGLCubeMap>();
+		case RenderAPI::API::OpenGL:  return CreateRef<OpenGLCubeMap>(faces);
 #elif defined __EMSCRIPTEN__ || __OPENGLES3__
 		case RenderAPI::API::None:			LOG_ERROR("Wrong API"); break;
 		case RenderAPI::API::OpenGL:		LOG_ERROR("Wrong API"); break;

@@ -5,6 +5,7 @@
 
 #include "MenuPanel.h"
 #include "ViewportPanel.h"
+#include "SceneHierarchyPanel.h"
 #include "Render/Render2D.h"
 
 namespace Cober {
@@ -31,7 +32,7 @@ namespace Cober {
 		instance = nullptr;
 	}
 
-	void MenuPanel::OnGuiRender(Ref<EditorCamera>& editorCamera, Ref<Scene>& activeScene, bool& game2D, bool& debugMode) {
+	void MenuPanel::OnGuiRender(Ref<EditorCamera>& editorCamera, Ref<Scene>& activeScene, Ref<Scene>& editorScene, Entity& hoveredEntity, bool& game2D, bool& debugMode) {
 
 		_fileBrowser.Display();
 		if (_fileBrowser.HasSelected()) {
@@ -46,9 +47,22 @@ namespace Cober {
 		_world2D = game2D;
 
 		if (ImGui::BeginMenuBar()) {
+			
 			if (ImGui::BeginMenu("File")) {
-				if (ImGui::MenuItem("SaveScene"))
+				
+				if(ImGui::MenuItem("Open File Explorer"))
 					_fileBrowser.Open();
+
+				if (ImGui::MenuItem("Save Scene"))
+					Scene::Save(activeScene, "Scene1.txt");	 // Test Scene
+
+				if (ImGui::MenuItem("Load Scene")) {
+					editorScene = Scene::Load("Scene1.txt"); // Test Scene
+					activeScene = editorScene;
+					SceneHierarchyPanel::Get().SetContext(activeScene);
+					activeScene->SetDefaultEntity(hoveredEntity);
+					activeScene->OnRuntimeStart(activeScene);
+				}
 
 				if (ImGui::MenuItem("Exit"))
 					Engine::Get().Close();

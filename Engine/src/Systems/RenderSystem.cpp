@@ -5,6 +5,11 @@
 #include "Render/RenderGlobals.h"
 #include "Entities/ECS.h"
 
+// TEST
+#include "Render/CubeMap.h"
+#include "core/Utils.h"
+#include <filesystem>
+
 namespace Cober {
 
 	RenderSystem::RenderSystem() {
@@ -14,6 +19,8 @@ namespace Cober {
 
 		//if (Engine::Get().GetGameState() == GameState::PLAY)
 			//RequireComponent<CameraSystem>();
+
+		LOG("Render System Added to Registry!!");
 	}
 
 	RenderSystem::~RenderSystem() {
@@ -21,11 +28,25 @@ namespace Cober {
 		LOG("Render System removed from Registry");
 	}
 
+	Ref<CubeMap> cubeMap;
 	void RenderSystem::Start()
 	{
 		RenderGlobals::Create();
 		RenderGlobals::Init();
 		Render2D::Start();
+
+		// TEST CUBEMAP
+		std::string _filePath = std::filesystem::path(SOLUTION_DIR + (std::string)"assets\\skybox\\").string();
+		std::vector<std::string> faces{
+			SKYBOX_PATH + "right.jpg",
+			SKYBOX_PATH + "left.jpg",
+			SKYBOX_PATH + "top.jpg",
+			SKYBOX_PATH + "bottom.jpg",
+			SKYBOX_PATH + "front.jpg",
+			SKYBOX_PATH + "back.jpg"
+		};
+		cubeMap = CubeMap::Create(faces);
+		cubeMap->Bind();
 
 		LOG("Render System Started!!");
 	}
@@ -37,6 +58,7 @@ namespace Cober {
 
 		glm::vec3 cameraFocus = camera->GetPosition() + camera->GetForwardDirection();
 		Render2D::DrawGrid(cameraFocus);
+		cubeMap->DrawSkybox(camera->GetProjection(), camera->GetView());
 
 		// DEBUG PHYSICS
 #ifndef __EMSCRIPTEN__ 

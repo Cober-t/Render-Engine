@@ -53,10 +53,12 @@ namespace Cober {
 		: _path(path)
 	{
 		// LOAD IMAGE
+		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 		SDL_Surface* texSurface = IMG_Load(path.c_str());
+		//std::cout << SDL_GetError() << std::endl;
 
 		if (!texSurface)
-			LOG_ERROR("Failed to load image!");
+			Logger::Error("Failed to load image!");
 
 		FlipSurface(texSurface);
 		

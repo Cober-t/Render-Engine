@@ -4,7 +4,7 @@
 #include "Render/Render2D.h"
 
 #include "core/Core.h"
-#include "core/Scene.h"
+#include "Entities/Scene.h"
 #include "Render/Camera/EditorCamera.h"
 
 namespace Cober {

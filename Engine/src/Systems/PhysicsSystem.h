@@ -3,7 +3,7 @@
 #include "Entities/ECS.h"
 
 #include "core/Core.h"
-#include "core/Scene.h"
+#include "Entities/Scene.h"
 
 #include <box2d/b2_world.h>
 #include <box2d/b2_body.h>
@@ -24,6 +24,6 @@ namespace Cober {
 		void Update(double ts);
 	
 	private:
-		b2World* _physicsWorld;
+		b2World* _physicsWorld = nullptr;
 	};
 }

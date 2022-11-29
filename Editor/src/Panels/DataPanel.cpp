@@ -25,24 +25,21 @@ namespace Cober {
 		// Data
 		ImGui::Begin("Data");
 
-		//if (hoveredEntity.GetIndex() != -1 && ImGui::IsMouseClicked(0)) {
-		//	hoveredEntity.SetTag("None"); 
-		//	hoveredEntity.SetIndex(-1);
-		//	SceneHierarchyPanel::Get().SetNullEntityContext();
-		//}
-
 		ImGui::Text("Renderer Stats:");
 		ImGui::Text("Frames: %d", Engine::Get().GetFrames());
 		ImGui::Text("Draw Calls: %d", Render2D::GetStats().DrawCalls);
 		ImGui::Text("Quads: %d", Render2D::GetStats().QuadCount);
 
 		ImGui::Text("Mouse Coords: \nX: %i\nY: %i", mouseX, mouseY);
-		if (hoveredEntity.GetIndex() == -1)
-			ImGui::Text("Hovered Entity: %s", hoveredEntity.GetTag().c_str());
-		else
-			ImGui::Text("Hovered Entity: %s", hoveredEntity.GetComponent<Tag>().tag.c_str());
 
-		ImGui::Text("Entity Index: %i", hoveredEntity.GetIndex());
+		if (hoveredEntity) {
+			if (hoveredEntity.GetIndex() == -1)
+				ImGui::Text("Hovered Entity: None");
+			else if(hoveredEntity.HasComponent<Tag>())
+				ImGui::Text("Hovered Entity: %s", hoveredEntity.GetComponent<Tag>().tag.c_str());
+
+			ImGui::Text("Entity Index: %i", hoveredEntity.GetIndex());
+		}
 
 		ImGui::End();
 

@@ -126,8 +126,8 @@ project "Engine"
 			"NK_SDL_GL3_IMPLEMENTATION",
 			"GL_GLEXT_PROTOTYPES=1",
 			"GLEW_STATIC",
-			--"__OPENGL__",
-			"__OPENGLES3__",
+			"__OPENGL__",
+			--"__OPENGLES3__",
 		}
 
 	filter "configurations:Debug"

@@ -19,7 +19,8 @@ namespace Cober {
 
 	void EditorLayer::OnAttach() {
 
-		_editorScene = Scene::Create();
+		//_editorScene = Scene::Create();
+		_editorScene = Scene::Load("Scene1.txt");
 		_activeScene = _editorScene;
 
 		ViewportPanel::Get().CreateFramebuffer(1280, 720);
@@ -52,11 +53,6 @@ namespace Cober {
 				//colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
 				_editorCamera->OnUpdate(ts);
 				_activeScene->OnUpdateEditor(ts, _editorCamera);
-				break;
-			}
-			case GameState::PLAY: {
-				//colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.000f, 0.000f, 0.000f, 0.586f);
-				_activeScene->OnUpdateRuntime(ts, _editorCamera);
 				break;
 			}
 			case GameState::RUNTIME_EDITOR: {
@@ -121,7 +117,7 @@ namespace Cober {
 		ContentBrowserPanel::Get().OnGuiRender();
 		ViewportPanel::Get().OnGuiRender(_editorCamera, _activeScene, hoveredEntity);
 		DataPanel::Get().OnGuiRender(Engine::Get().GetGameMode(), hoveredEntity);
-		MenuPanel::Get().OnGuiRender(_editorCamera, _activeScene, Engine::Get().GetGameMode(), Engine::Get().GetDebugMode());
+		MenuPanel::Get().OnGuiRender(_editorCamera, _activeScene, _editorScene, hoveredEntity, Engine::Get().GetGameMode(), Engine::Get().GetDebugMode());
 
 		ViewportPanel::Get().PlayButtonBar(_editorScene, _activeScene, Engine::Get().GetGameState());
 

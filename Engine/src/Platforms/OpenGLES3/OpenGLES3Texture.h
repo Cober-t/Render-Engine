@@ -23,6 +23,7 @@ namespace Cober {
 		virtual uint32_t GetID() const override { return _rendererID; }
 		virtual std::string GetName() const override;
 		virtual std::string GetFormat() const override;
+		virtual std::string GetPath() const override { return _path; };
 
 		virtual void SetData(void* data, uint32_t size) override;
 

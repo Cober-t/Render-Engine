@@ -1,0 +1,367 @@
+
+Scene1
+{
+	world2D = 0
+	width = 1280
+	height = 720
+	numEntities = 9
+
+	Entity0
+	{
+		tag = Entity0
+		index = 0
+
+		Tag
+		{
+			tag = Epic Box
+		}
+
+		Transform
+		{
+			position = 1.500000, 1.500000, 0.000000
+			rotation = 0.000000, 0.000000, 0.000000
+			scale = 1.000000, 1.000000, 1.000000
+		}
+
+		Sprite
+		{
+			color = 0.000000, 1.000000, 1.000000, 1.000000
+			texture = C:\Users\jorge\Engine\assets\textures\woodenContainer.png
+		}
+
+		Rigidbody2D
+		{
+			bodyType = 2
+			fixedRotation = 0
+		}
+
+		BoxCollider2D
+		{
+			offset = 0.000000, 0.000000
+			size = 0.000000, 0.000000
+			density = 1.000000
+			friction = 0.500000
+			restitution = 0.000000
+			restitution Threshold = 0.000000
+		}
+	}
+
+	Entity1
+	{
+		tag = Entity1
+		index = 1
+
+		Tag
+		{
+			tag = Terrain 2
+		}
+
+		Transform
+		{
+			position = -0.014919, -0.487013, 0.000000
+			rotation = 0.000000, 0.000000, 0.000000
+			scale = 1.000000, 1.000000, 1.000000
+		}
+
+		Sprite
+		{
+			color = 1.000000, 1.000000, 0.000000, 1.000000
+			texture = C:\Users\jorge\Engine\assets\skybox\bottom.jpg
+		}
+
+		Rigidbody2D
+		{
+			bodyType = 0
+			fixedRotation = 0
+		}
+
+		BoxCollider2D
+		{
+			offset = 0.000000, 0.000000
+			size = 0.000000, 0.000000
+			density = 1.000000
+			friction = 0.500000
+			restitution = 0.000000
+			restitution Threshold = 0.000000
+		}
+	}
+
+	Entity2
+	{
+		tag = Entity2
+		index = 2
+
+		Tag
+		{
+			tag = Epic Icon Cat 1
+		}
+
+		Transform
+		{
+			position = -1.514919, 1.512987, 0.000000
+			rotation = 0.000000, 0.000000, 0.000000
+			scale = 1.000000, 1.000000, 1.000000
+		}
+
+		Sprite
+		{
+			color = 0.878431, 1.000000, 1.000000, 1.000000
+			texture = C:\Users\jorge\Engine\assets\textures\orangeMykoeski.png
+		}
+
+		Rigidbody2D
+		{
+			bodyType = 2
+			fixedRotation = 0
+		}
+
+		BoxCollider2D
+		{
+			offset = 0.000000, 0.000000
+			size = 0.000000, 0.000000
+			density = 1.000000
+			friction = 0.500000
+			restitution = 0.000000
+			restitution Threshold = 0.000000
+		}
+	}
+
+	Entity3
+	{
+		tag = Entity3
+		index = 3
+
+		Tag
+		{
+			tag = Epic Blend Cat
+		}
+
+		Transform
+		{
+			position = 0.790000, 3.512987, 0.000000
+			rotation = 0.000000, 0.000000, 0.000000
+			scale = 1.000000, 1.000000, 1.000000
+		}
+
+		Sprite
+		{
+			color = 1.000000, 1.000000, 1.000000, 1.000000
+			texture = C:\Users\jorge\Engine\assets\textures\blendTest.png
+		}
+
+		Rigidbody2D
+		{
+			bodyType = 2
+			fixedRotation = 0
+		}
+
+		BoxCollider2D
+		{
+			offset = 0.000000, 0.000000
+			size = 0.000000, 0.000000
+			density = 1.000000
+			friction = 0.500000
+			restitution = 0.000000
+			restitution Threshold = 0.000000
+		}
+	}
+
+	Entity4
+	{
+		tag = Entity4
+		index = 4
+
+		Tag
+		{
+			tag = Terrain 3
+		}
+
+		Transform
+		{
+			position = -1.014919, -0.987013, 0.000000
+			rotation = 0.000000, 0.000000, 0.000000
+			scale = 1.000000, 1.000000, 1.000000
+		}
+
+		Sprite
+		{
+			color = 1.000000, 0.960784, 0.000000, 1.000000
+			texture = C:\Users\jorge\Engine\assets\skybox\bottom.jpg
+		}
+
+		Rigidbody2D
+		{
+			bodyType = 0
+			fixedRotation = 0
+		}
+
+		BoxCollider2D
+		{
+			offset = 0.000000, 0.000000
+			size = 0.000000, 0.000000
+			density = 1.000000
+			friction = 0.500000
+			restitution = 0.000000
+			restitution Threshold = 0.000000
+		}
+	}
+
+	Entity5
+	{
+		tag = Entity5
+		index = 5
+
+		Tag
+		{
+			tag = Empty Entity
+		}
+
+		Transform
+		{
+			position = 1.485081, -0.487013, 0.000000
+			rotation = 0.000000, 0.000000, 0.000000
+			scale = 1.000000, 1.000000, 1.000000
+		}
+
+		Sprite
+		{
+			color = 1.000000, 1.000000, 0.000000, 0.996078
+			texture = C:\Users\jorge\Engine\assets\skybox\bottom.jpg
+		}
+
+		Rigidbody2D
+		{
+			bodyType = 0
+			fixedRotation = 0
+		}
+
+		BoxCollider2D
+		{
+			offset = 0.000000, 0.000000
+			size = 0.000000, 0.000000
+			density = 1.000000
+			friction = 0.500000
+			restitution = 0.000000
+			restitution Threshold = 0.000000
+		}
+	}
+
+	Entity6
+	{
+		tag = Entity6
+		index = 6
+
+		Tag
+		{
+			tag = Empty Entity
+		}
+
+		Transform
+		{
+			position = -0.014919, -0.487013, 0.000000
+			rotation = 0.000000, 0.000000, 0.000000
+			scale = 1.000000, 1.000000, 1.000000
+		}
+
+		Sprite
+		{
+			color = 1.000000, 1.000000, 1.000000, 1.000000
+		}
+
+		Rigidbody2D
+		{
+			bodyType = 0
+			fixedRotation = 0
+		}
+
+		BoxCollider2D
+		{
+			offset = 0.000000, 0.000000
+			size = 0.000000, 0.000000
+			density = 1.000000
+			friction = 0.500000
+			restitution = 0.000000
+			restitution Threshold = 0.000000
+		}
+	}
+
+	Entity7
+	{
+		tag = Entity7
+		index = 7
+
+		Tag
+		{
+			tag = Epic Icon Cat 2
+		}
+
+		Transform
+		{
+			position = -0.800000, 3.000000, 0.000000
+			rotation = 0.000000, 0.000000, 0.000000
+			scale = 1.000000, 1.000000, 1.000000
+		}
+
+		Sprite
+		{
+			color = 1.000000, 0.000000, 1.000000, 1.000000
+			texture = C:\Users\jorge\Engine\assets\textures\orangeMykoeski.png
+		}
+
+		Rigidbody2D
+		{
+			bodyType = 2
+			fixedRotation = 0
+		}
+
+		BoxCollider2D
+		{
+			offset = 0.000000, 0.000000
+			size = 0.000000, 0.000000
+			density = 1.000000
+			friction = 0.500000
+			restitution = 0.000000
+			restitution Threshold = 0.000000
+		}
+	}
+
+	Entity8
+	{
+		tag = Entity8
+		index = 8
+
+		Tag
+		{
+			tag = Terrain 4
+		}
+
+		Transform
+		{
+			position = -2.014919, -0.487013, 0.000000
+			rotation = 0.000000, 0.000000, 0.000000
+			scale = 1.000000, 1.000000, 1.000000
+		}
+
+		Sprite
+		{
+			color = 1.000000, 1.000000, 0.000000, 1.000000
+			texture = C:\Users\jorge\Engine\assets\skybox\bottom.jpg
+		}
+
+		Rigidbody2D
+		{
+			bodyType = 0
+			fixedRotation = 0
+		}
+
+		BoxCollider2D
+		{
+			offset = 0.000000, 0.000000
+			size = 0.000000, 0.000000
+			density = 1.000000
+			friction = 0.500000
+			restitution = 0.000000
+			restitution Threshold = 0.000000
+		}
+	}
+}

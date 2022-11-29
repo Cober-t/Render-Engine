@@ -8,20 +8,24 @@ namespace Cober {
 	{
 		RequireComponent<Transform>();
 		RequireComponent<Rigidbody2D>();
-		//RequireComponent<BoxCollider2D>();
+		RequireComponent<BoxCollider2D>();
+
+		LOG("Physics System Added to Registry!!");
 	}
 
 	PhysicsSystem::~PhysicsSystem()
 	{
 		LOG("Physics System removed from Registry");
 
-		delete _physicsWorld;
-		_physicsWorld = nullptr;
+		if (_physicsWorld) {
+			delete _physicsWorld;
+			_physicsWorld = nullptr;
+		}
 	}
 
 	void PhysicsSystem::Start()
 	{
-		_physicsWorld = new b2World({ 0.0f, -0.5f });
+		_physicsWorld = new b2World({ 0.0f, -9.8f });
 
 		for (auto& entity : GetSystemEntities()) {
 

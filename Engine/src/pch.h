@@ -28,6 +28,7 @@
 #include <typeindex>
 #include <vector>
 #include <map>
+#include <stack>
 
 #include <filesystem>
 

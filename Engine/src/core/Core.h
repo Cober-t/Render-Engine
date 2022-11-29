@@ -43,6 +43,7 @@
 #ifndef __linux__
 	#define SHADERS_PATH  SOLUTION_DIR + (std::string)"assets\\shaders\\"
 	#define TEXTURES_PATH SOLUTION_DIR + (std::string)"assets\\textures\\"
+	#define SKYBOX_PATH	  SOLUTION_DIR + (std::string)"assets\\skybox\\"
 #endif
 #endif
 #define BIT(x)          (1 << x)

@@ -2112,7 +2112,7 @@
     <ClInclude Include="src\core\Logger.h">
       <Filter>src\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\Scene.h">
+    <ClInclude Include="src\Entities\Scene.h">
       <Filter>src\core</Filter>
     </ClInclude>
     <ClInclude Include="src\core\Timestep.h">
@@ -2279,7 +2279,7 @@
     <ClCompile Include="src\core\Logger.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Scene.cpp">
+    <ClCompile Include="src\Entities\Scene.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
     <ClCompile Include="src\core\Utils.cpp">
