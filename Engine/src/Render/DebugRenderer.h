@@ -2,7 +2,7 @@
 
 #include "core/Core.h"
 
-#include "Systems/PhysicsSystem.h"
+#include "Systems/PhysicsSystem2D.h"
 #include "Entities/ECS.h"
 
 #include <box2D/b2_polygon_shape.h>

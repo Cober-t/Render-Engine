@@ -49,12 +49,16 @@ namespace Cober {
 				DrawEntityNode(entity.second, hoveredEntity);
 		}
 
-		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
+		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered()) {
 			_selectionContext = _nullEntityContext;
+			hoveredEntity = _selectionContext;
+		}
 
 		if (ImGui::BeginPopupContextWindow(0, 1)) {
-			if (_selectionContext == _nullEntityContext && ImGui::Selectable("Empty Entity"))
+			if (_selectionContext == _nullEntityContext && ImGui::Selectable("Empty Entity")) {
 				_selectionContext = _sceneContext->GetRegistry().CreateEntity();
+				hoveredEntity = _selectionContext;
+			}
 				
 			ImGui::EndPopup();
 		}
@@ -240,8 +244,8 @@ namespace Cober {
 					_selectionContext.AddComponent<Sprite>();
 					_sceneContext->GetRegistry().AddEntityToSystems(_selectionContext);
 				}
-				else if (!_selectionContext.HasComponent<Animation>()) {
-					_selectionContext.AddComponent<Animation>();
+				else if (!_selectionContext.HasComponent<Animation2D>()) {
+					_selectionContext.AddComponent<Animation2D>();
 					_sceneContext->GetRegistry().AddEntityToSystems(_selectionContext);
 				}
 				else if (!_selectionContext.HasComponent<Rigidbody2D>()) {
@@ -259,7 +263,7 @@ namespace Cober {
 
 		if (ImGui::BeginPopup("AddComponent")) {
 			AddIfHasComponent<Sprite>("Sprite Renderer Component");
-			AddIfHasComponent<Animation>("Animation Component");
+			AddIfHasComponent<Animation2D>("Animation2D Component");
 			AddIfHasComponent<Rigidbody2D>("Rigidbody 2D Component");
 			AddIfHasComponent<BoxCollider2D>("BoxCollider 2D Component");
 			// ...
@@ -300,7 +304,7 @@ namespace Cober {
 				}
 			});
 
-		DrawComponent<Animation>("Animation", entity, [](auto& component)
+		DrawComponent<Animation2D>("Animation", entity, [](auto& component)
 			{
 				ImGui::DragInt("Num Frames", &component.numFrames, 1.0);
 				ImGui::DragInt("Frame Rate", &component.frameRateSpeed, 1.0);

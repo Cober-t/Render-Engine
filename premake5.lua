@@ -36,8 +36,8 @@ project "Engine"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
-	        "%{prj.name}/include/GL/**.h",
-        	"%{prj.name}/include/GLES3/**.h",
+	    "%{prj.name}/include/GL/**.h",
+        "%{prj.name}/include/GLES3/**.h",
 		"%{prj.name}/include/SDL/**.h",
 		"%{prj.name}/include/glm/**.h",
 		"%{prj.name}/include/glm/**.hpp",
@@ -68,6 +68,7 @@ project "Engine"
 		"%{prj.name}/src",
 		"%{prj.name}/src/imgui",
 		"%{prj.name}/src/core",
+		"%{prj.name}/src/Events",
 		"%{prj.name}/src/Entities",
 		"%{prj.name}/src/Render",
 		"%{prj.name}/src/Render/Camera",
@@ -246,6 +247,7 @@ project "Game"
 		"Engine/include/sol",
 		"Engine/include/lua",
 		"Engine/src",
+		"Engine/src/Events",
 	}
 
 	links 

@@ -11,7 +11,7 @@
 
 #include "GUISystem/GuiLayer.h"
 
-#include "Events.h"
+#include "Events/Events.h"
 
 int main(int argc, char** argv);
 
@@ -46,7 +46,7 @@ namespace Cober {
 		bool& GetDebugMode() { return DEBUG; }
 		bool& GetGameMode() { return GAME_2D; }
 
-		Ref<AssetManager> GetAssetManager() { return _assetManager; }
+		//Unique<AssetManager> GetAssetManager() { return _assetManager; }
 		GuiLayer* GetImGuiLayer() { return _GuiLayer; }
 		Window&   GetWindow()			{ return *_window; }
 		GameState GetGameState()		{ return _gameState; }
@@ -58,7 +58,7 @@ namespace Cober {
 		Ref<Timestep> _timestep;
 		Unique<Window> _window;
 		Unique<Events> _events;
-		Ref<AssetManager> _assetManager;
+		//Unique<AssetManager> _assetManager;
 		bool _minimized = false;
 	private:
 		bool DEBUG;

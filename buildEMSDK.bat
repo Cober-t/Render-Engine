@@ -18,7 +18,8 @@ set ENGINE="%~dp0Engine\src"
 set GAME="%~dp0Game\src"
 set IncludeFolder="%~dp0Engine\include"
 set LibsFolder=-I"%~dp0Engine\lib\" -I"%~dp0Engine\lib\box2d\" -I"%~dp0Engine\lib\lua\"
-set core="%~dp0Engine\src\core"
+set Core="%~dp0Engine\src\core"
+set Events="%~dp0Engine\src\Events"
 set Render="%~dp0Engine\src\Render"
 set Camera="%~dp0Engine\src\Render\Camera"
 set Entities="%~dp0Engine\src\Entities"
@@ -43,7 +44,7 @@ set BOX2D_2H="%~dp0Engine\include\box2d\include\box2d"
 set BOX2D_INCLUDES=-I%BOX2D_H% -I%BOX2D_2H% -I%BOX2D_SRC% 
 ::-I%COLLISION% -I%COMMON% -I%DYNAMICS% -I%ROPE% 
 
-set INCLUDE_FOLDERS= -I%IncludeFolder% -I%ENGINE% -I%GAME% -I%core% -I%Render% -I%Camera% -I%Entities% -I%Platforms% -I%Systems% -I%Physics% -I%SDL% -I%GLM% -I%NUKLEAR% %BOX2D_INCLUDES% 
+set INCLUDE_FOLDERS= -I%IncludeFolder% -I%ENGINE% -I%GAME% -I%Core% -I%Events% -I%Render% -I%Camera% -I%Entities% -I%Platforms% -I%Systems% -I%Physics% -I%SDL% -I%GLM% -I%NUKLEAR% %BOX2D_INCLUDES% 
 
 :: Compilation flags
 set C++=-std=c++17
@@ -99,7 +100,7 @@ goto :error
 	echo Gathering *.cpp files
 	set CPP=
 	for %%x in (%GAME%\*.cpp, %ENGINE%\*.cpp,
-				%Core%\*.cpp, %Render%\*.cpp, %Camera%\*.cpp, %Entities%\*.cpp, %Platforms%\*.cpp, %Systems%\*.cpp
+				%Core%\*.cpp, %Events%\*.cpp, %Render%\*.cpp, %Camera%\*.cpp, %Entities%\*.cpp, %Platforms%\*.cpp, %Systems%\*.cpp
 				%COMMON%\*.cpp, %DYNAMICS%\*.cpp, %ROPE%\*.cpp, %COLLISION%\*.cpp) do set CPP=!CPP! %%x
 	set CPP=%CPP:~1%
 

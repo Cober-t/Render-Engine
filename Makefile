@@ -10,6 +10,7 @@ INCLUDE_PATH= -I ./$(NAME)/include \
 			  -I ./Game/src \
 			  -I ./$(NAME)/src \
 			  -I ./$(NAME)/src/core \
+			  -I ./$(NAME)/src/Events \
 			  -I ./$(NAME)/src/Entities \
 			  -I ./$(NAME)/src/Platforms/OpenGLES3 \
 			  -I ./$(NAME)/src/Render \
@@ -18,6 +19,7 @@ INCLUDE_PATH= -I ./$(NAME)/include \
 			  -I ./$(NAME)/lib/
 SRC_FILES = $(NAME)/src/*.cpp \
 			$(NAME)/src/core/*.cpp \
+			$(NAME)/src/Events/*.cpp \
 			$(NAME)/src/Render/*.cpp \
 			$(NAME)/src/Render/Camera/*.cpp \
 			$(NAME)/src/Platforms/OpenGLES3/*.cpp \

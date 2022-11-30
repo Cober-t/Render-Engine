@@ -142,6 +142,9 @@
     <Filter Include="src\Entities">
       <UniqueIdentifier>{81A6B583-6D09-4528-168F-7DDE02D110AB}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Events">
+      <UniqueIdentifier>{7162C20E-5D1A-045C-C621-DDB7B2F89E4C}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\GUISystem">
       <UniqueIdentifier>{2611FCAF-92D1-77E6-5B0C-C163C78BBCC2}</UniqueIdentifier>
     </Filter>
@@ -1986,8 +1989,14 @@
     <ClInclude Include="src\Entities\ECS.h">
       <Filter>src\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\Entities\Scene.h">
+      <Filter>src\Entities</Filter>
+    </ClInclude>
     <ClInclude Include="src\EntryPoint.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Events\Events.h">
+      <Filter>src\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\GUISystem\GuiLayer.h">
       <Filter>src\GUISystem</Filter>
@@ -2082,10 +2091,16 @@
     <ClInclude Include="src\Render\VertexArray.h">
       <Filter>src\Render</Filter>
     </ClInclude>
+    <ClInclude Include="src\Systems\AnimationSystem2D.h">
+      <Filter>src\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Systems\CollisionSystem2D.h">
+      <Filter>src\Systems</Filter>
+    </ClInclude>
     <ClInclude Include="src\Systems\MovementSystem.h">
       <Filter>src\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="src\Systems\PhysicsSystem.h">
+    <ClInclude Include="src\Systems\PhysicsSystem2D.h">
       <Filter>src\Systems</Filter>
     </ClInclude>
     <ClInclude Include="src\Systems\RenderSystem.h">
@@ -2103,16 +2118,10 @@
     <ClInclude Include="src\core\Core.h">
       <Filter>src\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\Events.h">
-      <Filter>src\core</Filter>
-    </ClInclude>
     <ClInclude Include="src\core\Layer.h">
       <Filter>src\core</Filter>
     </ClInclude>
     <ClInclude Include="src\core\Logger.h">
-      <Filter>src\core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Entities\Scene.h">
       <Filter>src\core</Filter>
     </ClInclude>
     <ClInclude Include="src\core\Timestep.h">
@@ -2157,11 +2166,18 @@
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Systems\AnimationSystem.h" />
+    <ClInclude Include="src\Events\Event.h" />
+    <ClInclude Include="src\Events\EventHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entities\ECS.cpp">
       <Filter>src\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entities\Scene.cpp">
+      <Filter>src\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Events\Events.cpp">
+      <Filter>src\Events</Filter>
     </ClCompile>
     <ClCompile Include="src\GUISystem\GuiLayer.cpp">
       <Filter>src\GUISystem</Filter>
@@ -2253,10 +2269,16 @@
     <ClCompile Include="src\Render\VertexArray.cpp">
       <Filter>src\Render</Filter>
     </ClCompile>
+    <ClCompile Include="src\Systems\AnimationSystem2D.cpp">
+      <Filter>src\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\CollisionSystem2D.cpp">
+      <Filter>src\Systems</Filter>
+    </ClCompile>
     <ClCompile Include="src\Systems\MovementSystem.cpp">
       <Filter>src\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="src\Systems\PhysicsSystem.cpp">
+    <ClCompile Include="src\Systems\PhysicsSystem2D.cpp">
       <Filter>src\Systems</Filter>
     </ClCompile>
     <ClCompile Include="src\Systems\RenderSystem.cpp">
@@ -2271,16 +2293,10 @@
     <ClCompile Include="src\core\AssetManager.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Events.cpp">
-      <Filter>src\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\core\Layer.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
     <ClCompile Include="src\core\Logger.cpp">
-      <Filter>src\core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Entities\Scene.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
     <ClCompile Include="src\core\Utils.cpp">
@@ -2313,6 +2329,6 @@
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Systems\AnimationSystem.cpp" />
+    <ClCompile Include="src\Events\EventHandler.cpp" />
   </ItemGroup>
 </Project>

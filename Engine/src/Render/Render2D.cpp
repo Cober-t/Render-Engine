@@ -439,8 +439,8 @@ namespace Cober {
 			auto& bc2d = entity.GetComponent<BoxCollider2D>();
 			auto& enttTrans = entity.GetComponent<Transform>();
 
-			glm::vec3 position{ enttTrans.position.x + bc2d.offset.x, enttTrans.position.y + bc2d.offset.y, enttTrans.position.z };
-			glm::vec3 scale{ (bc2d.size.x + enttTrans.scale.x), (bc2d.size.y + enttTrans.scale.y), 1.0f };
+			glm::vec3 position{ enttTrans.position.x + bc2d.offset.x, enttTrans.position.y + bc2d.offset.y, enttTrans.position.z + 0.001f };
+			glm::vec3 scale{ (bc2d.size.x * enttTrans.scale.x), (bc2d.size.y * enttTrans.scale.y), 1.0f };
 
 			glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 				* glm::toMat4(glm::quat(enttTrans.rotation))

@@ -72,7 +72,7 @@ namespace Cober {
 			: assetID(ID), w(width), h(height), color(tintColor) {}
 	};
 
-	struct Animation {
+	struct Animation2D {
 		int numFrames;
 		int currentFrame;
 		int frameRateSpeed;
@@ -80,8 +80,8 @@ namespace Cober {
 		int startTime;
 
 		//Animation() = default;
-		Animation(const Animation&) = default;
-		Animation(int numfrm = 1, int frmRateSpeed = 1, bool loop = true)
+		Animation2D(const Animation2D&) = default;
+		Animation2D(int numfrm = 1, int frmRateSpeed = 1, bool loop = true)
 			: numFrames(numfrm), currentFrame(1), frameRateSpeed(frmRateSpeed), shouldLoop(loop), startTime(SDL_GetTicks()) {}
 	};
 
@@ -100,10 +100,13 @@ namespace Cober {
 			: velocity(vel), fixedRotation(fxRotation), type((BodyType)bodyType), runtimeBody(nullptr) {}
 	};
 
-	//class b2Shape;
-	struct BoxCollider2D {
+	struct Collider2D {
+
+	};
+
+	struct BoxCollider2D : public Collider2D {
 		glm::vec2 offset = { 0.0f, 0.0f };
-		glm::vec2 size =   { 0.0f, 0.0f };
+		glm::vec2 size =   { 1.0f, 1.0f };
 
 		b2Shape* body;
 		b2PolygonShape shape;

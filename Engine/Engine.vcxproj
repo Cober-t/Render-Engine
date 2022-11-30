@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;SOLUTION_DIR=R"($(SolutionDir))";CB_BUILD_DLL;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGL__;CB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;include\SDL;include\glm;include\box2d;include\box2d\include;include\nuklear;include\sol;include\lua;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\SDL;include\glm;include\box2d;include\box2d\include;include\nuklear;include\sol;include\lua;src;src\imgui;src\core;src\Events;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -102,7 +102,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;SOLUTION_DIR=R"($(SolutionDir))";CB_BUILD_DLL;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGL__;CB_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;include\SDL;include\glm;include\box2d;include\box2d\include;include\nuklear;include\sol;include\lua;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\SDL;include\glm;include\box2d;include\box2d\include;include\nuklear;include\sol;include\lua;src;src\imgui;src\core;src\Events;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -130,7 +130,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CB_PLATFORM_WINDOWS;SOLUTION_DIR=R"($(SolutionDir))";CB_BUILD_DLL;IMGUI_IMPL_OPENGL_LOADER_CUSTOM=&lt;SDL_opengl.h&gt;;NK_IMPLEMENTATION;NK_SDL_GL3_IMPLEMENTATION;GL_GLEXT_PROTOTYPES=1;GLEW_STATIC;__OPENGL__;CB_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;include\SDL;include\glm;include\box2d;include\box2d\include;include\nuklear;include\sol;include\lua;src;src\imgui;src\core;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include\SDL;include\glm;include\box2d;include\box2d\include;include\nuklear;include\sol;include\lua;src;src\imgui;src\core;src\Events;src\Entities;src\Render;src\Render\Camera;src\GUISystem;src\Systems;src\Platforms;src\Platforms\OpenGL;src\Platforms\OpenGLES3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -757,7 +757,11 @@
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Entities\Components.h" />
     <ClInclude Include="src\Entities\ECS.h" />
+    <ClInclude Include="src\Entities\Scene.h" />
     <ClInclude Include="src\EntryPoint.h" />
+    <ClInclude Include="src\Events\Event.h" />
+    <ClInclude Include="src\Events\EventHandler.h" />
+    <ClInclude Include="src\Events\Events.h" />
     <ClInclude Include="src\GUISystem\GuiLayer.h" />
     <ClInclude Include="src\GUISystem\ImFileBrowser.h" />
     <ClInclude Include="src\GUISystem\ImGui.h" />
@@ -789,18 +793,17 @@
     <ClInclude Include="src\Render\Shader.h" />
     <ClInclude Include="src\Render\Texture.h" />
     <ClInclude Include="src\Render\VertexArray.h" />
-    <ClInclude Include="src\Systems\AnimationSystem.h" />
+    <ClInclude Include="src\Systems\AnimationSystem2D.h" />
+    <ClInclude Include="src\Systems\CollisionSystem2D.h" />
     <ClInclude Include="src\Systems\MovementSystem.h" />
-    <ClInclude Include="src\Systems\PhysicsSystem.h" />
+    <ClInclude Include="src\Systems\PhysicsSystem2D.h" />
     <ClInclude Include="src\Systems\RenderSystem.h" />
     <ClInclude Include="src\Systems\UISystem.h" />
     <ClInclude Include="src\core\Application.h" />
     <ClInclude Include="src\core\AssetManager.h" />
     <ClInclude Include="src\core\Core.h" />
-    <ClInclude Include="src\core\Events.h" />
     <ClInclude Include="src\core\Layer.h" />
     <ClInclude Include="src\core\Logger.h" />
-    <ClInclude Include="src\Entities\Scene.h" />
     <ClInclude Include="src\core\Timestep.h" />
     <ClInclude Include="src\core\Utils.h" />
     <ClInclude Include="src\core\Window.h" />
@@ -818,6 +821,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entities\ECS.cpp" />
+    <ClCompile Include="src\Entities\Scene.cpp" />
+    <ClCompile Include="src\Events\EventHandler.cpp" />
+    <ClCompile Include="src\Events\Events.cpp" />
     <ClCompile Include="src\GUISystem\GuiLayer.cpp" />
     <ClCompile Include="src\Physics\glue.cpp" />
     <ClCompile Include="src\Physics\wrapperBox2D.cpp" />
@@ -848,17 +854,16 @@
     <ClCompile Include="src\Render\Shader.cpp" />
     <ClCompile Include="src\Render\Texture.cpp" />
     <ClCompile Include="src\Render\VertexArray.cpp" />
-    <ClCompile Include="src\Systems\AnimationSystem.cpp" />
+    <ClCompile Include="src\Systems\AnimationSystem2D.cpp" />
+    <ClCompile Include="src\Systems\CollisionSystem2D.cpp" />
     <ClCompile Include="src\Systems\MovementSystem.cpp" />
-    <ClCompile Include="src\Systems\PhysicsSystem.cpp" />
+    <ClCompile Include="src\Systems\PhysicsSystem2D.cpp" />
     <ClCompile Include="src\Systems\RenderSystem.cpp" />
     <ClCompile Include="src\Systems\UISystem.cpp" />
     <ClCompile Include="src\core\Application.cpp" />
     <ClCompile Include="src\core\AssetManager.cpp" />
-    <ClCompile Include="src\core\Events.cpp" />
     <ClCompile Include="src\core\Layer.cpp" />
     <ClCompile Include="src\core\Logger.cpp" />
-    <ClCompile Include="src\Entities\Scene.cpp" />
     <ClCompile Include="src\core\Utils.cpp" />
     <ClCompile Include="src\core\Window.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />

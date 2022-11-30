@@ -22,8 +22,12 @@
 #include <core/Timestep.h>
 #include <core/Window.h>
 #include <core/Layer.h>
-#include <core/Events.h>
 #include <core/Utils.h>
+
+//[++++++++++++++++++++++++++]
+//[+++++++++ EVENTS +++++++++]
+//[++++++++++++++++++++++++++]
+#include <Events/Events.h>
 
 
 //[++++++++++++++++++++++++++]
@@ -35,7 +39,9 @@
 #endif
 #include <Systems/MovementSystem.h>
 #include <Systems/RenderSystem.h>
-#include <Systems/PhysicsSystem.h>
+#include <Systems/PhysicsSystem2D.h>
+#include <Systems/CollisionSystem2D.h>
+#include <Systems/AnimationSystem2D.h>
 
 
 //[++++++++++++++++++++++++++]
