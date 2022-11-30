@@ -1,8 +1,10 @@
 #include "pch.h"
-#include "Events.h"
-#include "Render/RenderGlobals.h"
 
-#include "Application.h"
+#include "Render/RenderGlobals.h"
+#include "core/Application.h"
+
+#include "Events.h"
+#include "EventHandler.h"
 
 namespace Cober {
 
@@ -30,6 +32,10 @@ namespace Cober {
 #else
                     std::cout << "Pressed!" << std::endl;
 #endif
+                }
+                if (key == SDLK_q) {
+                    Logger::Log("key Q pressed");
+                    EventHandler::Get().SubscribeToEvent<CollisionEvent>(this, &Events::OnCollision);
                 }
                 break;
             }
@@ -87,5 +93,13 @@ namespace Cober {
                 break;
             }
         }
+    }
+
+    // Test
+    void Events::OnCollision(CollisionEvent& event) {
+
+        // Test
+        event.a.Destroy();
+        Logger::Log("Entity " + std::to_string(event.a.GetIndex()) + " collided wih entity " + std::to_string(event.b.GetIndex()));
     }
 }

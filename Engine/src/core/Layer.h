@@ -6,6 +6,8 @@
 #include "core/Core.h"
 #include "core/Timestep.h"
 
+#include "Events/EventHandler.h"
+
 namespace Cober {
 
 	class Layer {

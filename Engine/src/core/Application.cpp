@@ -27,7 +27,8 @@ namespace Cober {
         _window = Window::Create(name, width, height, vsync);
 
         _timestep = CreateUnique<Timestep>();
-        _events = CreateUnique<Events>();
+        _events = CreateUnique<Events>();      // Get rid of it later
+        _eventHandler = CreateUnique<EventHandler>();
         //_assetManager = CreateUnique<AssetManager>();
 
         _gameState = GameState::PLAY;
@@ -67,7 +68,12 @@ namespace Cober {
     }
 
     void Engine::main_loop() {
-        _timestep->Update();  // Allow limit FPS
+
+        // Allow limit FPS
+        _timestep->Update();  
+
+        // Reset Event Subscriptions
+        EventHandler::Get().Reset();
 
         // if(!_minimized) { UISystem::StartProcessInputs(); }
         ProcessInputs();

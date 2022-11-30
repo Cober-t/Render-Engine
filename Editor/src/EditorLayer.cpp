@@ -74,7 +74,9 @@ namespace Cober {
 	void EditorLayer::OnEvent(SDL_Event& event)
 	{
 		_editorCamera->OnEvent(event);
+
 		ViewportPanel::Get().OnEvent(event, hoveredEntity);
+		//eventHandler->SubscribeToEvent<CollisionEvent>(this, &Cober::Events::OnCollision);
 	}
 
 	/*

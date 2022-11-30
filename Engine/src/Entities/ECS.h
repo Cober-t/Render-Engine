@@ -25,6 +25,8 @@ namespace Cober {
 		Entity(std::string name, int entityIndex) : tag(name), index(entityIndex), registry(nullptr) {};
 		Entity(const Entity& entity) = default;
 
+		void Destroy();
+
 		std::string GetTag() const  { return tag; }
 		int GetIndex() const		{ return index; }
 

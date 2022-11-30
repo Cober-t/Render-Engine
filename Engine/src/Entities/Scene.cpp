@@ -259,6 +259,10 @@ namespace Cober {
 
 	}
 
+	void Scene::OnEvent(Unique<EventHandler>& eventHandler) {
+
+	}
+
 	void Scene::OnViewportResize(uint32_t width, uint32_t height)
 	{
 		_width = width;

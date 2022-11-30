@@ -4,6 +4,7 @@
 #include "Event.h"
 
 #include <map> 
+#include <list> 
 #include <typeindex>
 
 namespace Cober {
@@ -12,54 +13,97 @@ namespace Cober {
     ////+++++++++ BASE EVENT CALLBACK CLASS +++++++++++////
     ///////////////////////////////////////////////////////
     class IEventCallback {
-    public:
-        virtual ~IEventCallback();
-
-        inline void Execute(Event& e) { Call(e); }
     private:
         virtual void Call(Event& e) = 0;
+
+    public:
+        virtual ~IEventCallback() = default;
+
+        void Execute(Event& e) {
+            Call(e);
+        }
     };
 
     ///////////////////////////////////////////////////////
     ////++++++++++++ EVENT CALLBACK CLASS +++++++++++++////
     ///////////////////////////////////////////////////////
-    template<typename TOwner, typename TEvent>
-    class EventCallback : IEventCallback {
+    template <typename TOwner, typename TEvent>
+    class EventCallback : public IEventCallback {
     private:
-        typedef void(TOwner::* CallbackFunction)(TEvent&);
+        typedef void (TOwner::* CallbackFunction)(TEvent&);
 
-    public:
-        EventCallback(TOwner* ownerInst, CallbackFunction callbackFunc)
-            : ownerInstance(ownerInst), callbackFunction(callbackFunc) { }
-    private:
-        TOwner* ownerInstnce;
+        TOwner* ownerInstance;
         CallbackFunction callbackFunction;
 
-        inline virtual void Call(Event& e) override {
+        virtual void Call(Event& e) override {
             std::invoke(callbackFunction, ownerInstance, static_cast<TEvent&>(e));
         }
-    };
 
+    public:
+        EventCallback(TOwner* ownerInstance, CallbackFunction callbackFunction) {
+            this->ownerInstance = ownerInstance;
+            this->callbackFunction = callbackFunction;
+        }
+
+        virtual ~EventCallback() override = default;
+    };
 
     ///////////////////////////////////////////////////////
     ////+++++++++++++ EVENT HANDLER CLASS +++++++++++++////
     ///////////////////////////////////////////////////////
-    typedef std::list<Unique<IEventCallback>> HandlerList;
+
+    typedef std::list<std::unique_ptr<IEventCallback>> HandlerList;
+
     class EventHandler {
     public:
-        EventHandler() { Logger::Log("EventHadler constructor called!"); };
-        ~EventHandler() { Logger::Log("EventHandler destructor called!"); };
+        EventHandler() {
+            _instance = this;
+            Logger::Log("EventBus constructor called!");
+        }
 
+        ~EventHandler() {
+            Logger::Log("EventBus destructor called!");
+        }
 
-        //// Example: eventHandler->SubscribeToEvent<CollisionEvent>(&Events::onCollision);
-        template<typename TOwner, typename TEvent>
-        void SubscribeToEvent(TOwner* ownerInstance, void (TOwner::*callbackFunction)(TEvent&));
+        // Clears the subscribers list
+        void Reset() { subscribers.clear(); }
 
-        //// Example: eventHandler->DispatchEvent<CollisionEvent>(player, enemy);
-        template<typename TEvent, typename ...TArgs>
+        static EventHandler& Get() { return *_instance; }
+
+        //// Example: eventBus->SubscribeToEvent<CollisionEvent>(this, &Game::onCollision);
+        template <typename TEvent, typename TOwner>
+        void SubscribeToEvent(TOwner* ownerInstance, void (TOwner::* callbackFunction)(TEvent&));
+
+        //// Example: eventBus->EmitEvent<CollisionEvent>(player, enemy);
+        template <typename TEvent, typename ...TArgs>
         void DispatchEvent(TArgs&& ...args);
 
     private:
-        std::map<std::type_index, Unique<HandlerList>> subscribers;
+        static EventHandler* _instance;
+        std::map<std::type_index, std::unique_ptr<HandlerList>> subscribers;
     };
+
+
+    template <typename TEvent, typename TOwner>
+    void EventHandler::SubscribeToEvent(TOwner* ownerInstance, void (TOwner::* callbackFunction)(TEvent&)) {
+
+        if (!subscribers[typeid(TEvent)].get()) {
+            subscribers[typeid(TEvent)] = std::make_unique<HandlerList>();
+        }
+        auto subscriber = std::make_unique<EventCallback<TOwner, TEvent>>(ownerInstance, callbackFunction);
+        subscribers[typeid(TEvent)]->push_back(std::move(subscriber));
+    }
+
+    template <typename TEvent, typename ...TArgs>
+    void EventHandler::DispatchEvent(TArgs&& ...args) {
+
+        auto handlers = subscribers[typeid(TEvent)].get();
+        if (handlers) {
+            for (auto it = handlers->begin(); it != handlers->end(); it++) {
+                auto handler = it->get();
+                TEvent event(std::forward<TArgs>(args)...);
+                handler->Execute(event);
+            }
+        }
+    }
 }

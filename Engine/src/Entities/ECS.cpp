@@ -6,6 +6,11 @@ namespace Cober {
 
 	int IComponent::nextIndex = 0;
 
+	void Entity::Destroy() {
+
+		registry->DeleteEntity(*this);
+	}
+
 	Entity Registry::CreateEntity(std::string name) {
 
 		int entityID;

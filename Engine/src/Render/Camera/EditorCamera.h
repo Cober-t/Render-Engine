@@ -4,6 +4,7 @@
 #include "core/Timestep.h"
 
 #include "core/Core.h"
+#include "Events/EventHandler.h"
 
 namespace Cober {
 

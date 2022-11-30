@@ -1,11 +1,17 @@
 #pragma once
 
 #include "core/Core.h"
-#include "Event.h"
 
 #include <SDL/SDL.h>
 
 namespace Cober{
+
+    class CollisionEvent : public Event {
+    public:
+        Entity a;
+        Entity b;
+        CollisionEvent(Entity a, Entity b) : a(a), b(b) {}
+    };
 
 	class Events {
 	public:
@@ -15,6 +21,8 @@ namespace Cober{
 
         // Window Events
         void WindowResizeEvent(int width, int height);
+
+        void OnCollision(CollisionEvent& event);    // Test
 
         // Device Events 
         //void ZoomEventMouse(bool mouseWheelDown, int x, int y);
@@ -30,4 +38,6 @@ namespace Cober{
         const float _pinchZoomThreshold, _pinchScale;
         bool _pinch;
 	};
+
+  
 }

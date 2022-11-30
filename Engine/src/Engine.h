@@ -28,6 +28,8 @@
 //[+++++++++ EVENTS +++++++++]
 //[++++++++++++++++++++++++++]
 #include <Events/Events.h>
+#include <Events/Event.h>
+#include <Events/EventHandler.h>
 
 
 //[++++++++++++++++++++++++++]

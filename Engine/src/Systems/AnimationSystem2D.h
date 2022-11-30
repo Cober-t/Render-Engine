@@ -3,6 +3,8 @@
 #include "core/Core.h"
 #include "Entities/ECS.h"
 
+#include "Events/EventHandler.h"
+
 namespace Cober{
 
 	class AnimationSystem2D : public System {
@@ -14,6 +16,8 @@ namespace Cober{
 		void Start();
 
 		void Update();
+
+		//void OnEvent(Unique<EventHandler>& eventHandler);
 
 	private:
 		glm::vec2 texSize{ 64, 32 };			// Export to Component Editor

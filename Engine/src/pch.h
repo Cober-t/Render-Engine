@@ -27,6 +27,7 @@
 #include <set>
 #include <typeindex>
 #include <vector>
+#include <list> 
 #include <map>
 #include <stack>
 

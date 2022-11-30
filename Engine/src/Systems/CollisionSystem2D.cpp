@@ -2,6 +2,9 @@
 
 #include "CollisionSystem2D.h"
 
+#include "Events/Events.h"
+#include "Events/EventHandler.h"
+
 namespace Cober {
 
 	CollisionSystem2D::CollisionSystem2D() {
@@ -14,6 +17,11 @@ namespace Cober {
 	CollisionSystem2D::~CollisionSystem2D() {
 
 	}
+
+    struct EntitiesOnCollision {
+        Entity a;
+        Entity b;
+    };
 
     void CollisionSystem2D::Update() {
 
@@ -40,12 +48,9 @@ namespace Cober {
                     a_trans.position, a_trans.scale, a_coll.offset, a_coll.size,
                     b_trans.position, b_trans.scale, b_coll.offset, b_coll.size
                 );
-            
-                if (collisionHappened) {
-                    Logger::Log("Entity " + std::to_string(a.GetIndex()) + " collided wih entity " + std::to_string(b.GetIndex()));
-            
-                    // TODO: emit an event
-                }
+
+                if (collisionHappened)
+                    EventHandler::Get().DispatchEvent<CollisionEvent>(a, b);
             }
         }
     }

@@ -8,6 +8,8 @@
 #include "Entities/Scene.h"
 #include "Render/Camera/EditorCamera.h"
 
+#include "Events/EventHandler.h"
+
 namespace Cober {
 
 	class RenderSystem : public System {
@@ -16,8 +18,12 @@ namespace Cober {
 		~RenderSystem();
 
 		void Start();
+
 		void Update(const Ref<EditorCamera>& camera);
 		//void Update(const Ref<CameraComponent>& camera)
+
+		//void OnEvent(Unique<EventHandler>& eventHandler);
+
 	private:
 		Ref<Registry> _registry;
 	};	

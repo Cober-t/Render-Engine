@@ -4,6 +4,8 @@
 #include "core/Application.h"
 #include "Render/Camera/EditorCamera.h"
 
+#include "Events/EventHandler.h"
+
 namespace Cober {
 
 	class Scene {
@@ -17,6 +19,8 @@ namespace Cober {
 		//void OnUpdateRuntime(Ref<Timestep> ts);	// Get Camera components from entities
 		void OnUpdateRuntime(Ref<Timestep> ts, Ref<EditorCamera> camera);
 		void OnUpdateEditor(Ref<Timestep> ts, Ref<EditorCamera> camera);
+
+		void OnEvent(Unique<EventHandler>& eventHandler);
 
 		void OnViewportResize(uint32_t width, uint32_t height);
 

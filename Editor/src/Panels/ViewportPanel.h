@@ -2,6 +2,7 @@
 #include <Engine.h>
 
 #include "core/Core.h"
+#include "Events/EventHandler.h" 
 
 #include <SDL/SDL.h>
 

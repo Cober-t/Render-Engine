@@ -247,7 +247,6 @@ project "Game"
 		"Engine/include/sol",
 		"Engine/include/lua",
 		"Engine/src",
-		"Engine/src/Events",
 	}
 
 	links 

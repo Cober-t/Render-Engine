@@ -5,6 +5,8 @@
 #include "core/Core.h"
 #include "Entities/Scene.h"
 
+#include "Events/EventHandler.h"
+
 #include <box2d/b2_world.h>
 #include <box2d/b2_body.h>
 #include <box2d/b2_fixture.h>
@@ -21,7 +23,10 @@ namespace Cober {
 		~PhysicsSystem2D();
 
 		void Start();
+
 		void Update(double ts);
+
+		//void OnEvent(Unique<EventHandler>& eventHandler);
 	
 	private:
 		b2World* _physicsWorld = nullptr;
