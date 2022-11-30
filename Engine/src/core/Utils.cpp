@@ -10,7 +10,7 @@ namespace Cober::Utils {
 	bool DecomposeTransform(const glm::mat4& transform, glm::vec3& translation, glm::vec3& rotation, glm::vec3& scale)
 	{
 		// From glm::decompose in matrix_decompose.inl
-		
+
 		using namespace glm;
 		using T = float;
 
@@ -81,7 +81,7 @@ namespace Cober::Utils {
 
 	// Sets the String Value of a Property (for a given index)
 	void DataFile::SetString(const std::string& string, const size_t item) {
-	
+
 		if (item >= _content.size())
 			_content.resize(item + 1);
 
@@ -165,7 +165,7 @@ namespace Cober::Utils {
 
 	// Returns the number of Values a property consists of
 	size_t DataFile::GetValueCount() const {
-		
+
 		return _content.size();
 	}
 
@@ -212,7 +212,7 @@ namespace Cober::Utils {
 			auto indentation = [&](const std::string& string, const size_t count)
 			{
 				std::string out;
-				for (size_t n = 0; n < count; n++) 
+				for (size_t n = 0; n < count; n++)
 					out += string;
 				return out;
 			};
@@ -266,7 +266,7 @@ namespace Cober::Utils {
 		// Start here!, open the file for writing
 		std::string path = SOLUTION_DIR + (std::string)"assets\\scenes\\" + fileName;
 		std::ofstream file(path);
-		if (file.is_open()) 
+		if (file.is_open())
 		{
 			write(dataFile, file);
 			return true;
@@ -319,7 +319,7 @@ namespace Cober::Utils {
 						// ...it is content, so parse. Firstly, find if the line
 						// contains an assignment. If it does then it's a property
 						size_t x = line.find_first_of('=');
-						if (x != std::string::npos) 
+						if (x != std::string::npos)
 						{
 							// ...so split up the property into a name, and its values!
 
@@ -339,7 +339,7 @@ namespace Cober::Utils {
 							bool inQuotes = false;
 							std::string token;
 							size_t tokenCount = 0;
-							for (const auto c : propValue) 
+							for (const auto c : propValue)
 							{
 								// Is character a quote...
 								if (c == '\"')	// ...yes, so toggle quote state
@@ -386,7 +386,7 @@ namespace Cober::Utils {
 							{
 								if (line[0] == '}')	// Close brace, so this node has been defined, pop it from the stack
 									stackPath.pop();
-								else 
+								else
 								{
 									// Line is a property with no assignment. Who knows whether this is useful
 									// but we can simply add it as a valueless property...
@@ -408,4 +408,5 @@ namespace Cober::Utils {
 		Logger::Error("File not found with path: " + path);
 		return false;
 	}
+
 }

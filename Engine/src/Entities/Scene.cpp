@@ -192,8 +192,8 @@ namespace Cober {
 					if (loader.HasProperty("Rigidbody2D")) {
 						auto rb2d = loader["Rigibody2D"];
 						newEntity.AddComponent<Rigidbody2D>();
-						newEntity.GetComponent<Rigidbody2D>().type = (BodyType)rb2d["bodyType"].GetInt();
-						newEntity.GetComponent<Rigidbody2D>().fixedRotation = rb2d["fixedRotation"].GetInt();
+						newEntity.GetComponent<Rigidbody2D>().type = BodyType((int)rb2d["bodyType"].GetReal());
+						newEntity.GetComponent<Rigidbody2D>().fixedRotation = (int)rb2d["fixedRotation"].GetReal();
 					}
 
 					if (loader.HasProperty("BoxCollider2D")) {

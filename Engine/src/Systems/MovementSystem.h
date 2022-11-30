@@ -5,6 +5,8 @@
 
 #include "Events/EventHandler.h"
 
+#include <glm/glm.hpp>
+
 namespace Cober {
 
 	class MovementSystem : public System {
@@ -15,5 +17,11 @@ namespace Cober {
 		void Update(double deltaTime);
 
 		//void OnEvent(Unique<EventHandler>& eventHandler);
+
+	private:
+		glm::vec2 upVelocity;
+		glm::vec2 rightVelocity;
+		glm::vec2 downVelocity;
+		glm::vec2 leftVelocity;
 	};
 }

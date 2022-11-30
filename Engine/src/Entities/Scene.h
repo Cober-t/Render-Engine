@@ -24,10 +24,16 @@ namespace Cober {
 
 		void OnViewportResize(uint32_t width, uint32_t height);
 
+		bool GetWorldType() { return _world2D; }
 		uint32_t GetWidth()  { return _width; }
 		uint32_t GetHeight() { return _height; }
+		
+		void SetWorldType(bool type) { _world2D = type; }
 		void SetWidth(uint32_t w)  { _width = w; }
 		void SetHeight(uint32_t h) { _height = h; }
+
+		static void Save(const Ref<Scene>& scene, std::string sceneName = "Scene1");
+		static Ref<Scene> Load(std::string scenePath);
 
 		void GetEntity(int index, Entity& hoveredEntity);
 		Entity GetEntity(int index) { return GetSceneEntities().at(index); };
@@ -40,8 +46,6 @@ namespace Cober {
 
 		static Ref<Scene> Create();
 		static Ref<Scene> Copy(Ref<Scene> scene);
-		static void Save(const Ref<Scene>& scene, std::string sceneName = "Scene1");
-		static Ref<Scene> Load(std::string scenePath);
 	private:
 		bool _world2D;
 		Registry _registry;

@@ -20,6 +20,8 @@ namespace Cober {
 
 		static InputEvent* Get();
 
+		const Uint8* GetKeyboardStateArray() { return SDL_GetKeyboardState(NULL); }
+
 		void OnKeyDown(KeyDownEvent& event);
 
 	private:

@@ -4,7 +4,7 @@ Scene1
 	world2D = 0
 	width = 1280
 	height = 720
-	numEntities = 7
+	numEntities = 5
 
 	Entity0
 	{
@@ -32,7 +32,7 @@ Scene1
 		Rigidbody2D
 		{
 			bodyType = 0
-			fixedRotation = 0
+			fixedRotation = 1
 		}
 
 		BoxCollider2D
@@ -111,7 +111,7 @@ Scene1
 
 		Rigidbody2D
 		{
-			bodyType = 0
+			bodyType = 2
 			fixedRotation = 0
 		}
 
@@ -151,7 +151,7 @@ Scene1
 
 		Rigidbody2D
 		{
-			bodyType = 0
+			bodyType = 2
 			fixedRotation = 0
 		}
 
@@ -186,86 +186,6 @@ Scene1
 		Sprite
 		{
 			color = 1.000000, 0.960784, 0.000000, 1.000000
-			texture = C:\Users\jorge\Engine\assets\skybox\bottom.jpg
-		}
-
-		Rigidbody2D
-		{
-			bodyType = 0
-			fixedRotation = 0
-		}
-
-		BoxCollider2D
-		{
-			offset = 0.000000, 0.000000
-			size = 0.000000, 0.000000
-			density = 1.000000
-			friction = 0.500000
-			restitution = 0.000000
-			restitution Threshold = 0.000000
-		}
-	}
-
-	Entity7
-	{
-		tag = Entity7
-		index = 7
-
-		Tag
-		{
-			tag = Epic Icon Cat 2
-		}
-
-		Transform
-		{
-			position = -0.800000, 3.000000, 0.000000
-			rotation = 0.000000, 0.000000, 0.000000
-			scale = 1.000000, 1.000000, 1.000000
-		}
-
-		Sprite
-		{
-			color = 1.000000, 0.000000, 1.000000, 1.000000
-			texture = C:\Users\jorge\Engine\assets\textures\orangeMykoeski.png
-		}
-
-		Rigidbody2D
-		{
-			bodyType = 0
-			fixedRotation = 0
-		}
-
-		BoxCollider2D
-		{
-			offset = 0.000000, 0.000000
-			size = 0.000000, 0.000000
-			density = 1.000000
-			friction = 0.500000
-			restitution = 0.000000
-			restitution Threshold = 0.000000
-		}
-	}
-
-	Entity8
-	{
-		tag = Entity8
-		index = 8
-
-		Tag
-		{
-			tag = Terrain 4
-		}
-
-		Transform
-		{
-			position = -2.014919, -0.487013, 0.000000
-			rotation = 0.000000, 0.000000, 0.000000
-			scale = 1.000000, 1.000000, 1.000000
-		}
-
-		Sprite
-		{
-			color = 1.000000, 1.000000, 0.000000, 1.000000
 			texture = C:\Users\jorge\Engine\assets\skybox\bottom.jpg
 		}
 
