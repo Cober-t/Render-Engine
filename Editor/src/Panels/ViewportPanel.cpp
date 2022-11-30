@@ -66,7 +66,7 @@ namespace Cober {
 		if (mouseX >= 0 && mouseY >= 0 &&
 			mouseX < ((int)_viewportSize.x) && mouseY < ((int)_viewportSize.y)) {
 			int pixelData = _fbo->ReadPixel(1, mouseX, mouseY);
-			if (pixelData != -1)
+			if (pixelData != -1 && ImGui::IsMouseClicked(0))
 				activeScene->GetEntity(pixelData, hoveredEntity);
 		}
 	}

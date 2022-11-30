@@ -23,6 +23,6 @@ namespace Cober {
 	private:
 		//std::map<std::string, GLuint> textures;
 		//std::map<std::string, SDL_ttf*> fonts;
-		//std::map<std::string, SDL_audio*> textures;
+		//std::map<std::string, SDL_audio*> audios;
 	};
 }

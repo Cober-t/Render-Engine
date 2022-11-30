@@ -2157,6 +2157,7 @@
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Systems\AnimationSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entities\ECS.cpp">
@@ -2312,5 +2313,6 @@
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Systems\AnimationSystem.cpp" />
   </ItemGroup>
 </Project>

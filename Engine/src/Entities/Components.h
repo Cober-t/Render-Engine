@@ -1,18 +1,12 @@
 #pragma once
 
-#ifndef __EMSCRIPTEN__
-#ifndef __OPENGLES3__
-	#include <xhash> // For generating Universal Unique Identifiers
-#endif
-#endif
-#include <random>
-#include <box2d/b2_polygon_shape.h>
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
+
+#include <box2d/b2_polygon_shape.h>
 
 #include "core/Core.h"
 #include "Render/Texture.h"
@@ -78,6 +72,19 @@ namespace Cober {
 			: assetID(ID), w(width), h(height), color(tintColor) {}
 	};
 
+	struct Animation {
+		int numFrames;
+		int currentFrame;
+		int frameRateSpeed;
+		bool shouldLoop;
+		int startTime;
+
+		//Animation() = default;
+		Animation(const Animation&) = default;
+		Animation(int numfrm = 1, int frmRateSpeed = 1, bool loop = true)
+			: numFrames(numfrm), currentFrame(1), frameRateSpeed(frmRateSpeed), shouldLoop(loop), startTime(SDL_GetTicks()) {}
+	};
+
 	enum class BodyType { Static = 0, Kinematic, Dynamic };
 	struct Rigidbody2D {
 		glm::vec2 velocity;
@@ -89,6 +96,8 @@ namespace Cober {
 
 		Rigidbody2D() = default;
 		Rigidbody2D(const Rigidbody2D&) = default;
+		Rigidbody2D(glm::vec2 vel, bool fxRotation, int bodyType = 1)
+			: velocity(vel), fixedRotation(fxRotation), type((BodyType)bodyType), runtimeBody(nullptr) {}
 	};
 
 	//class b2Shape;
@@ -110,5 +119,8 @@ namespace Cober {
 
 		BoxCollider2D() = default;
 		BoxCollider2D(const BoxCollider2D&) = default;
+		BoxCollider2D(glm::vec2 Offset, glm::vec2 Size, float Density, float Friction, float Rest, float RestThreshold)
+			: offset(Offset), size(Size), 
+			  density(Density), friction(Friction), restitution(Rest), restitutionThreshold(RestThreshold) {}
 	};
 }

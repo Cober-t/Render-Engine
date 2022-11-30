@@ -31,7 +31,7 @@ Scene1
 
 		Rigidbody2D
 		{
-			bodyType = 2
+			bodyType = 0
 			fixedRotation = 0
 		}
 
@@ -111,7 +111,7 @@ Scene1
 
 		Rigidbody2D
 		{
-			bodyType = 2
+			bodyType = 0
 			fixedRotation = 0
 		}
 
@@ -151,7 +151,7 @@ Scene1
 
 		Rigidbody2D
 		{
-			bodyType = 2
+			bodyType = 0
 			fixedRotation = 0
 		}
 
@@ -310,7 +310,7 @@ Scene1
 
 		Rigidbody2D
 		{
-			bodyType = 2
+			bodyType = 0
 			fixedRotation = 0
 		}
 

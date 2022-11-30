@@ -235,6 +235,10 @@ namespace Cober {
 					_selectionContext.AddComponent<Sprite>();
 					_sceneContext->GetRegistry().AddEntityToSystems(_selectionContext);
 				}
+				else if (!_selectionContext.HasComponent<Animation>()) {
+					_selectionContext.AddComponent<Animation>();
+					_sceneContext->GetRegistry().AddEntityToSystems(_selectionContext);
+				}
 				else if (!_selectionContext.HasComponent<Rigidbody2D>()) {
 					_selectionContext.AddComponent<Rigidbody2D>();
 					_sceneContext->GetRegistry().AddEntityToSystems(_selectionContext);
@@ -250,10 +254,11 @@ namespace Cober {
 
 		if (ImGui::BeginPopup("AddComponent")) {
 			AddIfHasComponent<Sprite>("Sprite Renderer Component");
+			AddIfHasComponent<Animation>("Animation Component");
 			AddIfHasComponent<Rigidbody2D>("Rigidbody 2D Component");
 			AddIfHasComponent<BoxCollider2D>("BoxCollider 2D Component");
-			// Add if has Rigidbody2D Component
-			// Add if has BoxCollider2D Component
+			// ...
+			// ...
 
 			ImGui::EndPopup();
 		}
@@ -288,6 +293,13 @@ namespace Cober {
 					}
 					ImGui::EndDragDropTarget();
 				}
+			});
+
+		DrawComponent<Animation>("Animation", entity, [](auto& component)
+			{
+				ImGui::DragInt("Num Frames", &component.numFrames, 1.0);
+				ImGui::DragInt("Frame Rate", &component.frameRateSpeed, 1.0);
+				ImGui::Checkbox("Loop", &component.shouldLoop);
 			});
 
 		DrawComponent<Rigidbody2D>("Rigidbody 2D", entity, [](auto& component)

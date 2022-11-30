@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "Systems/RenderSystem.h"
 #include "Systems/MovementSystem.h"
+#include "Systems/AnimationSystem.h"
 #include "Systems/PhysicsSystem.h"
 #include "Systems/UISystem.h"
 
@@ -13,6 +14,7 @@ namespace Cober {
 	Scene::Scene() : _world2D(false), _width(1280), _height(720){
 
 		_registry.AddSystem<PhysicsSystem>();
+		_registry.AddSystem<AnimationSystem>();
 		_registry.AddSystem<RenderSystem>();
 
 		// [+++++ TODO
@@ -31,6 +33,7 @@ namespace Cober {
 	{
 		LOG("Scene finished, removing systems from registry...");
 		_registry.RemoveSystem<PhysicsSystem>();
+		_registry.RemoveSystem<AnimationSystem>();
 		_registry.RemoveSystem<RenderSystem>();
 		//_registry->RemoveSystem<UISystem>();
 	}
@@ -231,17 +234,21 @@ namespace Cober {
 		_registry.Update();
 
 		_registry.GetSystem<PhysicsSystem>().Start();
+		_registry.GetSystem<AnimationSystem>().Start();
 		_registry.GetSystem<RenderSystem>().Start();
 		//_registry->GetSystem<UISystem>().Start(Engine::Get().GetWindow().GetNativeWindow());
 		//_registry->GetSystem<MovementSystem>().Start(scene);
 
 
 		// TEST SERIALIZATION
-		//Entity newEntity = scene->CreateEntity();
-		//newEntity.AddComponent<Sprite>();
-		//newEntity.GetComponent<Sprite>().color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
-		//newEntity.AddComponent<Rigidbody2D>();
-		//newEntity.AddComponent<BoxCollider2D>();
+		Entity newEntity = scene->CreateEntity();
+		newEntity.GetComponent<Transform>().position = glm::vec3(0.0f, 2.0f, 0.0f);
+		newEntity.AddComponent<Sprite>();
+		newEntity.GetComponent<Sprite>().color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		newEntity.GetComponent<Sprite>().texture = Texture::Create("C:\\Users\\jorge\\Engine\\assets\\textures\\chopper.png");
+		newEntity.AddComponent<Rigidbody2D>();
+		newEntity.AddComponent<BoxCollider2D>();
+		newEntity.AddComponent<Animation>(2, 15, true);
 		//Scene::Save(scene, "Scene1.txt");
 	}
 
@@ -271,6 +278,7 @@ namespace Cober {
 		_registry.Update();
 
 		_registry.GetSystem<PhysicsSystem>().Update(ts->deltaTime);
+		_registry.GetSystem<AnimationSystem>().Update();
 		_registry.GetSystem<RenderSystem>().Update(camera);	// Get Camera components from entities
 		//_registry->GetSystem<UISystem>().Update();
 	}
@@ -279,6 +287,7 @@ namespace Cober {
 
 		_registry.Update();
 
+		_registry.GetSystem<AnimationSystem>().Update(); // Animation System on editor must be enable with a checkbox
 		_registry.GetSystem<RenderSystem>().Update(editorCamera);
 		//_registry->GetSystem<UISystem>().Update();
 	}

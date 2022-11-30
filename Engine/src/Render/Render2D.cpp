@@ -385,19 +385,21 @@ namespace Cober {
 	void Render2D::DrawSprite(Transform* transformComponent, Sprite* spriteComponent, int entityIndex)
 	{
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), transformComponent->position) *
-			glm::toMat4(glm::quat(transformComponent->rotation)) *
-			glm::scale(glm::mat4(1.0f), { transformComponent->scale.x, transformComponent->scale.y, 1.0f });
+				glm::toMat4(glm::quat(transformComponent->rotation)) *
+				glm::scale(glm::mat4(1.0f), { transformComponent->scale.x, transformComponent->scale.y, 1.0f });
 
 		constexpr size_t quadVertexCount = 4;
-		constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 		float textureIndex = 0.0f;
 		constexpr float tilingFactor = 1.0f;
-
+		constexpr glm::vec2 baseTexCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
+		const glm::vec2* subTexCoords = nullptr;
+		
 		if (data.QuadIndexCount >= RenderData::MaxIndices)
 			Render2D::NextBatch();
 
 		if (spriteComponent->texture) {
 
+			subTexCoords = spriteComponent->texture->GetSubTextureCoords();
 			for (uint32_t i = 1; i < data.TextureSlotIndex; i++) {
 				if (*data.TextureSlots[i] == *spriteComponent->texture) {
 					textureIndex = (float)i;
@@ -419,7 +421,7 @@ namespace Cober {
 		{
 			data.QuadVertexBufferPtr->Position = transform * data.QuadVertexPositions[i];
 			data.QuadVertexBufferPtr->Color = spriteComponent->color;
-			data.QuadVertexBufferPtr->TexCoord = textureCoords[i];
+			data.QuadVertexBufferPtr->TexCoord = subTexCoords != nullptr ? subTexCoords[i] : baseTexCoords[i];
 			data.QuadVertexBufferPtr->TexIndex = textureIndex;
 			data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
 			data.QuadVertexBufferPtr->EntityID = entityIndex;

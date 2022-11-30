@@ -3,12 +3,9 @@
 #include "RenderSystem.h"
 #include "PhysicsSystem.h"
 #include "Render/RenderGlobals.h"
-#include "Entities/ECS.h"
 
 // TEST
 #include "Render/CubeMap.h"
-#include "core/Utils.h"
-#include <filesystem>
 
 namespace Cober {
 

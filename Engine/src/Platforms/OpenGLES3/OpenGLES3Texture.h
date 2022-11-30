@@ -25,6 +25,9 @@ namespace Cober {
 		virtual std::string GetFormat() const override;
 		virtual std::string GetPath() const override { return _path; };
 
+		virtual void SetSubTextureIndex(const glm::vec2 coords[4]) override;
+		virtual glm::vec2* GetSubTextureCoords() override { return subTexIndex; };
+
 		virtual void SetData(void* data, uint32_t size) override;
 
 		virtual void Bind(uint32_t slot = 0) const override;
@@ -38,5 +41,7 @@ namespace Cober {
 		uint32_t _width, _height;
 		uint32_t _rendererID;
 		GLenum _internalFormat, _dataFormat;
+
+		glm::vec2 subTexIndex[4] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 	};
 }

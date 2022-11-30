@@ -52,10 +52,8 @@ namespace Cober {
 	OpenGLTexture::OpenGLTexture(const std::string& path)
 		: _path(path)
 	{
-		// LOAD IMAGE
 		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 		SDL_Surface* texSurface = IMG_Load(path.c_str());
-		//std::cout << SDL_GetError() << std::endl;
 
 		if (!texSurface)
 			Logger::Error("Failed to load image!");
@@ -81,19 +79,25 @@ namespace Cober {
 		_internalFormat = internalFormat;
 		_dataFormat = dataFormat;
 
-		GLCallV(glCreateTextures(GL_TEXTURE_2D, 1, &_rendererID));
-		GLCallV(glTextureStorage2D(_rendererID, 1, internalFormat, _width, _height));
+		glCreateTextures(GL_TEXTURE_2D, 1, &(GLuint)_rendererID);
+		glTextureStorage2D(_rendererID, 1, internalFormat, _width, _height);
 
-		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+		glTextureParameteri(_rendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTextureParameteri(_rendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_S, GL_REPEAT));
-		GLCallV(glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_T, GL_REPEAT));
+		glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-		GLCallV(glTextureSubImage2D(_rendererID, 0, 0, 0, _width, _height, dataFormat, GL_UNSIGNED_BYTE, texSurface->pixels));
+		glTextureSubImage2D(_rendererID, 0, 0, 0, _width, _height, dataFormat, GL_UNSIGNED_BYTE, texSurface->pixels);
 
 		SDL_FreeSurface(texSurface);
 	}
+
+	void OpenGLTexture::SetSubTextureIndex(const glm::vec2 coords[4]) {
+
+		for (int i = 0; i < 4; i++)
+			subTexIndex[i] = coords[i];
+	};
 
 	std::string OpenGLTexture::GetName() const  {
 

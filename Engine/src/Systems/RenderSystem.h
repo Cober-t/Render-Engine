@@ -4,6 +4,7 @@
 #include "Render/Render2D.h"
 
 #include "core/Core.h"
+#include "Entities/ECS.h"
 #include "Entities/Scene.h"
 #include "Render/Camera/EditorCamera.h"
 
