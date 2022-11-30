@@ -6,6 +6,7 @@
 #include <map> 
 #include <list> 
 #include <typeindex>
+#include <SDL/SDL.h>
 
 namespace Cober {
 
@@ -68,7 +69,9 @@ namespace Cober {
         // Clears the subscribers list
         void Reset() { subscribers.clear(); }
 
-        static EventHandler& Get() { return *_instance; }
+        static EventHandler* Get() { return _instance == nullptr ? new EventHandler() : _instance; }
+
+        void ProcessEvents(SDL_Event& event);
 
         //// Example: eventBus->SubscribeToEvent<CollisionEvent>(this, &Game::onCollision);
         template <typename TEvent, typename TOwner>

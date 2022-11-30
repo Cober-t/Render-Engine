@@ -27,8 +27,6 @@ namespace Cober {
         _window = Window::Create(name, width, height, vsync);
 
         _timestep = CreateUnique<Timestep>();
-        _events = CreateUnique<Events>();      // Get rid of it later
-        _eventHandler = CreateUnique<EventHandler>();
         //_assetManager = CreateUnique<AssetManager>();
 
         _gameState = GameState::PLAY;
@@ -73,10 +71,14 @@ namespace Cober {
         _timestep->Update();  
 
         // Reset Event Subscriptions
-        EventHandler::Get().Reset();
+        EventHandler::Get()->Reset();
+        
+        // Test
+        EventHandler::Get()->SubscribeToEvent<KeyDownEvent>(InputEvent::Get(), &InputEvent::OnKeyDown);
+
 
         // if(!_minimized) { UISystem::StartProcessInputs(); }
-        ProcessInputs();
+        ProcessEvents();
         // if(!_minimized) { UISystem::EndProcessInputs(); }
 
         if(!_minimized) {
@@ -97,14 +99,15 @@ namespace Cober {
         _window->SwapBuffers();
     }
 
-    void Engine::ProcessInputs() {
+    void Engine::ProcessEvents() {
 
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
             //UISystem::ProcessInputs(event);
 
-            _events->ProcessEvents(event);
+            //Process Events from SDL
+            EventHandler::Get()->ProcessEvents(event);
 
             for (Layer* layer : _LayerStack)
                 layer->OnEvent(event);

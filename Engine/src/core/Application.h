@@ -11,8 +11,8 @@
 
 #include "GUISystem/GuiLayer.h"
 
-#include "Events/Events.h"
 #include "Events/EventHandler.h"
+#include "Events/InputEvent.h"
 
 int main(int argc, char** argv);
 
@@ -36,7 +36,7 @@ namespace Cober {
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 
-		void ProcessInputs();
+		void ProcessEvents();
 
 		void Destroy();
 		void Close() { _gameState = GameState::EXIT; }
@@ -58,8 +58,6 @@ namespace Cober {
 		Layer _LayerStack;
 		Ref<Timestep> _timestep;
 		Unique<Window> _window;
-		Unique<Events> _events;	// Get rid of it later
-		Unique<EventHandler> _eventHandler;
 		//Unique<AssetManager> _assetManager;
 		bool _minimized = false;
 	private:

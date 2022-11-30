@@ -2,8 +2,8 @@
 
 #include "CollisionSystem2D.h"
 
-#include "Events/Events.h"
 #include "Events/EventHandler.h"
+#include "Events/CollisionEvent.h"
 
 namespace Cober {
 
@@ -50,7 +50,7 @@ namespace Cober {
                 );
 
                 if (collisionHappened)
-                    EventHandler::Get().DispatchEvent<CollisionEvent>(a, b);
+                    EventHandler::Get()->DispatchEvent<OnCollisionEvent>(a, b);
             }
         }
     }

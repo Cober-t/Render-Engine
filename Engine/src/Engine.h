@@ -27,9 +27,13 @@
 //[++++++++++++++++++++++++++]
 //[+++++++++ EVENTS +++++++++]
 //[++++++++++++++++++++++++++]
-#include <Events/Events.h>
 #include <Events/Event.h>
 #include <Events/EventHandler.h>
+#include <Events/InputEvent.h>
+#include <Events/MouseEvent.h>
+#include <Events/WindowEvent.h>
+#include <Events/JoystickEvent.h>
+#include <Events/CollisionEvent.h>
 
 
 //[++++++++++++++++++++++++++]
