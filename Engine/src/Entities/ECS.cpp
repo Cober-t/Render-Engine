@@ -8,15 +8,24 @@ namespace Cober {
 
 	Entity Registry::CreateEntity(std::string name) {
 
-		int entityID = numEntities++;
+		int entityID;
+		if (freeIDs.empty()) {
+			// If there are no free IDs waiting to be reused
+			entityID = numEntities;
+			if (entityID >= entityComponentSignatures.size())
+				entityComponentSignatures.resize(entityID + 1);
+		}
+		else {
+			// Reuse an ID from the list of previously removed entities
+			entityID = freeIDs.front();
+			freeIDs.pop_back();
+		}
+
 		Entity entity(name, entityID);
 		entity.registry = this;
-
 		entitiesToBeAdded.insert(entity);
 		entities[entityID] = entity;
-
-		if (entityID >= entityComponentSignatures.size())
-			entityComponentSignatures.resize(entityID + 1);
+		numEntities++;
 
 		entity.AddComponent<Tag>(name);
 		entity.AddComponent<Transform>();
@@ -38,7 +47,6 @@ namespace Cober {
 	}
 
 	void Registry::Update() {
-		// TODO: Add the entities that are waiting to be created to the active Systems
 
 		for (auto& entity : entitiesToBeAdded)
 			AddEntityToSystems(entity);
@@ -46,8 +54,12 @@ namespace Cober {
 		entitiesToBeAdded.clear();
 
 		for (auto& entity : entitiesToBeKilled) {
-			for (auto& system : systems)
-				system.second->RemoveEntityFromSystem(entity);
+			RemoveEntityFromSystems(entity);
+			// Must clear component signatures for this entity
+			entityComponentSignatures[entity.GetIndex()].reset();
+			// Make the entity ID available to be reused
+			freeIDs.push_back(entity.GetIndex());
+			// Delelete from the global set of entities
 			entities.erase(entity.GetIndex());
 		}
 
@@ -66,14 +78,9 @@ namespace Cober {
 	}
 
 	void Registry::RemoveEntityFromSystems(Entity entity) {
-		const auto& entityComponentSignature = entityComponentSignatures[entity.GetIndex()];
 
-		for (auto& system : systems) {
-			const auto& systemComponentSignature = system.second->GetComponentSignature();
-			bool isInterested = (entityComponentSignature & systemComponentSignature) == systemComponentSignature;
-			if (!isInterested)
-				system.second->RemoveEntityFromSystem(entity);
-		}
+		for (auto& system : systems)
+			system.second->RemoveEntityFromSystem(entity);
 	}
 
 	void System::AddEntityToSystem(Entity entity) {

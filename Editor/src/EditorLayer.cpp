@@ -113,7 +113,7 @@ namespace Cober {
 
 		InitDockspace();
 
-		SceneHierarchyPanel::Get().OnGuiRender();
+		SceneHierarchyPanel::Get().OnGuiRender(hoveredEntity);
 		ContentBrowserPanel::Get().OnGuiRender();
 		ViewportPanel::Get().OnGuiRender(_editorCamera, _activeScene, hoveredEntity);
 		DataPanel::Get().OnGuiRender(Engine::Get().GetGameMode(), hoveredEntity);

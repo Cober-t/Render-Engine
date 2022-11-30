@@ -4,7 +4,7 @@ Scene1
 	world2D = 0
 	width = 1280
 	height = 720
-	numEntities = 9
+	numEntities = 7
 
 	Entity0
 	{
@@ -187,85 +187,6 @@ Scene1
 		{
 			color = 1.000000, 0.960784, 0.000000, 1.000000
 			texture = C:\Users\jorge\Engine\assets\skybox\bottom.jpg
-		}
-
-		Rigidbody2D
-		{
-			bodyType = 0
-			fixedRotation = 0
-		}
-
-		BoxCollider2D
-		{
-			offset = 0.000000, 0.000000
-			size = 0.000000, 0.000000
-			density = 1.000000
-			friction = 0.500000
-			restitution = 0.000000
-			restitution Threshold = 0.000000
-		}
-	}
-
-	Entity5
-	{
-		tag = Entity5
-		index = 5
-
-		Tag
-		{
-			tag = Empty Entity
-		}
-
-		Transform
-		{
-			position = 1.485081, -0.487013, 0.000000
-			rotation = 0.000000, 0.000000, 0.000000
-			scale = 1.000000, 1.000000, 1.000000
-		}
-
-		Sprite
-		{
-			color = 1.000000, 1.000000, 0.000000, 0.996078
-			texture = C:\Users\jorge\Engine\assets\skybox\bottom.jpg
-		}
-
-		Rigidbody2D
-		{
-			bodyType = 0
-			fixedRotation = 0
-		}
-
-		BoxCollider2D
-		{
-			offset = 0.000000, 0.000000
-			size = 0.000000, 0.000000
-			density = 1.000000
-			friction = 0.500000
-			restitution = 0.000000
-			restitution Threshold = 0.000000
-		}
-	}
-
-	Entity6
-	{
-		tag = Entity6
-		index = 6
-
-		Tag
-		{
-			tag = Empty Entity
-		}
-
-		Transform
-		{
-			position = -0.014919, -0.487013, 0.000000
-			rotation = 0.000000, 0.000000, 0.000000
-			scale = 1.000000, 1.000000, 1.000000
-		}
-
-		Sprite
-		{
-			color = 1.000000, 1.000000, 1.000000, 1.000000
 		}
 
 		Rigidbody2D

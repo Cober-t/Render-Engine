@@ -7,11 +7,12 @@ namespace Cober {
 
 	void OpenGLRenderAPI::Init() {
 
-		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_DEPTH_TEST);
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		//glBlendFunc(GL_ONE, GL_ZERO);
 
 		//glEnable(GL_PROGRAM_POINT_SIZE);
 		glEnable(GL_LINE_SMOOTH);

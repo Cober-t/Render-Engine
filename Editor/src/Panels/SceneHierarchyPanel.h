@@ -12,7 +12,7 @@ namespace Cober {
 
 		static SceneHierarchyPanel& Get() { return *instance; }
 
-		void OnGuiRender();
+		void OnGuiRender(Entity& hoveredEntity);
 
 		void SetContext(const Ref<Scene>& selectionContext);
 		Entity GetSelectedEntity() const { return _selectionContext; }
@@ -25,7 +25,7 @@ namespace Cober {
 		template<typename T>
 		void AddIfHasComponent(std::string name);
 	private:
-		void DrawEntityNode(Entity entity);
+		void DrawEntityNode(Entity entity, Entity& hoveredEntity);
 		void DrawComponents(Entity& entity);
 	private:
 		Ref<Scene> _sceneContext;

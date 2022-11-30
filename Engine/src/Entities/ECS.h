@@ -8,6 +8,7 @@
 #include <typeindex>
 #include <memory>
 #include <set>
+#include <deque>
 #include <core/Logger.h>
 
 
@@ -139,6 +140,7 @@ namespace Cober {
 
 		std::set<Entity> entitiesToBeAdded;
 		std::set<Entity> entitiesToBeKilled;
+		std::deque<int> freeIDs;
 	};
 
 

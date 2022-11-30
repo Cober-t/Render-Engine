@@ -241,14 +241,14 @@ namespace Cober {
 
 
 		// TEST SERIALIZATION
-		Entity newEntity = scene->CreateEntity();
-		newEntity.GetComponent<Transform>().position = glm::vec3(0.0f, 2.0f, 0.0f);
-		newEntity.AddComponent<Sprite>();
-		newEntity.GetComponent<Sprite>().color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-		newEntity.GetComponent<Sprite>().texture = Texture::Create("C:\\Users\\jorge\\Engine\\assets\\textures\\chopper.png");
-		newEntity.AddComponent<Rigidbody2D>();
-		newEntity.AddComponent<BoxCollider2D>();
-		newEntity.AddComponent<Animation>(2, 15, true);
+		//Entity newEntity = scene->CreateEntity();
+		//newEntity.GetComponent<Transform>().position = glm::vec3(0.0f, 2.0f, 0.0f);
+		//newEntity.AddComponent<Sprite>();
+		//newEntity.GetComponent<Sprite>().color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		//newEntity.GetComponent<Sprite>().texture = Texture::Create("C:\\Users\\jorge\\Engine\\assets\\textures\\chopper.png");
+		//newEntity.AddComponent<Rigidbody2D>();
+		//newEntity.AddComponent<BoxCollider2D>();
+		//newEntity.AddComponent<Animation>(2, 15, true);
 		//Scene::Save(scene, "Scene1.txt");
 	}
 

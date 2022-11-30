@@ -40,13 +40,13 @@ namespace Cober {
 		_selectionContext = _nullEntityContext;
 	}
 
-	void SceneHierarchyPanel::OnGuiRender() {
+	void SceneHierarchyPanel::OnGuiRender(Entity& hoveredEntity) {
 
 		ImGui::Begin("Scene Hierarchy");
 
 		for (auto& entity : _sceneContext->GetRegistry().GetAllEntities()) {
 			if (entity.second.GetIndex() != -1)
-				DrawEntityNode(entity.second);
+				DrawEntityNode(entity.second, hoveredEntity);
 		}
 
 		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
@@ -67,21 +67,24 @@ namespace Cober {
 		ImGui::End();
 	}
 
-	void SceneHierarchyPanel::DrawEntityNode(Entity entity) {
+	void SceneHierarchyPanel::DrawEntityNode(Entity entity, Entity& hoveredEntity) {
 
 		auto& tag = entity.GetComponent<Tag>().tag;
 		ImGuiTreeNodeFlags flags = ((_selectionContext == entity) ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
 		flags |= ImGuiTreeNodeFlags_SpanAvailWidth;
 		bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)entity, flags, tag.c_str());
 
-		if (ImGui::IsItemClicked())
+		if (ImGui::IsItemClicked()) {
 			_selectionContext = entity;
+			hoveredEntity = _selectionContext;
+		}
 
 		// Delete an Entity
 		bool entityDeleted = false;
 		if (_selectionContext == entity && ImGui::BeginPopupContextWindow(0, 1)) {
 			if (ImGui::MenuItem("Delete Entity"))
 				entityDeleted = true;
+
 			ImGui::EndPopup();
 		}
 
@@ -89,9 +92,11 @@ namespace Cober {
 			ImGui::TreePop();
 
 		if (entityDeleted) {
-			_sceneContext->GetRegistry().DeleteEntity(entity);
-			if (_selectionContext == entity)
+			if (_selectionContext == entity) {
 				_selectionContext = _nullEntityContext;
+				hoveredEntity = _nullEntityContext;
+			}
+			_sceneContext->GetRegistry().DeleteEntity(entity);
 		}
 	}
 
