@@ -27,6 +27,7 @@ namespace Cober {
 		bool GetWorldType() { return _world2D; }
 		uint32_t GetWidth()  { return _width; }
 		uint32_t GetHeight() { return _height; }
+		Entity& GetHoveredEntity() { return _hoveredEntity; }
 		
 		void SetWorldType(bool type) { _world2D = type; }
 		void SetWidth(uint32_t w)  { _width = w; }
@@ -51,5 +52,6 @@ namespace Cober {
 		Registry _registry;
 		uint32_t _width; 
 		uint32_t _height;
+		Entity _hoveredEntity;
 	};
 }

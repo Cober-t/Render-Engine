@@ -288,6 +288,7 @@ namespace Cober {
 				activeScene->OnRuntimeStop();
 				activeScene = editorScene;
 				SceneHierarchyPanel::Get().SetContext(activeScene);
+				//SceneHierarchyPanel::Get().SetSelectedEntity(SceneHierarchyPanel::Get().GetNullEntity());
 			}
 		}
 		ImGui::PopStyleVar(2);

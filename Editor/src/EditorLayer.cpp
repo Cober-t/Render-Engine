@@ -26,7 +26,7 @@ namespace Cober {
 		ViewportPanel::Get().CreateFramebuffer(1280, 720);
 		SceneHierarchyPanel::Get().SetContext(_activeScene);
 
-		_activeScene->SetDefaultEntity(hoveredEntity);
+		_activeScene->SetDefaultEntity(_activeScene->GetHoveredEntity());
 		_activeScene->OnRuntimeStart(_activeScene);
 	}
 
@@ -62,10 +62,10 @@ namespace Cober {
 			}
 		}
 
-		ViewportPanel::Get().SetCursorEntity(_activeScene, hoveredEntity);
+		ViewportPanel::Get().SetCursorEntity(_activeScene, _activeScene->GetHoveredEntity());
 
-		if (ImGui::IsMouseClicked(0) && hoveredEntity.GetIndex() != -1)
-			SceneHierarchyPanel::Get().SetSelectedEntity(hoveredEntity);
+		if (ImGui::IsMouseClicked(0) && _activeScene->GetHoveredEntity().GetIndex() != -1)
+			SceneHierarchyPanel::Get().SetSelectedEntity(_activeScene->GetHoveredEntity());
 
 		ViewportPanel::Get().UnbindFramebuffer();
 	}
@@ -75,7 +75,7 @@ namespace Cober {
 	{
 		_editorCamera->OnEvent(event);
 
-		ViewportPanel::Get().OnEvent(event, hoveredEntity);
+		ViewportPanel::Get().OnEvent(event, _activeScene->GetHoveredEntity());
 		//eventHandler->SubscribeToEvent<CollisionEvent>(this, &Cober::Events::OnCollision);
 	}
 
@@ -115,11 +115,12 @@ namespace Cober {
 
 		InitDockspace();
 
+		Entity& hoveredEntity = _activeScene->GetHoveredEntity();
 		SceneHierarchyPanel::Get().OnGuiRender(hoveredEntity);
 		ContentBrowserPanel::Get().OnGuiRender();
 		ViewportPanel::Get().OnGuiRender(_editorCamera, _activeScene, hoveredEntity);
 		DataPanel::Get().OnGuiRender(Engine::Get().GetGameMode(), hoveredEntity);
-		MenuPanel::Get().OnGuiRender(_editorCamera, _activeScene, _editorScene, hoveredEntity, Engine::Get().GetGameMode(), Engine::Get().GetDebugMode());
+		MenuPanel::Get().OnGuiRender(_editorCamera, _activeScene, _editorScene, Engine::Get().GetGameMode(), Engine::Get().GetDebugMode());
 
 		ViewportPanel::Get().PlayButtonBar(_editorScene, _activeScene, Engine::Get().GetGameState());
 

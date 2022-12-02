@@ -24,7 +24,7 @@ namespace Cober {
 	template <typename T>
 	class Component : public IComponent {
 	public:
-		static int GetComponentIndex() {
+		static int GetComponentID() {
 			static int index = nextIndex++;
 			return index;
 		}

@@ -32,7 +32,7 @@ namespace Cober {
 		instance = nullptr;
 	}
 
-	void MenuPanel::OnGuiRender(Ref<EditorCamera>& editorCamera, Ref<Scene>& activeScene, Ref<Scene>& editorScene, Entity& hoveredEntity, bool& game2D, bool& debugMode) {
+	void MenuPanel::OnGuiRender(Ref<EditorCamera>& editorCamera, Ref<Scene>& activeScene, Ref<Scene>& editorScene, bool& game2D, bool& debugMode) {
 
 		_fileBrowser.Display();
 		if (_fileBrowser.HasSelected()) {
@@ -60,7 +60,7 @@ namespace Cober {
 					editorScene = Scene::Load("Scene1.txt"); // Test Scene
 					activeScene = editorScene;
 					SceneHierarchyPanel::Get().SetContext(activeScene);
-					activeScene->SetDefaultEntity(hoveredEntity);
+					activeScene->SetDefaultEntity(activeScene->GetHoveredEntity());
 					activeScene->OnRuntimeStart(activeScene);
 				}
 

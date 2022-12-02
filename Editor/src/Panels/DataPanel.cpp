@@ -32,14 +32,8 @@ namespace Cober {
 
 		ImGui::Text("Mouse Coords: \nX: %i\nY: %i", mouseX, mouseY);
 
-		if (hoveredEntity) {
-			if (hoveredEntity.GetIndex() == -1)
-				ImGui::Text("Hovered Entity: None");
-			else if(hoveredEntity.HasComponent<Tag>())
-				ImGui::Text("Hovered Entity: %s", hoveredEntity.GetComponent<Tag>().tag.c_str());
-
-			ImGui::Text("Entity Index: %i", hoveredEntity.GetIndex());
-		}
+		ImGui::Text("Hovered Entity: %s", hoveredEntity.GetTag().c_str());
+		ImGui::Text("Entity Index: %i", hoveredEntity.GetIndex());
 
 		ImGui::End();
 

@@ -15,7 +15,9 @@ namespace Cober {
 		void OnGuiRender(Entity& hoveredEntity);
 
 		void SetContext(const Ref<Scene>& selectionContext);
+
 		Entity GetSelectedEntity() const { return _selectionContext; }
+		Entity GetNullEntity() const { return _nullEntityContext; }
 		void SetSelectedEntity(Entity entity);
 		void SetNullEntityContext();
 

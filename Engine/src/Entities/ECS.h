@@ -84,27 +84,36 @@ namespace Cober {
 	// +++++ POOL +++++++++++++++++++++++++++++++++++++++++++++++ //
 	class IPool {
 	public:
-		virtual ~IPool() {}
+		virtual ~IPool() = default;
+		virtual void RemoveEntityFromPool(int entityID) = 0;
 	};
 
 	template<typename T>
 	class Pool : public IPool {
 	public:
-		Pool(int size = 100) { data.resize(size); }
+		Pool(int capacity = 100) { size = 0; data.resize(capacity); }
 		virtual ~Pool() = default;
 
-		bool IsEmpty() const { return data.empty();	}
-		int  GetSize() const { return data.size();	}
-		void Resize(int n)	 { data.resize(n);		}
+		bool IsEmpty() const { return size == 0; }
+		int  GetSize() const { return size;		 }
+		void Resize(int n)	 { data.resize(n);	 }
 
-		void Clear() { data.clear(); }
-		void Add(T object) { data, push_back(object); }
-		void Set(int index, T object) { data[index] = object; }
+		void Clear()		 { data.clear(); size = 0; }
+		void Add(T object)	 { data.push_back(object); }
+		void Set(int entitiID, T object); 
+		void Remove(int entityID);
 
-		T& Get(int index) { return static_cast<T&>(data[index]); }
+		void RemoveEntityFromPool(int entityID) override;
+
+		T& Get(int entityID);
 		T& operator [](unsigned int index) { return data[index]; }
 	private:
+		// Keep track of the vecgtor of component objects and ther current size
 		std::vector<T> data;
+		int size;
+		// Maps to keep track of entity ids per index so the vector is always packed
+		std::map<int, int> entityIDToIndex;
+		std::map<int, int> indexToEntityID;
 	};
 
 	////////////////////////////////////////////////////////////////
@@ -137,7 +146,7 @@ namespace Cober {
 		void RemoveEntityTag(Entity& entity);
 		void RemoveEntityGroup(Entity& entity);
 		// Check if an entity belongs to a group
-		bool EntityBelongsToGroup(Entity& entity, const std::string& group) const;
+		bool EntityBelongsToGroup(Entity entity, const std::string& group) const;
 
 		// Add the entity to the systems that are interested in it
 		void AddEntityToSystems(Entity entity);
@@ -181,7 +190,7 @@ namespace Cober {
 	// +++++ TEMPLATES ++++++++++++++++++++++++++++++++++++++++++ //
 	template <typename TComponent>
 	void System::RequireComponent() {
-		const auto componentID = Component<TComponent>::GetComponentIndex();
+		const auto componentID = Component<TComponent>::GetComponentID();
 		componentSignature.set(componentID);
 	}
 
@@ -210,7 +219,7 @@ namespace Cober {
 
 	template<typename TComponent, typename ...TArgs>
 	void Registry::AddComponent(Entity entity, TArgs&& ...args) {
-		const auto componentID = Component<TComponent>::GetComponentIndex();
+		const auto componentID = Component<TComponent>::GetComponentID();
 		const auto entityID = entity.GetIndex();
 
 		if (componentID >= componentPools.size())
@@ -223,29 +232,32 @@ namespace Cober {
 
 		Ref<Pool<TComponent>> componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentID]);
 
-		if (entityID >= componentPool->GetSize())
-			componentPool->Resize(numEntities);
-
 		TComponent newComponent(std::forward<TArgs>(args)...);
 		componentPool->Set(entityID, newComponent);
 		entityComponentSignatures[entityID].set(componentID);
 
 		//if (componentID != 0 && componentID != 3 && componentID != 4)
 		//	LOG("Component ID = " + std::to_string(componentID) + " was added to entity: " + entity.GetComponent<Tag>().tag);
+		Logger::Log("Component ID = " + std::to_string(componentID) + " --> Pool Size: " + std::to_string(componentPool->GetSize()));
 	}
 
 	template<typename TComponent>
 	void Registry::RemoveComponent(Entity entity) {
-		const auto componentID = Component<TComponent>::GetComponentIndex();
-		const auto entityID = entity.GetIndex();
 
+		const auto componentID = Component<TComponent>::GetComponentID();
+		const auto entityID = entity.GetIndex();
+		// Remove the component fmro the component list for that entity
+		Ref<Pool<TComponent>> componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentID]);
+		componentPool->Remove(entityID);
+		// Set this component signature for that entity to false
 		entityComponentSignatures[entityID].set(componentID, false);
+		
 		//LOG("Component ID = " + std::to_string(componentID) + " was removed from entity ID: " + std::to_string(entityID));
 	}
 
 	template<typename TComponent>
 	bool Registry::HasComponent(Entity entity) const {
-		const auto componentID = Component<TComponent>::GetComponentIndex();
+		const auto componentID = Component<TComponent>::GetComponentID();
 		const auto entityID = entity.GetIndex();
 
 		return entityComponentSignatures[entityID].test(componentID);
@@ -253,7 +265,7 @@ namespace Cober {
 
 	template<typename TComponent>
 	TComponent& Registry::GetComponent(Entity entity) const {
-		const auto componentID = Component<TComponent>::GetComponentIndex();
+		const auto componentID = Component<TComponent>::GetComponentID();
 		const auto entityID = entity.GetIndex();
 		auto componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentID]);
 
@@ -278,5 +290,58 @@ namespace Cober {
 	template<typename TComponent>
 	TComponent& Entity::GetComponent() const {
 		return registry->GetComponent<TComponent>(*this);
+	}
+
+	template<typename T>
+	inline void Pool<T>::Set(int entityID, T object) {
+
+		if (entityIDToIndex.find(entityID) != entityIDToIndex.end()) {
+			// If the element already exists, simply replace the component object
+			int index = entityIDToIndex[entityID];
+			data[index] = object;
+		}
+		else {
+			// When adding a new object, keep track of the entity ID and its vector index
+			int index = size;
+			entityIDToIndex.emplace(entityID, index);
+			indexToEntityID.emplace(index, entityID);
+			if(index >= data.capacity()) {
+				// If necessary, we resize by alwats doubling the current capacity
+				data.resize(size * 2);
+			}
+			data[index] = object;
+			size++;
+		}
+	}
+
+	template<typename T>
+	inline void Pool<T>::Remove(int entityID) {
+		// Copy the last element to the deleted position to keep the array packed
+		int indexOfRemoved = entityIDToIndex[entityID];
+		int indexOfLast = size - 1;
+		data[indexOfRemoved] = data[indexOfLast];
+
+		// Update the index-entity maps to point to the correct elements
+		int entityIdLastElement = indexToEntityID[indexOfLast];
+		entityIDToIndex[entityIdLastElement] = indexOfRemoved;
+		indexToEntityID[indexOfRemoved] = entityIdLastElement;
+
+		entityIDToIndex.erase(entityID);
+		indexToEntityID.erase(indexOfLast);
+		size--;
+	}
+
+	template<typename T>
+	void Pool<T>::RemoveEntityFromPool(int entityID) {
+
+		if (entityIDToIndex.find(entityID) != entityIDToIndex.end())
+			Remove(entityID);
+	}
+
+	template<typename T>
+	inline T& Pool<T>::Get(int entityID) {
+
+		int index = entityIDToIndex[entityID];
+		return static_cast<T&>(data[index]);
 	}
 }

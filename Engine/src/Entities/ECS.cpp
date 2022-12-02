@@ -15,7 +15,7 @@ namespace Cober {
 
 	std::string Entity::GetTag() const {
 
-		return this->HasComponent<Tag>() ? this->GetComponent<Tag>().tag : "None";
+		return GetIndex() != -1 && this->HasComponent<Tag>() ? this->GetComponent<Tag>().tag : "None";
 	}
 
 	std::string Entity::GetGroup() const {
@@ -40,7 +40,7 @@ namespace Cober {
 
 	bool Entity::BelongsToGroup(const std::string& group) const
 	{
-		return GetGroup() == group;
+		return registry->EntityBelongsToGroup(*this, group);
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -203,9 +203,10 @@ namespace Cober {
 		}
 	}
 
-	bool Registry::EntityBelongsToGroup(Entity& entity, const std::string& group) const
+	bool Registry::EntityBelongsToGroup(Entity entity, const std::string& group) const
 	{
-		return entitiesByGroup.at(group).find(entity) == entitiesByGroup.at(group).end();
+		int ID = entity.GetIndex();
+		return groupsByEntities.find(ID) != groupsByEntities.end() && groupsByEntities.at(ID) == group;
 	}
 
 	void Registry::Update() {
@@ -216,9 +217,16 @@ namespace Cober {
 		entitiesToBeAdded.clear();
 
 		for (auto entity : entitiesToBeKilled) {
+
 			RemoveEntityFromSystems(entity);
 			// Must clear component signatures for this entity
 			entityComponentSignatures[entity.GetIndex()].reset();
+			//Remove the entity from the component pools
+			for (auto pool : componentPools) {
+				if(pool)
+					pool->RemoveEntityFromPool(entity.GetIndex());
+			}
+
 			// Make the entity ID available to be reused
 			freeIDs.push_back(entity.GetIndex());
 			// Remove Tag and Group from registry
@@ -247,7 +255,7 @@ namespace Cober {
 		for (auto& system : systems)
 			system.second->RemoveEntityFromSystem(entity);
 	}
-	
+		
 
 	///////////////////////////////////////////////////////////////////////////
 	////++++++++++++++++++++++++   SYSTEM   +++++++++++++++++++++++++++++++////

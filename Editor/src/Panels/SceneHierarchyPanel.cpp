@@ -30,6 +30,7 @@ namespace Cober {
 		_sceneContext = sceneContext;
 		_nullEntityContext = Entity("Null", -1);;
 		_selectionContext = _nullEntityContext;
+		sceneContext->GetHoveredEntity() = _nullEntityContext;
 	}
 
 	void SceneHierarchyPanel::SetSelectedEntity(Entity entity) {
@@ -363,7 +364,7 @@ namespace Cober {
 		DrawComponent<BoxCollider2D>("Box Collider 2D", entity, [](auto& component)
 			{
 				ImGui::DragFloat2("Offset", glm::value_ptr(component.offset));
-				ImGui::DragFloat2("Size", glm::value_ptr(component.size));
+				ImGui::DragFloat2("Size", glm::value_ptr(component.size), 1.0f, 1.0f);
 				ImGui::DragFloat("Density", &component.density, 0.01f, 0.0f, 1.0f);
 				ImGui::DragFloat("Friction", &component.friction, 0.01f, 0.0f, 1.0f);
 				ImGui::DragFloat("Restitution", &component.restitution, 0.01f, 0.0f, 1.0f);

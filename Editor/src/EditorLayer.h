@@ -33,8 +33,6 @@ namespace Cober {
 	private:
 		Ref<Framebuffer> _fbo;
 
-		Entity hoveredEntity;
-
 		glm::vec2 _viewportSize = { 0.0f, 0.0f };
 		glm::vec2 _minViewportBound;
 		glm::vec2 _maxViewportBound;
