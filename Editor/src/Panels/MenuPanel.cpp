@@ -54,10 +54,10 @@ namespace Cober {
 					_fileBrowser.Open();
 
 				if (ImGui::MenuItem("Save Scene"))
-					Scene::Save(activeScene, "Scene1.txt");	 // Test Scene
+					Scene::Save(activeScene, "EditorSceneTest.txt");	 // Test Scene
 
 				if (ImGui::MenuItem("Load Scene")) {
-					editorScene = Scene::Load("Scene1.txt"); // Test Scene
+					editorScene = Scene::Load("EditorSceneTest.txt"); // Test Scene
 					activeScene = editorScene;
 					SceneHierarchyPanel::Get().SetContext(activeScene);
 					activeScene->SetDefaultEntity(activeScene->GetHoveredEntity());

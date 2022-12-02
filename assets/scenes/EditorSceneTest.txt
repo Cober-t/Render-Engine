@@ -1,32 +1,31 @@
 
-Scene1
+EditorSceneTest
 {
 	world2D = 0
 	width = 1280
 	height = 720
-	numEntities = 5
+	numEntities = 4
 
 	Entity0
 	{
-		tag = Epic Box
-		index = 0
+		group = None
 
 		Tag
 		{
-			tag = Epic Box
+			tag = Empty Entity
 		}
 
 		Transform
 		{
-			position = 1.500000, 1.500000, 0.000000
+			position = 0.000000, 0.000000, 0.768857
 			rotation = 0.000000, 0.000000, 0.000000
 			scale = 1.000000, 1.000000, 1.000000
 		}
 
 		Sprite
 		{
-			color = 0.000000, 1.000000, 1.000000, 1.000000
-			texture = C:\Users\jorge\Engine\assets\textures\woodenContainer.png
+			color = 1.000000, 1.000000, 1.000000, 1.000000
+			texture = chopper.png
 		}
 
 		Rigidbody2D
@@ -44,29 +43,35 @@ Scene1
 			restitution = 0.000000
 			restitution Threshold = 0.000000
 		}
+
+		Animation2D
+		{
+			numFrames = 2
+			frameRateSpeed = 15.000000
+			shouldLoop = 0
+		}
 	}
 
 	Entity1
 	{
-		tag = Terrain 2
-		index = 1
+		group = None
 
 		Tag
 		{
-			tag = Terrain 2
+			tag = Empty Entity(1)
 		}
 
 		Transform
 		{
-			position = -0.014919, -0.487013, 0.000000
+			position = 0.000000, 0.245295, 0.000000
 			rotation = 0.000000, 0.000000, 0.000000
 			scale = 1.000000, 1.000000, 1.000000
 		}
 
 		Sprite
 		{
-			color = 1.000000, 1.000000, 0.000000, 1.000000
-			texture = C:\Users\jorge\Engine\assets\skybox\bottom.jpg
+			color = 1.000000, 0.580392, 0.000000, 1.000000
+			texture = woodenContainer.png
 		}
 
 		Rigidbody2D
@@ -88,25 +93,24 @@ Scene1
 
 	Entity2
 	{
-		tag = Epic Icon Cat 1
-		index = 2
+		group = None
 
 		Tag
 		{
-			tag = Epic Icon Cat 1
+			tag = Empty Entity(2)
 		}
 
 		Transform
 		{
-			position = -1.514919, 1.512987, 0.000000
+			position = -1.422529, 0.000000, 0.000000
 			rotation = 0.000000, 0.000000, 0.000000
 			scale = 1.000000, 1.000000, 1.000000
 		}
 
 		Sprite
 		{
-			color = 0.878431, 1.000000, 1.000000, 1.000000
-			texture = C:\Users\jorge\Engine\assets\textures\orangeMykoeski.png
+			color = 1.000000, 0.000000, 1.000000, 1.000000
+			texture = blendTest.png
 		}
 
 		Rigidbody2D
@@ -128,17 +132,16 @@ Scene1
 
 	Entity3
 	{
-		tag = Epic Blend Cat
-		index = 3
+		group = None
 
 		Tag
 		{
-			tag = Epic Blend Cat
+			tag = Empty Entity(3)
 		}
 
 		Transform
 		{
-			position = 0.790000, 3.512987, 0.000000
+			position = -0.619734, 1.886983, 0.000000
 			rotation = 0.000000, 0.000000, 0.000000
 			scale = 1.000000, 1.000000, 1.000000
 		}
@@ -146,7 +149,7 @@ Scene1
 		Sprite
 		{
 			color = 1.000000, 1.000000, 1.000000, 1.000000
-			texture = C:\Users\jorge\Engine\assets\textures\blendTest.png
+			texture = orangeMykoeski.png
 		}
 
 		Rigidbody2D
@@ -159,49 +162,9 @@ Scene1
 		{
 			offset = 0.000000, 0.000000
 			size = 1.000000, 1.000000
-			density = 1.000000
-			friction = 0.500000
-			restitution = 0.000000
-			restitution Threshold = 0.000000
-		}
-	}
-
-	Entity4
-	{
-		tag = Terrain 3
-		index = 4
-
-		Tag
-		{
-			tag = Terrain 3
-		}
-
-		Transform
-		{
-			position = -1.014919, -0.987013, 0.000000
-			rotation = 0.000000, 0.000000, 0.000000
-			scale = 1.000000, 1.000000, 1.000000
-		}
-
-		Sprite
-		{
-			color = 1.000000, 0.960784, 0.000000, 1.000000
-			texture = C:\Users\jorge\Engine\assets\skybox\bottom.jpg
-		}
-
-		Rigidbody2D
-		{
-			bodyType = 0
-			fixedRotation = 0
-		}
-
-		BoxCollider2D
-		{
-			offset = 0.000000, 0.000000
-			size = 1.000000, 1.000000
-			density = 1.000000
-			friction = 0.500000
-			restitution = 0.000000
+			density = 0.550000
+			friction = 1.000000
+			restitution = 0.750000
 			restitution Threshold = 0.000000
 		}
 	}

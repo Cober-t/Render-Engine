@@ -20,7 +20,7 @@ namespace Cober {
 	void EditorLayer::OnAttach() {
 
 		_editorScene = Scene::Create();
-		//_editorScene = Scene::Load("Scene1.txt");
+		//_editorScene = Scene::Load("EditorSceneTest.txt");
 		_activeScene = _editorScene;
 
 		ViewportPanel::Get().CreateFramebuffer(1280, 720);

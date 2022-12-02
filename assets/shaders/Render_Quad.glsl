@@ -33,13 +33,13 @@ void main()
 precision mediump float;
 
 layout(location = 0) out vec4 o_Color;
-layout(location = 1) out float o_EntityID;
+//layout(location = 1) out float o_EntityID;
 
 in vec4 Color;
 in vec2 TexCoord;
 in float TilingFactor;
 in float v_TexIndex;
-in float v_EntityID;
+//in float v_EntityID;
 
 // Max for WebGL
 uniform sampler2D u_Textures[16];
@@ -72,5 +72,5 @@ void main()
 		discard;
 
 	o_Color = texColor;
-	o_EntityID = v_EntityID;
+	//o_EntityID = v_EntityID;
 }

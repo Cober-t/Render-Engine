@@ -7,7 +7,8 @@ Game2D::Game2D() : Layer("First 2D Game!") {
 
 void Game2D::OnAttach() {
 
-	_activeScene = Scene::Create();
+	//_activeScene = Scene::Create();
+	_activeScene = Scene::Load("EditorSceneTest.txt");
 	_activeScene->OnRuntimeStart(_activeScene);
 }
 

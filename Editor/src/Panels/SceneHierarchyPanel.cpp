@@ -234,8 +234,10 @@ namespace Cober {
 		ImGui::SameLine();
 
 		if (ImGui::Button("Rename")) {
-			if (_newEntityTag != "")
+			if (_newEntityTag != "") {
+				entity.registry->RemoveEntityTag(entity);
 				entity.SetTag(std::string(_newEntityTag));
+			}
 		}
 
 		ImGui::PushItemWidth(100.0f);
@@ -335,8 +337,8 @@ namespace Cober {
 
 		DrawComponent<Animation2D>("Animation", entity, [](auto& component)
 			{
-				ImGui::DragInt("Num Frames", &component.numFrames, 1.0);
-				ImGui::DragInt("Frame Rate", &component.frameRateSpeed, 1.0);
+				ImGui::DragInt("Num Frames", &component.numFrames, 1.0, 1.0);
+				ImGui::DragInt("Frame Rate", &component.frameRateSpeed, 1.0, 1.0);
 				ImGui::Checkbox("Loop", &component.shouldLoop);
 			});
 

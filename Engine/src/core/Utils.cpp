@@ -264,21 +264,29 @@ namespace Cober::Utils {
 		};
 
 		// Start here!, open the file for writing
+#ifdef __EMSCRIPTEN__
+		std::ofstream file("assets/scenes/" + fileName, std::ios::in | std::ios::binary);
+#else
 		std::string path = SOLUTION_DIR + (std::string)"assets\\scenes\\" + fileName;
 		std::ofstream file(path);
+#endif
 		if (file.is_open())
 		{
 			write(dataFile, file);
 			return true;
 		}
-		Logger::Error("Serializacion could'nt success with path: " + path);
+		Logger::Error("Serializacion could'nt success with name: " + fileName);
 		return false;
 	}
 
 	bool DataFile::Read(DataFile& dataFile, const std::string& fileName, const char listStep) {
 
+#ifdef __EMSCRIPTEN__
+		std::ifstream file("assets/scenes/" + fileName, std::ios::in | std::ios::binary);
+#else
 		std::string path = SOLUTION_DIR + (std::string)"assets\\scenes\\" + fileName;
 		std::ifstream file(path);
+#endif
 		//Open the file!
 		if (file.is_open()) {
 
@@ -405,7 +413,7 @@ namespace Cober::Utils {
 			return true;
 		}
 
-		Logger::Error("File not found with path: " + path);
+		Logger::Error("File not found with name: " + fileName);
 		return false;
 	}
 

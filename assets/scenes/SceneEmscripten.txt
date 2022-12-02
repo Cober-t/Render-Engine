@@ -1,0 +1,155 @@
+
+EditorSceneTest
+{
+	world2D = 0
+	width = 1280
+	height = 720
+	numEntities = 4
+
+	Entity0
+	{
+		group = None
+
+		Tag
+		{
+			tag = Empty Entity
+		}
+
+		Transform
+		{
+			position = 0.000000, 0.000000, 0.000000
+			rotation = 0.000000, 0.000000, 0.000000
+			scale = 1.000000, 1.000000, 1.000000
+		}
+
+		Sprite
+		{
+			color = 1.000000, 1.000000, 1.000000, 1.000000
+			texture = assets/textures/chopper.png
+		}
+
+		Rigidbody2D
+		{
+			bodyType = 0
+			fixedRotation = 0
+		}
+
+		BoxCollider2D
+		{
+			offset = 0.000000, 0.000000
+			size = 1.000000, 1.000000
+			density = 1.000000
+			friction = 0.500000
+			restitution = 0.000000
+			restitution Threshold = 0.000000
+		}
+
+		Animation2D
+		{
+			numFrames = 4
+			frameRateSpeed = 14.000000
+			shouldLoop = 0
+		}
+	}
+
+	Entity1
+	{
+		group = None
+
+		Tag
+		{
+			tag = Empty Entity(1)
+		}
+
+		Transform
+		{
+			position = 1.362174, 0.000000, 0.000000
+			rotation = 0.000000, 0.000000, 0.000000
+			scale = 1.000000, 1.000000, 1.000000
+		}
+
+		Sprite
+		{
+			color = 1.000000, 0.580392, 0.000000, 1.000000
+			texture = assets/textures/woodenContainer.png
+		}
+
+		Rigidbody2D
+		{
+			bodyType = 0
+			fixedRotation = 0
+		}
+
+		BoxCollider2D
+		{
+			offset = 0.000000, 0.000000
+			size = 1.000000, 1.000000
+			density = 1.000000
+			friction = 0.500000
+			restitution = 0.000000
+			restitution Threshold = 0.500000
+		}
+	}
+
+	Entity2
+	{
+		group = None
+
+		Tag
+		{
+			tag = Empty Entity(2)
+		}
+
+		Transform
+		{
+			position = -1.422529, 0.000000, 0.000000
+			rotation = 0.000000, 0.000000, 0.000000
+			scale = 1.000000, 1.000000, 1.000000
+		}
+
+		Sprite
+		{
+			color = 1.000000, 0.000000, 1.000000, 1.000000
+			texture = assets/textures/blendTest.png
+		}
+
+		Rigidbody2D
+		{
+			bodyType = 0
+			fixedRotation = 0
+		}
+
+		BoxCollider2D
+		{
+			offset = 0.000000, 0.000000
+			size = 1.000000, 1.000000
+			density = 1.000000
+			friction = 0.500000
+			restitution = 0.000000
+			restitution Threshold = 0.500000
+		}
+	}
+
+	Entity3
+	{
+		group = None
+
+		Tag
+		{
+			tag = Empty Entity(3)
+		}
+
+		Transform
+		{
+			position = 0.000000, 1.584416, 0.000000
+			rotation = 0.000000, 0.000000, 0.000000
+			scale = 1.000000, 1.000000, 1.000000
+		}
+
+		Sprite
+		{
+			color = 0.000000, 1.000000, 1.000000, 1.000000
+			texture = assets/textures/orangeMykoeski.png
+		}
+	}
+}

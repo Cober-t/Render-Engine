@@ -33,7 +33,7 @@ namespace Cober {
 		Render2D::Start();
 
 		// TEST CUBEMAP
-		std::string _filePath = std::filesystem::path(SOLUTION_DIR + (std::string)"assets\\skybox\\").string();
+		/*std::string _filePath = std::filesystem::path(SOLUTION_DIR + (std::string)"assets\\skybox\\").string();
 		std::vector<std::string> faces{
 			SKYBOX_PATH + "right.jpg",
 			SKYBOX_PATH + "left.jpg",
@@ -43,7 +43,7 @@ namespace Cober {
 			SKYBOX_PATH + "back.jpg"
 		};
 		cubeMap = CubeMap::Create(faces);
-		cubeMap->Bind();
+		cubeMap->Bind();*/
 
 		LOG_INFO("Render System Started!!");
 	}
@@ -54,8 +54,10 @@ namespace Cober {
 		Render2D::BeginScene(camera);
 
 		glm::vec3 cameraFocus = camera->GetPosition() + camera->GetForwardDirection();
+#ifndef __EMSCRIPTEN__
 		Render2D::DrawGrid(cameraFocus);
-		cubeMap->DrawSkybox(camera->GetProjection(), camera->GetView());
+#endif
+		//cubeMap->DrawSkybox(camera->GetProjection(), camera->GetView());
 
 		// DEBUG PHYSICS
 #ifndef __EMSCRIPTEN__ 

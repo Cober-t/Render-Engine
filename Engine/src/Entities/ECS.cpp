@@ -70,7 +70,7 @@ namespace Cober {
 		entity.SetTag(name);
 		entity.SetGroup("None");
 
-		Logger::Log("Created entity with ID = " + std::to_string(entity.GetIndex()));
+		Logger::Log("Created entity with ID = " + std::to_string(entity.GetIndex()) + " and Tag = " + entity.GetTag());
 		return entity;
 	}
 
@@ -83,7 +83,7 @@ namespace Cober {
 	void Registry::DeleteEntity(Entity& entity) {
 
 		entitiesToBeKilled.insert(entity);
-		Logger::Log("Deleted entity with ID = " + std::to_string(entity.GetIndex()));
+		Logger::Log("Deleted entity with ID = " + std::to_string(entity.GetIndex()) + (std::string)" and Tag = " + entity.GetComponent<Tag>().tag);
 	}
 
 	std::vector<std::string> Registry::GetAllTags()
@@ -134,15 +134,23 @@ namespace Cober {
 
 	void Registry::SetEntityTag(Entity& entity, std::string tag) {
 	
-		// Only remove if the entity already is in tag lists (name change)
-		RemoveEntityTag(entity);
 		// Check repeat tags
+		std::string repeatedTag;
 		if (entityByTag.find(tag) != entityByTag.end()) {
 			int enttCount = 0;
+			int entCompareNum = 0;
 			for (auto entityTag : entityByTag) {
-				std::string repeatedTag = entityTag.first.substr(0, entityTag.first.find_first_of("("));
-				if (repeatedTag == tag)
-					enttCount++;
+
+				auto tagToCompare = entityTag.first;
+				if (tagToCompare.find_last_of('(') != std::string::npos) {
+					std::string extractNum = tagToCompare.substr(tagToCompare.find_last_of('('), tagToCompare.find_last_of(')'));
+					entCompareNum = std::atoi(extractNum.substr(1, 1).c_str());
+				}
+				if (entCompareNum == 0 || entCompareNum <= enttCount) {
+					repeatedTag = tagToCompare.substr(0, entityTag.first.find_first_of("("));
+					if (repeatedTag == tag)
+						enttCount++;
+				}
 			}
 			tag += "(" + std::to_string(enttCount) + ")";
 		}
@@ -183,10 +191,9 @@ namespace Cober {
 
 	void Registry::RemoveEntityTag(Entity& entity) {
 
-		if (tagsFromEntities.find(entity.GetIndex()) != tagsFromEntities.end()) {
-			tagsFromEntities.erase(entity.GetIndex());
-			entityByTag.erase(entity.GetComponent<Tag>().tag);
-		}
+		tagsFromEntities.erase(entity.GetIndex());
+		std::cout << entity.GetComponent<Tag>().tag << std::endl;
+		entityByTag.erase(entity.GetComponent<Tag>().tag);
 	}
 	void Registry::RemoveEntityGroup(Entity& entity)
 	{
@@ -218,6 +225,10 @@ namespace Cober {
 
 		for (auto entity : entitiesToBeKilled) {
 
+			// Remove Tag and Group from registry
+			RemoveEntityTag(entity);
+			RemoveEntityGroup(entity);
+			// Remove Entity from Systems
 			RemoveEntityFromSystems(entity);
 			// Must clear component signatures for this entity
 			entityComponentSignatures[entity.GetIndex()].reset();
@@ -229,9 +240,6 @@ namespace Cober {
 
 			// Make the entity ID available to be reused
 			freeIDs.push_back(entity.GetIndex());
-			// Remove Tag and Group from registry
-			RemoveEntityTag(entity);
-			RemoveEntityGroup(entity);
 			// Delelete from the global set of entities
 			entities.erase(entity.GetIndex());
 		}

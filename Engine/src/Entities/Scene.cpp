@@ -85,6 +85,7 @@ namespace Cober {
 
 			// Copy components (except IDComponent and TagComponent)
 			CopyComponent<Sprite>(dstEntities, srcEntities);
+			CopyComponent<Animation2D>(dstEntities, srcEntities);
 			CopyComponent<Rigidbody2D>(dstEntities, srcEntities);
 			CopyComponent<BoxCollider2D>(dstEntities, srcEntities);
 			// ...
@@ -112,11 +113,10 @@ namespace Cober {
 		for (auto& entity : scene->GetSceneEntities()) {
 
 			auto& entityToBeSaved = sceneSaver[name]["Entity" + std::to_string(entity.first)];
+			
+			entityToBeSaved["group"].SetString(entity.second.GetGroup());
 
-			entityToBeSaved["tag"].SetString(entity.second.GetTag());
-			entityToBeSaved["index"].SetInt(entity.first);
-
-			entityToBeSaved["Tag"]["tag"].SetString(entity.second.GetComponent<Tag>().tag);
+			entityToBeSaved["Tag"]["tag"].SetString(entity.second.GetTag());
 			
 			auto& transform = entity.second.GetComponent<Transform>();
 			entityToBeSaved["Transform"]["position"].SetVec3(transform.position);
@@ -127,7 +127,7 @@ namespace Cober {
 				auto& sprite = entity.second.GetComponent<Sprite>();
 				entityToBeSaved["Sprite"]["color"].SetVec4(sprite.color);
 				if(sprite.texture)
-					entityToBeSaved["Sprite"]["texture"].SetString(sprite.texture->GetPath());
+					entityToBeSaved["Sprite"]["texture"].SetString(sprite.texture->GetName() + sprite.texture->GetFormat());
 			}
 
 			if (entity.second.HasComponent<Rigidbody2D>()) {
@@ -146,12 +146,12 @@ namespace Cober {
 				entityToBeSaved["BoxCollider2D"]["restitution Threshold"].SetReal(bc2D.restitutionThreshold);
 			}
 
-			//if (entity.second.HasComponent<Animation2D>()) {
-			//	auto& anim = entity.second.GetComponent<Animation2D>();
-			//	entityToBeSaved["Animation2D"]["numFrames"].SetInt(anim.numFrames);
-			//	entityToBeSaved["Animation2D"]["frameRateSpeed"].SetReal(anim.frameRateSpeed);
-			//	entityToBeSaved["Animation2D"]["shouldLoop"].SetInt(anim.shouldLoop);
-			//}
+			if (entity.second.HasComponent<Animation2D>()) {
+				auto& anim = entity.second.GetComponent<Animation2D>();
+				entityToBeSaved["Animation2D"]["numFrames"].SetInt(anim.numFrames);
+				entityToBeSaved["Animation2D"]["frameRateSpeed"].SetReal(anim.frameRateSpeed);
+				entityToBeSaved["Animation2D"]["shouldLoop"].SetInt(anim.shouldLoop);
+			}
 
 			//...
 		}
@@ -180,10 +180,10 @@ namespace Cober {
 
 				if (sceneLoader[name].HasProperty("Entity" + std::to_string(i))) {
 					auto& loader = sceneLoader[name]["Entity" + std::to_string(i)];
-					Entity newEntity = newRegistry.CreateEntity("Entity" + std::to_string(i));
+					Entity newEntity = newRegistry.CreateEntity(loader["Tag"]["tag"].GetString());
 
-					newEntity.SetTag(loader["Tag"]["tag"].GetString());
-					//newEntity.SetGroup(loader["group"].GetString());
+					if(newEntity.GetGroup() != "None")
+						newEntity.SetGroup(loader["group"].GetString());
 
 					newEntity.GetComponent<Transform>().position = loader["Transform"]["position"].GetVec3();
 					newEntity.GetComponent<Transform>().rotation = loader["Transform"]["rotation"].GetVec3();
@@ -195,14 +195,18 @@ namespace Cober {
 						newEntity.GetComponent<Sprite>().color = sprite["color"].GetVec4();
 
 						if (sprite.HasProperty("texture"))
-							newEntity.GetComponent<Sprite>().texture = Texture::Create(sprite["texture"].GetString());
+#ifdef __EMSCRIPTEN__
+							newEntity.GetComponent<Sprite>().texture = Texture::Create("assets/textures/" + sprite["texture"].GetString());
+#else
+							newEntity.GetComponent<Sprite>().texture = Texture::Create(TEXTURES_PATH + sprite["texture"].GetString());
+#endif
 					}
 
 					if (loader.HasProperty("Rigidbody2D")) {
-						auto rb2d = loader["Rigibody2D"];
+						auto rb2d = loader["Rigidbody2D"];
 						newEntity.AddComponent<Rigidbody2D>();
-						newEntity.GetComponent<Rigidbody2D>().type = BodyType((int)rb2d["bodyType"].GetReal());
-						newEntity.GetComponent<Rigidbody2D>().fixedRotation = (int)rb2d["fixedRotation"].GetReal();
+						newEntity.GetComponent<Rigidbody2D>().type = BodyType((int)rb2d["bodyType"].GetInt());
+						newEntity.GetComponent<Rigidbody2D>().fixedRotation = (int)rb2d["fixedRotation"].GetInt();
 					}
 
 					if (loader.HasProperty("BoxCollider2D")) {
@@ -216,13 +220,13 @@ namespace Cober {
 						newEntity.GetComponent<BoxCollider2D>().restitutionThreshold = bc2d["restitution threshold"].GetReal();
 					}
 
-					//if (loader.HasProperty("Animation2D")) {
-					//	auto anim = loader["Animation2D"];
-					//	newEntity.AddComponent<Animation2D>();
-					//	newEntity.GetComponent<Animation2D>().numFrames	= anim["numFrames"].GetInt();
-					//	newEntity.GetComponent<Animation2D>().frameRateSpeed = anim["frameRateSpeed"].GetReal();
-					//	newEntity.GetComponent<Animation2D>().shouldLoop = anim["density"].GetInt();
-					//}
+					if (loader.HasProperty("Animation2D")) {
+						auto anim = loader["Animation2D"];
+						newEntity.AddComponent<Animation2D>();
+						newEntity.GetComponent<Animation2D>().numFrames	= anim["numFrames"].GetInt();
+						newEntity.GetComponent<Animation2D>().frameRateSpeed = anim["frameRateSpeed"].GetReal();
+						newEntity.GetComponent<Animation2D>().shouldLoop = anim["density"].GetInt();
+					}
 				}
 				else
 					Logger::Warning("Loading scene does not have entity with id: " + std::to_string(i));
@@ -231,7 +235,11 @@ namespace Cober {
 			return newScene;
 		}
 		else {
+#ifdef __EMSCRIPTEN__
+			Logger::Error("Cannot read scene with name: " + sceneName);
+#else
 			Logger::Error("Cannot read scene with path: " + (SOLUTION_DIR + (std::string)"assets\\scenes\\" + sceneName));
+#endif
 			return nullptr;
 		}
 	}
@@ -250,7 +258,24 @@ namespace Cober {
 
 	void Scene::OnRuntimeStart(const Ref<Scene>& scene) {
 
+		// TEST SERIALIZATION
+
 		_registry.Update();
+
+		{/*
+			Entity newEntity = scene->CreateEntity();
+			newEntity.GetComponent<Transform>().position = glm::vec3(0.0f, 2.0f, 0.0f);
+			newEntity.AddComponent<Sprite>();
+			newEntity.GetComponent<Sprite>().color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+#ifdef __EMSCRIPTEN__
+			newEntity.GetComponent<Sprite>().texture = Texture::Create("assets/textures/orangeMykoeski.png");
+#else
+			newEntity.GetComponent<Sprite>().texture = Texture::Create("C:\\Users\\jorge\\Engine\\assets\\textures\\blendTest.png");
+#endif
+			newEntity.AddComponent<Rigidbody2D>();
+			newEntity.AddComponent<BoxCollider2D>();
+			//newEntity.AddComponent<Animation2D>(2, 15, true);
+		*/}
 
 		_registry.GetSystem<PhysicsSystem2D>().Start();
 		_registry.GetSystem<AnimationSystem2D>().Start();
@@ -259,16 +284,6 @@ namespace Cober {
 		//_registry->GetSystem<MovementSystem>().Start(scene);
 
 
-		// TEST SERIALIZATION
-		//Entity newEntity = scene->CreateEntity();
-		//newEntity.GetComponent<Transform>().position = glm::vec3(0.0f, 2.0f, 0.0f);
-		//newEntity.AddComponent<Sprite>();
-		//newEntity.GetComponent<Sprite>().color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-		//newEntity.GetComponent<Sprite>().texture = Texture::Create("C:\\Users\\jorge\\Engine\\assets\\textures\\chopper.png");
-		//newEntity.AddComponent<Rigidbody2D>();
-		//newEntity.AddComponent<BoxCollider2D>();
-		//newEntity.AddComponent<Animation>(2, 15, true);
-		//Scene::Save(scene, "Scene1.txt");
 	}
 
 	void Scene::OnRuntimeStop() 

@@ -24,11 +24,10 @@ namespace Cober {
 	}
 
 	void CollisionEvent::OnCollision(OnCollisionEvent& event) {
-
+		
 		// Test
 		Entity A = event.a;
 		Entity B = event.b;
-		Logger::Log("Entity " + std::to_string(event.a.GetIndex()) + " collided wih entity " + std::to_string(event.b.GetIndex()));
 
 		if (A.BelongsToGroup("Box"))
 			Logger::Log(A.GetComponent<Tag>().tag);

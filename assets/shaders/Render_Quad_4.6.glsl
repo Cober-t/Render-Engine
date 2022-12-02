@@ -55,7 +55,7 @@ layout (location = 0) in VertexOutput Input;
 layout (location = 3) in flat float v_TexIndex;
 layout (location = 4) in flat int v_EntityID;
 
-layout (binding = 0) uniform sampler2D u_Textures[32];
+uniform sampler2D u_Textures[32];
 
 void main()
 {
@@ -96,6 +96,9 @@ void main()
 		case 30: texColor *= texture(u_Textures[30], Input.TexCoord * Input.TilingFactor); break;
 		case 31: texColor *= texture(u_Textures[31], Input.TexCoord * Input.TilingFactor); break;
 	}
+	if (texColor.a == 0.0)
+		discard;
+		
 	color = texColor;
 
 	color2 = v_EntityID;

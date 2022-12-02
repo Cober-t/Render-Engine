@@ -76,7 +76,7 @@ namespace Cober {
 	{
 #ifdef __EMSCRIPTEN__
 		const int32_t velocityIterations = 3;
-		const int32_t positionIterations = 2;
+		const int32_t positionIterations = 1;
 		_physicsWorld->Step(0.016f, velocityIterations, positionIterations);
 #else
 		const int32_t velocityIterations = 6;

@@ -139,8 +139,28 @@ namespace Cober {
 		GLCallV(glTexImage2D(GL_TEXTURE_2D, 0, _internalFormat, _width, _height, 0, _dataFormat, GL_UNSIGNED_BYTE, data));
 	}
 
-	void OpenGLES3Texture::Bind(uint32_t slot) const
+	void OpenGLES3Texture::Bind(uint32_t slot)
 	{
-		GLCallV(glBindTexture(GL_TEXTURE_2D, slot));
+		switch (slot) {
+			case 0:  GLCallV(glActiveTexture(GL_TEXTURE0));   break;
+			case 1:  GLCallV(glActiveTexture(GL_TEXTURE1));   break;
+			case 2:  GLCallV(glActiveTexture(GL_TEXTURE2));   break;
+			case 3:  GLCallV(glActiveTexture(GL_TEXTURE3));   break;
+			case 4:  GLCallV(glActiveTexture(GL_TEXTURE4));   break;
+			case 5:  GLCallV(glActiveTexture(GL_TEXTURE5));   break;
+			case 6:  GLCallV(glActiveTexture(GL_TEXTURE6));   break;
+			case 7:  GLCallV(glActiveTexture(GL_TEXTURE7));   break;
+			case 8:  GLCallV(glActiveTexture(GL_TEXTURE8));   break;
+			case 9:  GLCallV(glActiveTexture(GL_TEXTURE9));   break;
+			case 10: GLCallV(glActiveTexture(GL_TEXTURE10));  break;
+			case 11: GLCallV(glActiveTexture(GL_TEXTURE11));  break;
+			case 12: GLCallV(glActiveTexture(GL_TEXTURE12));  break;
+			case 13: GLCallV(glActiveTexture(GL_TEXTURE13));  break;
+			case 14: GLCallV(glActiveTexture(GL_TEXTURE14));  break;
+			case 15: GLCallV(glActiveTexture(GL_TEXTURE15));  break;
+			case 16: GLCallV(glActiveTexture(GL_TEXTURE16));  break;
+		}
+		
+		GLCallV(glBindTexture(GL_TEXTURE_2D, _rendererID));
 	}
 }

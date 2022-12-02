@@ -133,7 +133,7 @@ namespace Cober {
 		GLCallV(glTextureSubImage2D(_rendererID, 0, 0, 0, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, data));
 	}
 
-	void OpenGLTexture::Bind(uint32_t slot) const
+	void OpenGLTexture::Bind(uint32_t slot)
 	{
 		GLCallV(glBindTextureUnit(slot, _rendererID));
 	}

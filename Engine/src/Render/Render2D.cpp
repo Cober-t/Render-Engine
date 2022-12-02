@@ -110,7 +110,7 @@ namespace Cober {
 			glm::mat4 View;
 		};
 		CameraData CameraBuffer;
-#ifdef __OPENGL__
+#if defined __OPENGL__
 		Ref<UniformBuffer> CameraUniformBuffer;
 #endif
 	};
@@ -202,7 +202,7 @@ namespace Cober {
 		data.WhiteTexture = Texture::Create(1, 1);
 		uint32_t whiteTextureData = 0xffffffff;
 #ifdef __EMSCRIPTEN__
-		data.WhiteTexture->Bind(data.WhiteTexture->GetID());
+		data.WhiteTexture->Bind();
 #endif
 		data.WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
@@ -216,9 +216,16 @@ namespace Cober {
 		data.QuadShader->SetIntArray("u_Textures", samplers, data.MaxTextureSlots);
 #else
 		data.QuadShader   = Shader::Create("Render_Quad_4.6.glsl");
+		data.QuadShader->Bind();
+		data.QuadShader->SetIntArray("u_Textures", samplers, data.MaxTextureSlots);
 		data.CircleShader = Shader::Create("Render_Circle.glsl");
 		data.LineShader   = Shader::Create("Render_Line.glsl");
 		data.GridShader   = Shader::Create("Editor_Infinite_Grid.glsl");
+
+		data.GridVertexPositions[0] = { -1.0f, -1.0f, 0.0f, 1.0f };
+		data.GridVertexPositions[1] = {  1.0f, -1.0f, 0.0f, 1.0f };
+		data.GridVertexPositions[2] = {  1.0f,  1.0f, 0.0f, 1.0f };
+		data.GridVertexPositions[3] = { -1.0f,  1.0f, 0.0f, 1.0f };
 #endif
 
 		// Set first texture slot to 0
@@ -229,10 +236,6 @@ namespace Cober {
 		data.QuadVertexPositions[2] = {  0.5f,  0.5f, 0.0f, 1.0f };
 		data.QuadVertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
 
-		data.GridVertexPositions[0] = { -1.0f, -1.0f, 0.0f, 1.0f };
-		data.GridVertexPositions[1] = {  1.0f, -1.0f, 0.0f, 1.0f };
-		data.GridVertexPositions[2] = {  1.0f,  1.0f, 0.0f, 1.0f };
-		data.GridVertexPositions[3] = { -1.0f,  1.0f, 0.0f, 1.0f };
 
 #ifdef __OPENGL__
 		data.CameraUniformBuffer = UniformBuffer::Create(sizeof(RenderData::CameraData), 0);
@@ -265,8 +268,12 @@ namespace Cober {
 
 			// Bind textures
 #ifdef __EMSCRIPTEN__
-			for (uint32_t i = 0; i < data.TextureSlotIndex; i++)
-				data.TextureSlots[i]->Bind(data.TextureSlots[i]->GetID());
+			for (uint32_t i = 0; i < data.TextureSlotIndex; i++) {
+				//std::cout << i << std::endl;
+				data.TextureSlots[i]->Bind(i);
+				//data.TextureSlots[i]->Bind(data.TextureSlots[i]->GetID());
+			}
+
 #else
 			for (uint32_t i = 0; i < data.TextureSlotIndex; i++)
 				data.TextureSlots[i]->Bind(i);
