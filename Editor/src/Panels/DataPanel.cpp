@@ -49,10 +49,10 @@ namespace Cober {
 		for (auto& message : Logger::messages) {
 			switch(message.type)
 			{ 
-				case LOG_INFO:		ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32( 80, 255, 255, 255));	break;
-				case LOG_WARNING:	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(125, 125,   0, 255));	break;
-				case LOG_ERROR:		ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255,   0,   0, 255));	break;
-				default:			ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));	break;
+				case INFO:		ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32( 80, 255, 255, 255));	break;
+				case WARNING:	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(125, 125,   0, 255));	break;
+				case ERROR:		ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255,   0,   0, 255));	break;
+				default:		ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));	break;
 			}
 			ImGui::Text(message.message.c_str());
 			ImGui::PopStyleColor();

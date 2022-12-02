@@ -227,7 +227,6 @@ namespace Cober {
 			glm::mat4 transform = tc.GetTransform();
 
 			bool snap = MenuPanel::Get().MustSnap();
-			//float value = MenuPanel::Get().SnapValue();
 			float snapValue = MenuPanel::Get().SnapValue() / 10; // Snap to 0.5m for translation/scale
 			// Snap to 45 degrees for rotation
 			if (_gizmoType == ImGuizmo::OPERATION::ROTATE)

@@ -9,13 +9,7 @@
 #define ASSERT(x) if (!(x)) __debugbreak();
 #endif
 #endif
-//#define GLCall(x) Cober::Logger::GLCheckError();\
-//				  x;\
-//				  ASSERT(Cober::Logger::GLCheckError())
-//
-//#define GLCall(x, y)  Cober::Logger::GLCheckError(y);\
-//					  x;\
-//				      ASSERT(Cober::Logger::GLCheckError(y))
+
 #if defined __EMSCRIPTEN__ || __OPENGLES3__
 	#define GLCallV( x ) \
 			Cober::Logger::GLClearErrors(); \
@@ -42,14 +36,14 @@
 		}()
 #endif
 
-#define LOG( x )		 Cober::Logger::Log(#x, __FILE__, __LINE__)
+#define LOG_INFO( x )	 Cober::Logger::Log(#x, __FILE__, __LINE__)
 #define LOG_WARNING( x ) Cober::Logger::Warning(#x, __FILE__, __LINE__)
 #define LOG_ERROR( x )	 Cober::Logger::Error(#x, __FILE__, __LINE__)
 
 namespace Cober {
 
 	enum LogType {
-		LOG_INFO, LOG_WARNING, LOG_ERROR
+		INFO, WARNING, ERROR
 	};
 
 	struct LogEntry {

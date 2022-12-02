@@ -14,7 +14,7 @@ namespace Cober {
 		}
 
 		~Editor() {
-			LOG("Editor Destructor Called!");
+			LOG_INFO("Editor Destructor Called!");
 		}
 	};
 

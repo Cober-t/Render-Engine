@@ -13,6 +13,10 @@
 
 
 const unsigned int MAX_COMPONENTS = 32;
+
+//// SIGNATURE
+// We use a bitset (1s and 0s) to keep track of which components an entity has
+// and also keep track of which entities a system is interested in.
 typedef std::bitset<MAX_COMPONENTS> Signature;
 
 namespace Cober {
@@ -22,16 +26,20 @@ namespace Cober {
 	class Entity {
 	public:
 		Entity() = default;
-		Entity(std::string name, int entityIndex) : tag(name), index(entityIndex), registry(nullptr) {};
+		Entity(std::string name, int entityIndex) : index(entityIndex), registry(nullptr) {};
 		Entity(const Entity& entity) = default;
 
 		void Destroy();
+		
+		std::string GetTag() const;
+		std::string GetGroup() const;
+		int GetIndex() const { return index; }
+		void SetIndex(int id) { index = id; }
 
-		std::string GetTag() const  { return tag; }
-		int GetIndex() const		{ return index; }
-
-		void SetTag(std::string name) { tag = name; }
-		void SetIndex(int entityID)	  { index = entityID; }
+		void SetTag(std::string name);
+		void SetGroup(std::string group);
+		void RemoveFromGroup();
+		bool BelongsToGroup(const std::string& g) const;
 
 		bool operator ==(const Entity& other) const { return index == other.index; };
 		bool operator !=(const Entity& other) const { return index != other.index; };
@@ -47,9 +55,8 @@ namespace Cober {
 
 		class Registry* registry;	// Alternative to Forward Declaration
 
-	private:
 		int index;
-		std::string tag;
+		//std::string group;
 	};
 
 	////////////////////////////////////////////////////////////////
@@ -104,15 +111,37 @@ namespace Cober {
 	// +++++ REGISTRY +++++++++++++++++++++++++++++++++++++++++++ //
 	class Registry {
 	public:
-		Registry()  { LOG("Registry constructor called"); };
-		~Registry() { LOG("Registry destructor called"); };
+		Registry()  { LOG_INFO("Registry constructor called"); };
+		~Registry() { LOG_INFO("Registry destructor called"); };
 
 		void Update();
 
 		Entity CreateEntity(std::string name = "Empty Entity");
-		Entity GetEntity(Entity requestedEntity);
+		Entity GetEntity(Entity& requestedEntity);
 		std::map<int, Entity>& GetAllEntities() { return entities; };
-		void DeleteEntity(Entity entity);
+		void DeleteEntity(Entity& entity);
+
+		std::vector<std::string> GetAllTags();
+		std::vector<std::string> GetAllGroups();
+
+		std::string GetEntityGroup(Entity entity);
+		std::vector<Entity> GetGroupOfEntities(Entity& entity);
+		std::vector<Entity> GetGroupOfEntities(const std::string& group);
+
+		Entity GetEntityByIndex(const int ID) const;
+		Entity GetEntityByTag(const std::string& tag) const;
+		void SetEntityTag(Entity& entity, std::string tag);
+		void SetEntityGroup(Entity& entity, const std::string& group);
+
+		// Remove an entity from a group
+		void RemoveEntityTag(Entity& entity);
+		void RemoveEntityGroup(Entity& entity);
+		// Check if an entity belongs to a group
+		bool EntityBelongsToGroup(Entity& entity, const std::string& group) const;
+
+		// Add the entity to the systems that are interested in it
+		void AddEntityToSystems(Entity entity);
+		void RemoveEntityFromSystems(Entity entity);
 
 		// Component management
 		template<typename TComponent,
@@ -128,9 +157,6 @@ namespace Cober {
 		template<typename TSystem>		bool HasSystem() const;
 		template<typename TSystem>		TSystem& GetSystem() const;
 
-		// Add the entity to the systems that are interested in it
-		void AddEntityToSystems(Entity entity);
-		void RemoveEntityFromSystems(Entity entity);
 	private:
 		int numEntities = 0;
 		std::vector<Ref<IPool>> componentPools;
@@ -138,7 +164,12 @@ namespace Cober {
 		std::vector<Signature> entityComponentSignatures;
 
 		std::map<std::type_index, Ref<System>> systems;
+
 		std::map<int, Entity> entities;
+		std::map<std::string, Entity> entityByTag;
+		std::map<std::string, std::set<Entity>> entitiesByGroup;
+		std::map<int, std::string> tagsFromEntities;
+		std::map<int, std::string> groupsByEntities;
 
 		std::set<Entity> entitiesToBeAdded;
 		std::set<Entity> entitiesToBeKilled;

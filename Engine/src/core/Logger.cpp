@@ -19,7 +19,7 @@ namespace Cober {
 	void Logger::Log(const std::string& message, const char* file, int line) {
 
 		LogEntry logEntry;
-		logEntry.type = LOG_INFO;
+		logEntry.type = INFO;
 		logEntry.message = message;
 		std::string fileName = (std::string)file;
 #ifdef __linux__
@@ -39,7 +39,7 @@ namespace Cober {
 	void Logger::Warning(const std::string& message, const char* file, int line) {
 
 		LogEntry logEntry;
-		logEntry.type = LOG_INFO;
+		logEntry.type = WARNING;
 		logEntry.message = message;
 		std::string fileName = (std::string)file;
 		fileName = fileName.substr(fileName.find_last_of("\\") + 1);
@@ -56,7 +56,7 @@ namespace Cober {
 	void Logger::Error(const std::string& message, const char* file, int line) {
 
 		LogEntry logEntry;
-		logEntry.type = LOG_ERROR;
+		logEntry.type = ERROR;
 		logEntry.message = message;
 		std::string fileName = (std::string)file;
 		fileName = fileName.substr(fileName.find_last_of("\\") + 1);

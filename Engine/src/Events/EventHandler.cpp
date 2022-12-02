@@ -81,7 +81,7 @@ namespace Cober {
                         break;
                     }
                     case SDLK_q: {
-                        Logger::Log("key Q pressed");
+                        // TEST
                         EventHandler::Get()->SubscribeToEvent<OnCollisionEvent>(CollisionEvent::Get(), &CollisionEvent::OnCollision);
                         break;
                     }

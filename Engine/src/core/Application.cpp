@@ -9,7 +9,7 @@ namespace Cober {
     
     Engine::Engine(const std::string& name, uint32_t width, uint32_t height, bool vsync) 
     {
-        LOG("Engine Constructor!");
+        LOG_INFO("Engine Constructor!");
         DEBUG = false;
         GAME_2D = false;
         PHYSICS_2D = false;
@@ -34,7 +34,7 @@ namespace Cober {
     }
 
     Engine::~Engine() {
-        LOG("Engine Destructor!");
+        LOG_INFO("Engine Destructor!");
     }
 
     void Engine::PushLayer(Layer* layer) {

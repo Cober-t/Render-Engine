@@ -7,12 +7,12 @@ namespace Cober {
 		RequireComponent<Transform>();
 		RequireComponent<Rigidbody2D>();
 
-		LOG("Movement SYSTEM Added!!");
+		LOG_INFO("Movement SYSTEM Added!!");
 	}
 
 	MovementSystem::~MovementSystem() {
 
-		LOG("Movement System removed from Registry");
+		LOG_INFO("Movement System removed from Registry");
 	}
 
 	void MovementSystem::Update(double deltaTime) {

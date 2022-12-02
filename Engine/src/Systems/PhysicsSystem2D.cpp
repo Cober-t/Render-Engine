@@ -10,12 +10,12 @@ namespace Cober {
 		RequireComponent<Rigidbody2D>();
 		RequireComponent<BoxCollider2D>();
 
-		LOG("Physics System Added to Registry!!");
+		LOG_INFO("Physics System Added to Registry!!");
 	}
 
 	PhysicsSystem2D::~PhysicsSystem2D()
 	{
-		LOG("Physics System removed from Registry");
+		LOG_INFO("Physics System removed from Registry");
 
 		if (_physicsWorld) {
 			delete _physicsWorld;
@@ -69,7 +69,7 @@ namespace Cober {
 			// ...
 			// TRIGGERS ...
 		}
-		LOG("Physic System Started!!");
+		LOG_INFO("Physic System Started!!");
 	}
 
 	void PhysicsSystem2D::Update(double ts)

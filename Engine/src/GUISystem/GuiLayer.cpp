@@ -46,7 +46,7 @@ namespace Cober {
 
 	void GuiLayer::OnDetach() {
 
-		LOG("ImGui Destructor called!");
+		LOG_INFO("ImGui Destructor called!");
 	}
 
 	void GuiLayer::OnEvent(SDL_Event& event) {

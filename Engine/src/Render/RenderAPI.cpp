@@ -26,7 +26,7 @@ namespace Cober {
 
 		switch (_api) {
 #if !defined __EMSCRIPTEN__ && !defined __OPENGLES3__
-			case RenderAPI::API::None:		LOG("RenderAPI::None means there is not render defined!!"); return nullptr;
+			case RenderAPI::API::None:		LOG_INFO("RenderAPI::None means there is not render defined!!"); return nullptr;
 			case RenderAPI::API::OpenGL:	return CreateUnique<OpenGLRenderAPI>();
 #elif defined __EMSCRIPTEN__ || __OPENGLES3__
 			case RenderAPI::API::None:		LOG_ERROR("Wrong API"); break;
@@ -36,7 +36,7 @@ namespace Cober {
 			default:	LOG_ERROR("Unknown RendererAPI!"); break;
 #endif
 		}
-		LOG("Unknown RenderAPI!");
+		LOG_INFO("Unknown RenderAPI!");
 		return nullptr;
 	}
 }

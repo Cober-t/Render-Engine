@@ -32,7 +32,7 @@ namespace Cober {
 
 	Scene::~Scene()
 	{
-		LOG("Scene finished, removing systems from registry...");
+		LOG_INFO("Scene finished, removing systems from registry...");
 		_registry.RemoveSystem<PhysicsSystem2D>();
 		_registry.RemoveSystem<CollisionSystem2D>();
 		_registry.RemoveSystem<AnimationSystem2D>();
@@ -145,6 +145,14 @@ namespace Cober {
 				entityToBeSaved["BoxCollider2D"]["restitution"].SetReal(bc2D.restitution);
 				entityToBeSaved["BoxCollider2D"]["restitution Threshold"].SetReal(bc2D.restitutionThreshold);
 			}
+
+			//if (entity.second.HasComponent<Animation2D>()) {
+			//	auto& anim = entity.second.GetComponent<Animation2D>();
+			//	entityToBeSaved["Animation2D"]["numFrames"].SetInt(anim.numFrames);
+			//	entityToBeSaved["Animation2D"]["frameRateSpeed"].SetReal(anim.frameRateSpeed);
+			//	entityToBeSaved["Animation2D"]["shouldLoop"].SetInt(anim.shouldLoop);
+			//}
+
 			//...
 		}
 		
@@ -174,7 +182,8 @@ namespace Cober {
 					auto& loader = sceneLoader[name]["Entity" + std::to_string(i)];
 					Entity newEntity = newRegistry.CreateEntity("Entity" + std::to_string(i));
 
-					newEntity.GetComponent<Tag>().tag = loader["Tag"]["tag"].GetString();
+					newEntity.SetTag(loader["Tag"]["tag"].GetString());
+					//newEntity.SetGroup(loader["group"].GetString());
 
 					newEntity.GetComponent<Transform>().position = loader["Transform"]["position"].GetVec3();
 					newEntity.GetComponent<Transform>().rotation = loader["Transform"]["rotation"].GetVec3();
@@ -206,6 +215,14 @@ namespace Cober {
 						newEntity.GetComponent<BoxCollider2D>().restitution = bc2d["restitution"].GetReal();
 						newEntity.GetComponent<BoxCollider2D>().restitutionThreshold = bc2d["restitution threshold"].GetReal();
 					}
+
+					//if (loader.HasProperty("Animation2D")) {
+					//	auto anim = loader["Animation2D"];
+					//	newEntity.AddComponent<Animation2D>();
+					//	newEntity.GetComponent<Animation2D>().numFrames	= anim["numFrames"].GetInt();
+					//	newEntity.GetComponent<Animation2D>().frameRateSpeed = anim["frameRateSpeed"].GetReal();
+					//	newEntity.GetComponent<Animation2D>().shouldLoop = anim["density"].GetInt();
+					//}
 				}
 				else
 					Logger::Warning("Loading scene does not have entity with id: " + std::to_string(i));

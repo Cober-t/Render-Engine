@@ -17,12 +17,12 @@ namespace Cober {
 		//if (Engine::Get().GetGameState() == GameState::PLAY)
 			//RequireComponent<CameraSystem>();
 
-		LOG("Render System Added to Registry!!");
+		LOG_INFO("Render System Added to Registry!!");
 	}
 
 	RenderSystem::~RenderSystem() {
 
-		LOG("Render System removed from Registry");
+		LOG_INFO("Render System removed from Registry");
 	}
 
 	Ref<CubeMap> cubeMap;
@@ -45,7 +45,7 @@ namespace Cober {
 		cubeMap = CubeMap::Create(faces);
 		cubeMap->Bind();
 
-		LOG("Render System Started!!");
+		LOG_INFO("Render System Started!!");
 	}
 
 	void RenderSystem::Update(const Ref<EditorCamera>& camera)

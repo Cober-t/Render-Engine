@@ -18,7 +18,7 @@ namespace Cober {
 
 	EditorCamera::~EditorCamera() {
 
-		LOG("Editor Camera Destroyed!!");
+		LOG_INFO("Editor Camera Destroyed!!");
 	}
 
 	void EditorCamera::UpdateProjection(bool& ortho) {

@@ -59,11 +59,11 @@ namespace Cober {
     public:
         EventHandler() {
             _instance = this;
-            Logger::Log("EventBus constructor called!");
+            Logger::Log("Event Handler constructor called!");
         }
 
         ~EventHandler() {
-            Logger::Log("EventBus destructor called!");
+            Logger::Log("Event Handler destructor called!");
         }
 
         // Clears the subscribers list

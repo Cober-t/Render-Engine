@@ -6,12 +6,12 @@
 namespace Cober {
 
 	AssetManager::AssetManager() {
-		LOG("AssetManager constructor called!");
+		LOG_INFO("AssetManager constructor called!");
 	}
 
 	AssetManager::~AssetManager() {
 		//ClearAssets();
-		LOG("AssetManager destructor called!");
+		LOG_INFO("AssetManager destructor called!");
 	}
 
 	/*void AssetManager::ClearAssets() {

@@ -39,7 +39,7 @@ namespace Cober {
 		Entity GetEntity(int index) { return GetSceneEntities().at(index); };
 		std::map<int, Entity>& GetSceneEntities() { return _registry.GetAllEntities(); }
 
-		void SetDefaultEntity(Entity& entity) { entity.SetTag("None"); entity.SetIndex(-1); }
+		void SetDefaultEntity(Entity& entity) { entity = Entity("Null", -1);; }
 		Entity CreateEntity(std::string name = "Empty Entity") { return _registry.CreateEntity(name); }
 
 		Registry& GetRegistry() { return _registry; }

@@ -31,6 +31,8 @@ namespace Cober {
 		Ref<Scene> _sceneContext;
 		Entity _selectionContext;
 		Entity _nullEntityContext;
+		std::string _newEntityGroup;
+		std::string _newEntityTag;
 	private:
 		static SceneHierarchyPanel* instance;
 	};

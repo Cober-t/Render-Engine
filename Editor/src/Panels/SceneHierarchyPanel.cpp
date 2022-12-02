@@ -28,7 +28,7 @@ namespace Cober {
 	void SceneHierarchyPanel::SetContext(const Ref<Scene>& sceneContext)
 	{
 		_sceneContext = sceneContext;
-		_nullEntityContext = Entity("nullContext", -1);
+		_nullEntityContext = Entity("Null", -1);;
 		_selectionContext = _nullEntityContext;
 	}
 
@@ -222,21 +222,50 @@ namespace Cober {
 
 	void SceneHierarchyPanel::DrawComponents(Entity& entity)
 	{
-		if (entity.HasComponent<Tag>()) {
+		// TAGS
+		char buffer[256];
+		memset(buffer, 0, sizeof(buffer));
+		strcpy_s(buffer, sizeof(buffer), entity.GetComponent<Tag>().tag.c_str());
 
-			auto& tag = entity.GetComponent<Tag>().tag;
+		if (ImGui::InputText("##Name", buffer, sizeof(buffer)))
+			_newEntityTag = buffer;
 
-			char buffer[256];
-			memset(buffer, 0, sizeof(buffer));
-			strcpy_s(buffer, sizeof(buffer), tag.c_str());
+		ImGui::SameLine();
 
-			if (ImGui::InputText("##Tag", buffer, sizeof(buffer)))
-				tag = std::string(buffer);
+		if (ImGui::Button("Rename")) {
+			if (_newEntityTag != "")
+				entity.SetTag(std::string(_newEntityTag));
+		}
+
+		ImGui::PushItemWidth(100.0f);
+
+		// GROUPS
+		if (ImGui::BeginCombo("Group", entity.GetGroup().c_str())) {
+			auto groupList = entity.registry->GetAllGroups();
+			for (int n = 0; n < groupList.size(); n++) {
+				bool selected = (entity.GetGroup() == groupList[n]);
+				if (ImGui::Selectable(groupList[n].c_str(), selected))
+					entity.SetGroup(groupList[n]);
+			}
+			ImGui::EndCombo();
 		}
 
 		ImGui::SameLine();
-		ImGui::PushItemWidth(-1);
+		ImGui::PushItemWidth(80.0f);
 
+		memset(buffer, 0, sizeof(buffer));
+		//strcpy_s(buffer, sizeof(buffer), entity.GetGroup().c_str());
+		if (ImGui::InputText("NewGroup", buffer, sizeof(buffer)))
+			_newEntityGroup = buffer;
+
+		ImGui::SameLine();
+		if (ImGui::Button("+")) {
+			if (_newEntityGroup != "")
+				entity.SetGroup(_newEntityGroup);
+		}
+
+		ImGui::PopItemWidth();
+		ImGui::PopItemWidth();
 
 		if (ImGui::Button("Add Component")) {
 			if (ImGui::IsMouseDown(ImGuiMouseButton_Right)) {
@@ -271,7 +300,6 @@ namespace Cober {
 
 			ImGui::EndPopup();
 		}
-		ImGui::PopItemWidth();
 
 		DrawComponent<Transform>("Transform", entity, [](auto& component)
 			{

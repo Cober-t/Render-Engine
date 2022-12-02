@@ -20,7 +20,7 @@ namespace Cober {
 			return;
 	}
 	Window::~Window() {
-		LOG("Window Destructor called!");
+		LOG_INFO("Window Destructor called!");
 	}
 
 	Unique<Window> Window::Create(const std::string& name, uint32_t width, uint32_t height, bool VSync) {
