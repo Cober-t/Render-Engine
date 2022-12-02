@@ -39,7 +39,7 @@ namespace Cober {
 		void SetTag(std::string name);
 		void SetGroup(std::string group);
 		void RemoveFromGroup();
-		bool BelongsToGroup(const std::string& g) const;
+		bool BelongsToGroup(const std::string& group) const;
 
 		bool operator ==(const Entity& other) const { return index == other.index; };
 		bool operator !=(const Entity& other) const { return index != other.index; };

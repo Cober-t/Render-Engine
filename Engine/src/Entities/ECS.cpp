@@ -38,9 +38,9 @@ namespace Cober {
 		registry->RemoveEntityGroup(*this);
 	}
 
-	bool Entity::BelongsToGroup(const std::string& g) const
+	bool Entity::BelongsToGroup(const std::string& group) const
 	{
-		return false;
+		return GetGroup() == group;
 	}
 
 	////////////////////////////////////////////////////////////////////////////

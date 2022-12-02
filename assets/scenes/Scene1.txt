@@ -8,7 +8,7 @@ Scene1
 
 	Entity0
 	{
-		tag = Entity0
+		tag = Epic Box
 		index = 0
 
 		Tag
@@ -32,13 +32,13 @@ Scene1
 		Rigidbody2D
 		{
 			bodyType = 0
-			fixedRotation = 1
+			fixedRotation = 0
 		}
 
 		BoxCollider2D
 		{
 			offset = 0.000000, 0.000000
-			size = 0.000000, 0.000000
+			size = 1.000000, 1.000000
 			density = 1.000000
 			friction = 0.500000
 			restitution = 0.000000
@@ -48,7 +48,7 @@ Scene1
 
 	Entity1
 	{
-		tag = Entity1
+		tag = Terrain 2
 		index = 1
 
 		Tag
@@ -78,7 +78,7 @@ Scene1
 		BoxCollider2D
 		{
 			offset = 0.000000, 0.000000
-			size = 0.000000, 0.000000
+			size = 1.000000, 1.000000
 			density = 1.000000
 			friction = 0.500000
 			restitution = 0.000000
@@ -88,7 +88,7 @@ Scene1
 
 	Entity2
 	{
-		tag = Entity2
+		tag = Epic Icon Cat 1
 		index = 2
 
 		Tag
@@ -111,14 +111,14 @@ Scene1
 
 		Rigidbody2D
 		{
-			bodyType = 2
+			bodyType = 0
 			fixedRotation = 0
 		}
 
 		BoxCollider2D
 		{
 			offset = 0.000000, 0.000000
-			size = 0.000000, 0.000000
+			size = 1.000000, 1.000000
 			density = 1.000000
 			friction = 0.500000
 			restitution = 0.000000
@@ -128,7 +128,7 @@ Scene1
 
 	Entity3
 	{
-		tag = Entity3
+		tag = Epic Blend Cat
 		index = 3
 
 		Tag
@@ -158,7 +158,7 @@ Scene1
 		BoxCollider2D
 		{
 			offset = 0.000000, 0.000000
-			size = 0.000000, 0.000000
+			size = 1.000000, 1.000000
 			density = 1.000000
 			friction = 0.500000
 			restitution = 0.000000
@@ -168,7 +168,7 @@ Scene1
 
 	Entity4
 	{
-		tag = Entity4
+		tag = Terrain 3
 		index = 4
 
 		Tag
@@ -198,7 +198,7 @@ Scene1
 		BoxCollider2D
 		{
 			offset = 0.000000, 0.000000
-			size = 0.000000, 0.000000
+			size = 1.000000, 1.000000
 			density = 1.000000
 			friction = 0.500000
 			restitution = 0.000000
