@@ -14,6 +14,10 @@
 #include "Events/EventHandler.h"
 #include "Events/InputEvent.h"
 
+#ifndef  __EMSCRIPTEN__
+	#include <sol/sol.hpp>
+#endif
+
 int main(int argc, char** argv);
 
 namespace Cober {
@@ -58,6 +62,8 @@ namespace Cober {
 		Layer _LayerStack;
 		Ref<Timestep> _timestep;
 		Unique<Window> _window;
+
+		sol::state lua;
 		//Unique<AssetManager> _assetManager;
 		bool _minimized = false;
 	private:

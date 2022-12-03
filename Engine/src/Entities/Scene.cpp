@@ -88,6 +88,7 @@ namespace Cober {
 			CopyComponent<Animation2D>(dstEntities, srcEntities);
 			CopyComponent<Rigidbody2D>(dstEntities, srcEntities);
 			CopyComponent<BoxCollider2D>(dstEntities, srcEntities);
+			//CopyComponent<Script>(dstEntities, srcEntities);
 			// ...
 			// Script Component, Camera component, Movement script component ...
 			// ...
@@ -152,6 +153,15 @@ namespace Cober {
 				entityToBeSaved["Animation2D"]["frameRateSpeed"].SetReal(anim.frameRateSpeed);
 				entityToBeSaved["Animation2D"]["shouldLoop"].SetInt(anim.shouldLoop);
 			}
+
+			//if (entity.second.HasComponent<Script>()) {
+			//	auto& scriptList = entity.second.GetComponent<Script>().scripts;
+			//	int numFunctions = scriptList.size();
+			//	entityToBeSaved["scripts count"].SetInt(numFunctions);
+			//	//for (auto& script : scriptList) {
+			//	//	entityToBeSaved["Script"]["function"].SetString(pathFunc);
+			//	//}
+			//}
 
 			//...
 		}
@@ -227,6 +237,16 @@ namespace Cober {
 						newEntity.GetComponent<Animation2D>().frameRateSpeed = anim["frameRateSpeed"].GetReal();
 						newEntity.GetComponent<Animation2D>().shouldLoop = anim["density"].GetInt();
 					}
+
+					//if (loader.HasProperty["Script"]) {
+					//	int scriptCount = loader["Script"]["scripts count"];
+					//	std::vector<sol::functions> scripts;
+					//
+					//	for (int i = 0; i < scriptCount; i++)
+					//		scripts.push_back();
+					//
+					//	newEntity.AddComponent<Script>();
+					//}
 				}
 				else
 					Logger::Warning("Loading scene does not have entity with id: " + std::to_string(i));

@@ -8,6 +8,10 @@
 
 #include <box2d/b2_polygon_shape.h>
 
+#ifndef __EMSCRIPTEN__
+	#include <sol/sol.hpp>
+#endif
+
 #include "core/Core.h"
 #include "Render/Texture.h"
 
@@ -126,4 +130,33 @@ namespace Cober {
 			: offset(Offset), size(Size), 
 			  density(Density), friction(Friction), restitution(Rest), restitutionThreshold(RestThreshold) {}
 	};
+
+	/*
+	struct CircleCollider2D : public Collider2D {
+
+	};
+
+	struct LineCollider2D : public Collider2D {
+
+	};
+
+	struct CapsuleCollider2D : public Collider2D {
+
+	};
+	*/
+
+#ifndef __EMSCRIPTEN__
+	struct Script {
+
+		//std::vector<sol::function> scripts;
+		sol::function scripts = sol::lua_nil;
+
+		//void AddScript(sol::function func) { scripts.push_back(func); }
+
+		Script() = default;
+		Script(const Script&) = default;
+		//Script(std::vector<sol::function> funcs) : scripts(funcs) {}
+		Script(sol::function funcs = sol::lua_nil) : scripts(funcs) {}
+	};
+#endif
 }

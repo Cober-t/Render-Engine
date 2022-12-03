@@ -16,10 +16,46 @@ namespace Cober {
 
         _instance = this;
 
+
 #ifdef __EMSCRIPTEN__
+
         unsigned int flags = SDL_INIT_VIDEO | SDL_INIT_EVENTS;
 #else
         unsigned int flags = SDL_INIT_EVERYTHING;
+
+        lua.open_libraries(sol::lib::base, sol::lib::math);
+
+        { // Lua temporary
+            /*
+            std::string scriptName = "firstScript.lua";
+            sol::load_result script = lua.load_file(SCRIPTS_PATH + scriptName);
+            if (!script.valid()) {
+                sol::error err = script;
+                std::string errorMesage = err.what();
+                Logger::Error("Error loading the lua script: " + errorMesage);
+                return;
+            }
+            // Executes the script using the Sol state
+            lua.script_file(SCRIPTS_PATH + scriptName);
+
+            // Read the big table for the current level
+            sol::table level = lua["Level"];
+            // Rad the level assets
+            sol::table assets = level["assets"];
+
+            int i = 0;
+            while (true) {
+                sol::optional<sol::table> hasAsset = assets[i];
+                if (hasAsset == sol::nullopt)
+                    break;
+
+                sol::table asset = assets[i];
+                std::string assetType = asset["type"];
+                // etc ...
+                i++;
+            }
+            */
+        }
 #endif
         if (SDL_Init(flags))
             GET_SDL_ERROR();

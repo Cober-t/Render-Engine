@@ -100,7 +100,7 @@ project "Engine"
 		"SDL2_image",
 		"SDL2_mixer",
 		"SDL2_ttf",
-		--"liblua54",
+		"lua",
 	}
 
 	postbuildcommands
@@ -127,8 +127,8 @@ project "Engine"
 			"NK_SDL_GL3_IMPLEMENTATION",
 			"GL_GLEXT_PROTOTYPES=1",
 			"GLEW_STATIC",
-			--"__OPENGL__",
-			"__OPENGLES3__",
+			"__OPENGL__",
+			--"__OPENGLES3__",
 		}
 
 	filter "configurations:Debug"
@@ -235,6 +235,9 @@ project "Game"
 	{
 		"%{prj.name}/**.h",
 		"%{prj.name}/**.cpp",
+		"Engine/include/sol/**.hpp",
+		"Engine/include/lua/**.h",
+		"Engine/include/lua/**.hpp",
 	}
 
 	includedirs

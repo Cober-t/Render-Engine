@@ -212,12 +212,8 @@ namespace Cober {
 
 #ifdef __EMSCRIPTEN__
 		data.QuadShader = Shader::Create("Render_Quad.glsl");
-		data.QuadShader->Bind();
-		data.QuadShader->SetIntArray("u_Textures", samplers, data.MaxTextureSlots);
 #else
-		data.QuadShader   = Shader::Create("Render_Quad_4.6.glsl");
-		data.QuadShader->Bind();
-		data.QuadShader->SetIntArray("u_Textures", samplers, data.MaxTextureSlots);
+		data.QuadShader = Shader::Create("Render_Quad_4.6.glsl");
 		data.CircleShader = Shader::Create("Render_Circle.glsl");
 		data.LineShader   = Shader::Create("Render_Line.glsl");
 		data.GridShader   = Shader::Create("Editor_Infinite_Grid.glsl");
@@ -227,7 +223,8 @@ namespace Cober {
 		data.GridVertexPositions[2] = {  1.0f,  1.0f, 0.0f, 1.0f };
 		data.GridVertexPositions[3] = { -1.0f,  1.0f, 0.0f, 1.0f };
 #endif
-
+		data.QuadShader->Bind();
+		data.QuadShader->SetIntArray("u_Textures", samplers, data.MaxTextureSlots);
 		// Set first texture slot to 0
 		data.TextureSlots[0] = data.WhiteTexture;
 
@@ -267,17 +264,9 @@ namespace Cober {
 			data.QuadVertexBuffer->SetData(data.QuadVertexBufferBase, dataSize);
 
 			// Bind textures
-#ifdef __EMSCRIPTEN__
-			for (uint32_t i = 0; i < data.TextureSlotIndex; i++) {
-				//std::cout << i << std::endl;
-				data.TextureSlots[i]->Bind(i);
-				//data.TextureSlots[i]->Bind(data.TextureSlots[i]->GetID());
-			}
-
-#else
 			for (uint32_t i = 0; i < data.TextureSlotIndex; i++)
 				data.TextureSlots[i]->Bind(i);
-#endif
+
 			data.QuadShader->Bind();
 			RenderGlobals::DrawIndexed(data.QuadVertexArray, data.QuadIndexCount);
 			// ... CircleShader .. LineShader ...
