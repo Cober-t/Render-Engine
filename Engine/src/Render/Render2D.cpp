@@ -110,7 +110,7 @@ namespace Cober {
 			glm::mat4 View;
 		};
 		CameraData CameraBuffer;
-#if defined __OPENGL__
+#if defined __OPENGL__ && !defined __EMSCRIPTEN__
 		Ref<UniformBuffer> CameraUniformBuffer;
 #endif
 	};
@@ -234,7 +234,7 @@ namespace Cober {
 		data.QuadVertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
 
 
-#ifdef __OPENGL__
+#if defined __OPENGL__ && !defined __EMSCRIPTEN__
 		data.CameraUniformBuffer = UniformBuffer::Create(sizeof(RenderData::CameraData), 0);
 #endif
 	}
@@ -242,7 +242,7 @@ namespace Cober {
 	void Render2D::BeginScene(const Ref<EditorCamera>& camera) {
 
 		orthoFarClip = camera->GetOrthoCamera().GetFarClip();
-#ifdef __OPENGL__
+#if defined __OPENGL__ && !defined __EMSCRIPTEN__
 		data.CameraBuffer.View = camera->GetView();
 		data.CameraBuffer.Projection = camera->GetProjection();
 		data.CameraUniformBuffer->SetData(&data.CameraBuffer, sizeof(RenderData::CameraData));

@@ -1,7 +1,7 @@
 //[++++++++++++++++++++++++++]
 //[+++++++++ IMGUI ++++++++++]
 //[++++++++++++++++++++++++++]
-#if defined __OPENGL__
+#if defined __OPENGL__ && !defined __EMSCIPTEN__
 	#include <imgui/imgui.h>
 	#include <imgui/imconfig.h>
 	#include <imgui/imgui_impl_opengl3.h>
@@ -40,7 +40,7 @@
 //[++++++++ SYSTEMS +++++++++]
 //[++++++++++++++++++++++++++]
 #include <GUISystem/GuiLayer.h>
-#ifdef __OPENGL__
+#if defined __OPENGL__ && !defined __EMSCIPTEN__
 #include <GUISystem/ImFileBrowser.h>
 #endif
 #include <Systems/MovementSystem.h>

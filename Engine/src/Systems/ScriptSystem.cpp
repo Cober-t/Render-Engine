@@ -6,7 +6,7 @@ namespace Cober {
 
 	ScriptSystem::ScriptSystem() {
 
-		RequireComponent<Script>();
+		//RequireComponent<Script>();
 	}
 
 	void ScriptSystem::Update() {

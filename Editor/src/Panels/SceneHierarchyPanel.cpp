@@ -288,10 +288,10 @@ namespace Cober {
 					_selectionContext.AddComponent<BoxCollider2D>();
 					_sceneContext->GetRegistry().AddEntityToSystems(_selectionContext);
 				}
-				else if (!_selectionContext.HasComponent<Script>()) {
-					_selectionContext.AddComponent<Script>();
-					_sceneContext->GetRegistry().AddEntityToSystems(_selectionContext);
-				}
+				//else if (!_selectionContext.HasComponent<Script>()) {
+				//	_selectionContext.AddComponent<Script>();
+				//	_sceneContext->GetRegistry().AddEntityToSystems(_selectionContext);
+				//}
 			}
 			else
 				ImGui::OpenPopup("AddComponent");
@@ -302,7 +302,7 @@ namespace Cober {
 			AddIfHasComponent<Animation2D>("Animation2D Component");
 			AddIfHasComponent<Rigidbody2D>("Rigidbody 2D Component");
 			AddIfHasComponent<BoxCollider2D>("BoxCollider 2D Component");
-			AddIfHasComponent<Script>("Script Component");
+			//AddIfHasComponent<Script>("Script Component");
 			// ...
 			// ...
 
@@ -378,11 +378,12 @@ namespace Cober {
 				//ImGui::DragFloat("Restitution Threshold", &component.restitutionThreshold, 0.01f, 0.0f);
 			});
 
+		/*
 		DrawComponent<Sprite>("Sprite", entity, [](auto& component)
 			{
 				if (ImGui::BeginDragDropSource())
 				{
-					/*if (ImGui::BeginCombo("", currentScreenSize)) {
+					if (ImGui::BeginCombo("", currentScreenSize)) {
 						for (int n = 0; n < IM_ARRAYSIZE(_screenValues); n++) {
 							bool selected = (currentScreenSize == _screenValues[n]);
 							if (ImGui::Selectable(_screenValues[n], selected)) {
@@ -399,12 +400,11 @@ namespace Cober {
 						}
 						ImGui::EndCombo();
 					}
-					*/
 					ImGui::EndDragDropSource();
 				}
 
 			});
-
+		*/
 		// Draw Rigidbody3D Component
 
 		// Draw BoxCollider3D Component

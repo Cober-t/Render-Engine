@@ -62,9 +62,11 @@ namespace Cober {
 		Layer _LayerStack;
 		Ref<Timestep> _timestep;
 		Unique<Window> _window;
-
-		sol::state lua;
 		//Unique<AssetManager> _assetManager;
+
+#ifndef __EMSCRIPTEN__
+		sol::state lua;
+#endif
 		bool _minimized = false;
 	private:
 		bool DEBUG;
